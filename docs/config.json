@@ -1,0 +1,10 @@
+{
+  "title": "QuickBlox documentation",
+  "html": {
+    "search": false,
+    "theme": "quickblox-standard",
+    "inherit_index": true,
+    "landing_resource_dir_path": "themes/quickblox/templates/landing_resoures",
+    "main_resource_dir_path": "themes/quickblox/templates/main_resources"
+  }
+}
