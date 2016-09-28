@@ -1,8 +1,9 @@
-<span id="Getting_Started" class="on_page_navigation"></span>
-# Getting Started
+QuickBlox - Communication & cloud backend (BaaS) platform which brings superpowers to your mobile apps.
 
 <span id="Features" class="on_page_navigation"></span>
 # Features
+
+Authentication, Users, Chat, Custom Objects,
 
 <span id="Requirements" class="on_page_navigation"></span>
 # Requirements
@@ -13,6 +14,8 @@ Swift 3.0+
 
 <span id="Migration_Guides" class="on_page_navigation"></span>
 # Migration Guides
+
+From version 1.9 to 2.0
 
 <span id="Communication" class="on_page_navigation"></span>
 # Communication
@@ -65,10 +68,14 @@ If you prefer not to use either of the aforementioned dependency managers, you c
 + Add the framework target to the Embedded Binaries section by clicking the Add icon, highlighted in Figure 3. Do not drag in the framework from Finder.
 + Select your framework from the list of binaries that can be embedded.
 
-<center> **Figure 1:**  Click the Add button to embed a framework </center>
+<center> <b>Figure 1:</b>  Click the Add button to embed a framework </center>
 
 
 ...
 
 <span id="Usage" class="on_page_navigation"></span>
 # Usage
+
+
+<span id="License" class="on_page_navigation"></span>
+# License
