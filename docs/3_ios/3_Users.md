@@ -29,7 +29,7 @@ Please note that trailing whitespaces in string data (except password) will be t
 
 >Only login/email and password fields are required
 
-```objective-c
+```objectivec
 
 QBUUser *user = [QBUUser user];
 user.password = @"password";
