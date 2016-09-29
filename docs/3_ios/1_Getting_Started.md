@@ -64,18 +64,24 @@ If you prefer not to use either of the aforementioned dependency managers, you c
 ### Embedding a framework
 
 1. Open the app’s Xcode project or workspace.
-+ Go to the app target’s General configuration page.
-+ Add the framework target to the Embedded Binaries section by clicking the Add icon, highlighted in Figure 3. Do not drag in the framework from Finder.
-+ Select your framework from the list of binaries that can be embedded.
+2. Go to the app target’s General configuration page.
+3. Add the framework target to the Embedded Binaries section by clicking the Add icon, highlighted in Figure 3. Do not drag in the framework from Finder.
+4. Select your framework from the list of binaries that can be embedded.
 
 <center> <b>Figure 1:</b>  Click the Add button to embed a framework </center>
 
+![](./resources/images/embed_binaries.png)
 
-...
 
 <span id="Usage" class="on_page_navigation"></span>
 # Usage
 
+# Other Quickblox Projects
+
++ Q-municate app for iOS
++ Services
++ Chat UI for iOS
++ QBCallKit for iOS
 
 <span id="License" class="on_page_navigation"></span>
 # License
