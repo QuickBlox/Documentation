@@ -26,7 +26,7 @@ If you found a bug, open an issue.
 If you have a feature request, open an issue.
 If you want to contribute, submit a pull request
 
-<span id="Communication" class="on_page_navigation"></span>
+<span id="Installation" class="on_page_navigation"></span>
 # Installation
 
 ## CocoaPods
@@ -71,10 +71,6 @@ If you prefer not to use either of the aforementioned dependency managers, you c
 <center> <b>Figure 1:</b>  Click the Add button to embed a framework </center>
 
 ![](./resources/images/embed_binaries.png)
-
-
-<span id="Usage" class="on_page_navigation"></span>
-# Usage
 
 # Other Quickblox Projects
 
