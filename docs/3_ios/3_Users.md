@@ -28,27 +28,3 @@ Retrieve all [API Users]() for current account.
 
 <span id="User Sign UP" class="on_page_navigation">
 </span>
-
-# User Sign Up
-
-Use for the identification of the mobile applications users. The request can contain all, some or none of the optional parameters. Login, email, facebook ID, twitter ID and the external user ID should not be taken previously. If you want to create a user with a some content (f.e. with a photo) you have to create a blob firstly. The same tags can be used for any number of users. Please note that trailing whitespaces in string data (except password) will be trimmed.
-
-> Only login/email and password fields are required
-
-```objectivec
-QBUUser *user = [QBUUser user];
-user.password = @"password";
-user.login = @"login";
-
-// Registration/sign up of User
-[QBRequest signUp:user completion:^(QBUUser *user, NSError *error) {
-
-}];
-
-//Old Style
-[QBRequest signUp:user successBlock:^(QBResponse *response, QBUUser *user) {
-    // Sign up was successful
-} errorBlock:^(QBResponse *response) {
-    // Handle error here
-}];
-```
