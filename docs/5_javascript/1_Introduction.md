@@ -26,7 +26,7 @@ There are a few ways to get started with JS SDK.
 #### CDN
 The simplest way to load the JS SDK is to add a &lt;script&gt; tag:
 ```html
-&lt;script src='https://unpkg.com/quickblox@2.4.0/quickblox.min.js'&gt;&lt;/script&gt;
+<script src='https://unpkg.com/quickblox@2.4.0/quickblox.min.js'></script>
 ```
 
 > You also can use another content delivery network, for example [cdnjs](https://cdnjs.com/libraries/quickblox).
