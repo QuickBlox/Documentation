@@ -19,9 +19,14 @@ You can check JavaScript SDK by running tests:
 ## Install 
 JS SDK supports [UMD (Universal Module Definition)](https://github.com/umdjs/umd) pattern for JavaScript modules. So it is possible to use SDK everywhere (as browser global variable, with AMD module loader like RequireJS or as CommonJS module).
 
-> If you are using JS SDK version less 2.5.0 you need to include either [jQuery](http://jquery.com/download) or [Zepto](http://zeptojs.com/) in your html before our SDK.
+<div class="panel panel-warning">
+    <div class="panel-body">
+         If you are using JS SDK version less 2.5.0 you need to include either [jQuery](http://jquery.com/download) or [Zepto](http://zeptojs.com/) in your html before our SDK, only for browser environment.
+    </div>
+</div>
 
-There are a few ways to get started with JS SDK.
+
+There are several ways to get started with JS SDK.
 
 #### CDN
 The simplest way to load the JS SDK is to add a &lt;script&gt; tag:
@@ -29,7 +34,11 @@ The simplest way to load the JS SDK is to add a &lt;script&gt; tag:
 <script src='https://unpkg.com/quickblox@2.4.0/quickblox.min.js'></script>
 ```
 
-> You also can use another content delivery network, for example [cdnjs](https://cdnjs.com/libraries/quickblox).
+<div class="panel panel-info">
+    <div class="panel-body">
+        You also can use another content delivery network, for example [cdnjs](https://cdnjs.com/libraries/quickblox).
+    </div>
+</div>
 
 And SDK will be avaible via the `QB` namespace.
 
@@ -44,7 +53,7 @@ The JS SDK is also available on [NPM](https://www.npmjs.com/package/quickblox):
 npm install quickblox --save
 ```
 
-JS SDK can then be accessed by requireing the module:
+JS SDK can then be accessed by requiring the module:
 
 ```javascript
 var QB = require('quickblox');
@@ -57,4 +66,4 @@ bower install quickblox --save
 ```
 
 #### Download sources
-Also, you can download [sources from Github (zip archive)](https://github.com/QuickBlox/quickblox-javascript-sdk/archive/gh-pages.zip) and use as you like.
+You can also download [sources from Github (zip archive)](https://github.com/QuickBlox/quickblox-javascript-sdk/archive/gh-pages.zip) and use as you like.
