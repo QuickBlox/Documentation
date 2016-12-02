@@ -1,9 +1,11 @@
 The QuickBlox JavaScript SDK provides a JavaScript library making it even easier to access the QuickBlox cloud communication backend platform.
 Our goal is let you quickly start building your JavaScript app on Quickblox.
 
+<hr>
+
 <span id="Overview" class="on_page_navigation"></span>
 ## Overview
-<hr>
+
 The latest version is [**2.5.0**](https://github.com/QuickBlox/quickblox-javascript-sdk/releases/latest).
 We are using [Github Releases](https://github.com/QuickBlox/quickblox-javascript-sdk/releases) to make changelog.
 
@@ -15,21 +17,23 @@ You can check JavaScript SDK by running tests:
 * Visit our [a Spec Runner page on GitHub](https://quickblox.github.io/quickblox-javascript-sdk/spec/SpecRunner.html).
 * Or download the Javascript SDK, you will find the Spec Runner in the `/spec` folder and you can run by [Jasmine](https://jasmine.github.io/).
 
+<hr>
+
 <span id="Install" class="on_page_navigation"></span>
 ## Install
-<hr> 
+
 JS SDK supports [UMD (Universal Module Definition)](https://github.com/umdjs/umd) pattern for JavaScript modules. So it is possible to use SDK everywhere (as browser global variable, with AMD module loader like RequireJS or as CommonJS module).
 
 <div class="panel panel-warning">
     <div class="panel-body">
-         If you are using JS SDK version less 2.5.0 you need to include either <a href="http://jquery.com/download" target="_blank">jQuery</a> or <a href="http://zeptojs.com/" target="_blank">Zepto</a> in your html before our SDK, only for browser environment.
+        If you are using JS SDK version less 2.5.0 you need to include either <a href="http://jquery.com/download" target="_blank">jQuery</a> or <a href="http://zeptojs.com/" target="_blank">Zepto</a> in your html before our SDK, only for browser environment.
     </div>
 </div>
-
 
 There are several ways to get started with JS SDK.
 
 #### CDN
+
 The simplest way to load the JS SDK is to add a &lt;script&gt; tag:
 ```html
 <script src='https://unpkg.com/quickblox@2.4.0/quickblox.min.js'></script>
@@ -48,6 +52,7 @@ QB.init(appId, authKey, authSecret);
 ```
 
 #### NPM
+
 The JS SDK is also available on [NPM](https://www.npmjs.com/package/quickblox):
 
 ```bash
@@ -67,4 +72,5 @@ bower install quickblox --save
 ```
 
 #### Download sources
+
 You can also download [sources from Github (zip archive)](https://github.com/QuickBlox/quickblox-javascript-sdk/archive/gh-pages.zip) and use as you like.
