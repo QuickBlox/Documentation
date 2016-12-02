@@ -1,17 +1,11 @@
-To use inside a browser, a window scoped variable called `QB` is created. Most, with the notable exception of init, take a callback parameter which gets called with an error and result parameter (ala `node.js`).
+If you haven’t set up your project yet, please head over to the [Quick Start](/quick_start/Getting_started.html) to get up and running. You can also check out our [API Reference](http://quickblox.github.io/quickblox-javascript-sdk/docs/) for more detailed information about our SDK.
 
-<br>
+<hr>
 
-The common way to interact with QuickBlox can be presented with the following sequence of actions:
+<span id="Initialize_сonfiguration_SDK" class="on_page_navigation"></span>
+# Initialize & сonfiguration SDK
 
-1. Initialize framework
-2. Authorisation
-4. Perform actions
-
-<span id="Initialize_framework" class="on_page_navigation"></span>
-# Initialize framework
-
-Initialize framework with application credentials:
+Initialize SDK with application credentials:
 
 ```javascript
 var CREDENTIALS = {
@@ -23,9 +17,7 @@ var CREDENTIALS = {
 QB.init(CREDENTIALS.appId, CREDENTIALS.authKey, CREDENTIALS.authSecret);
 ```
 
-<br>
-
-Initialize framework with existing QB token:
+Or initialize SDK with existing QB token:
 
 ```javascript
 var sessionToken = '1b785b603a9ae88d9dfbd1fc0cca0335086927f1';
@@ -35,6 +27,12 @@ QB.init(sessionToken, appId);
 ```
 
 With this method you can generate a token elsewhere (e.g. on the server side), and then use this token and application ID to initialise the SDK.
+
+<hr>
+
+
+
+
 
 <span id="Authorization" class="on_page_navigation"></span>
 # Authorization

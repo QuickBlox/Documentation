@@ -9,7 +9,7 @@ Our goal is let you quickly start building your JavaScript app on Quickblox.
 The latest version is [**2.5.0**](https://github.com/QuickBlox/quickblox-javascript-sdk/releases/latest).
 We are using [Github Releases](https://github.com/QuickBlox/quickblox-javascript-sdk/releases) to make changelog.
 
-Also we have [SDK API Reference](http://quickblox.github.io/quickblox-javascript-sdk/docs/).
+Check out our [API Reference](http://quickblox.github.io/quickblox-javascript-sdk/docs/) for more detailed information about our SDK.
 
 JS SDK supports Chrome 30+, Safari 7.1+, Firefox 30+, IE 10+, Opera 23+, Edge 12+ and Node v.4+.
 
