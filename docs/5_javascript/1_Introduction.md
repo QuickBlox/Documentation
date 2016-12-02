@@ -3,7 +3,7 @@ Our goal is let you quickly start building your JavaScript app on Quickblox.
 
 <span id="Overview" class="on_page_navigation"></span>
 ## Overview
-
+<hr>
 The latest version is [**2.5.0**](https://github.com/QuickBlox/quickblox-javascript-sdk/releases/latest).
 We are using [Github Releases](https://github.com/QuickBlox/quickblox-javascript-sdk/releases) to make changelog.
 
@@ -16,7 +16,8 @@ You can check JavaScript SDK by running tests:
 * Or download the Javascript SDK, you will find the Spec Runner in the `/spec` folder and you can run by [Jasmine](https://jasmine.github.io/).
 
 <span id="Install" class="on_page_navigation"></span>
-## Install 
+## Install
+<hr> 
 JS SDK supports [UMD (Universal Module Definition)](https://github.com/umdjs/umd) pattern for JavaScript modules. So it is possible to use SDK everywhere (as browser global variable, with AMD module loader like RequireJS or as CommonJS module).
 
 <div class="panel panel-warning">
