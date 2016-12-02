@@ -3,7 +3,7 @@ If you haven’t set up your project yet, please head over to the [Quick Start](
 <hr>
 
 <span id="Initialize_сonfiguration_SDK" class="on_page_navigation"></span>
-# Initialize & сonfiguration SDK
+# Initialize &amp; сonfiguration SDK
 
 Initialize SDK with application credentials:
 
