@@ -21,7 +21,7 @@ JS SDK supports [UMD (Universal Module Definition)](https://github.com/umdjs/umd
 
 <div class="panel panel-warning">
     <div class="panel-body">
-         If you are using JS SDK version less 2.5.0 you need to include either [jQuery](http://jquery.com/download) or [Zepto](http://zeptojs.com/) in your html before our SDK, only for browser environment.
+         If you are using JS SDK version less 2.5.0 you need to include either <a href="http://jquery.com/download" target="_blank">jQuery</a> or <a href="http://zeptojs.com/" target="_blank">Zepto</a> in your html before our SDK, only for browser environment.
     </div>
 </div>
 
@@ -36,7 +36,7 @@ The simplest way to load the JS SDK is to add a &lt;script&gt; tag:
 
 <div class="panel panel-info">
     <div class="panel-body">
-        You also can use another content delivery network, for example [cdnjs](https://cdnjs.com/libraries/quickblox).
+        You also can use another content delivery network, for example <a href="https://cdnjs.com/libraries/quickblox" target="_blank">cdnjs</a>.
     </div>
 </div>
 
