@@ -2,29 +2,52 @@ If you haven’t set up your project yet, please head over to the [Quick Start](
 
 <hr>
 
-<span id="Initialize_configuration_SDK" class="on_page_navigation"></span>
+<span id="Initialize_and_configuration_SDK" class="on_page_navigation"></span>
 # Initialize & Configuration SDK
+
+There are 2 ways to initialize JS SDK: initialize SDK with application credentials and create a session or initialize with existing session token.
+
 Check out [init method in API Refference](http://quickblox.github.io/quickblox-javascript-sdk/docs/QB.html#.init).
 
-Initialize SDK with application credentials:
+Initialize JS SDK with application credentials:
 
-```javascript
-var CREDENTIALS = {
-  appId: 28287,
-  authKey: 'XydaWcf8OO9xhGT',
-  authSecret: 'JZfqTspCvELAmnW'
+```html
+&lt;script src="https://www.gstatic.com/firebasejs/3.6.2/firebase.js"&gt; &lt;/script&gt;
+
+&lt;script&gt;
+var CREDS = {
+    appId: 28287,
+    authKey: 'XydaWcf8OO9xhGT',
+    authSecret: 'JZfqTspCvELAmnW'
 };
 
-QB.init(CREDENTIALS.appId, CREDENTIALS.authKey, CREDENTIALS.authSecret);
+var config = {
+    endpoints: {
+        api: 'apicustomdomain.quickblox.com', // set custom API endpoint
+        chat: 'chatcustomdomain.quickblox.com' // set custom Chat endpoint
+    },
+    chatProtocol: {
+        active: 2 // set 1 to use BOSH, set 2 to use WebSockets (default)
+    },
+    debug: { 
+        mode: 1 // the SDK will be printing logs to console.log()
+    }
+};
+
+QB.init(CREDS.appId, CREDS.authKey, CREDS.authSecret, config);
+&lt;/script&gt;
 ```
+The above would enable debugging, disable ssl and change the endpoints so that requests would go to another server.
 
 Or initialize SDK with existing QB token:
 
 ```javascript
+var QB = require('../node_modules/quickblox-javascript-sdk/src/qbMain.js');
+
 var sessionToken = '1b785b603a9ae88d9dfbd1fc0cca0335086927f1';
 var appId = 3451;
 
-QB.init(sessionToken, appId);
+QB.init(sessionToken, appId, null, config);
 ```
 
 With this method you can generate a token elsewhere (e.g. on the server side), and then use this token and application ID to initialise the SDK.
@@ -109,34 +132,3 @@ QB.init(3477, 'ChRnwEJ3WzxH9O4', 'AS546kpUQ2tfbvv', config);
 It has been placed inside the "on" field so that we can add more listeners in the future. **This function fires when the SDK makes a request and recognises an expired session error**. It will execute this function before it executes the original callback for the request. You could use it to create a new session, request a new token from your backend, or simply tell the user to refresh the page.
 
 This function accepts 2 parameters, `next` and `retry`. Calling `next()` will cause the original callback of the request to be fired - you would use this if your session creation/regeneration fails. Retry will make the original request again with your newly regenerated token, meaning minimal interruption to the operation of your code.
-
-<span id="Configuration" class="on_page_navigation"></span>
-# Configuration
-
-We recommend you to create `config.js` configuration file in your js-application and insert your QB application credentials and other ancillary data into it.
-
-<br>
-
-A custom configuration can look like this:
-
-```javascript
-var CONFIG = {
-  endpoints: {
-    api: "apicustomdomain.quickblox.com", // set custom API endpoint
-    chat: "chatcustomdomain.quickblox.com" // set custom Chat endpoint
-  },
-  chatProtocol: {
-    active: 2 // set 1 to use BOSH, set 2 to use WebSockets (default)
-  },
-  debug: {mode: 1} // set DEBUG mode
-};
-QB.init(3477, 'ChRnwEJ3WzxH9O4', 'AS546kpUQ2tfbvv', CONFIG);
-```
-
-The above would enable debugging, disable ssl and change the endpoints so that requests would go to another server.
-
-There are 3 debug modes:
-
-* `debug: {mode: 0}` - logs are off
-* `debug: {mode: 1}` - the SDK will be printing logs to console.log()
-* `debug: {mode: 2, file: "appname_debug.log"}` - the SDK will be printing logs into file with name "appname_debug.log". Works only on Node.js.
