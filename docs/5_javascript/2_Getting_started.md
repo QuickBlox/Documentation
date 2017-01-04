@@ -12,7 +12,7 @@ Check out [init method in API Refference](http://quickblox.github.io/quickblox-j
 Initialize JS SDK with application credentials:
 
 ```html
-&lt;script src="https://www.gstatic.com/firebasejs/3.6.2/firebase.js"&gt; &lt;/script&gt;
+<script src="https://cdnjs.cloudflare.com/ajax/libs/quickblox/2.5.0/quickblox.min.js"></script>
 
 &lt;script&gt;
 var CREDS = {
