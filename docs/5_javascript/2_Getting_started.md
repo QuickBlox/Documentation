@@ -1,9 +1,10 @@
-If you haven’t set up your project yet, please head over to the [Quick Start](/quick_start/Getting_started.html) to get up and running. You can also check out our [API Reference](http://quickblox.github.io/quickblox-javascript-sdk/docs/) for more detailed information about our SDK.
+If you haven’t set up your project yet, please head over to the [Quick Start](/quick_start/Getting_started.html) to get up and running.
 
 <hr>
 
 <span id="Initialize_сonfiguration_SDK" class="on_page_navigation"></span>
-# Initialize &amp; сonfiguration SDK
+# Initialize / Configuration SDK
+Check out [init method in API Refference](http://quickblox.github.io/quickblox-javascript-sdk/docs/QB.html#.init).
 
 Initialize SDK with application credentials:
 
@@ -27,11 +28,6 @@ QB.init(sessionToken, appId);
 ```
 
 With this method you can generate a token elsewhere (e.g. on the server side), and then use this token and application ID to initialise the SDK.
-
-<hr>
-
-
-
 
 
 <span id="Authorization" class="on_page_navigation"></span>

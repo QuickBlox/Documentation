@@ -6,8 +6,8 @@ Our goal is let you quickly start building your JavaScript app on Quickblox.
 <span id="Overview" class="on_page_navigation"></span>
 ## Overview
 
-The latest version is [**2.5.0**](https://github.com/QuickBlox/quickblox-javascript-sdk/releases/latest).
-We are using [Github Releases](https://github.com/QuickBlox/quickblox-javascript-sdk/releases) to make changelog.
+The latest version of JS SDK is [**2.5.0**](https://github.com/QuickBlox/quickblox-javascript-sdk/releases/latest),
+a full list of JS SDK vesions can be found on [Github Releases](https://github.com/QuickBlox/quickblox-javascript-sdk/releases).
 
 Check out our [API Reference](http://quickblox.github.io/quickblox-javascript-sdk/docs/) for more detailed information about our SDK.
 
@@ -16,8 +16,6 @@ JS SDK supports Chrome 30+, Safari 7.1+, Firefox 30+, IE 10+, Opera 23+, Edge 12
 You can check JavaScript SDK by running tests:
 * Visit our [a Spec Runner page on GitHub](https://quickblox.github.io/quickblox-javascript-sdk/spec/SpecRunner.html).
 * Or download the Javascript SDK, you will find the Spec Runner in the `/spec` folder and you can run by [Jasmine](https://jasmine.github.io/).
-
-<hr>
 
 <span id="Install" class="on_page_navigation"></span>
 ## Install
@@ -36,7 +34,7 @@ There are several ways to get started with JS SDK.
 
 The simplest way to load the JS SDK is to add a &lt;script&gt; tag:
 ```html
-<script src='https://unpkg.com/quickblox@2.4.0/quickblox.min.js'></script>
+<script src='https://unpkg.com/quickblox@x.x.x/quickblox.min.js'></script>
 ```
 
 <div class="panel panel-info">
