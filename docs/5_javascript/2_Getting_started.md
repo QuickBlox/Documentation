@@ -117,8 +117,8 @@ config = {
     sessionExpired: [Function]
   }
 }
-...
- 
+//...
+
 QB.init(3477, 'ChRnwEJ3WzxH9O4', 'AS546kpUQ2tfbvv', config);
 ```
 
