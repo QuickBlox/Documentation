@@ -1,4 +1,5 @@
 The QuickBlox JavaScript SDK provides a JavaScript library making it even easier to access the QuickBlox cloud communication backend platform.
+
 Our goal is let you quickly start building your JavaScript app on Quickblox.
 
 <hr>
@@ -7,7 +8,7 @@ Our goal is let you quickly start building your JavaScript app on Quickblox.
 ## Overview
 
 The latest version of JS SDK is [**2.5.0**](https://github.com/QuickBlox/quickblox-javascript-sdk/releases/latest),
-a full list of JS SDK vesions can be found on [Github Releases](https://github.com/QuickBlox/quickblox-javascript-sdk/releases).
+a full list of JS SDK versions can be found on [Github Releases](https://github.com/QuickBlox/quickblox-javascript-sdk/releases).
 
 Check out our [API Reference](http://quickblox.github.io/quickblox-javascript-sdk/docs/) for more detailed information about our SDK.
 

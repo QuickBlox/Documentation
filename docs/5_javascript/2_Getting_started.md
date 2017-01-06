@@ -14,7 +14,7 @@ Initialize JS SDK with application credentials:
 ```html
 <script src="https://cdnjs.cloudflare.com/ajax/libs/quickblox/2.5.0/quickblox.min.js"></script>
 
-&lt;script&gt;
+<script>
 var CREDS = {
     appId: 28287,
     authKey: 'XydaWcf8OO9xhGT',
@@ -35,7 +35,7 @@ var config = {
 };
 
 QB.init(CREDS.appId, CREDS.authKey, CREDS.authSecret, config);
-&lt;/script&gt;
+</script>
 ```
 The above would enable debugging, disable ssl and change the endpoints so that requests would go to another server.
 
@@ -52,20 +52,15 @@ QB.init(sessionToken, appId, null, config);
 
 With this method you can generate a token elsewhere (e.g. on the server side), and then use this token and application ID to initialise the SDK.
 
-
 <span id="Authorization" class="on_page_navigation"></span>
 # Authorization
 
 To be able to use QuickBlox API you have to create a session.
 
-<br>
-
 There are 2 types of session:
 
 * **Application session**. It provides only READ access to data.
 * **User session**. It provides CRUD (Create, Read, Update, Delete) access to data.
-
-<br>
 
 To create an application session use the code:
 
@@ -76,8 +71,6 @@ QB.createSession(function(err, result) {
 ```
 
 With an Application session you can READ any data you need and only have to do one Create operation — [User Sign Up (Users API)](http://quickblox.com/developers/Sample-users-javascript#Signing_Up).
-
-<br>
 
 To update an Application session to a User session you have to login to QuickBlox:
 
