@@ -1,0 +1,114 @@
+swagger: '2.0'
+info:
+  title: QuickBlox Server API, Session API.
+  description: A set of REST API requests to work with QuickBlox session.
+  version: 0.1.1
+# the domain of the service
+host: quickblox.com
+# array of all schemes that QuickBlox API supports
+schemes:
+  - https
+basePath: /api
+produces:
+  - application/json
+paths:
+  /session.json:
+    post:
+      summary: Create user
+      operationId: Users_1
+      description: |
+        To receive the session token you have to authenticate your application by requesting url with obligatory parameters.
+      parameters:
+        - name: application_id
+          in: formData
+          description: API Application Identifier
+          required: true
+          type: integer
+          default: 92
+        - name: auth_key
+          in: formData
+          description: Authentication Key.
+          required: true
+          type: string
+          default: WzRAY9vrGmb6FfP
+        - name: timestamp
+          in: formData
+          description: Unix Timestamp It shouldn't be differ from time provided by NTP more than 10 minutes. We suggest you synchronize time on your devices with NTP service.
+          required: true
+          type: integer
+          default: 1473075233
+        - name: nonce
+          in: formData
+          description: Unique Random Value. Requests with the same timestamp and same value for nonce parameter can not be send twice.
+          required: true
+          type: integer
+          default: 189463
+        - name: signature
+          in: formData
+          description: Follow Signature generation guide
+          required: true
+          type: string
+          default: |
+                  eb0ec2d8c8184a3e62b41
+                  da2afb6e8d690577fa4
+      responses:
+        '201':
+          description: "Session object"
+          schema:
+            $ref: '#/definitions/SessionObject'
+    get:
+      summary:
+        Retrieve user Info
+      operationId: Users_2
+      description:
+        Get info about current session
+      responses:
+        '200':
+          description: "Session object"
+          schema:
+            $ref: '#/definitions/SessionObject'
+    delete:
+      summary: |
+        Destroy user
+      operationId: Users_3
+      description: |
+        Destroy user session (Session token will be decreased to the token of the application)
+      responses:
+        '200':
+          description: Empty body
+          schema:
+            $ref: '#/definitions/EmptyBody'
+definitions:
+  EmptyBody:
+    type: string
+    default: 'null'
+  SessionObject:
+    type: object
+    properties:
+      _id:
+        type: string
+        example: 0e7bc95d85c0eb2bf052be3d29d3df523081e87f
+      application_id:
+        type: integer
+        example: 92
+      created_at:
+        type: string
+        example: "2012-04-03T07:34:48Z"
+      nonce:
+        type: integer
+        example: 18945
+      token:
+        type: string
+        example: "1e7bc99d85c0eb2bf062be3d29d3df523081e874"
+      ts:
+        type: integer
+        example: 1473075233
+      updated_at:
+        type: string
+        example: "2012-04-03T07:34:48Z"
+      user_id:
+        type: integer
+        example: 302
+      id:
+        type: integer
+        example: 326
