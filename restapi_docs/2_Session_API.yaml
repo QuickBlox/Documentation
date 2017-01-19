@@ -1,6 +1,6 @@
 swagger: '2.0'
 info:
-  title: QuickBlox REST API, Session API.
+  title: QuickBlox Server API, Session API.
   description: A set of REST API requests to work with QuickBlox session.
   version: 0.1.1
 # the domain of the service
