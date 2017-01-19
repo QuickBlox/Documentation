@@ -14,8 +14,8 @@ produces:
 paths:
   /session.json:
     post:
-      summary: Create user
-      operationId: Users_1
+      summary: Create session
+      operationId: Session_1
       description: |
         To receive the session token you have to authenticate your application by requesting url with obligatory parameters.
       parameters:
@@ -58,8 +58,8 @@ paths:
             $ref: '#/definitions/SessionObject'
     get:
       summary:
-        Retrieve user Info
-      operationId: Users_2
+        Retrieve session Info
+      operationId: Session_2
       description:
         Get info about current session
       responses:
@@ -69,8 +69,8 @@ paths:
             $ref: '#/definitions/SessionObject'
     delete:
       summary: |
-        Destroy user
-      operationId: Users_3
+        Destroy session
+      operationId: Session_3
       description: |
         Destroy user session (Session token will be decreased to the token of the application)
       responses:
