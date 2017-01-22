@@ -1,0 +1,290 @@
+# Summary
+
+## How QuickBlox Push Notifications work
+
+In order to use QuickBlox Push Notifications APIs you must Create a session & Sign In to QuickBlox OR just create a session with a User.
+
+There are 2 ways that you can integrate Push Notifications into your app:
+1. **Broadcasting the same message to all users.** It's a simple method which can be used in informational apps that do not authenticate users and where same push notification messages are broadcasted to everybody. This way when you want to send a push message you may 1) simply go to Admin panel -> Push Notifications -> type your message in Simple mode -> and hit "Send" for all of your users to receive the message; Send a push using Push Notifications API (explained below). Following this way you only need to create ONE QuickBlox User which will have all of your users' devices associated with it. Then simply send your pushes to that User.
+3. **Send individual push alerts.** This is when you want to individually send push notifications to a particular user or a group of users (for example notify users of a new chat message sent while they are offline or tell them about some deal/event happening in close proximity to their location). Following this way you need to have a QuickBlox User created for each of your app users. Note that there are easy ways to transparently create QB Users along with your existing users authentication system or have them sign up with Facebook/Twitter/OAuth (described in Users code sample reference) so your end users don't have to type any additional login credentials or know anything about QuickBlox.
+
+<span id="Need_to_known_information" class="on_page_navigation">
+</span>
+
+# Need to know information
+Before using the Push Notifications module please read the following:
+
+- [Getting Started]()
+- [Authentication and Authorization]()
+
+<span id="Getting_Started_with_Push_Notifications_API" class="on_page_navigation">
+</span>
+
+# Getting Started with Push Notifications API
+
+## Getting a QuickBlox account
+http://admin.quickblox.com/register
+
+## Creating applications in the Admin panel
+http://admin.quickblox.com/apps/new
+
+>For further reading there is also [5 minutes guide]()
+
+## Connecting QuickBlox to your application
+To get the information on how to connect to the QuickBlox.framework please refer to the IOS-how-to-connect-Quickblox-framework page.
+
+## Creating APNS certificates
+
+Each iOS application that uses Apple Push Notifications must have APNS certificates uploaded via the Admin panel. To get the information on how to create APNS certificates and upload them to Admin panel, please, refer to the [How to create APNS certificates page.]()
+
+>You must use valid Provisioning Profiles for your Xcode project.
+
+<span id="How_to_create_APNS_certificates_page" class="on_page_navigation">
+</span>
+
+# How to create APNS certificates
+## Creating an App ID
+
+Each iOS application that uses the APNs must have a unique application ID that uniquely identifies itself. In this step, you will learn how to create an App ID for push notification.
+>If you already have an App ID you can skip this steps
+
+1. Log in to the [iPhone Developer Connection Portal](https://developer.apple.com/account/)
+
+2. Click on the **Certificates, IDs & Profiles**:
+![](./resources/images/6/6_1.png)
+
+3. To make a new App ID open the App IDs tab and click on the New App ID button:
+![](./resources/images/6/6_2.png)
+
+4. Enter your app name for the **Description (1)**. Enter **Bundle Identifier(2)**.
+ Ensure you have created an App ID without a wildcard. Wildcard IDs cannot use the push notification service. For example, our iOS application ID looks something like *com.quickblox.notificationstest*. Click **Continue**:
+![](./resources/images/6/6_3.png)
+
+5. You should now see the info about App ID that you have created. Click **Register** button to continue.
+
+ ## Generating a Certificate Request
+
+ You must generate a certificate request file so that you can use it to request for a development SSL certificate later on.
+
+ 1. Launch the Keychain Access application in your Mac OS:
+ ![](./resources/images/6/6_4.png)
+
+ 2. Select Keychain Access -> Certificate Assistant -> Request a Certificate From a Certificate Authority:
+ ![](./resources/images/6/6_5.png)
+
+ 3. Enter the information required and check the **'Saved to disk'** option. Click Continue:
+ ![](./resources/images/6/6_6.png)
+
+ 4. Save the certificate request using the suggested name and click **Save**. Click **Done** in the next screen:
+ ![](./resources/images/6/6_7.png)
+
+>The same process above applies when generating the production certificate.
+
+## Configuring an App ID for Push Notifications
+
+Once an App ID is created, you need to configure it for push notifications.
+
+1. To configure an App ID for push notification, you need to select the App in the App IDs list. Under Application Services: click on the **'Edit'** button for the selected App ID:
+![](./resources/images/6/6_8.png)
+
+2. Configuration page opens. Scroll down to Push Notifications. Enable checkbox**(1)** and click the **'Create Certificate'(2)** button.
+![](./resources/images/6/6_9.png)
+
+3. A wizard will appear. Click **Continue**:
+![](./resources/images/6/6_10.png)
+
+4. Click the **'Choose File...'** button to locate the Certificate Request file that you have saved earlier *(Generating a Certificate Request section)*. Click **Generate**:
+![](./resources/images/6/6_11.png)
+
+5. Your SSL Certificate will now be generated. Click **Download** and save it on your hard dick:
+![](./resources/images/6/6_12.png)
+
+Alternative way for downloading created certificate:
+
+> The same process above applies when generating the production certificate.
+
+## Making APNS certificates
+
+1. The SSL Certificate that you download is named **aps_developer_identity.cer**. Double-click on it to install it in the Keychain Access application. The SSL certificate will be used by your provider application so that it can contact the APNs to send push notifications to your applications.
+
+2. Launch Keychain Assistant from your Mac and from the 'login' keychain, filter by the 'Certificates' category. You will see an expandable option called “Apple Development iOS Push Services”, paired with a private key:
+![](./resources/images/6/6_13.png)
+
+3.Right-click on your new push certificate and choose **Export “Apple Development iOS Push Services ...″**. Save this as apns-dev-cert.p12 file somewhere you can access it.
+
+Enter the password for exporting (optional):
+![](./resources/images/6/6_14.png)
+
+Enter your usual admin password for your computer to confirm and finalize the export process:
+![](./resources/images/6/6_15.png)
+
+> The same process above applies when generating the production certificate.
+
+
+
+## Upload certificate to Admin panel
+**Thats all! Now you can upload APNS certificates to Push notifications module in [QuickBlox Admin panel.](https://admin.quickblox.com/signin)**
+
+1. Go to Push notifications
+![](./resources/images/6/6_16.png)
+
+2. Switch to Settings tab.
+![](./resources/images/6/6_17.png)
+ * Choose certificate enviroment (1).
+ * Enter password if certificate has it (2).
+ * Choose certificate with p12 format (3).
+
+3. Upload your certificate.
+
+## Creating provision profile
+1. Log in to the [iPhone Developer Connection Portal](https://developer.apple.com/account/)
+
+2. Click on the **Certificates, IDs & Profiles**:
+![](./resources/images/6/6_1.png)
+
+3. Open Provisioning profiles tab. Click on the 'Create a new provision profile' button:
+![](./resources/images/6/6_18.png)
+
+4. Select a type of the provisioning profile you need to create (1) and click on 'Continue' button to continue the creation:
+![](./resources/images/6/6_19.png)
+
+5. Select App ID you are creating the provisioning profile for:
+![](./resources/images/6/6_20.png)
+
+6. Select the certificates you wish to include in this provisioning profile and click on 'Continue' button:
+![](./resources/images/6/6_21.png)
+
+7. Select the devices you wish to include in this provisioning profile and click on 'Continue' button:
+![](./resources/images/6/6_22.png)
+
+8. Input the Provisioning profile name and click on 'Continue' button to generate the profile:
+![](./resources/images/6/6_23.png)
+
+9. After the generating of the Provisioning Profile was finished screen with the info and available options appears. Click on 'Download' button to download the Provisioning profile:
+![](./resources/images/6/6_24.png)
+
+>Also you can download the Provisioning profile later. Open a list with all Provisioning profiles and choose the required. Additional options become available:
+![](./resources/images/6/6_25.png)
+
+10. After click on 'Download' button the Provision profile will be downloaded to your hard disk.Double click on it:
+![](./resources/images/6/6_26.png)
+
+## Configuring an App for Push Notifications
+
+1. The first step is to change the App ID. Go to App Settings -> General and change Bundle Identifier to identifier that you type on [Step 1]():
+![](./resources/images/6/6_27.png)
+
+2. Then in the section named "Singing (Debug or Release)" select your Provision Profile
+![](./resources/images/6/6_28.png)
+
+3. Go to App Settings -> Capabilities and flip the switch for Push Notifications to On.
+![](./resources/images/6/6_29.png)
+
+>If you are using Xcode version prior to 8 you can go to **Build Settings**  and find (or search for) the "Code Signing Identity" field. Then in the section named "Provision Profile" select your Provision Profile:
+![](./resources/images/6/6_30.png)
+
+## Registering for Push Notifications
+
+1. To register the current device for push, call UIApplication's registerForRemoteNotifications method from the app delegate's application:didFinishLaunchingWithOptions: (typically AppDelegate.m or AppDelegate.swift).
+
+2. To register the current device for push, call `UIApplication`'s `registerForRemoteNotifications` method from the app delegate's `application:didFinishLaunchingWithOptions:` (typically `AppDelegate.m` or `AppDelegate.swift`).
+
+```objective-c
+// Objective-C
+- (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
+  ...
+
+  UIUserNotificationType userNotificationTypes = (UIUserNotificationTypeAlert |
+                                                  UIUserNotificationTypeBadge |
+                                                  UIUserNotificationTypeSound);
+  UIUserNotificationSettings *settings = [UIUserNotificationSettings settingsForTypes:userNotificationTypes
+                                                                           categories:nil];
+  [application registerUserNotificationSettings:settings];
+  [application registerForRemoteNotifications];
+  ...
+}
+```
+```swift
+// Swift
+func application(application: UIApplication, didFinishLaunchingWithOptions launchOptions: [NSObject: AnyObject]?) -> Bool
+    {
+    ...
+    let userNotificationTypes: UIUserNotificationType = [.Alert, .Badge, .Sound]
+    let settings = UIUserNotificationSettings(forTypes: userNotificationTypes, categories: nil)
+    application.registerUserNotificationSettings(settings)
+    application.registerForRemoteNotifications()
+    ...
+    }
+```
+
+3. If the registration is successful, the callback method `application:didRegisterForRemoteNotificationsWithDeviceToken:` in the application delegate will be executed.
+
+```objective-c
+// Objective-C
+- (void)application:(UIApplication *)application didRegisterForRemoteNotificationsWithDeviceToken:(NSData *)deviceToken {
+
+}
+```
+
+```swift
+// Swift
+func application(application: UIApplication, didRegisterForRemoteNotificationsWithDeviceToken deviceToken: NSData) {
+
+}
+```
+
+4. Build and run. When the app launches, you should receive a prompt that asks for permission to send you notifications:
+![](./resources/images/6/6_31.png)
+
+5. If the user accepts, iOS will call your application delegate's application:didRegisterForRemoteNotificationWithDeviceToken: method, passing in the APNs device token. It is a token provided by APNS that uniquely identifies this app on this particular device. When sending a push notification, the app uses device tokens as “addresses” to direct notifications to the correct devices. Add the following code to AppDelegate:
+
+```objective-c
+
+// Objective-C
+- (void)application:(UIApplication *)application didRegisterForRemoteNotificationsWithDeviceToken:(NSData *)deviceToken {
+    NSString *deviceIdentifier = [[[UIDevice currentDevice] identifierForVendor] UUIDString];
+
+    // subscribing for push notifications
+    QBMSubscription *subscription = [QBMSubscription subscription];
+    subscription.notificationChannel = QBMNotificationChannelAPNS;
+    subscription.deviceUDID = deviceIdentifier;
+    subscription.deviceToken = deviceToken;
+
+    [QBRequest createSubscription:subscription successBlock:nil errorBlock:nil];
+}
+```
+
+```swift
+// Swift
+func application(_ application: UIApplication, didRegisterForRemoteNotificationsWithDeviceToken deviceToken: Data) {
+
+    let deviceIdentifier: String = UIDevice.current.identifierForVendor!.uuidString
+    let subscription: QBMSubscription! = QBMSubscription()
+
+    subscription.notificationChannel = QBMNotificationChannel.APNS
+    subscription.deviceUDID = deviceIdentifier
+    subscription.deviceToken = deviceToken
+    QBRequest.createSubscription(subscription, successBlock: { (response: QBResponse!, objects: [QBMSubscription]?) -> Void in
+        //
+    }) { (response: QBResponse!) -> Void in
+        //
+    }
+}
+```
+
+# Sending Push Notifications
+QuickBlox provides several solutions for triggering the delivery of push notifications. You may use any combination of the following methods as needed to fit your app's use case.
+
+## Sending Push Notifications from the Admin panel
+1. Go to [QuickBlox Admin panel](https://admin.quickblox.com/signin) and choose 'Push notifications' section:
+![](./resources/images/6/6_16.png)
+
+2. Choose Environment (1), Channel(2), type the message(3) and press the 'Prepare Notification' button(4):
+![](./resources/images/6/6_32.png)
+
+3. Your message will be delivered to all subscribed Users. You will see:
+![](./resources/images/6/6_33.png)
+
+4. If you've installed the app on a device, you should see the notification appear within a few seconds.
+
+>You won’t see anything if the app is open and running in the foreground. The notification is delivered, but there’s nothing in the app to handle it yet. Simply close the app and send the notification again.
