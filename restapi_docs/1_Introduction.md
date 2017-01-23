@@ -9,6 +9,7 @@ For example:
 * You can upload large amounts of data that will later be consumed in a mobile/web app.
 * Applications written in any programming language can interact with data on QuickBlox Server.
 
+
 QuickBlox iOS, Android and Javascript SDKs use Server APIs.
 
 <span id="API_introduction" class="on_page_navigation"></span>
@@ -18,7 +19,7 @@ All REST API access is over HTTPS, and accessed via the **https://api.quickblox.
 All XMPP API access is over TLS, and accessed via the **chat.quickblox.com:5223** domain. For Web applications it's also possible to use BOSH/WebSockets endpoints (**https://chat.quickblox.com:5281** and **wss://chat.quickblox.com:5291**).
 
 ## Authenticating requests
-Server API requests must be authenticated with a token generated vie REST API, Create session request.
+Server API requests must be authenticated with a token generated vie REST API, [Create session request](Session_API.html#Create_session).
 
 The **QB-Token** header of each REST API request should contain valid session token. 
 
