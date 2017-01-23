@@ -3,7 +3,7 @@ info:
   title: QuickBlox Server API, Endpoints API.
   description: QuickBlox provides a flexible mechanism for apps to retrieve all the correct endpoints (API, Chat, etc) to work with. This mechanism allows smooth transition between <a href=https://quickblox.com/plans>Plans</a>. We recommend to call it each 1 hour.
     <br><br>
-    Use these endpoints in the application. This should ideally be the very first request in the application before all other requests to QuickBlox.
+    Then use these endpoints in your application. It should be ideally the very first request in your application before all other requests to QuickBlox API.
   version: 1.0
 # the domain of the service
 host: quickblox.com
