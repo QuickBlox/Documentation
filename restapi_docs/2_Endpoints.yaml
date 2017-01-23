@@ -2,7 +2,7 @@ swagger: '2.0'
 info:
   title: QuickBlox Server API, Endpoints API.
   description: QuickBlox provides a flexible mechanism for apps to retrieve all the correct endpoints (API, Chat, etc) to work with. This mechanism allows smooth transition between <a href="https://quickblox.com/plans">Plans</a>. We recommend to call it each 1 hour.
-
+    <br><br>
     Use these endpoints in the application. This should ideally be the very first request in the application before all other requests to QuickBlox.
   version: 1.0
 # the domain of the service
