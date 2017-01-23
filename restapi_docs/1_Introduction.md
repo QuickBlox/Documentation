@@ -41,7 +41,7 @@ You can create **Application session** and then upgrade it to **User session** o
 # Changelog
 
 ## API and Dashboard changelog
-TDB
+TBA
 
 ## Real-time Chat API changelog
-TDB
+TBA
