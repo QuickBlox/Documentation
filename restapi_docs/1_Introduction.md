@@ -27,6 +27,14 @@ Expiration time for session token is 2 hours after last request to REST API. Be 
 
 Each REST API response contains header **QB-Token-ExpirationDate** which contains session token expiration date.
 
+## Access Rights
+A session token can be one of 2 types:
+
+* **Application session** - has only READ access to resources.
+* **User session** - has READ/WRITE access to resources.
+
+You can create **Application session** and then upgrade it to **User session** or you can create **User session** at once. 
+ 
 <span id="Changelog" class="on_page_navigation"></span>
 # Changelog
 TDB
