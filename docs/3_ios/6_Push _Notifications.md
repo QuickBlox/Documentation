@@ -286,5 +286,121 @@ QuickBlox provides several solutions for triggering the delivery of push notific
 ![](./resources/images/6/6_33.png)
 
 4. If you've installed the app on a device, you should see the notification appear within a few seconds.
+![](./resources/images/6/6_34.png)
 
 >You won’t see anything if the app is open and running in the foreground. The notification is delivered, but there’s nothing in the app to handle it yet. Simply close the app and send the notification again.
+
+
+## Sending Push Notifications from application (via API)
+It's possible to send 2 types of push notifications:
+1. Platform based Push Notifications
+2. Universal push notifications
+
+### Platform based Push Notifications
+
+Send Platform based push notifications (APNS) (only works for iOS mobile and Safari desktop). Platform based push notification will be delivered to **specified platform only** - in our case it's iOS mobile and Safari desktop:
+
+1. Send Push Notification to particular users (through their IDs):
+
+```objective-c
+// Objective-C
+- (void)application:(UIApplication *)application didRegisterForRemoteNotificationsWithDeviceToken:(NSData *)deviceToken {
+    NSString *deviceIdentifier = [[[UIDevice currentDevice] identifierForVendor] UUIDString];
+
+    // subscribing for push notifications
+    QBMSubscription *subscription = [QBMSubscription subscription];
+    subscription.notificationChannel = QBMNotificationChannelAPNS;
+    subscription.deviceUDID = deviceIdentifier;
+    subscription.deviceToken = deviceToken;
+
+    [QBRequest createSubscription:subscription successBlock:nil errorBlock:nil];
+}
+```
+2. Send push notification to a group of users (via Tags):
+
+```objective-c
+// Objective-C
+NSString *mesage = @"Hello man!";
+NSMutableDictionary *payload = [NSMutableDictionary dictionary];
+NSMutableDictionary *aps = [NSMutableDictionary dictionary];
+[aps setObject:@"default" forKey:QBMPushMessageSoundKey];
+[aps setObject:mesage forKey:QBMPushMessageAlertKey];
+[payload setObject:aps forKey:QBMPushMessageApsKey];
+
+QBMPushMessage *message = [[QBMPushMessage alloc] initWithPayload:payload];
+
+// Send push to groups 'man' and 'car'
+[QBRequest sendPush:pushMessage toUsersWithAnyOfTheseTags:@"man,car" successBlock:^(QBResponse *response, QBMEvent *event) {
+    // Successful response with event
+} errorBlock:^(QBError *error) {
+    // Handler error
+}];
+```
+
+### Universal push notifications
+Universal push notifications will be delivered to all possible platforms and devices for specified users. With universal push notifications there are 2 ways to send it:
+
+1. Just send a simple push with text only:
+
+```objective-c
+// Objective-C
+
+// Send push to users with ids 292,300,1295
+[QBRequest sendPushWithText:@"Hello world" toUsers:@"292,300,1295" successBlock:^(QBResponse *response, QBMEvent *event) {
+    // Successful response with event
+} errorBlock:^(QBError *error) {
+    // Handle error
+}];
+```
+2. With custom parameters:
+
+```objective-c
+
+// Send push to users with ids 292,300,1295
+QBMEvent *event = [QBMEvent event];
+event.notificationType = QBMNotificationTypePush;
+event.usersIDs = @"292,300,129";
+event.type = QBMEventTypeOneShot;
+
+// standart parameters
+// read more about parameters formation http://quickblox.com/developers/Messages#Use_custom_parameters
+//
+NSMutableDictionary  *dictPush = [NSMutableDictionary  dictionary];
+[dictPush setObject:@"Message received from Bob" forKey:@"message"];
+[dictPush setObject:@"5" forKey:@"ios_badge"];
+[dictPush setObject:@"mysound.wav" forKey:@"ios_sound"];
+
+// custom params
+[dictPush setObject:@"234" forKey:@"user_id"];
+[dictPush setObject:@"144" forKey:@"thread_id"];
+
+NSError *error = nil;
+NSData *sendData = [NSJSONSerialization dataWithJSONObject:dictPush options:NSJSONWritingPrettyPrinted error:&error];
+NSString *jsonString = [[NSString alloc] initWithData:sendData encoding:NSUTF8StringEncoding];
+//
+event.message = jsonString;
+
+[QBRequest createEvent:event successBlock:^(QBResponse * _Nonnull response, NSArray<QBMEvent *> * _Nullable events) {
+    // Successful response with event
+} errorBlock:^(QBResponse * _Nonnull response) {
+    // Handle error
+}];
+```
+> read more [about parameters formation](http://quickblox.com/developers/Messages#Use_custom_parameters)
+
+## Adding Rich Push Notifications to your application
+Rich Push Notifications allow you to deliver some rich media content (images, video, HTML/CSS/Javascript) to your users. This works as a combination of QB Push Notifications and [QB Content APIs](http://quickblox.com/developers/Content).
+
+1. Go to Content module page on Admin panel, сhoose any image on your hard disk and press Upload button:
+![](./resources/images/6/6_35.png)
+
+2. While creating the push notification message body, press 'Add Content' button:
+![](./resources/images/6/6_36.png)
+
+3. Check your uploaded image and press 'Add Selected' button:
+![](./resources/images/6/6_37.png)
+
+4. The image will be connected to the Push Notifications. Finally, choose **Environment**, **Channel**, type your message body and press the '**Prepare Notification**' button.
+![](./resources/images/6/6_38.png)
+
+# Handling Push Notifications
