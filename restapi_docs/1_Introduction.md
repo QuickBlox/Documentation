@@ -20,7 +20,7 @@ All XMPP API access is over TLS, and accessed via the **chat.quickblox.com:5223*
 
 <span id="Authenticating_requests" class="on_page_navigation"></span>
 # Authenticating requests
-Server API requests must be authenticated with a token generated vie REST API [Create session request](3_Session_API.md).
+Server API requests must be authenticated with a token generated via REST API [Create session request](3_Session_API.md).
 
 The **QB-Token** header of each REST API request should contain valid session token. 
 
@@ -33,8 +33,8 @@ A session token can be one of 2 types:
 
 * **Application session** - has only READ access to resources.
 * **User session** - has READ/WRITE access to resources.
-
 <br>
+
 You can create **Application session** and then upgrade it to **User session** or you can create **User session** at once. 
  
 <span id="Changelog" class="on_page_navigation"></span>
