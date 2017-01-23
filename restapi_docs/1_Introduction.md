@@ -9,7 +9,7 @@ For example:
 * You can upload large amounts of data that will later be consumed in a mobile/web app.
 * Applications written in any programming language can interact with data on QuickBlox Server.
 
-
+<br>
 QuickBlox iOS, Android and Javascript SDKs use Server APIs.
 
 <span id="API_introduction" class="on_page_navigation"></span>
