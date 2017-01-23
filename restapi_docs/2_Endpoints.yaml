@@ -18,10 +18,13 @@ paths:
       operationId: Endpoints_1
       description: |
         Request all the application endpoints.
-      headers:
-        QB-Account-Key:
+      parameters:
+        - name: QB-Account-Key
+          in: header
           description: QuickBlox Account Key. To get the **QB-Account-Key**, open <a href="https://admin.quickblox.com/account">Admin panel, your Account page</a> and copy the Account key value.
+          required: true
           type: string
+          default: 2yvNe18TnjNiqDoewfqp
       responses:
         '200':
           description: "Endpoints object"
