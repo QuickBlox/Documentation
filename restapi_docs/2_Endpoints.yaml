@@ -19,9 +19,9 @@ paths:
       description: |
         Request all the application endpoints.
       parameters:
-        - name: QB-Account-Key
+        - name: 'QB-Account-Key'
           in: header
-          description: QuickBlox Account Key. To get the <br>QB-Account-Key</br>, open <a href="https://admin.quickblox.com/account">Admin panel, your Account page</a> and copy the Account key value.
+          description: 'QuickBlox Account Key. To get the <br>QB-Account-Key</br>, open <a href="https://admin.quickblox.com/account">Admin panel, your Account page</a> and copy the Account key value.'
           required: true
           type: string
           default: 2yvNe18TnjNiqDoewfqp
