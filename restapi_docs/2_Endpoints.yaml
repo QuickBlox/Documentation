@@ -1,7 +1,7 @@
 swagger: '2.0'
 info:
   title: QuickBlox Server API, Endpoints API.
-  description: QuickBlox provides a flexible mechanism for apps to retrieve all the correct endpoints (API, Chat, etc) to work with. This mechanism allows smooth transition between [Plans](https://quickblox.com/plans). We recommend to call it each 1 hour.
+  description: QuickBlox provides a flexible mechanism for apps to retrieve all the correct endpoints (API, Chat, etc) to work with. This mechanism allows smooth transition between <a href="https://quickblox.com/plans">Plans</a>. We recommend to call it each 1 hour.
   version: 1.0
 # the domain of the service
 host: quickblox.com
@@ -20,7 +20,7 @@ paths:
         Request all the application endpoints.
       headers:
         QB-Account-Key:
-          description: QuickBlox Account Key. To get the **QB-Account-Key**, open [Admin panel, your Account page](https://admin.quickblox.com/account) and copy the Account key value.
+          description: QuickBlox Account Key. To get the **QB-Account-Key**, open <a href="https://admin.quickblox.com/account">Admin panel, your Account page</a> and copy the Account key value.
           type: string
       responses:
         '200':
