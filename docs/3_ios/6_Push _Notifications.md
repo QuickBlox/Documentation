@@ -491,3 +491,64 @@ Rich Push Notifications allow you to deliver some rich media content (images, vi
 ![](./resources/images/6/6_38.png)
 
 # Handling Push Notifications
+
+When your app receives a push notification, a method in UIApplicationDelegate is called.
+The notification needs to be handled differently depending on what state your app is in when it’s received:
+
+| Device / Application State           	| Notification workflow                                                                                                                                  	| Delegate method                                   	|
+|-------------------------------------	|--------------------------------------------------------------------------------------------------------------------------------------------------------	|-----------------------------------------------	|
+| Device is off                       	| Most recent notification stored  in a queue and may be delivered device is turned on (no guarantee).                                                   	|  -                                            	|
+| Device is on / App is in background 	| Notifications is displayed. Style of the notification is based on user preferences and settings.                                                       	| application(_:didReceiveRemoteNotification:)  	|
+| Device is on / App is in foreground 	| Notification is received by app, but not automatically displayed. Code must be written to display notification.                                         	|  application(_:didReceiveRemoteNotification:) 	|
+| Device is on / App is not running   	| If your app wasn’t running and the user launches it by tapping the push notification, the push notification is passed to your app in the launchOptions 	| application(_:didFinishLaunchingWithOptions:) 	|
+
+- (void)application:(UIApplication *)application didReceiveRemoteNotification:(NSDictionary *)userInfo
+{
+    NSLog(@"New push: %@", userInfo);
+}
+
+...
+
+{
+    aps =     {
+        alert = "Message received from Bob";
+        badge = 5;
+        sound = "mysound.wav";
+    };
+    "user_id" = 234;
+}
+
+# Preparing for the App Store
+
+You've configured your app to receive push notifications during development. Prior to submitting your app to the App Store, you will need to configure push notifications for distribution.
+
+There are two types of distribution profiles: Ad Hoc, and App Store. You will need the latter to submit your app to the App Store, however it is good practice to test push notifications using an Ad Hoc profile prior to submitting your app.
+
+## Configuring your App for Distribution Push Notifications
+
+In Section 1.3., you configured your App ID for Push Notifications in Development. Retrace steps 1 through 7, but select "Production Push SSL Certificate" in step 2 instead.
+
+Your App ID should now be configured for both Development and Distribution push notifications. Make sure to download the new Production SSL Certificate from the App ID Settings screen.
+
+Configured for Development and Distribution
+Double click on the downloaded SSL certificate to install it in your keychain. Right-click on it and export it as a .p12 file. Again, don't enter an export password when prompted.
+
+Go back to Section 2 and retrace steps 1 through 10, making sure to select "Ad Hoc" under Distribution in Step 4. You should also use a different name in Step 8, such as "Test Notifications Ad Hoc Profile". This should help you distinguish between development and distribution profiles.
+
+Retrace the steps from Section 3, and upload your exported Production .p12 certificate to admin panel instead.
+
+In Section 4, you configured your app to use a Development provisioning profile. Retrace your steps, but this time choose your new Distribution Ad Hoc provisioning profile instead.
+
+Build and run your app on an iOS device. Verify that push notifications are delivered successfully.
+
+Note that once you have uploaded a production push certificate to Quickblox admin panel, you will only be able to target devices using a distribution provisioning profile. Devices running an app signed with a development provisioning profile will need to install the newly provisioned build again.
+
+## Configuring your App for App Store Distribution
+
+You have now confirmed that your app is configured correctly to receive distribution push notifications using an Ad Hoc provisioning profile. Now it's time to submit your app to the App Store.
+
+Follow steps 1 through 10 from Section 2, making sure to select "App Store" under Distribution for Step 4. Note that this time around, since you will be submitting your app to the App Store, you can skip Step 7 (selecting test devices).
+
+Go through Section 4 again, this time selecting your new App Store Distribution provisioning profile.
+
+Build and archive your iOS app, then submit to the App Store.
