@@ -492,6 +492,55 @@ Rich Push Notifications allow you to deliver some rich media content (images, vi
 
 # Handling Push Notifications
 
+## Anatomy of a Basic Push Notification
+A push notification is a short message that consists of the device token, a payload, and a few other bits and bytes. The payload is what you are interested in, as that contains the actual data you need.
+The payload for a simple push message looks like this:
+
+```
+{
+    aps =     {
+        alert = "Hello everyone!!!";
+        sound = default;
+    };
+}
+```
+
+For the JSON uninitiated, a block delimited by curly { } brackets contains a dictionary that consists of key/value pairs (just like an NSDictionary).
+
+The payload is a dictionary that contains at least one item, “aps”, which itself is also a dictionary. In our example, “aps” contains the fields “alert” and “sound”. When this push notification is received, it shows an alert view with the text "Hello everyone!!!" and plays the standard sound effect.
+
+There are five keys you can add to the aps dictionary:
+- **alert**. This can be a string, like in the previous example, or a dictionary itself. As a dictionary, it can localize the text or change other aspects of the notification. See [Apple’s documentation](https://developer.apple.com/library/content/documentation/NetworkingInternet/Conceptual/RemoteNotificationsPG/PayloadKeyReference.html#//apple_ref/doc/uid/TP40008194-CH17-SW1) for all the keys it can support.
+- **badge**. This is a number that will display in the corner of the app icon. You can remove the badge by setting this to 0.
+- **sound**. By setting this key, you can play custom notification sounds located in the app in place of the default notification sound. Custom notification sounds must be shorter than 30 seconds and have a few restrictions, which you can see in [Apple’s documentation]().
+- **content-available**. By setting this key to 1, the push notification becomes a silent one.
+- **category**. This defines the category of the notification, which is is used to show custom actions on the notification.
+
+Outside of these, you can add as much custom data as you want, **as long as the payload does not exceed the maximum size**. Custom values must use the JSON structured and primitive types: dictionary (object), array, string, number, and Boolean.
+
+>Custom payload values should be specified outside the Apple-reserved aps namespace
+
+```
+{
+    "aps" : {
+        "alert" : {
+            "title" : "New message",
+            "body" : "I like Quickblox!"
+        },
+        "badge" : 5,
+        "sound" : "bingbong.aiff"
+    },
+    "acme1" : "bar",
+    "acme2" : [ "bang",  "whiz" ]
+}
+```
+
+Now “alert” is a dictionary of its own. The “badge” field contains the number that will be shown on the application icon. This notification will play a custom sound named "bingbong.aiff".
+This examples also includes keys whose names include the string “acme”, which represent custom data.
+
+> In iOS 8 and later, the maximum size allowed for a notification payload is 2 kilobytes; Apple Push Notification service refuses any notification that exceeds this limit. (Prior to iOS 8 and in OS X, the maximum payload size is 256 bytes.)
+
+## Deal with it!
 When your app receives a push notification, a method in UIApplicationDelegate is called.
 The notification needs to be handled differently depending on what state your app is in when it’s received:
 
@@ -509,14 +558,7 @@ The notification needs to be handled differently depending on what state your ap
 
 ...
 
-{
-    aps =     {
-        alert = "Message received from Bob";
-        badge = 5;
-        sound = "mysound.wav";
-    };
-    "user_id" = 234;
-}
+
 
 # Preparing for the App Store
 
