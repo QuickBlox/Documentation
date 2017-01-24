@@ -316,6 +316,26 @@ Send Platform based push notifications (APNS) (only works for iOS mobile and Saf
     [QBRequest createSubscription:subscription successBlock:nil errorBlock:nil];
 }
 ```
+
+```swift
+
+// Swift
+func application(_ application: UIApplication, didRegisterForRemoteNotificationsWithDeviceToken deviceToken: Data) {
+
+    let deviceIdentifier: String = UIDevice.current.identifierForVendor!.uuidString
+    let subscription: QBMSubscription! = QBMSubscription()
+
+    subscription.notificationChannel = QBMNotificationChannel.APNS
+    subscription.deviceUDID = deviceIdentifier
+    subscription.deviceToken = deviceToken
+
+    QBRequest.createSubscription(subscription, successBlock: { (response: QBResponse!, objects: [QBMSubscription]?) -> Void in
+        //
+    }) { (response: QBResponse!) -> Void in
+        //
+    }
+}
+
 2. Send push notification to a group of users (via Tags):
 
 ```objective-c
@@ -327,14 +347,36 @@ NSMutableDictionary *aps = [NSMutableDictionary dictionary];
 [aps setObject:mesage forKey:QBMPushMessageAlertKey];
 [payload setObject:aps forKey:QBMPushMessageApsKey];
 
-QBMPushMessage *message = [[QBMPushMessage alloc] initWithPayload:payload];
+QBMPushMessage *pushMessage = [[QBMPushMessage alloc] initWithPayload:payload];
 
 // Send push to groups 'man' and 'car'
 [QBRequest sendPush:pushMessage toUsersWithAnyOfTheseTags:@"man,car" successBlock:^(QBResponse *response, QBMEvent *event) {
     // Successful response with event
 } errorBlock:^(QBError *error) {
-    // Handler error
+    // Handle error
 }];
+```
+
+```swift
+// Swift
+
+let message = "Hello man!"
+var payload = [String: AnyObject]()
+var aps = [String: AnyObject]()
+
+aps[QBMPushMessageSoundKey] = "default" as AnyObject!
+aps[QBMPushMessageAlertKey] = message as AnyObject!
+payload[QBMPushMessageApsKey] = aps as AnyObject!
+
+let pushMessage = QBMPushMessage.init()
+pushMessage.payloadDict = NSMutableDictionary(dictionary: payload)
+
+// Send push to groups 'man' and 'car'
+QBRequest.sendPush(pushMessage, toUsersWithAnyOfTheseTags: "man,car", successBlock: {(response: QBResponse,event: QBMEvent?) -> Void in
+    // Successful response with event
+}, errorBlock: {(error: QBError?) -> Void in
+    // Handle error
+})
 ```
 
 ### Universal push notifications
@@ -352,6 +394,17 @@ Universal push notifications will be delivered to all possible platforms and dev
     // Handle error
 }];
 ```
+
+```swift
+
+// Swift
+QBRequest.sendPush(withText:"Hello world", toUsers: "292,300,1295", successBlock: {(response: QBResponse!, event: [QBMEvent]?) -> Void in
+    // Successful response with even
+}, errorBlock: {(error: QBError?) -> Void in
+    // Handle error
+})
+```
+
 2. With custom parameters:
 
 ```objective-c
@@ -386,6 +439,40 @@ event.message = jsonString;
     // Handle error
 }];
 ```
+
+```swift
+//Swift
+// Send push to users with ids 292,300,1295
+let event = QBMEvent.init()
+event.notificationType = .push
+event.usersIDs = "292,300,129"
+event.type = .oneShot
+
+// standart parameters
+// read more about parameters formation http://quickblox.com/developers/Messages#Use_custom_parameters
+//
+var dictPush = [String : String]()
+
+dictPush["message"] = "Message received from Bob"
+dictPush["ios_badge"] = "5"
+dictPush["ios_sound"] = "mysound.wav"
+
+// custom params
+dictPush["user_id"] = "234"
+dictPush["thread_id"] = "144"
+
+let jsonData = try? JSONSerialization.data(withJSONObject: dictPush, options: .prettyPrinted)
+let jsonString = String(bytes: jsonData!, encoding: String.Encoding.utf8)
+
+event.message = jsonString
+
+QBRequest.createEvent(event, successBlock: {(response: QBResponse,events: [QBMEvent]?) -> Void in
+    // Successful response with event
+}, errorBlock: {(response: QBResponse) -> Void in
+    // Handle error
+})
+```
+
 > read more [about parameters formation](http://quickblox.com/developers/Messages#Use_custom_parameters)
 
 ## Adding Rich Push Notifications to your application
