@@ -556,10 +556,114 @@ The notification needs to be handled differently depending on what state your ap
     NSLog(@"New push: %@", userInfo);
 }
 
-...
+## Push Notifications in iOS 10
 
+The new framework called “**UserNotifications**”	is introduced with iOS 10 SDK. The [UserNotifications framework](https://developer.apple.com/reference/usernotifications) (UserNotifications.framework) supports the delivery and handling of local and remote notifications.
 
+1. Add UserNotifications.framework
+![](./resources/images/6/6_39.png)
 
+2. Import UserNotifications.framework in your AppDelegate file and add UNUserNotificationCenterDelegate.
+
+```objective-c
+#import <UserNotifications/UserNotifications.h>
+//...
+@interface AppDelegate () <UNUserNotificationCenterDelegate>
+
+@end
+//...
+```
+
+```swift
+import UserNotifications
+//...
+class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterDelegate {
+//...
+```
+3. Register for push notification
+Before registration check the version of iOS and then add code base on versions
+Add code in your did finish launching:
+
+```objective-c
+
+#define SYSTEM_VERSION_GREATER_THAN_OR_EQUAL_TO(v)  ([[[UIDevice currentDevice] systemVersion] compare:v options:NSNumericSearch] != NSOrderedAscending)
+
+-(BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions{
+    [self registerForRemoteNotifications];
+    return YES;
+}
+
+- (void)registerForRemoteNotifications {
+    if(SYSTEM_VERSION_GRATERTHAN_OR_EQUALTO(@"10.0")){
+        UNUserNotificationCenter *center = [UNUserNotificationCenter currentNotificationCenter];
+        center.delegate = self;
+        [center requestAuthorizationWithOptions:(UNAuthorizationOptionSound | UNAuthorizationOptionAlert | UNAuthorizationOptionBadge) completionHandler:^(BOOL granted, NSError * _Nullable error){
+             if(!error){
+                 [[UIApplication sharedApplication] registerForRemoteNotifications];
+             }
+         }];
+    }
+    else {
+        // Code for old versions
+    }
+}
+```
+
+```swift
+func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
+    // Override point for customization after application launch.
+    registerForRemoteNotification()
+    return true
+}
+
+func registerForRemoteNotification() {
+    if #available(iOS 10.0, *) {
+        let center  = UNUserNotificationCenter.current()
+        center.delegate = self
+        center.requestAuthorization(options: [.sound, .alert, .badge]) { (granted, error) in
+            if error == nil{
+                UIApplication.shared.registerForRemoteNotifications()
+            }
+        }
+    }
+    else {
+        UIApplication.shared.registerUserNotificationSettings(UIUserNotificationSettings(types: [.sound, .alert, .badge], categories: nil))
+        UIApplication.shared.registerForRemoteNotifications()
+    }
+}
+```
+4. Handling delegate methods for UserNotifications
+There are two delegate methods need to be handled :
+
+```objective-c
+//Called when a notification is delivered to a foreground app.
+-(void)userNotificationCenter:(UNUserNotificationCenter *)center willPresentNotification:(UNNotification *)notification withCompletionHandler:(void (^)(UNNotificationPresentationOptions options))completionHandler{
+    NSLog(@"User Info : %@",notification.request.content.userInfo);
+    completionHandler(UNAuthorizationOptionSound | UNAuthorizationOptionAlert | UNAuthorizationOptionBadge);
+}
+
+//Called to let your app know which action was selected by the user for a given notification.
+-(void)userNotificationCenter:(UNUserNotificationCenter *)center didReceiveNotificationResponse:(UNNotificationResponse *)response withCompletionHandler:(void(^)())completionHandler{
+    NSLog(@"User Info : %@",response.notification.request.content.userInfo);
+    completionHandler();
+}
+```
+
+```swift
+//Called when a notification is delivered to a foreground app.
+@available(iOS 10.0, *)
+func userNotificationCenter(_ center: UNUserNotificationCenter, willPresent notification: UNNotification, withCompletionHandler completionHandler: @escaping (UNNotificationPresentationOptions) -> Void) {
+    print("User Info = ",notification.request.content.userInfo)
+    completionHandler([.alert, .badge, .sound])
+}
+
+//Called to let your app know which action was selected by the user for a given notification.
+@available(iOS 10.0, *)
+func userNotificationCenter(_ center: UNUserNotificationCenter, didReceive response: UNNotificationResponse, withCompletionHandler completionHandler: @escaping () -> Void) {
+    print("User Info = ",response.notification.request.content.userInfo)
+    completionHandler()
+}
+```
 # Preparing for the App Store
 
 You've configured your app to receive push notifications during development. Prior to submitting your app to the App Store, you will need to configure push notifications for distribution.
