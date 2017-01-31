@@ -20,13 +20,7 @@ All XMPP API access is over TLS, and accessed via the **chat.quickblox.com:5223*
 
 <span id="Authenticating_requests" class="on_page_navigation"></span>
 # Authenticating requests
-Server API requests must be authenticated with a token generated via REST API [Create session request](3_Session_API.md).
-
-The **QB-Token** header of each REST API request should contain valid session token. 
-
-Expiration time for session token is 2 hours after last request to REST API. Be aware about it. If you will perform query with expired token - you will receive error **Required session does not exist**. In this case you have to recreate a session. 
-
-Each REST API response contains header **QB-Token-ExpirationDate** which contains session token expiration date.
+TDB
 
 ## Access Rights
 A session token can be one of 2 types:
