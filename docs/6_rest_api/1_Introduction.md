@@ -1,22 +1,18 @@
-The Server APIs consists of REST APIs and XMPP APIs.
-
-It provides system-level access to QuickBlox content and actions. It also allows you to integrate the functionality provided by QuickBlox with other services and applications.
+REST API provides system-level access to QuickBlox content and actions. It also allows you to integrate the functionality provided by QuickBlox with other services and applications.
 
 For example:
 
 * A web server can interact with QuickBlox Server, for example, show data on a website.
-* Headless application (for example, Chat Bot) can connect with QuickBlox Server via QuickBlox Server APIs
+* Headless application (for example, Chat Bot) can connect with QuickBlox Server via QuickBlox REST API.
 * You can upload large amounts of data that will later be consumed in a mobile/web app.
 * Applications written in any programming language can interact with data on QuickBlox Server.
 
 <br>
-QuickBlox iOS, Android and Javascript SDKs use Server APIs.
+QuickBlox iOS, Android and Javascript SDKs use REST API.
 
 <span id="API_introduction" class="on_page_navigation"></span>
 # API introduction
 All REST API access is over HTTPS, and accessed via the **https://api.quickblox.com** domain.
-
-All XMPP API access is over TLS, and accessed via the **chat.quickblox.com:5223** domain. For Web applications it's also possible to use BOSH/WebSockets endpoints (**https://chat.quickblox.com:5281** and **wss://chat.quickblox.com:5291**).
 
 <span id="Authenticating_requests" class="on_page_navigation"></span>
 # Authenticating requests

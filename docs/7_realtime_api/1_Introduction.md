@@ -14,9 +14,9 @@ QuickBlox iOS, Android and Javascript SDKs use Server APIs.
 
 <span id="API_introduction" class="on_page_navigation"></span>
 # API introduction
-All REST API access is over HTTPS, and accessed via the **https://api.quickblox.com** domain.
+All XMPP API access is over TLS, and accessed via the **chat.quickblox.com:5223** domain. 
 
-All XMPP API access is over TLS, and accessed via the **chat.quickblox.com:5223** domain. For Web applications it's also possible to use BOSH/WebSockets endpoints (**https://chat.quickblox.com:5281** and **wss://chat.quickblox.com:5291**).
+For Web applications it's also possible to use BOSH/WebSockets endpoints (**https://chat.quickblox.com:5281** and **wss://chat.quickblox.com:5291**).
 
 <span id="Authenticating_requests" class="on_page_navigation"></span>
 # Authenticating requests
