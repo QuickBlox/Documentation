@@ -16,19 +16,29 @@ All REST API access is over HTTPS, and accessed via the **https://api.quickblox.
 
 <span id="Authenticating_requests" class="on_page_navigation"></span>
 # Authenticating requests
-Server API requests must be authenticated with a token generated via REST API [Create session request](3_Session_API.md).
+When someone connects with an app using QuickBlox, the app will be able to obtain an access token which provides temporary, secure access to QuickBlox APIs.
 
-The **QB-Token** header of each REST API request should contain valid session token. 
+A session token is an opaque string that identifies a user and an app.
 
-Expiration time for session token is 2 hours after last request to REST API. Be aware about it. If you will perform query with expired token - you will receive error **Required session does not exist**. In this case you have to recreate a session. 
+Session tokens are obtained via [Create Session request](3_Session_API.md).
 
-Each REST API response contains header **QB-Token-ExpirationDate** which contains session token expiration date.
+Then, because of privacy checks, all REST API requests must be authenticated with a token - the **QB-Token** header of each request to REST API must contain valid session token. 
 
-## Access Rights
-A session token can be one of 2 types:
+Expiration time for session token is 2 hours after last request to REST API. Be aware about it. If you will perform query with expired token - you will receive error **'Required session does not exist'**. In this case you have to recreate a session token. 
 
-* **Application session** - has only READ access to resources.
-* **User session** - has READ/WRITE access to resources.
+Each REST API response contains header **'QB-Token-ExpirationDate'** which contains session token expiration date.
+
+## Access Tokens rights
+There are different types of session tokens to support different use cases:
+
+| IE   | Firefox | Chrome | Safari | Opera | Node.js |
+|:----:|:-------:|:------:|:------:|:-----:|:-------:|
+| 10+  |  30+    | 30+    |  7.1+  |  23+  |    4+   |
+| 10+  |  30+    | 30+    |  7.1+  |  23+  |    4+   |
+
+
+* **App session token** - has only READ access to resources.
+* **User session token** - has READ/WRITE access to resources.
 <br>
 
 You can create **Application session** and then upgrade it to **User session** or you can create **User session** at once. 
