@@ -31,15 +31,11 @@ Each REST API response contains header **'QB-Token-ExpirationDate'** which conta
 ## Access Tokens rights
 There are different types of session tokens to support different use cases:
 
-| IE   | Firefox | Chrome | Safari | Opera | Node.js |
-|:----:|:-------:|:------:|:------:|:-----:|:-------:|
-| 10+  |  30+    | 30+    |  7.1+  |  23+  |    4+   |
-| 10+  |  30+    | 30+    |  7.1+  |  23+  |    4+   |
+| Session Token Type | Description |
+|:----:|:-------:|
+| App session token | Has only READ access to resources |
+| User session token  | Has READ/WRITE access to resources |
 
-
-* **App session token** - has only READ access to resources.
-* **User session token** - has READ/WRITE access to resources.
-<br>
 
 You can create **Application session** and then upgrade it to **User session** or you can create **User session** at once. 
  
