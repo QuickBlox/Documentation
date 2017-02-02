@@ -26,18 +26,18 @@ Then, because of privacy checks, all REST API requests must be authenticated wit
 
 Expiration time for session token is 2 hours after last request to REST API. Be aware about it. If you will perform query with expired token - you will receive error **'Required session does not exist'**. In this case you have to recreate a session token. 
 
-Each REST API response contains header **'QB-Token-ExpirationDate'** which contains session token expiration date.
+Each REST API response contains header **'QB-Token-ExpirationDate'** which contains session token expiration date. 
 
 ## Access Tokens rights
 There are different types of session tokens to support different use cases:
 
 | Session Token Type | Description |
 |:----:|:-------:|
-| App session token | Has only READ access to resources |
-| User session token  | Has READ/WRITE access to resources |
+| App session token | This kind of access token is needed to read the app data. Has only READ access to resources |
+| User session token  | The user token is the most commonly used type of token. This kind of access token is needed any time the app calls an API to read, modify or write a specific user's QuickBlox data on their behalf. Has READ/WRITE access to resources |
 
 
-You can create **Application session** and then upgrade it to **User session** or you can create **User session** at once. 
+You can create **Application session** and then upgrade it to **User session** or you can create **User session** at once. Use [Create Session request](3_Session_API.md).
  
 <span id="Changelog" class="on_page_navigation"></span>
 # Changelog
@@ -45,5 +45,3 @@ You can create **Application session** and then upgrade it to **User session** o
 ## API and Dashboard changelog
 TBA
 
-## Real-time Chat API changelog
-TBA
