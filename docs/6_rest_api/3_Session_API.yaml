@@ -17,7 +17,10 @@ paths:
       summary: Create session
       operationId: Session_1
       description: |
-        To receive the session token you have to authenticate your application by requesting url with obligatory parameters.
+        Create session and retrieve session token. Usually there are 3 sets of parameters you can pass:
+          1) ...
+          2) ...
+          3) ...  
       parameters:
         - name: application_id
           in: formData
