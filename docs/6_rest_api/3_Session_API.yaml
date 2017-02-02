@@ -17,10 +17,13 @@ paths:
       summary: Create session
       operationId: Session_1
       description: |
-        Create session and retrieve session token. Usually there are 3 sets of parameters you can pass:
-        * aside
-        * asdas
-        * asdasdd
+         | Header 1 | Header 2 | Header 3 |
+         |----------|----------|----------|
+         | Data 1   | Data 2   | Data 3   |
+
+         * Item 1
+         * Item 2
+         * Item 3
       parameters:
         - name: application_id
           in: formData
