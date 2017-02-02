@@ -18,9 +18,11 @@ paths:
       operationId: Session_1
       description: |
         Create session and retrieve session token. Usually there are 3 sets of parameters you can pass:
-          1) ...
-          2) ...
-          3) ...  
+          <ul>
+            <li> ... </li>
+            <li> ... </li>
+            <li> ... </li>
+          </ul>
       parameters:
         - name: application_id
           in: formData
@@ -75,7 +77,7 @@ paths:
         Destroy session
       operationId: Session_3
       description: |
-        Destroy user session (Session token will be decreased to the token of the application)
+        Destroy session (Session token will be removed on backend side).
       responses:
         '200':
           description: Empty body
