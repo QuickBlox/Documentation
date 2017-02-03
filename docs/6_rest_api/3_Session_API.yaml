@@ -20,7 +20,7 @@ paths:
         Create session and retrieve session token. Usually there are 3 sets of parameters you can pass:
           * minimal set of parameters (to create App session token)
           * minimal set of parameters plus **user[login]**/**user[email]** and **user[password]** (to create User session token)
-          * minimal set of parameters plus **provider**, **keys[token]**, **keys[secret]**, **twitter_digits[..]** (to create User session token based on social authorization)
+          * minimal set of parameters plus **provider**, **keys[..]**/**twitter_digits[..]** (to create User session token based on social authorization)
       parameters:
         - name: application_id
           in: formData
