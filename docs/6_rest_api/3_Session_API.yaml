@@ -17,8 +17,7 @@ paths:
       summary: Create session
       operationId: Session_1
       description: |
-        Create session and retrieve session token. Usually there are 3 sets of parameters you can pass:
-
+        Create session and retrieve session token. Usually there are 3 sets of parameters you can pass
         * qwe
         * qweqwe
         * qweqweqw
