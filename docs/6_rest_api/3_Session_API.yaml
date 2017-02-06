@@ -58,6 +58,18 @@ paths:
           required: false
           type: string
           default: bukster
+        - name: user[email]
+          in: formData
+          description: User's email to create User session with. You can pass **user[login]** or **user[email]** only.
+          required: false
+          type: string
+          default: samuel@quickblox.com
+        - name: user[password]
+          in: formData
+          description: User's password to create User session with.
+          required: false
+          type: string
+          default: bad-as-passwd
       responses:
         '201':
           description: "Session object"
