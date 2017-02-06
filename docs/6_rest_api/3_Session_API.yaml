@@ -36,7 +36,7 @@ paths:
           default: WzRAY9vrGmb6FfP
         - name: timestamp
           in: formData
-          description: Unix Timestamp It shouldn't be differ from time provided by NTP more than 10 minutes. We suggest you synchronize time on your devices with NTP service.
+          description: Unix Timestamp It shouldn't be differ from time provided by NTP more than 60 minutes. We suggest you synchronize time on your devices with NTP service.
           required: true
           type: integer
           default: 1473075233
@@ -51,9 +51,7 @@ paths:
           description: Follow Signature generation guide
           required: true
           type: string
-          default: |
-                  eb0ec2d8c8184a3e62b41
-                  da2afb6e8d690577fa4
+          default: eb0ec2d8c8184a3e62b41da2afb6e8d690577fa4
         - name: user[login]
           in: formData
           description: User's login to create User session with. You can pass **user[login]** or **user[email]** only.
