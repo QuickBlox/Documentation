@@ -95,7 +95,9 @@ paths:
           description: Twitter Digits auth header to create User session with.
           required: false
           type: string
-          default: https://api.digits.com/1.1/sdk/account.json
+          default: |
+            https://api.digits.com/1.1
+            /sdk/account.json
         - name: |
             twitter_digits
             [X-Verify-Credentials-Authorization]
@@ -105,13 +107,13 @@ paths:
           type: string
           default: |
             OAuth
-            oauth_signature=\"VPAnnk%2BX5gl9%2FWfImtlX%2F7a1erk%3D\",
-            oauth_nonce=\"BAAA38FB-6DC2-42F7-94F9-762775E318FC\",
-            oauth_timestamp=\"1455617205\",
-            oauth_consumer_key=\"yvr9bDxidLTaydLo7JZRtGIAp\",
-            oauth_token=\"3533173695-3FS9DzsV0L16kA63lOC7c7MCMw7m2xVGWfbs8pK\",
-            oauth_version=\"1.0\",
-            oauth_signature_method=\"HMAC-SHA1\"
+            oauth_signature=...,
+            oauth_nonce=...,
+            oauth_timestamp=...,
+            oauth_consumer_key=...,
+            oauth_token=...,
+            oauth_version=...,
+            oauth_signature_method=...
       responses:
         '201':
           description: "Session object"
