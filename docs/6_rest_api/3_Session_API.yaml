@@ -36,7 +36,7 @@ paths:
           default: WzRAY9vrGmb6FfP
         - name: timestamp
           in: formData
-          description: [Unix Timestamp!](http://en.wikipedia.org/wiki/Unix_time). It shouldn't be differ from time provided by [NTP!](http://en.wikipedia.org/wiki/Network_Time_Protocol) more than 60 minutes. We suggest you synchronize time on your devices with NTP service.
+          description: Unix Timestamp. It shouldn't be differ from time provided by [NTP](http://en.wikipedia.org/wiki/Network_Time_Protocol) more than 60 minutes. We suggest you synchronize time on your devices with NTP service.
           required: true
           type: integer
           default: 1473075233
