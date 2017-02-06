@@ -72,6 +72,18 @@ paths:
           required: false
           type: string
           default: bad-as-passwd
+        - name: keys[token]
+          in: formData
+          description: Social provider token to create User session with.
+          required: false
+          type: string
+          default: AM46dxjhisdffgry26282352fdusdfusdfgsdf
+        - name: keys[secret]
+          in: formData
+          description: Social provider secret to create User session with.
+          required: false
+          type: string
+          default: t35400dfzxcxvsdfn76gancHDHoad7a7fs
       responses:
         '201':
           description: "Session object"
