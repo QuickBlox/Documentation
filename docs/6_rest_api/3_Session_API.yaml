@@ -58,48 +58,7 @@ paths:
           required: false
           type: string
           default: bukster
-        - name: user[email]
-          in: formData
-          description: User's email to create User session with. You can pass **user[login]** or **user[email]** only.
-          required: false
-          type: string
-          default: samuel@quickblox.com
-        - name: user[password]
-          in: formData
-          description: User's password to create User session with.
-          required: false
-          type: string
-          default: bad-as-passwd
-        - name: provider
-          in: formData
-          description: Social provider name to create User session with.Possible values: **facebook**, **twitter**, **twitter_digits**.
-          required: false
-          type: string
-          default: facebook
-        - name: keys[token]
-          in: formData
-          description: Social provider token to create User session with.
-          required: false
-          type: string
-          default: AM46dxjhisdffgry26282352fdusdfusdfgsdf
-        - name: keys[secret]
-          in: formData
-          description: Social provider secret to create User session with.
-          required: false
-          type: string
-          default: t35400dfzxcxvsdfn76gancHDHoad7a7fs
-        - name: twitter_digits[X-Auth-Service-Provider]
-          in: formData
-          description: Twitter Digits auth header to create User session with.
-          required: false
-          type: string
-          default: https://api.digits.com/1.1/sdk/account.json
-        - name: twitter_digits[X-Verify-Credentials-Authorization]
-          in: formData
-          description: Twitter Digits auth header to create User session with.
-          required: false
-          type: string
-          default: ololo
+      responses:
         '201':
           description: "Session object"
           schema:
