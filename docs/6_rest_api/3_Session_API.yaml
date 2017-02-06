@@ -51,7 +51,9 @@ paths:
           description: Follow Signature generation guide
           required: true
           type: string
-          default: eb0ec2d8c8184a3e62b41da2afb6e8d690577fa4
+          default: |
+            eb0ec2d8c8184a3e62b4
+            1da2afb6e8d690577fa4
         - name: user[login]
           in: formData
           description: User's login to create User session with. You can pass **user[login]** or **user[email]** only.
