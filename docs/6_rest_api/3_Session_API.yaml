@@ -88,13 +88,17 @@ paths:
           default: |
             t35400dfzxcxvsdfn
             76gancHDHoad7a7fs
-        - name: twitter_digits[X-Auth-Service-Provider]
+        - name: |
+            twitter_digits
+            [X-Auth-Service-Provider]
           in: formData
           description: Twitter Digits auth header to create User session with.
           required: false
           type: string
           default: https://api.digits.com/1.1/sdk/account.json
-        - name: twitter_digits[X-Verify-Credentials-Authorization]
+        - name: |
+            twitter_digits
+            [X-Verify-Credentials-Authorization]
           in: formData
           description: Twitter Digits auth header to create User session with.
           required: false
