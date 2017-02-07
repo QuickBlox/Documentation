@@ -19,10 +19,9 @@ Example of body with social token(Facebook):
 application_id=22&auth_key=wJHd4cQSxpQGWx5&keys[token]=AM46dxjhisdffgry26282352fdusdfusdfgsdf&nonce=33432&provider=facebook&timestamp=1326966962
 ```
 
-
 <span id="Examples" class="on_page_navigation"></span>
 # Examples
-We collect examples of session creation request in different languages (not covered by QuickBlox SDKs) to help our users easily start QUickBlox integration:
+We collect examples of session creation request in different languages (not covered by QuickBlox SDKs) to help our users easily start QuickBlox integration:
 
 * [Python](http://stackoverflow.com/questions/17962051/authentication-and-getting-a-session-token-from-quickblox-in-python)
 * [PHP](http://stackoverflow.com/questions/14108986/how-to-generate-quickblox-authentication-signature-in-php)
