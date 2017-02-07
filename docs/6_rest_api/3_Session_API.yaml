@@ -131,8 +131,7 @@ paths:
           schema:
             $ref: '#/definitions/SessionObject'
     delete:
-      summary: |
-        Destroy session
+      summary: Destroy session
       operationId: Session_3
       description: |
         Destroy session (Session token will be removed on backend side).
