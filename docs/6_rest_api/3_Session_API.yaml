@@ -48,7 +48,7 @@ paths:
           default: 189463
         - name: signature
           in: formData
-          description: Request signature. Follow [Signature generation](#Signature_generation) guide.
+          description: Request signature. Follow [Signature generation](#Signature_generation) section.
           required: true
           type: string
           default: |
