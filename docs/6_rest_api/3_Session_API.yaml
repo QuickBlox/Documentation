@@ -140,12 +140,6 @@ paths:
           description: Empty body
           schema:
             $ref: '#/definitions/EmptyBody'
-    head:
-      summary: Signature generation
-      description: blablabla
-    head:
-      summary: Examples
-      description: blablabla
 definitions:
   EmptyBody:
     type: string
