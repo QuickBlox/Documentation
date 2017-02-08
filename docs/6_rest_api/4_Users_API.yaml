@@ -23,7 +23,7 @@ paths:
       operationId: Users_1
       description: |
         Sign up a new user for the identification of the application users.
-        QuickBlox enforces the uniqueness of the **login**, **email**, **facebook_id**, **twitter_id**, **twitter_digits_id** and ***external_user_id* fields.
+        QuickBlox enforces the uniqueness of the **login**, **email**, **facebook_id**, **twitter_id**, **twitter_digits_id** and **external_user_id** fields.
         You can ask QuickBlox to verify user email addresses (require email confirmation) in your application settings page in [Dashboard](https://admin.quickblox.com).
         Also you can setup custom email templates and pages for **Users greetings**, **Reset password** and **Email confirmation** features.
       parameters:
