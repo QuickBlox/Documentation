@@ -1,7 +1,12 @@
 swagger: '2.0'
 info:
-  title: QuickBlox Server API, Session API.
-  description: A set of REST API requests to work with QuickBlox session.
+  title: QuickBlox REST API, Users API.
+  description: |
+    The Users APIs manage all things related to user accounts handling, authentication, account data, password reminding etc.
+    * OAuth is secure and supports transparent authentication;
+    * Logging in users with their Facebook/Twitter/Twitter Digits accounts is available;
+    * User tags – set up user tags and address them separately in your app or through the admin panel – supported by other modules such as Push Notifications;
+    * Existing user base integration – our module supports connection to your system by storing your existent IDs table and matching them to new ones.
   version: 1.0
 # the domain of the service
 host: quickblox.com
@@ -12,77 +17,41 @@ basePath: /api
 produces:
   - application/json
 paths:
-  /session.json:
+  /users.json:
     post:
-      summary: Create user
+      summary: Sign Up
       operationId: Users_1
       description: |
-        To receive the session token you have to authenticate your application by requesting url with obligatory parameters.
+        Sign up a new user for the identification of the application users.
+        QuickBlox enforces the uniqueness of the **login**, **email**, **facebook_id**, **twitter_id**, **twitter_digits_id** and ***external_user_id* fields.
+        You can ask QuickBlox to verify user email addresses (require email confirmation) in your application settings page in [Dashboard](https://admin.quickblox.com).
+        Also you can setup custom email templates and pages for **Users greetings**, **Reset password** and **Email confirmation** features.
       parameters:
-        - name: application_id
+        - name: user[login]
           in: formData
-          description: API Application Identifier
+          description: User login. At least **user[login]** or **user[email]** is required.
           required: true
-          type: integer
-          default: 92
-        - name: auth_key
+          type: String
+          default: samuelrulez
+        - name: user[password]
           in: formData
-          description: Authentication Key.
+          description: User password
           required: true
           type: string
           default: WzRAY9vrGmb6FfP
-        - name: timestamp
+        - name: user[email]
           in: formData
-          description: Unix Timestamp It shouldn't be differ from time provided by NTP more than 10 minutes. We suggest you synchronize time on your devices with NTP service.
-          required: true
-          type: integer
-          default: 1473075233
-        - name: nonce
-          in: formData
-          description: Unique Random Value. Requests with the same timestamp and same value for nonce parameter can not be send twice.
-          required: true
-          type: integer
-          default: 189463
-        - name: signature
-          in: formData
-          description: Follow Signature generation guide
+          description: User email. At least **user[login]** or **user[email]** is required.
           required: true
           type: string
-          default: |
-                  eb0ec2d8c8184a3e62b41
-                  da2afb6e8d690577fa4
+          default: awesomeemail@domain.com
       responses:
         '201':
-          description: "Session object"
+          description: "User object"
           schema:
-            $ref: '#/definitions/SessionObject'
-    get:
-      summary:
-        Retrieve user Info
-      operationId: Users_2
-      description:
-        Get info about current session
-      responses:
-        '200':
-          description: "Session object"
-          schema:
-            $ref: '#/definitions/SessionObject'
-    delete:
-      summary: |
-        Destroy user
-      operationId: Users_3
-      description: |
-        Destroy user session (Session token will be decreased to the token of the application)
-      responses:
-        '200':
-          description: Empty body
-          schema:
-            $ref: '#/definitions/EmptyBody'
+            $ref: '#/definitions/UserObject'
 definitions:
-  EmptyBody:
-    type: string
-    default: 'null'
-  SessionObject:
+  UserObject:
     type: object
     properties:
       _id:
