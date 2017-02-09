@@ -109,8 +109,14 @@ paths:
         '201':
           description: "User object"
           schema:
-            $ref: '#/definitions/UserObject'
+            $ref: '#/definitions/UserResponse'
 definitions:
+  UserResponse:
+    properties:
+      user:
+        type: object
+        example:
+          $ref: '#/definitions/UserObject'
   UserObject:
     properties:
       id:
