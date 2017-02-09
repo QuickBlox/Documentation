@@ -45,6 +45,66 @@ paths:
           required: true
           type: string
           default: awesomeemail@domain.com
+        - name: user[full_name]
+          in: formData
+          description: User full name
+          required: false
+          type: string
+          default: Captain Jack
+        - name: user[phone]
+          in: formData
+          description: User phone number
+          required: false
+          type: string
+          default: 4487556488
+        - name: user[website]
+          in: formData
+          description: User web site
+          required: false
+          type: string
+          default: https://quickblox.com
+        - name: user[facebook_id]
+          in: formData
+          description: ID of the User in Facebook
+          required: false
+          type: string
+          default: 100000883956766
+        - name: user[twitter_id]
+          in: formData
+          description: ID of the User in Twitter
+          required: false
+          type: string
+          default: 23434883956766
+        - name: user[twitter_digits_id]
+          in: formData
+          description: ID of the User in Twitter digits
+          required: false
+          type: string
+          default: 67434863956765
+        - name: user[blob_id]
+          in: formData
+          description: 5346346
+          required: false
+          type: string
+          default: ID of associated blob from Content module (for example, User avatar)
+        - name: user[external_user_id]
+          in: formData
+          description: ID of User in external system
+          required: false
+          type: string
+          default: 21445
+        - name: user[tag_list]
+          in: formData
+          description: User tags – set up user tags and address them separately in your app.
+          required: false
+          type: string
+          default: man,car,mac
+        - name: user[custom_data]
+          in: formData
+          description: User's additional info
+          required: false
+          type: string
+          default: {"age": 34, "lang": "en"}
       responses:
         '201':
           description: "User object"
@@ -54,30 +114,48 @@ definitions:
   UserObject:
     type: object
     properties:
-      _id:
-        type: string
-        example: 0e7bc95d85c0eb2bf052be3d29d3df523081e87f
-      application_id:
-        type: integer
-        example: 92
-      created_at:
-        type: string
-        example: "2012-04-03T07:34:48Z"
-      nonce:
-        type: integer
-        example: 18945
-      token:
-        type: string
-        example: "1e7bc99d85c0eb2bf062be3d29d3df523081e874"
-      ts:
-        type: integer
-        example: 1473075233
-      updated_at:
-        type: string
-        example: "2012-04-03T07:34:48Z"
-      user_id:
-        type: integer
-        example: 302
       id:
         type: integer
-        example: 326
+        example: 1639
+      full_name:
+        type: string
+        example: John doe
+      login:
+        type: string
+        example: samuelrulez
+      phone:
+        type: string
+        example: 8765554351
+      website:
+        type: string
+        example: https://quickblox.com
+      created_at:
+        type: string
+        example: 2012-05-09T10:24:26Z
+      updated_at:
+        type: string
+        example: 2012-05-09T10:24:26Z
+      last_request_at:
+        type: string
+        example: 2012-05-09T10:24:26Z
+      facebook_id:
+        type: string
+        example: 100000883956766
+      twitter_id:
+        type: string
+        example: 23434883956766
+      twitter_digits_id:
+        type: string
+        example: 67434863956765
+      external_user_id:
+        type: string
+        example: 12334
+      blob_id:
+        type: string
+        example: 234435
+      custom_data:
+        type: string
+        example: {"age": 34, "lang": "en"}
+      user_tags:
+        type: string
+        example: man,car
