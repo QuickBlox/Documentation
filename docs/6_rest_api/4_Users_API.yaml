@@ -83,10 +83,10 @@ paths:
           default: 67434863956765
         - name: user[blob_id]
           in: formData
-          description: 5346346
+          description: The id of an assoicated blob for this user, for example their photo
           required: false
           type: integer
-          default: The id of an assoicated blob for this user, for example their photo
+          default: 12312412
         - name: user[external_user_id]
           in: formData
           description: An uid that represents the user in an external user registry
