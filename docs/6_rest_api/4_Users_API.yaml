@@ -114,9 +114,7 @@ definitions:
   UserResponse:
     properties:
       user:
-        type: object
-        example:
-          $ref: '#/definitions/UserObject'
+        $ref: '#/definitions/UserObject'
   UserObject:
     properties:
       id:
