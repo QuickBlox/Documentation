@@ -22,62 +22,62 @@ paths:
       summary: Sign Up
       operationId: Users_1
       description: |
-        Sign up a new user for the identification of the application users.
-        QuickBlox enforces the uniqueness of the **login**, **email**, **facebook_id**, **twitter_id**, **twitter_digits_id** and **external_user_id** fields.
+        Registers a new app user.
+        Call this API to register a user for the app. You must provide either a user **login** or **email** address along with their **passwor**, passing both email address and login is permitted but not required.
         You can ask QuickBlox to verify user email addresses (require email confirmation) in your application settings page in [Dashboard](https://admin.quickblox.com).
         Also you can setup custom email templates and pages for **Users greetings**, **Reset password** and **Email confirmation** features.
       parameters:
         - name: user[login]
           in: formData
-          description: User login. At least **user[login]** or **user[email]** is required.
+          description: The user's login name
           required: true
           type: String
           default: samuelrulez
         - name: user[password]
           in: formData
-          description: User password
+          description: The user's password for this app
           required: true
           type: string
           default: WzRAY9vrGmb6FfP
         - name: user[email]
           in: formData
-          description: User email. At least **user[login]** or **user[email]** is required.
+          description: The user's email address
           required: true
           type: string
-          default: awesomeemail@domain.com
+          default: awesome@domain.com
         - name: user[full_name]
           in: formData
-          description: User full name
+          description: The user's full name
           required: false
           type: string
           default: Captain Jack
         - name: user[phone]
           in: formData
-          description: User phone number
+          description: The user's telephone number
           required: false
           type: string
           default: 4487556488
         - name: user[website]
           in: formData
-          description: User web site
+          description: The user's web address, or other url
           required: false
           type: string
           default: https://quickblox.com
         - name: user[facebook_id]
           in: formData
-          description: ID of the User in Facebook
+          description: The user's facebook uid
           required: false
           type: string
           default: 100000883956766
         - name: user[twitter_id]
           in: formData
-          description: ID of the User in Twitter
+          description: The user's twitter uid
           required: false
           type: string
           default: 23434883956766
         - name: user[twitter_digits_id]
           in: formData
-          description: ID of the User in Twitter digits
+          description: The user's twitter digits uid
           required: false
           type: string
           default: 67434863956765
@@ -85,23 +85,23 @@ paths:
           in: formData
           description: 5346346
           required: false
-          type: string
-          default: ID of associated blob from Content module (for example, User avatar)
+          type: integer
+          default: The id of an assoicated blob for this user, for example their photo
         - name: user[external_user_id]
           in: formData
-          description: ID of User in external system
+          description: An uid that represents the user in an external user registry
           required: false
           type: string
           default: 21445
         - name: user[tag_list]
           in: formData
-          description: User tags – set up user tags and address them separately in your app.
+          description: A comma seperated list of tags associated with the user. Set up user tags and address them separately in your app.
           required: false
           type: string
           default: man,car,mac
         - name: user[custom_data]
           in: formData
-          description: User's additional info
+          description: The user's additional info
           required: false
           type: string
           default: age=34&lang=en
@@ -154,7 +154,7 @@ definitions:
         type: string
         example: 12334
       blob_id:
-        type: string
+        type: integer
         example: 234435
       custom_data:
         type: string
