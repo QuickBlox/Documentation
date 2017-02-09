@@ -104,7 +104,7 @@ paths:
           description: User's additional info
           required: false
           type: string
-          default: {age: 34, lang: en}
+          default: age=34&lang=en
       responses:
         '201':
           description: "User object"
@@ -112,7 +112,6 @@ paths:
             $ref: '#/definitions/UserObject'
 definitions:
   UserObject:
-    type: object
     properties:
       id:
         type: integer
@@ -155,7 +154,7 @@ definitions:
         example: 234435
       custom_data:
         type: string
-        example: {age: 34, lang: en}
+        example: age=34&lang=en
       user_tags:
         type: string
         example: man,car
