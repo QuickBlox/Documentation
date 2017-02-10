@@ -185,10 +185,10 @@ paths:
             oauth_version=...,
             oauth_signature_method=...
       responses:
-        '201':
+        '20':
           description: "User object"
           schema:
-            $ref: '#/definitions/UserResponse'
+            $ref: '#/definitions/UserObject'
 
 definitions:
   UserResponse:
