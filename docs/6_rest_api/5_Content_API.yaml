@@ -2,11 +2,13 @@ swagger: '2.0'
 info:
   title: QuickBlox REST API, Content API.
   description: |
-    The Users APIs manage all things related to user accounts handling, authentication, account data, password reminding etc:<br>
-      - OAuth is secure and supports transparent authentication<br>
-      - Logging in users with their Facebook/Twitter/Twitter Digits accounts is available<br>
-      - User tags – set up user tags and address them separately in your app or through the admin panel – supported by other modules such as Push Notifications<br>
-      - Existing user base integration – our module supports connection to your system by storing your existent IDs table and matching them to new ones.
+    Allows you to manage app contents and settings without having to re-publish them.
+    Using a web interface you or your clients can control and make instant changes to the apps.<br>
+    - To store chat file attachments<br>
+    - Manage text, rich text, and media via easy to use web admin panel<br>
+    - Can be used to manage ads and banners<br>
+    - App synchronizes content in background, users not affected<br>
+    - Any amount of data can be stored<br>
   version: 1.0
 # the domain of the service
 host: quickblox.com
@@ -17,148 +19,76 @@ basePath: /api
 produces:
   - application/json
 paths:
-  /users.json:
+  /blobs.json:
     post:
       summary: Create file
-      operationId: Users_1
+      operationId: Create_File_Id
       description: |
         Registers a new app user.
         Call this API to register a user for the app. You must provide either a user **login** or **email** address along with their **passwor**, passing both email address and login is permitted but not required.
         You can ask QuickBlox to verify user email addresses (require email confirmation) in your application settings page in [Dashboard](https://admin.quickblox.com).
         Also you can setup custom email templates and pages for **Users greetings**, **Reset password** and **Email confirmation** features.
       parameters:
-        - name: user[login]
+        - name: blob[content_type]
           in: formData
-          description: The user's login name
+          description: The file's mime [content type](https://developer.mozilla.org/ru/docs/Web/HTTP/Basics_of_HTTP/MIME_types/Complete_list_of_MIME_types)
           required: true
           type: String
-          default: samuelrulez
-        - name: user[password]
+          default: image/jpeg
+        - name: blob[name]
           in: formData
-          description: The user's password for this app
+          description: The file's name
           required: true
           type: string
-          default: WzRAY9vrGmb6FfP
-        - name: user[email]
+          default: museum.jpg
+        - name: blob[public]
           in: formData
-          description: The user's email address
+          description: The file's visibility. **public** means it will be possible to access this file without session token provided.
           required: true
           type: string
-          default: awesome@domain.com
-        - name: user[full_name]
-          in: formData
-          description: The user's full name
-          required: false
-          type: string
-          default: Captain Jack
-        - name: user[phone]
-          in: formData
-          description: The user's telephone number
-          required: false
-          type: string
-          default: 4487556488
-        - name: user[website]
-          in: formData
-          description: The user's web address, or other url
-          required: false
-          type: string
-          default: https://quickblox.com
-        - name: user[facebook_id]
-          in: formData
-          description: The user's facebook uid
-          required: false
-          type: string
-          default: 100000883956766
-        - name: user[twitter_id]
-          in: formData
-          description: The user's twitter uid
-          required: false
-          type: string
-          default: 23434883956766
-        - name: user[twitter_digits_id]
-          in: formData
-          description: The user's twitter digits uid
-          required: false
-          type: string
-          default: 67434863956765
-        - name: user[blob_id]
-          in: formData
-          description: The id of an assoicated blob for this user, for example their photo
-          required: false
-          type: integer
-          default: 12312412
-        - name: user[external_user_id]
-          in: formData
-          description: An uid that represents the user in an external user registry
-          required: false
-          type: string
-          default: 21445
-        - name: user[tag_list]
-          in: formData
-          description: A comma seperated list of tags associated with the user. Set up user tags and address them separately in your app.
-          required: false
-          type: string
-          default: man,car,mac
-        - name: user[custom_data]
-          in: formData
-          description: The user's additional info
-          required: false
-          type: string
-          default: age=34&lang=en
+          default: false
       responses:
         '201':
-          description: "User object"
+          description: "File object"
           schema:
-            $ref: '#/definitions/UserResponse'
+            $ref: '#/definitions/FileResponse'
 definitions:
-  UserResponse:
+  FileResponse:
     properties:
       user:
-        $ref: '#/definitions/UserObject'
-  UserObject:
+        $ref: '#/definitions/FileObject'
+  FileObject:
     properties:
       id:
         type: integer
         example: 1639
-      full_name:
-        type: string
-        example: John doe
-      login:
-        type: string
-        example: samuelrulez
-      phone:
-        type: string
-        example: 8765554351
-      website:
-        type: string
-        example: https://quickblox.com
       created_at:
         type: string
         example: 2012-05-09T10:24:26Z
       updated_at:
         type: string
         example: 2012-05-09T10:24:26Z
-      last_request_at:
+      name:
         type: string
-        example: 2012-05-09T10:24:26Z
-      facebook_id:
+        example: museum.jpg
+      content_type:
         type: string
-        example: 100000883956766
-      twitter_id:
-        type: string
-        example: 23434883956766
-      twitter_digits_id:
-        type: string
-        example: 67434863956765
-      external_user_id:
-        type: string
-        example: 12334
-      blob_id:
+        example: image/jpeg
+      public:
+        type: boolean
+        example: false
+      size:
         type: integer
-        example: 234435
-      custom_data:
+        example: 55332
+      blob_status:
         type: string
-        example: age=34&lang=en
-      user_tags:
+        example: complete
+      last_read_access_ts:
         type: string
-        example: man,car
+        example: 2012-03-27T13:14:08Z
+      set_completed_at:
+        type: string
+        example: 2012-03-23T16:14:51Z
+      uid:
+        type: string
+        example: 859146a9821e4bef9c6d60e1e8c88b3c00
