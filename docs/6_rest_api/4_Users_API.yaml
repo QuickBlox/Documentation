@@ -141,7 +141,7 @@ paths:
           description: Name of the social network provider to login User with, eg. **facebook**, **twitter**, **twitter_digits**.
           required: false
           type: string
-          default: bad-as-passwd
+          default: facebook
         - name: keys[token]
           in: formData
           description: Your app's access token for the social network platform to login User with.
