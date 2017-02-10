@@ -185,10 +185,19 @@ paths:
             oauth_version=...,
             oauth_signature_method=...
       responses:
-        '20':
+        '200':
           description: "User object"
           schema:
             $ref: '#/definitions/UserObject'
+    post:
+      summary: Sign Out
+      operationId: Users_3
+      description: |
+        Logout a user.
+        Calling this api downgrades the session token to an Application session token
+      responses:
+        '200':
+          description: "Empty response"
 
 definitions:
   UserResponse:
