@@ -24,10 +24,7 @@ paths:
       summary: Create file
       operationId: Create_File_Id
       description: |
-        Registers a new app user.
-        Call this API to register a user for the app. You must provide either a user **login** or **email** address along with their **passwor**, passing both email address and login is permitted but not required.
-        You can ask QuickBlox to verify user email addresses (require email confirmation) in your application settings page in [Dashboard](https://admin.quickblox.com).
-        Also you can setup custom email templates and pages for **Users greetings**, **Reset password** and **Email confirmation** features.
+        Create a new file.
       parameters:
         - name: blob[content_type]
           in: formData
