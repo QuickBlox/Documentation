@@ -15,7 +15,7 @@ paths:
   /session.json:
     post:
       summary: Create session
-      operationId: Session_1
+      operationId: Create_Session_Id
       description: |
         Create session and retrieve session token. Usually there are 3 sets of parameters you can pass:
           * minimal set of parameters (to create App session token)
@@ -128,7 +128,7 @@ paths:
     get:
       summary:
         Retrieve session Info
-      operationId: Session_2
+      operationId: Retrieve_Session_Info_Id
       description:
         Get info about current session
       responses:
@@ -138,7 +138,7 @@ paths:
             $ref: '#/definitions/SessionObject'
     delete:
       summary: Destroy session
-      operationId: Session_3
+      operationId: Destroy_Session_Id
       description: |
         Calling this method will remove and invalidate the session token
       responses:

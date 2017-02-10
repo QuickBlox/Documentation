@@ -17,7 +17,7 @@ paths:
   /account_settings.json:
     get:
       summary: Retrieve endpoints
-      operationId: Endpoints_1
+      operationId: Retrieve_Endpoints_Id
       description: |
         Request all the application endpoints.
       parameters:

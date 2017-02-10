@@ -31,7 +31,7 @@ paths:
           in: formData
           description: The user's login name
           required: true
-          type: String
+          type: string
           default: samuelrulez
         - name: user[password]
           in: formData
@@ -122,19 +122,19 @@ paths:
           in: formData
           description: The user's login, you must provide either the user's login or email.
           required: true
-          type: String
+          type: string
           default: samuelrulez
         - name: email
           in: formData
           description: The user's email address, you must provide either the user's login or email.
           required: true
-          type: String
+          type: string
           default: awesome@quickblox.com
         - name: password
           in: formData
           description: The user's password.
           required: true
-          type: String
+          type: string
           default: bad-as-password
         - name: provider
           in: formData
@@ -207,10 +207,10 @@ paths:
         Password reset instruction will be sent to this email address.
       parameters:
         - name: email
-          in: path
+          in: formData
           description: The user's email to send reset password instruction.
           required: true
-          type: String
+          type: string
           default: awesome@quickblox.com
       responses:
         '200':
@@ -224,12 +224,101 @@ paths:
         Any fields you don’t specify will remain unchanged, so you can update just a subset of the user’s data.
         **login**/**email** and **password** may be changed, but the new **login**/**email** must not already be in use.
       parameters:
+        - name: user_id
+          in: formData
+          description: The id of the user to be updated (path parameter)
+          required: true
+          type: integer
+          default: 53454
         - name: user[login]
           in: formData
           description: The user's login name
-          required: true
-          type: String
+          required: false
+          type: string
           default: samuelrulez
+        - name: user[old_password]
+          in: formData
+          description: The user's old password for this app
+          required: false
+          type: string
+          default: rzRAY9v5Gmb6FfP9
+        - name: user[password]
+          in: formData
+          description: The user's new password for this app
+          required: false
+          type: string
+          default: WzRAY9vrGmb6FfP
+        - name: user[email]
+          in: formData
+          description: The user's email address
+          required: false
+          type: string
+          default: awesome@domain.com
+        - name: user[full_name]
+          in: formData
+          description: The user's full name
+          required: false
+          type: string
+          default: Captain Jack
+        - name: user[phone]
+          in: formData
+          description: The user's telephone number
+          required: false
+          type: string
+          default: 4487556488
+        - name: user[website]
+          in: formData
+          description: The user's web address, or other url
+          required: false
+          type: string
+          default: https://quickblox.com
+        - name: user[facebook_id]
+          in: formData
+          description: The user's facebook uid
+          required: false
+          type: string
+          default: 100000883956766
+        - name: user[twitter_id]
+          in: formData
+          description: The user's twitter uid
+          required: false
+          type: string
+          default: 23434883956766
+        - name: user[twitter_digits_id]
+          in: formData
+          description: The user's twitter digits uid
+          required: false
+          type: string
+          default: 67434863956765
+        - name: user[blob_id]
+          in: formData
+          description: The id of an assoicated blob for this user, for example their photo
+          required: false
+          type: integer
+          default: 12312412
+        - name: user[external_user_id]
+          in: formData
+          description: An uid that represents the user in an external user registry
+          required: false
+          type: string
+          default: 21445
+        - name: user[tag_list]
+          in: formData
+          description: A comma seperated list of tags associated with the user. Set up user tags and address them separately in your app.
+          required: false
+          type: string
+          default: man,car,mac
+        - name: user[custom_data]
+          in: formData
+          description: The user's additional info
+          required: false
+          type: string
+          default: age=34&lang=en
+      responses:
+        '200':
+          description: "User object"
+          schema:
+            $ref: '#/definitions/UserResponse'
 definitions:
   UserResponse:
     properties:
