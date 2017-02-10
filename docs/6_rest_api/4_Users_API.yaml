@@ -189,7 +189,7 @@ paths:
           description: "User object"
           schema:
             $ref: '#/definitions/UserObject'
-    post:
+    delete:
       summary: Sign Out
       operationId: Users_3
       description: |
