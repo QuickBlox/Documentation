@@ -197,7 +197,7 @@ paths:
         Calling this api downgrades the session token to an Application session token
       responses:
         '200':
-          description: "Empty response"
+          description: "Empty body"
 
 definitions:
   UserResponse:

@@ -1,6 +1,6 @@
 swagger: '2.0'
 info:
-  title: QuickBlox REST API, Users API.
+  title: QuickBlox REST API, Content API.
   description: |
     The Users APIs manage all things related to user accounts handling, authentication, account data, password reminding etc:<br>
       - OAuth is secure and supports transparent authentication<br>
@@ -19,7 +19,7 @@ produces:
 paths:
   /users.json:
     post:
-      summary: Sign Up
+      summary: Create file
       operationId: Users_1
       description: |
         Registers a new app user.
