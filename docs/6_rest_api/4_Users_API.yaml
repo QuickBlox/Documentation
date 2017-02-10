@@ -20,7 +20,7 @@ paths:
   /users.json:
     post:
       summary: Sign Up
-      operationId: Users_1
+      operationId: Sign_Up_Id
       description: |
         Registers a new app user.
         Call this API to register a user for the app. You must provide either a user **login** or **email** address along with their **passwor**, passing both email address and login is permitted but not required.
@@ -113,7 +113,7 @@ paths:
   /login.json:
     post:
       summary: Sign In
-      operationId: Users_2
+      operationId: Sign_In_Id
       description: |
         After you allow users to sign up, you need to let them log in to their account with a login/email and password in the future.
         You must provide the user's login or email address along with a password when authenticating users that are registered in QuickBlox.
@@ -191,7 +191,7 @@ paths:
             $ref: '#/definitions/UserObject'
     delete:
       summary: Sign Out
-      operationId: Users_3
+      operationId: Sign_Out_Id
       description: |
         Logout a user.
         Calling this api downgrades the session token to an Application session token
@@ -201,13 +201,13 @@ paths:
   /password/reset.json:
     get:
       summary: Password reset
-      operationId: Users_4
+      operationId: Password_Reset_Id
       description: |
         You can initiate password resets for users who have emails associated with their account.
-        Password reset instruction will be sent to this eamil address.
+        Password reset instruction will be sent to this email address.
       parameters:
         - name: email
-          in: formData
+          in: path
           description: The user's email to send reset password instruction.
           required: true
           type: String
@@ -215,6 +215,21 @@ paths:
       responses:
         '200':
           description: "Empty body"
+  /users/{user_id}.json:
+    put:
+      summary: Update current user
+      operationId: Update_User_id
+      description: |
+        Update current user. In normal usage, nobody except the user is allowed to modify their own data.
+        Any fields you don’t specify will remain unchanged, so you can update just a subset of the user’s data.
+        **login**/**email** and **password** may be changed, but the new **login**/**email** must not already be in use.
+      parameters:
+        - name: user[login]
+          in: formData
+          description: The user's login name
+          required: true
+          type: String
+          default: samuelrulez
 definitions:
   UserResponse:
     properties:
