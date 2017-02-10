@@ -198,7 +198,23 @@ paths:
       responses:
         '200':
           description: "Empty body"
-
+  /password/reset.json:
+    get:
+      summary: Password reset
+      operationId: Users_4
+      description: |
+        You can initiate password resets for users who have emails associated with their account.
+        Password reset instruction will be sent to this eamil address.
+      parameters:
+        - name: email
+          in: formData
+          description: The user's email to send reset password instruction.
+          required: true
+          type: String
+          default: awesome@quickblox.com
+      responses:
+        '200':
+          description: "Empty body"
 definitions:
   UserResponse:
     properties:
