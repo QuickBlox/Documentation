@@ -52,7 +52,7 @@ paths:
 definitions:
   FileResponse:
     properties:
-      user:
+      blob:
         $ref: '#/definitions/FileObject'
   FileObject:
     properties:
