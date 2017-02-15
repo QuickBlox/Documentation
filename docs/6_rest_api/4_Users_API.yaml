@@ -439,6 +439,72 @@ paths:
           description: "User object"
           schema:
             $ref: '#/definitions/UserResponse'
+  /users/by_email.json:
+    get:
+      summary: Retrieve user by user email
+      operationId: Retrieve_User_By_User_Email_Id
+      description: |
+        Retrieve a specific user by user email
+      parameters:
+        - name: email
+          in: formData
+          description: The user's email address
+          required: true
+          type: string
+          default: awesome@quickblox.com
+      responses:
+        '200':
+          description: "User object"
+          schema:
+            $ref: '#/definitions/UserResponse'
+  /users/by_tags.json:
+    get:
+      summary: Retrieve users by tags
+      operationId: Retrieve_User_By_Tags_Id
+      description: |
+        Retrieve users by specific tags
+      parameters:
+        - name: tags
+          in: formData
+          description: A comma seperated list of tags associated with users
+          required: true
+          type: string
+          default: man,car
+        - name: page
+          in: formData
+          description: Used to paginate the results when more than one page of users retrieved
+          required: true
+          type: integer
+          default: 4
+        - name: per_page
+          in: formData
+          description: The maximum number of users to return per page, if not specified then the default is 10
+          required: true
+          type: integer
+          default: 30
+      responses:
+        '200':
+          description: "Array of users"
+          schema:
+            $ref: '#/definitions/ArrayOfUsersResponse'
+  /users/external/{external_user_id}.json:
+    get:
+      summary: Retrieve user external user id
+      operationId: Retrieve_User_By_External_User_Id
+      description: |
+        Retrieve a specific user by external user id that represents the user in an external user registry
+      parameters:
+        - name: external_user_id
+          in: formData
+          description: An uid that represents the user in an external user registry (path parameter)
+          required: true
+          type: integer
+          default: 153
+      responses:
+        '200':
+          description: "User object"
+          schema:
+            $ref: '#/definitions/UserResponse'
 definitions:
   UserResponse:
     properties:
