@@ -505,7 +505,7 @@ paths:
           description: "User object"
           schema:
             $ref: '#/definitions/UserResponse'
-  /users/users/{user_id}.json:
+  /users/{user_id}.json:
     delete:
       summary: Delete user by id
       operationId: Delete_User_By_Id
@@ -521,7 +521,7 @@ paths:
       responses:
         '200':
           description: "Empty body"
-  /users/users/external/{external_user_id}.json:
+  /users/external/{external_user_id}.json:
     delete:
       summary: Delete user by external user id
       operationId: Delete_User_By_External_User_Id
