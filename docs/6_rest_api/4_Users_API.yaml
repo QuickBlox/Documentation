@@ -385,7 +385,65 @@ paths:
           description: "Array of users"
           schema:
             $ref: '#/definitions/ArrayOfUsersResponse'
+  /users/by_facebook_id.json:
+    get:
+      summary: Retrieve user by Facebook id
+      operationId: Retrieve_User_By_Facebook_Id
+      description: |
+        Retrieve a specific user by Facebook id
+      parameters:
+        - name: facebook_id
+          in: formData
+          description: The user's facebook uid
+          required: true
+          type: string
+          default: 100000883956766
+      responses:
+        '200':
+          description: "User object"
+          schema:
+            $ref: '#/definitions/UserResponse'
+  /users/by_twitter_id.json:
+    get:
+      summary: Retrieve user by Twitter id
+      operationId: Retrieve_User_By_Twitter_Id
+      description: |
+        Retrieve a specific user by Twitter id
+      parameters:
+        - name: twitter_id
+          in: formData
+          description: The user's twitter uid
+          required: true
+          type: string
+          default: 23434883956766
+      responses:
+        '200':
+          description: "User object"
+          schema:
+            $ref: '#/definitions/UserResponse'
+  /users/by_twitter_digits_id.json:
+    get:
+      summary: Retrieve user by Twitter id
+      operationId: Retrieve_User_By_Twitter_Digits_Id
+      description: |
+        Retrieve a specific user by Twitter Digits id
+      parameters:
+        - name: twitter_digits_id
+          in: formData
+          description: The user's twitter digits uid
+          required: true
+          type: string
+          default: 67434863956765
+      responses:
+        '200':
+          description: "User object"
+          schema:
+            $ref: '#/definitions/UserResponse'
 definitions:
+  UserResponse:
+    properties:
+      user:
+        $ref: '#/definitions/UserObject'
   ArrayOfUsersResponse:
     properties:
       current_page:
@@ -401,10 +459,6 @@ definitions:
         type: array
         items:
           $ref: '#/definitions/UserObject'
-  UserResponse:
-    properties:
-      user:
-        $ref: '#/definitions/UserObject'
   UserObject:
     properties:
       id:
