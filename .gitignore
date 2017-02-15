@@ -36,6 +36,9 @@
 ehthumbs.db
 Thumbs.db
 
+# IDE files
+.idea
+
 # But not these files...
 !.gitignore
 !docs/
