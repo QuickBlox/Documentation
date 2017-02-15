@@ -18,6 +18,43 @@ produces:
   - application/json
 paths:
   /users.json:
+    get:
+      summary: Retrieve Users
+      operationId: Retrieve_Users_Id
+      description: |
+        Call this API to get a list of current users of you app.
+        By default it returns upto 10 users, but you can change this by adding pagination parameters.
+        You can filter the list of users by supplying a filter string.
+      parameters:
+        - name: page
+          in: formData
+          description: Used to paginate the results when more than one page of users retrieved
+          required: false
+          type: integer
+          default: 4
+        - name: per_page
+          in: formData
+          description: The maximum number of users to return per page, if not specified then the default is 10
+          required: false
+          type: integer
+          default: 30
+        - name: filter[]
+          in: formData
+          description: You can filter the list of users by supplying a filter string.
+          required: false
+          type: string
+          default: number+id+in+3,45,2241
+        - name: order
+          in: formData
+          description: Parameter to sort results - **asc** or **desc**.
+          required: false
+          type: string
+          default: order=asc+date+last_request_at
+      responses:
+        '200':
+          description: "Array of users"
+          schema:
+            $ref: '#/definitions/ArrayOfUsersResponse'
     post:
       summary: Sign Up
       operationId: Sign_Up_Id
@@ -371,13 +408,13 @@ paths:
         - name: page
           in: formData
           description: Used to paginate the results when more than one page of users retrieved
-          required: true
+          required: false
           type: integer
           default: 4
         - name: per_page
           in: formData
           description: The maximum number of users to return per page, if not specified then the default is 10
-          required: true
+          required: false
           type: integer
           default: 30
       responses:
@@ -473,13 +510,13 @@ paths:
         - name: page
           in: formData
           description: Used to paginate the results when more than one page of users retrieved
-          required: true
+          required: false
           type: integer
           default: 4
         - name: per_page
           in: formData
           description: The maximum number of users to return per page, if not specified then the default is 10
-          required: true
+          required: false
           type: integer
           default: 30
       responses:
