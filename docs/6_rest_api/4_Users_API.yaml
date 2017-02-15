@@ -25,6 +25,7 @@ paths:
         Call this API to get a list of current users of you app.
         By default it returns upto 10 users, but you can change this by adding pagination parameters.
         You can filter the list of users by supplying a filter string.
+        You can sort results by ask/desc.
       parameters:
         - name: page
           in: formData
