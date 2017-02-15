@@ -423,7 +423,7 @@ paths:
             $ref: '#/definitions/UserResponse'
   /users/by_twitter_digits_id.json:
     get:
-      summary: Retrieve user by Twitter id
+      summary: Retrieve user by Twitter Digits id
       operationId: Retrieve_User_By_Twitter_Digits_Id
       description: |
         Retrieve a specific user by Twitter Digits id
