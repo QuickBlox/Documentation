@@ -319,42 +319,42 @@ paths:
           description: "User object"
           schema:
             $ref: '#/definitions/UserResponse'
-/users/{user_id}.json:
-  get:
-    summary: Retrieve user by id
-    operationId: Retrieve_User_By_Id_Id
-    description: |
-      Retrieve a specific user by user id
-    parameters:
-      - name: user_id
-        in: formData
-        description: The id of the user to be retrieved
-        required: true
-        type: integer
-        default: 53454
-    responses:
-      '200':
-        description: "User object"
-        schema:
-          $ref: '#/definitions/UserResponse'
-/users/by_login.json:
-  get:
-    summary: Retrieve user by login
-    operationId: Retrieve_User_By_Login_Id
-    description: |
-      Retrieve a specific user by user login
-    parameters:
-      - name: login
-        in: formData
-        description: The login of the user to be retrieved
-        required: true
-        type: integer
-        default: samuel67
-    responses:
-      '200':
-        description: "User object"
-        schema:
-          $ref: '#/definitions/UserResponse'
+  /users/{user_id}.json:
+    get:
+      summary: Retrieve user by id
+      operationId: Retrieve_User_By_Id_Id
+      description: |
+        Retrieve a specific user by user id
+      parameters:
+        - name: user_id
+          in: formData
+          description: The id of the user to be retrieved
+          required: true
+          type: integer
+          default: 53454
+      responses:
+        '200':
+          description: "User object"
+          schema:
+            $ref: '#/definitions/UserResponse'
+  /users/by_login.json:
+    get:
+      summary: Retrieve user by login
+      operationId: Retrieve_User_By_Login_Id
+      description: |
+        Retrieve a specific user by user login
+      parameters:
+        - name: login
+          in: formData
+          description: The login of the user to be retrieved
+          required: true
+          type: integer
+          default: samuel67
+      responses:
+        '200':
+          description: "User object"
+          schema:
+            $ref: '#/definitions/UserResponse'
 definitions:
   UserResponse:
     properties:
