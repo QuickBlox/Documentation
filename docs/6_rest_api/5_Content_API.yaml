@@ -4,11 +4,11 @@ info:
   description: |
     Allows you to manage app contents and settings without having to re-publish them.
     Using a web interface you or your clients can control and make instant changes to the apps.<br><br>
-    - To store chat file attachments<br>
-    - Manage text, rich text, and media via easy to use web admin panel<br>
-    - Can be used to manage ads and banners<br>
-    - App synchronizes content in background, users not affected<br>
-    - Any amount of data can be stored<br>
+    • To store chat file attachments<br>
+    • Manage text, rich text, and media via easy to use web admin panel<br>
+    • Can be used to manage ads and banners<br>
+    • App synchronizes content in background, users not affected<br>
+    • Any amount of data can be stored<br>
   version: 1.0
 # the domain of the service
 host: quickblox.com
