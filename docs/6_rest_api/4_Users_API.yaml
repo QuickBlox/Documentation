@@ -328,7 +328,7 @@ paths:
       parameters:
         - name: user_id
           in: formData
-          description: The id of the user to be retrieved
+          description: The id of the user to be retrieved (path parameter)
           required: true
           type: integer
           default: 53454
@@ -355,7 +355,52 @@ paths:
           description: "User object"
           schema:
             $ref: '#/definitions/UserResponse'
+  /users/by_full_name.json:
+    get:
+      summary: Retrieve user by full name
+      operationId: Retrieve_User_By_Full_Name_Id
+      description: |
+        Retrieve a specific user by user full name
+      parameters:
+        - name: full_name
+          in: formData
+          description: The full name of the user to be retrieved
+          required: true
+          type: integer
+          default: samuel67
+        - name: page
+          in: formData
+          description: Used to paginate the results when more than one page of users retrieved
+          required: true
+          type: integer
+          default: 4
+        - name: per_page
+          in: formData
+          description: The maximum number of users to return per page, if not specified then the default is 10
+          required: true
+          type: integer
+          default: 30
+      responses:
+        '200':
+          description: "Array of users"
+          schema:
+            $ref: '#/definitions/ArrayOfUsersResponse'
 definitions:
+  ArrayOfUsersResponse:
+    properties:
+      current_page:
+        type: integer
+        example: 1
+      per_page:
+        type: integer
+        example: 10
+      total_entries:
+        type: integer
+        example: 23
+      items:
+        type: array
+        items:
+          $ref: '#/definitions/UserObject'
   UserResponse:
     properties:
       user:
