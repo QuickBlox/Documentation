@@ -348,7 +348,7 @@ paths:
           in: formData
           description: The login of the user to be retrieved
           required: true
-          type: integer
+          type: string
           default: samuel67
       responses:
         '200':
@@ -360,13 +360,13 @@ paths:
       summary: Retrieve user by full name
       operationId: Retrieve_User_By_Full_Name_Id
       description: |
-        Retrieve a specific user by user full name
+        Retrieve users by user full name
       parameters:
         - name: full_name
           in: formData
           description: The full name of the user to be retrieved
           required: true
-          type: integer
+          type: string
           default: samuel67
         - name: page
           in: formData
