@@ -298,8 +298,7 @@ var params = {
   data: {
     class_name: "dialog_data",
     age: 33
-  },
-  ...
+  }
 };
 ```
 
@@ -418,7 +417,7 @@ var opponentId = 78;
 QB.chat.send(opponentId, msg);
 // or msg.id = QB.chat.send(opponentId, msg) if message id is needed
 
-...
+
 
 QB.chat.onMessageListener = onMessage;
 
@@ -458,10 +457,11 @@ var msg = {
 };
 
 var dialogJid = "...";
+
 QB.chat.send(dialogJid, msg);
 // or msg.id = QB.chat.send(dialogJid, msg) if message id is needed
 
-...
+
 
 QB.chat.onMessageListener = onMessage;
 
@@ -494,3 +494,776 @@ QB.chat.muc.leave(dialogJid, function() {
 ```
 
 ### Send and receive a message with attachment
+
+#### Send attachment
+
+It's possible to add attachments to message: for example, image, audio file or video file. We don't have any restrictions here - you can attach any type of file.
+
+To send a message with attachments you should use the same way as you send regular message with text, but add to it an attachment object. Attachment can be:
+
+* An ID of a file in Content module: [JS example.](https://quickblox.com/developers/Sample-content-javascript) This is a way we recommend.
+* An ID of a file in Custom Objects module: [JS example](https://quickblox.com/developers/Sample-customobjects-javascript#Files)
+* Can be an url to any file in Internet
+
+
+To send a message with attachment you should upload a file to Content module, Custom Objects module using sample above or use an url to any file in Internet. Then you should incorporate an ID to file to message.
+
+For example, we use Content module to store attachments. Next snippets show how to upload a file to Content module and send it as an attach:
+
+```javascript
+// Upload a file to the Content module
+var inputFile = document.querySelector("input[type=file]").files[0];
+var params = {name: inputFile.name, file: inputFile, type: inputFile.type, size: inputFile.size, 'public': false};
+
+QB.content.createAndUpload(params, function(err, response){
+  if (err) {
+    console.log(err);
+  } else {
+    var uploadedFileId = response.id;
+
+    // prepare a message
+    //
+    var msg = {
+      type: currentDialog.type == 3 ? 'chat' : 'groupchat',
+      body: "attachment",
+      extension: {
+        save_to_history: 1,
+      }
+    };
+    msg["extension"]["attachments"] = [{id: uploadedFileId, type: 'photo'}];
+
+    // send a message
+    // ...
+  }
+});
+```
+
+#### Receive attachment
+
+For example we use Content module to store attachments. Next snippets allow to receive a message with an attachment and show it:
+
+```javascript
+QB.chat.onMessageListener = onMessage;
+
+function onMessage(userId, msg) {
+  if (msg.extension.hasOwnProperty("attachments")) {
+    if(msg.extension.attachments.length > 0) {
+      var fileId = msg.extension.attachments[0].id;
+      var qbSessionToken = "5861abe89879912bac14343534";
+      var privateUrl = "https://api.quickblox.com/blobs/" + fileId + "/download?token=" + qbSessionToken;
+
+      var imageHTML = "<img src='" + privateUrl + "' alt='photo'/>";
+    }
+  }
+}
+```
+
+### Use custom parameters in a message
+
+You can use custom parameters for the messages you send in the chat, for example to send some additional info or to send control messages:
+
+
+```javascript
+var msg = {
+  type: 'groupchat',
+  body: "How are you today?",
+  extension: {
+    save_to_history: 1,
+  },
+  customParam1: "book",
+  customParam2: "21"
+};
+```
+
+### Unread messages count
+
+You can request total unread messages count or unread count for particular dialog:
+
+```javascript
+var params = {chat_dialog_ids: ["12788459823458761223123124"]};
+QB.chat.message.unreadCount(params, function(err, res) {
+  if(err){
+
+  }else{
+
+  }
+});
+```
+
+## Chat history
+
+You can choose a way to save chat message to history or not. If you decided to store - you should add **save_to_history** parameter to the message:
+
+```javascript
+var msg = {
+  type: currentDialog.type == 3 ? 'chat' : 'groupchat',
+  body: text,
+  extension: {
+    save_to_history: 1,
+  }
+};
+```
+
+### List chat messages
+
+If you decided to use **save_to_history** parameter - all chat messages will be stored to history and user can request a chat history for particular dialog.
+
+![DialogsList_web](./resources/images/dialog_list.png)
+
+
+To get a chat history for particular dialog use next request:
+
+```javascript
+var dialogId = "2256abe536162312312322";
+var params = {chat_dialog_id: dialogId, sort_desc: 'date_sent', limit: 100, skip: 0};
+
+QB.chat.message.list(params, function(err, messages) {
+  if (messages) {
+
+  }else{
+    console.log(err);
+  }
+});
+```
+
+#### Filters
+
+There are some filters to get only chat messages you need, not just all.
+
+You can apply filters for the following fields:
+
+* _id (string)
+* message (string)
+* date_sent (timestamp)
+* sender_id (integer)
+* recipient_id (integer)
+* attachments.type (string)
+* updated_at (date)
+
+You can apply **sort** for the following fields:
+
+* date_sent
+
+Filters:
+
+| Operator | Description | Usage example |
+|------------------------------------------|-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|-----------------------------------|
+| **{field_name}** | Search records with field which contains exactly specified value | {"sender_id": 2960} |
+| **{field_name}** **[{search_operator}]** | Search record with the field which contains value according to specified value and operator.  Possible filters: **lt** (**L**ess **T**han operator), **lte** (**L**ess **T**han or **E**qual to operator), **gt** (**G**reater **T**han operator), **gte** (**G**reater **T**han or **E**qual to operator), **ne** (**N**ot **E**qual to operator), **in** (Contained **IN** array operator), **nin** **(N**ot contained **IN** array), **all** (**ALL** contained **IN** array), **ctn** (Contains substring operator) | {"sender_id": {"in": [2960,345]}} |
+| **limit** | Limit search results to **N** records. Useful for pagination. Default value - 100 | {"limit": 50} |
+| **skip** | Skip **N** records in search results. Useful for pagination. Default (if not specified): 0 | {"skip": 50} |
+| **sort_desc/sort_asc** | Search results will be sorted by specified field in ascending/descending order | {"sort_desc": "date_sent} |
+
+### Get a number of chat messages
+
+There is a separate request to get a number of chat messages for particular dialog:
+
+```javascript
+var params = {chat_dialog_id: dialogId, count: 1};
+
+QB.chat.message.list(params, function(err, messagesCount) {
+  if (messagesCount) {
+
+  }else{
+    console.log(err);
+  }
+});
+```
+
+### Delete chat messages
+
+To delete chat messages use next snippets:
+
+```javascript
+var messageId = "54fdbb69535c12c2e407c672";
+var params = {};
+
+QB.chat.message.delete(messageId, params, function(err, res) {
+  if (res) {
+
+  }else{
+    console.log(err);
+  }
+});
+```
+
+This request will remove chat messages for current user, but other users still will be able to request them.
+
+If you are the sender of a message, you can completely remove it from the backend using 'force' parameter:
+
+```javascript
+var messageId = "54fdbb69535c12c2e407c672";
+var params = {force: 1};
+
+QB.chat.message.delete(messageId, params, function(err, res) {
+  if (res) {
+
+  }else{
+    console.log(err);
+  }
+});
+```
+
+### Put chat messages to history
+
+It's also possible to create/send chat message via REST request:
+
+```javascript
+var params = {
+  message: "Hey Mark, how are you doing?",
+  //chat_dialog_id: "54fda666535c12834e06b108",  Set a dialog Id or recipient Id
+  recipient_id: 31233,
+
+  attachments: [{type: "image", id: 3232}],
+
+  customParam1: "value1",
+  customParam2: "value2"
+};
+
+QB.chat.message.create(params, function(err, res) {
+  if (res) {
+
+  }else{
+    console.log(err);
+  }
+});
+```
+
+This request will put a message into history without actually send it.
+
+Set **send_to_chat** property equal to 1 `send_to_chat: 1` to send this message via rest API. If you set send_to_chat property, you can also save this message to the history. All you need is set **save_to_history** property equal to 1.
+
+## Dashboard
+
+QuickBlox dashboard provide a way to view and manage all dialogs for your application. Go to admin panel, Chat module. Read more info [here](https://quickblox.com/developers/Chat#Dashboard).
+
+## Contact List
+
+In traditional IM applications, the "buddy" system is rather straightforward. User A sends a request to become "friends" with user B. User B accepts the friend request. And now user A and B appear in each other's roster. By default this SDK provides this mode.
+
+### Demo
+
+**Demo** - https://quickblox.github.io/quickblox-javascript-sdk/samples/roster/index.html
+
+### Get the roster
+
+This function give you an access to contact list.
+
+```javascript
+/*
+Returns:
+  *  (Object) roster - The user contact list
+  *  for example
+  *  roster = {
+  *    '1126541': {subscription: 'both', ask: null},        // you and user with ID 1126541 have subscription
+  *    '1126542': {subscription: 'none', ask: null},        // you don't have subscription but user maybe has
+  *    '1126543': {subscription: 'none', ask: 'subscribe'}, // you haven't had subscription earlier but now you asked it
+  *  };
+*/
+
+QB.chat.roster.get(function(roster) {
+  // callback function
+});
+```
+
+### Add users
+
+Add subscription with some user to your contact list.
+
+```javascript
+QB.chat.roster.add(jidOrUserId, function() {
+  // callback function
+});
+```
+
+### Remove users
+
+Remove subscription with some user from your contact list.
+
+```javascript
+QB.chat.roster.remove(jidOrUserId, function() {
+  // callback function
+});
+```
+
+### Confirm subscription request
+
+Confirm subscription with some user.
+
+```javascript
+QB.chat.roster.confirm(jidOrUserId, function() {
+  // callback function
+});
+```
+
+### Reject subscription request
+
+Reject subscription with some user.
+
+```javascript
+QB.chat.roster.reject(jidOrUserId, function() {
+  // callback function
+});
+```
+
+### Roster callbacks
+
+You can set own callback functions for chat-application logic.
+
+**Receive subscription request**
+
+```javascript
+/*
+Returns:
+  *  (Integer) userId - The sender ID
+*/
+
+QB.chat.onSubscribeListener = function(userId) {
+  // callback function
+};
+```
+
+**Receive confirm request**
+
+```javascript
+/*
+Returns:
+  *  (Integer) userId - The sender ID
+*/
+
+QB.chat.onConfirmSubscribeListener = function(userId) {
+  // callback function
+};
+```
+
+**Receive reject request**
+
+```javascript
+/*
+Returns:
+  *  (Integer) userId - The sender ID
+*/
+
+QB.chat.onRejectSubscribeListener = function(userId) {
+  // callback function
+};
+```
+
+**Receive user status (online / offline)**
+
+```javascript
+/*
+Returns:
+  *  (Integer) userId - The sender ID
+  *  (String) type - If user leave the chat, type will be 'unavailable'
+*/
+
+QB.chat.onContactListListener = function(userId, type) {
+  // callback function
+};
+```
+
+## Privacy lists
+
+Privacy list API allows to enable or disable communication with other users in a chat. Privacy list API also enables a user to create, modify, or delete his privacy lists, define a default list.
+
+### Retrieve privacy lists names
+
+User can have multiple privacy lists. To get a list of all your privacy lists' names use next request:
+
+```javascript
+QB.chat.privacylist.getNames(function(error, response) {
+    if(error){
+
+    }else{
+        var names = response.names;
+    }
+});
+```
+
+### Create a privacy list or edit existing list
+
+A privacy list must have at least one element in order to create it.
+
+You can choose a type of blocked logic (Privacy List). There is 2 type:
+
+* Block in one way. When you blocked, but you can write to blocked user.
+* Block in two ways. When you blocked and you also can't write to blocked user.
+
+```javascript
+var users = [
+  {user_id: 34, action: "deny"},
+  {user_id: 48, action: "deny", mutualBlock: true}, // it's means you can't write to user
+  {user_id: 18, action: "allow"}
+];
+var list = {name: "myList", items: users};
+
+QB.chat.privacylist.create(list, function(error) {
+  if(error){
+
+  }else{
+
+  }
+});
+
+//
+// or update it
+
+var users = [
+  {user_id: 34, action: "allow"},
+];
+var list = {name: "myList", items: users};
+
+QB.chat.privacylist.update(list, function(error) {
+  if(error){
+
+  }else{
+
+  }
+});
+```
+
+### Activate a privacy list
+
+User can have multiple privacy lists, but default can be only one. In order to activate rules from a privacy list you must set it as default.
+
+```javascript
+QB.chat.privacylist.setAsDefault("myList", function(error) {
+  if(error){
+
+  }else{
+
+  }
+});
+```
+
+To reset the default list just pass an empty string "" as a name;
+
+### Retrieve a privacy list
+
+
+```javascript
+QB.chat.privacylist.getList("myList", function(error, response) {
+  if(error){
+
+  }else{
+    var name = response.name;
+    var items = response.items;
+  }
+});
+```
+
+### Delete existing privacy list
+
+To delete a list you can call a method below or you can edit a list and set `items: null`.
+
+```javascript
+QB.chat.privacylist.delete("myList", function(error) {
+  if(error){
+
+  }else{
+
+  }
+});
+```
+
+### Blocked user attempts to communicate with user
+
+Blocked entities will be receiving an error when try to chat with a user in a 1-1 chat and will be receiving nothing in a group chat:
+
+```javascript
+QB.chat.onMessageErrorListener = onMessageErrorListener;
+
+function onMessageErrorListener(messageId, error){
+
+}
+```
+
+## Sent message
+
+This feature defines an approach for ensuring that message was delivered to the server. This feature is unenabled by default.
+
+To enable this feature to add to config a new property.
+
+```javascript
+streamManagement: {
+    enable: true
+}
+```
+
+Listen all sent messages by QB.chat.onSentMessageCallback.
+
+```javascript
+QB.chat.onSentMessageCallback = function (messageLost, messageSent) {
+    if (messageLost) {
+        console.error('sendErrorCallback', messageLost);
+    } else {
+        console.info('sendMessageSuccessCallback', messageSent);
+    }
+};
+```
+
+## Typing status
+
+Many instant messaging systems include notifications about the state of one's conversation partner in a one-to-one chat (or, sometimes, in a many-to-many chat). In essence, chat state notifications can be thought of as a form of chat-specific presence.
+
+This section describes how to integrate chat states notifications into your application.
+
+Here is a list of common Chat State Notifications:
+
+1. **typing**: The user is composing a message. The user is actively interacting with a message input interface specific to this chat session (e.g., by typing in the input area of a chat window)
+2. **stopped**: The user had been composing but now has stopped. The user was composing but has not interacted with the message input interface for a short period of time (e.g., 30 seconds)
+
+With QuickBlox you can use all these chat status notifications.
+
+```javascript
+// send 'is typing' status
+function sendTypingStatus() {
+  if (currentDialog.type == 3) {
+    QB.chat.sendIsTypingStatus(opponentId);
+  } else {
+    QB.chat.sendIsTypingStatus(currentDialog.xmpp_room_jid);
+  }
+}
+
+// send 'stop typing' status
+function sendStopTypinStatus() {
+  if (currentDialog.type == 3) {
+    QB.chat.sendIsStopTypingStatus(opponentId);
+  } else {
+    QB.chat.sendIsStopTypingStatus(currentDialog.xmpp_room_jid);
+  }
+}
+
+...
+
+QB.chat.onMessageTypingListener = onMessageTyping;
+
+// show typing status in chat or groupchat
+function onMessageTyping(isTyping, userId, dialogId) {
+   // isTyping=true if an opponent is typing and false if he stopped.
+
+}
+
+...
+
+// start timer after keypress event
+var isTypingTimerId;
+$("#message_text").focus().keyup(function(){
+  if (typeof isTypingTimerId === 'undefined') {
+
+    // send 'is typing' status
+    sendTypingStatus();
+
+    // start is typing timer
+    isTypingTimerId = setTimeout(isTypingTimeoutCallback, 5000);
+  } else {
+
+    // start is typing timer again
+    clearTimeout(isTypingTimerId);
+    isTypingTimerId = setTimeout(isTypingTimeoutCallback, 5000);
+  }
+});
+
+// delete timer and send 'stop typing' status
+function isTypingTimeoutCallback() {
+  isTypingTimerId = undefined;
+  sendStopTypinStatus();
+}
+
+// also stop timer after user sent a message
+function sendMessage(text, attachmentFileId) {
+   ...
+
+  clearTimeout(isTypingTimerId);
+  isTypingTimeoutCallback();
+}
+```
+
+## Delivered status
+
+SDK automatically manages delivery notifications for all 'online' messages if you use marked messages.
+
+Term 'marked' relies to messages that have automatic delivery control.
+
+To mark a message as 'markable' set `markable: 1` parameter in your message object.
+
+For such messages you will receive delivery confirmations.
+
+```javascript
+var message = {
+  type: 'chat',
+  body: "How are you today?",
+  extension: {
+    save_to_history: 1,
+  },
+  markable: 1
+};
+
+var opponentId = 78;
+QB.chat.send(opponentId, message);
+
+// save packet ID of current message
+var messageId = message.id;
+
+...
+
+QB.chat.onDeliveredStatusListener = function(messageId, dialogId, userId){
+
+}
+```
+
+
+It is also possible to send a 'delivered' status manually, for example for messages received via REST API:
+
+```javascript
+var params = {
+  messageId: "507f1f77bcf86cd799439011",
+  userId: QBUser1.id,
+  dialogId: "507f191e810c19729de860ea"
+};
+
+QB.chat.sendDeliveredStatus(params);
+```
+
+## Read status
+
+You can manage 'read' notifications in chat. For example, User1 sends messages to User2 and User1 would like to know when User2 reads these messages.
+
+First of all, if User1 would like to handle 'read' status of his messages, he should mark message as markable. To mark a message as 'markable' use set `markable: 1` in your message object.
+
+User1 sends a message:
+
+```javascript
+var message = {
+  type: 'chat',
+  body: "How are you today?",
+  extension: {
+    save_to_history: 1,
+  },
+  markable: 1
+};
+
+var opponentId = 78;
+QB.chat.send(opponentId, message);
+
+// save packet ID of current message
+var messageId = message.id;
+```
+
+User2 receives a message, reads it and sends 'read' status back:
+```javascript
+QB.chat.onMessageListener = function(userId, receivedMessage){
+    // read message
+
+    // sends 'read' status back
+    if(receivedMessage.markable){
+      var params = {
+        messageId: receivedMessage.id,
+        userId: userId,
+        dialogId: receivedMessage.dialogId
+      };
+      QB.chat.sendReadStatus(params);
+    }
+}
+```
+
+User1 receives a 'read' status notification that User2 read his message:
+
+```javascript
+QB.chat.onReadStatusListener = function(messageId, dialogId, userId){
+
+}
+```
+
+## Message carbons
+
+This feature defines an approach for ensuring that all of user's devices get both sides of all conversations in order to avoid confusion. Information about the current state of a conversation is shared between all of a user's clients that enable this feature.
+
+This feature is enabled by default.
+
+For example, a user is online on 2 browsers, Chrome desktop and Firefox laptop. On his **desktop** he sends a message to other user:
+
+```javascript
+var msg = {
+  type: 'chat',
+  body: "How are you today?",
+  extension: {
+    save_to_history: 1,
+  }
+};
+
+var opponentId = 78;
+QB.chat.send(opponentId, msg);
+```
+
+In this moment he also receives the message on his **laptop** device:
+
+```javascript
+QB.chat.onMessageListener = onMessage;
+
+function onMessage(userId, msg) {
+
+  if(userId === currentUser.id){
+    // message comes here from carbons
+  }
+}
+```
+
+## System notifications
+
+There is a way to send system notifications to other users about some events. These messages work over separated channel and won't be mixed with the regular chat messages:
+
+```javascript
+var message = {
+  body: 'Notification message',
+  extension: {
+    param1: "value1",
+    param2: "value2"
+  }
+};
+
+var opponentId = 34;
+
+QB.chat.sendSystemMessage(opponentId, message);
+// or message.id = QB.chat.sendSystemMessage(opponentId, message) if message ID is needed
+
+...
+
+QB.chat.onSystemMessageListener = function(receivedMessage){
+
+}
+```
+
+## Helper functions
+
+JS SDK also provides **QB.chat.helpers** submodule as an aid in of your chat-application development. It includes a set of methods to quickly perform the various routine tasks:
+
+| Method              | Params    | Type             | Description                                                                                                                                                                                                                                                                                                                                                               |
+|---------------------|-----------|------------------|---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| getUserJid          | id, appId | Integer, Integer | Use it for getting QB user JID by his user ID ([QuickBlox JID formation](https://quickblox.com/developers/Chat#Server))                                                                                                                                                                                                                                                   |
+| getIdFromNode       | jid       | String           | Use it for getting QB user ID by his JID from node part                                                                                                                                                                                                                                                                                                                   |
+| getDialogIdFromNode | jid       | String           | Use it for getting QB dialog ID by room JID from node part                                                                                                                                                                                                                                                                                                                |
+| getRoomJid          | jid       | String           | Use it for getting QB user's room JID with his nick                                                                                                                                                                                                                                                                                                                       |
+| getIdFromResource   | jid       | String           | Use it for getting QB user ID by room JID from resource part                                                                                                                                                                                                                                                                                                              |
+| getUniqueId         | suffix    | String           | Generate a **unique ID** for use in stanza elements (message, presence, iq).Each connection instance has a counter which starts from zero, and the value of this counter plus a colon followed by the suffix becomes the unique id. If no suffix is supplied, the counter is used as the unique id. The counter resets to 0 for every new connection for the same reason. |
+
+```javascript
+QB.chat.helpers.getUserJid(978815, 552);
+// -> '978815-552@chat.quickblox.com'
+
+QB.chat.helpers.getIdFromNode('978815-8445@chat.quickblox.com');
+// -> 978815
+
+QB.chat.helpers.getDialogIdFromNode('13318_5460ce32535c1247e3003c54@muc.chat.quickblox.com');
+// -> 5460ce32535c1247e3003c54
+
+QB.chat.helpers.getRoomJid('8445_public@muc.chat.quickblox.com');
+// -> '8445_public@muc.chat.quickblox.com/978815'
+
+QB.chat.helpers.getIdFromResource('8445_public@muc.chat.quickblox.com/978815');
+// -> 978815
+
+QB.chat.helpers.getUniqueId('test');
+// -> '1:test'
+```
