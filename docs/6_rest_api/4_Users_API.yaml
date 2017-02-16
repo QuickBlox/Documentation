@@ -55,7 +55,7 @@ paths:
             Allowed fields: **id,full_name,email,login,phone,website,created_at,updated_at,
             last_request_at,external_user_id,twitter_id,twitter_digits_id,facebook_id.**
           required: false
-          type: string (**<sort_type>+<field_type>+<field_name>**)
+          type: string (format is **sort_type+field_type+field_name**)
           default: asc+date+created_at
       responses:
         '200':
