@@ -436,7 +436,7 @@ paths:
   /users/by_facebook_id.json:
     get:
       summary: Retrieve user by Facebook id
-      operationId: 1010_Retrieve_User_By_Facebook_Id
+      operationId: 110_Retrieve_User_By_Facebook_Id
       description: |
         Retrieve a specific user by Facebook id
       parameters:
@@ -454,7 +454,7 @@ paths:
   /users/by_twitter_id.json:
     get:
       summary: Retrieve user by Twitter id
-      operationId: 1011_Retrieve_User_By_Twitter_Id
+      operationId: 111_Retrieve_User_By_Twitter_Id
       description: |
         Retrieve a specific user by Twitter id
       parameters:
@@ -472,7 +472,7 @@ paths:
   /users/by_twitter_digits_id.json:
     get:
       summary: Retrieve user by Twitter Digits id
-      operationId: 1012_Retrieve_User_By_Twitter_Digits_Id
+      operationId: 112_Retrieve_User_By_Twitter_Digits_Id
       description: |
         Retrieve a specific user by Twitter Digits id
       parameters:
@@ -490,7 +490,7 @@ paths:
   /users/by_email.json:
     get:
       summary: Retrieve user by email
-      operationId: 1013_Retrieve_User_By_User_Email_Id
+      operationId: 113_Retrieve_User_By_User_Email_Id
       description: |
         Retrieve a specific user by user email
       parameters:
@@ -508,7 +508,7 @@ paths:
   /users/by_tags.json:
     get:
       summary: Retrieve users by tags
-      operationId: 1014_Retrieve_User_By_Tags_Id
+      operationId: 114_Retrieve_User_By_Tags_Id
       description: |
         Retrieve users by specific tags
       parameters:
@@ -538,7 +538,7 @@ paths:
   /users/external/{external_user_id}.json:
     get:
       summary: Retrieve user external user id
-      operationId: 1015_Retrieve_User_By_External_User_Id
+      operationId: 115_Retrieve_User_By_External_User_Id
       description: |
         Retrieve a specific user by external user id that represents the user in an external user registry
       parameters:
@@ -556,7 +556,7 @@ paths:
   /users/{user_id}.json:
     delete:
       summary: Delete user by id
-      operationId: 1016_Delete_User_By_Id
+      operationId: 116_Delete_User_By_Id
       description: |
         Remove a user from the app
       parameters:
@@ -572,7 +572,7 @@ paths:
   /users/external/{external_user_id}.json:
     delete:
       summary: Delete user by external user id
-      operationId: 1017_Delete_User_By_External_User_Id
+      operationId: 117_Delete_User_By_External_User_Id
       description: |
         Remove a user from the app, by uid that represents the user in an external user registry
       parameters:
