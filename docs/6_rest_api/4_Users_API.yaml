@@ -20,7 +20,7 @@ paths:
   /users.json:
     get:
       summary: Retrieve Users
-      operationId: 6_Retrieve_Users_Id
+      operationId: 106_Retrieve_Users_Id
       description: |
         Call this API to get a list of current users of you app.
         By default it returns upto 10 users, but you can change this by adding pagination parameters.
@@ -68,7 +68,7 @@ paths:
             $ref: '#/definitions/ArrayOfUsersResponse'
     post:
       summary: Sign Up
-      operationId: 1_Sign_Up_Id
+      operationId: 101_Sign_Up_Id
       description: |
         Registers a new app user.
         Call this API to register a user for the app. You must provide either a user **login** or **email** address along with their **passwor**, passing both email address and login is permitted but not required.
@@ -161,7 +161,7 @@ paths:
   /login.json:
     post:
       summary: Sign In
-      operationId: 2_Sign_In_Id
+      operationId: 102_Sign_In_Id
       description: |
         After you allow users to sign up, you need to let them log in to their account with a login/email and password in the future.
         You must provide the user's login or email address along with a password when authenticating users that are registered in QuickBlox.
@@ -239,7 +239,7 @@ paths:
             $ref: '#/definitions/UserObject'
     delete:
       summary: Sign Out
-      operationId: 3_Sign_Out_Id
+      operationId: 103_Sign_Out_Id
       description: |
         Logout a user.
         Calling this api downgrades the session token to an Application session token
@@ -249,7 +249,7 @@ paths:
   /password/reset.json:
     get:
       summary: Password reset
-      operationId: 4_Password_Reset_Id
+      operationId: 104_Password_Reset_Id
       description: |
         You can initiate password resets for users who have emails associated with their account.
         Password reset instruction will be sent to this email address.
@@ -266,7 +266,7 @@ paths:
   /users/{user_id}.json:
     put:
       summary: Update current user
-      operationId: 5_Update_User_id
+      operationId: 105_Update_User_id
       description: |
         Update current user. In normal usage, nobody except the user is allowed to modify their own data.
         Any fields you don’t specify will remain unchanged, so you can update just a subset of the user’s data.
@@ -370,7 +370,7 @@ paths:
   /users/{user_id}.json:
     get:
       summary: Retrieve user by id
-      operationId: 7_Retrieve_User_By_Id_Id
+      operationId: 107_Retrieve_User_By_Id_Id
       description: |
         Retrieve a specific user by user id
       parameters:
@@ -388,7 +388,7 @@ paths:
   /users/by_login.json:
     get:
       summary: Retrieve user by login
-      operationId: 8_Retrieve_User_By_Login_Id
+      operationId: 108_Retrieve_User_By_Login_Id
       description: |
         Retrieve a specific user by user login
       parameters:
@@ -406,7 +406,7 @@ paths:
   /users/by_full_name.json:
     get:
       summary: Retrieve user by full name
-      operationId: 9_Retrieve_User_By_Full_Name_Id
+      operationId: 109_Retrieve_User_By_Full_Name_Id
       description: |
         Retrieve users by user full name
       parameters:
@@ -436,7 +436,7 @@ paths:
   /users/by_facebook_id.json:
     get:
       summary: Retrieve user by Facebook id
-      operationId: 10_Retrieve_User_By_Facebook_Id
+      operationId: 1010_Retrieve_User_By_Facebook_Id
       description: |
         Retrieve a specific user by Facebook id
       parameters:
@@ -454,7 +454,7 @@ paths:
   /users/by_twitter_id.json:
     get:
       summary: Retrieve user by Twitter id
-      operationId: 11_Retrieve_User_By_Twitter_Id
+      operationId: 1011_Retrieve_User_By_Twitter_Id
       description: |
         Retrieve a specific user by Twitter id
       parameters:
@@ -472,7 +472,7 @@ paths:
   /users/by_twitter_digits_id.json:
     get:
       summary: Retrieve user by Twitter Digits id
-      operationId: 12_Retrieve_User_By_Twitter_Digits_Id
+      operationId: 1012_Retrieve_User_By_Twitter_Digits_Id
       description: |
         Retrieve a specific user by Twitter Digits id
       parameters:
@@ -490,7 +490,7 @@ paths:
   /users/by_email.json:
     get:
       summary: Retrieve user by email
-      operationId: 13_Retrieve_User_By_User_Email_Id
+      operationId: 1013_Retrieve_User_By_User_Email_Id
       description: |
         Retrieve a specific user by user email
       parameters:
@@ -508,7 +508,7 @@ paths:
   /users/by_tags.json:
     get:
       summary: Retrieve users by tags
-      operationId: 14_Retrieve_User_By_Tags_Id
+      operationId: 1014_Retrieve_User_By_Tags_Id
       description: |
         Retrieve users by specific tags
       parameters:
@@ -538,7 +538,7 @@ paths:
   /users/external/{external_user_id}.json:
     get:
       summary: Retrieve user external user id
-      operationId: 15_Retrieve_User_By_External_User_Id
+      operationId: 1015_Retrieve_User_By_External_User_Id
       description: |
         Retrieve a specific user by external user id that represents the user in an external user registry
       parameters:
@@ -556,7 +556,7 @@ paths:
   /users/{user_id}.json:
     delete:
       summary: Delete user by id
-      operationId: 16_Delete_User_By_Id
+      operationId: 1016_Delete_User_By_Id
       description: |
         Remove a user from the app
       parameters:
@@ -572,7 +572,7 @@ paths:
   /users/external/{external_user_id}.json:
     delete:
       summary: Delete user by external user id
-      operationId: 17_Delete_User_By_External_User_Id
+      operationId: 1017_Delete_User_By_External_User_Id
       description: |
         Remove a user from the app, by uid that represents the user in an external user registry
       parameters:
