@@ -49,10 +49,11 @@ paths:
         - name: order
           in: formData
           description: |
-            Parameter to sort results.
-            Possible values: **asc** and **desc**. Allowed fields' types: **string,number,date**.
+            Parameter to sort results.<br>
+            Possible values: **asc** and **desc**. Allowed fields' types: **string,number,date**.<br>
             Allowed fields: **id,full_name,email,login,phone,website,created_at,updated_at,
-            last_request_at,external_user_id,twitter_id,twitter_digits_id,facebook_id.**
+            last_request_at,external_user_id,twitter_id,twitter_digits_id,facebook_id.**<br>
+            Format: **<sort_type>+<firled_type>+<field_name>**
           required: false
           type: string
           default: TDB
