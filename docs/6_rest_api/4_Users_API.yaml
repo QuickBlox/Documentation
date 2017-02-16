@@ -2,11 +2,11 @@ swagger: '2.0'
 info:
   title: QuickBlox REST API, Users API.
   description: |
-    The Users APIs manage all things related to user accounts handling, authentication, account data, password reminding etc:<br>
-      - OAuth is secure and supports transparent authentication<br>
-      - Logging in users with their Facebook/Twitter/Twitter Digits accounts is available<br>
-      - User tags – set up user tags and address them separately in your app or through the admin panel – supported by other modules such as Push Notifications<br>
-      - Existing user base integration – our module supports connection to your system by storing your existent IDs table and matching them to new ones.
+    The Users APIs manage all things related to user accounts handling, authentication, account data, password reminding etc:<br><br>
+      • OAuth is secure and supports transparent authentication<br>
+      • Logging in users with their Facebook/Twitter/Twitter Digits accounts is available<br>
+      • User tags – set up user tags and address them separately in your app or through the admin panel – supported by other modules such as Push Notifications<br>
+      • Existing user base integration – our module supports connection to your system by storing your existent IDs table and matching them to new ones.
   version: 1.0
 # the domain of the service
 host: quickblox.com
@@ -18,6 +18,45 @@ produces:
   - application/json
 paths:
   /users.json:
+    get:
+      summary: Retrieve Users
+      operationId: Retrieve_Users_Id
+      description: |
+        Call this API to get a list of current users of you app.
+        By default it returns upto 10 users, but you can change this by adding pagination parameters.
+        You can filter the list of users by supplying a filter string.
+        You can sort results by ask/desc.
+      parameters:
+        - name: page
+          in: formData
+          description: Used to paginate the results when more than one page of users retrieved
+          required: false
+          type: integer
+          default: 4
+        - name: per_page
+          in: formData
+          description: The maximum number of users to return per page, if not specified then the default is 10
+          required: false
+          type: integer
+          default: 30
+        - name: filter[]
+          in: formData
+          description: You can filter the list of users by supplying a filter string.
+          required: false
+          type: string
+          default: TDB
+        - name: order
+          in: formData
+          description: |
+            Parameter to sort results - **asc** or **desc**.
+          required: false
+          type: string
+          default: TDB
+      responses:
+        '200':
+          description: "Array of users"
+          schema:
+            $ref: '#/definitions/ArrayOfUsersResponse'
     post:
       summary: Sign Up
       operationId: Sign_Up_Id
@@ -319,11 +358,244 @@ paths:
           description: "User object"
           schema:
             $ref: '#/definitions/UserResponse'
+  /users/{user_id}.json:
+    get:
+      summary: Retrieve user by id
+      operationId: Retrieve_User_By_Id_Id
+      description: |
+        Retrieve a specific user by user id
+      parameters:
+        - name: user_id
+          in: formData
+          description: The id of the user to be retrieved (path parameter)
+          required: true
+          type: integer
+          default: 53454
+      responses:
+        '200':
+          description: "User object"
+          schema:
+            $ref: '#/definitions/UserResponse'
+  /users/by_login.json:
+    get:
+      summary: Retrieve user by login
+      operationId: Retrieve_User_By_Login_Id
+      description: |
+        Retrieve a specific user by user login
+      parameters:
+        - name: login
+          in: formData
+          description: The login of the user to be retrieved
+          required: true
+          type: string
+          default: samuel67
+      responses:
+        '200':
+          description: "User object"
+          schema:
+            $ref: '#/definitions/UserResponse'
+  /users/by_full_name.json:
+    get:
+      summary: Retrieve user by full name
+      operationId: Retrieve_User_By_Full_Name_Id
+      description: |
+        Retrieve users by user full name
+      parameters:
+        - name: full_name
+          in: formData
+          description: The full name of the user to be retrieved
+          required: true
+          type: string
+          default: samuel67
+        - name: page
+          in: formData
+          description: Used to paginate the results when more than one page of users retrieved
+          required: false
+          type: integer
+          default: 4
+        - name: per_page
+          in: formData
+          description: The maximum number of users to return per page, if not specified then the default is 10
+          required: false
+          type: integer
+          default: 30
+      responses:
+        '200':
+          description: "Array of users"
+          schema:
+            $ref: '#/definitions/ArrayOfUsersResponse'
+  /users/by_facebook_id.json:
+    get:
+      summary: Retrieve user by Facebook id
+      operationId: Retrieve_User_By_Facebook_Id
+      description: |
+        Retrieve a specific user by Facebook id
+      parameters:
+        - name: facebook_id
+          in: formData
+          description: The user's facebook uid
+          required: true
+          type: string
+          default: 100000883956766
+      responses:
+        '200':
+          description: "User object"
+          schema:
+            $ref: '#/definitions/UserResponse'
+  /users/by_twitter_id.json:
+    get:
+      summary: Retrieve user by Twitter id
+      operationId: Retrieve_User_By_Twitter_Id
+      description: |
+        Retrieve a specific user by Twitter id
+      parameters:
+        - name: twitter_id
+          in: formData
+          description: The user's twitter uid
+          required: true
+          type: string
+          default: 23434883956766
+      responses:
+        '200':
+          description: "User object"
+          schema:
+            $ref: '#/definitions/UserResponse'
+  /users/by_twitter_digits_id.json:
+    get:
+      summary: Retrieve user by Twitter Digits id
+      operationId: Retrieve_User_By_Twitter_Digits_Id
+      description: |
+        Retrieve a specific user by Twitter Digits id
+      parameters:
+        - name: twitter_digits_id
+          in: formData
+          description: The user's twitter digits uid
+          required: true
+          type: string
+          default: 67434863956765
+      responses:
+        '200':
+          description: "User object"
+          schema:
+            $ref: '#/definitions/UserResponse'
+  /users/by_email.json:
+    get:
+      summary: Retrieve user by email
+      operationId: Retrieve_User_By_User_Email_Id
+      description: |
+        Retrieve a specific user by user email
+      parameters:
+        - name: email
+          in: formData
+          description: The user's email address
+          required: true
+          type: string
+          default: awesome@quickblox.com
+      responses:
+        '200':
+          description: "User object"
+          schema:
+            $ref: '#/definitions/UserResponse'
+  /users/by_tags.json:
+    get:
+      summary: Retrieve users by tags
+      operationId: Retrieve_User_By_Tags_Id
+      description: |
+        Retrieve users by specific tags
+      parameters:
+        - name: tags
+          in: formData
+          description: A comma seperated list of tags associated with users
+          required: true
+          type: string
+          default: man,car
+        - name: page
+          in: formData
+          description: Used to paginate the results when more than one page of users retrieved
+          required: false
+          type: integer
+          default: 4
+        - name: per_page
+          in: formData
+          description: The maximum number of users to return per page, if not specified then the default is 10
+          required: false
+          type: integer
+          default: 30
+      responses:
+        '200':
+          description: "Array of users"
+          schema:
+            $ref: '#/definitions/ArrayOfUsersResponse'
+  /users/external/{external_user_id}.json:
+    get:
+      summary: Retrieve user external user id
+      operationId: Retrieve_User_By_External_User_Id
+      description: |
+        Retrieve a specific user by external user id that represents the user in an external user registry
+      parameters:
+        - name: external_user_id
+          in: formData
+          description: An uid that represents the user in an external user registry (path parameter)
+          required: true
+          type: integer
+          default: 153
+      responses:
+        '200':
+          description: "User object"
+          schema:
+            $ref: '#/definitions/UserResponse'
+  /users/{user_id}.json:
+    delete:
+      summary: Delete user by id
+      operationId: Delete_User_By_Id
+      description: |
+        Remove a user from the app
+      parameters:
+        - name: user_id
+          in: formData
+          description: An id of the user to be removed (path parameter)
+          required: true
+          type: integer
+          default: 567831
+      responses:
+        '200':
+          description: "Empty body"
+  /users/external/{external_user_id}.json:
+    delete:
+      summary: Delete user by external user id
+      operationId: Delete_User_By_External_User_Id
+      description: |
+        Remove a user from the app, by uid that represents the user in an external user registry
+      parameters:
+        - name: external_user_id
+          in: formData
+          description: An uid that represents the user in an external user registry (path parameter)
+          required: true
+          type: integer
+          default: 567831
+      responses:
+        '200':
+          description: "Empty body"
 definitions:
   UserResponse:
     properties:
       user:
         $ref: '#/definitions/UserObject'
+  ArrayOfUsersResponse:
+    properties:
+      current_page:
+        type: integer
+        example: 1
+      per_page:
+        type: integer
+        example: 10
+      total_entries:
+        type: integer
+        example: 23
+      items:
+        type: array
+        items:
+          $ref: '#/definitions/UserObject'
   UserObject:
     properties:
       id:
