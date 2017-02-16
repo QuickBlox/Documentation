@@ -50,10 +50,14 @@ paths:
           in: formData
           description: |
             Parameter to sort results.
+            
             Possible values: **asc** and **desc**.
+
             Allowed fields' types: **string,number,date**.
+
             Allowed fields: **id,full_name,email,login,phone,website,created_at,updated_at,
             last_request_at,external_user_id,twitter_id,twitter_digits_id,facebook_id.**
+
             Format: **<sort_type>+<firled_type>+<field_name>**
           required: false
           type: string
