@@ -367,7 +367,6 @@ paths:
           description: "User object"
           schema:
             $ref: '#/definitions/UserResponse'
-  /users/{user_id}.json:
     get:
       summary: Retrieve user by id
       operationId: 107_Retrieve_User_By_Id_Id
