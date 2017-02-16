@@ -44,7 +44,7 @@ paths:
           description: You can filter the list of users by supplying a filter string.
           required: false
           type: string
-          default: number+id+in+3,45,2241
+          default: TDB
         - name: order
           in: formData
           description: |
@@ -55,7 +55,7 @@ last_request_at,external_user_id,twitter_id,twitter_digits_id,facebook_id.**
             Format: **sort_type+field_type+field_name**
           required: false
           type: string
-          default: order=asc+date+last_request_at
+          default: TDB
       responses:
         '200':
           description: "Array of users"
