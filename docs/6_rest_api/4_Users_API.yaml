@@ -41,14 +41,18 @@ paths:
           default: 30
         - name: filter[]
           in: formData
-          description: You can filter the list of users by supplying a filter string.
+          description: |
+            You can filter the list of users by supplying a filter string.
           required: false
           type: string
           default: TDB
         - name: order
           in: formData
           description: |
-            Parameter to sort results - **asc** or **desc**.
+            Parameter to sort results.
+            Possible values: **asc** and **desc**. Allowed fields' types: **string,number,date**.
+            Allowed fields: **id,full_name,email,login,phone,website,created_at,updated_at,
+            last_request_at,external_user_id,twitter_id,twitter_digits_id,facebook_id.**
           required: false
           type: string
           default: TDB
