@@ -1,7 +1,5 @@
 # Summary
 
-## How QuickBlox Push Notifications work
-
 In order to use QuickBlox Push Notifications APIs you must Create a session & Sign In to QuickBlox OR just create a session with a User.
 
 There are 2 ways that you can integrate Push Notifications into your app:
@@ -10,7 +8,6 @@ There are 2 ways that you can integrate Push Notifications into your app:
 
 <span id="Need_to_known_information" class="on_page_navigation">
 </span>
-
 # Need to know information
 Before using the Push Notifications module please read the following:
 
@@ -19,7 +16,6 @@ Before using the Push Notifications module please read the following:
 
 <span id="Getting_Started_with_Push_Notifications_API" class="on_page_navigation">
 </span>
-
 # Getting Started with Push Notifications API
 
 ## Getting a QuickBlox account
