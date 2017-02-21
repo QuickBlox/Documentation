@@ -47,14 +47,14 @@ Each iOS application that uses the APNs must have a unique application ID that u
 1. Log in to the [iPhone Developer Connection Portal](https://developer.apple.com/account/)
 
 2. Click on the **Certificates, IDs & Profiles**:
-![](./resources/images/6/6_1.png)
+![](./resources/images/6/1.png)
 
 3. To make a new App ID open the App IDs tab and click on the New App ID button:
-![](./resources/images/6/6_2.png)
+![](./resources/images/6/2.png)
 
 4. Enter your app name for the **Description (1)**. Enter **Bundle Identifier(2)**.
  Ensure you have created an App ID without a wildcard. Wildcard IDs cannot use the push notification service. For example, our iOS application ID looks something like *com.quickblox.notificationstest*. Click **Continue**:
-![](./resources/images/6/6_3.png)
+![](./resources/images/6/3.png)
 
 5. You should now see the info about App ID that you have created. Click **Register** button to continue.
 
@@ -63,16 +63,16 @@ Each iOS application that uses the APNs must have a unique application ID that u
  You must generate a certificate request file so that you can use it to request for a development SSL certificate later on.
 
  1. Launch the Keychain Access application in your Mac OS:
- ![](./resources/images/6/6_4.png)
+ ![](./resources/images/6/4.png)
 
  2. Select Keychain Access -> Certificate Assistant -> Request a Certificate From a Certificate Authority:
- ![](./resources/images/6/6_5.png)
+ ![](./resources/images/6/5.png)
 
  3. Enter the information required and check the **'Saved to disk'** option. Click Continue:
- ![](./resources/images/6/6_6.png)
+ ![](./resources/images/6/6.png)
 
  4. Save the certificate request using the suggested name and click **Save**. Click **Done** in the next screen:
- ![](./resources/images/6/6_7.png)
+ ![](./resources/images/6/7.png)
 
 >The same process above applies when generating the production certificate.
 
@@ -81,19 +81,19 @@ Each iOS application that uses the APNs must have a unique application ID that u
 Once an App ID is created, you need to configure it for push notifications.
 
 1. To configure an App ID for push notification, you need to select the App in the App IDs list. Under Application Services: click on the **'Edit'** button for the selected App ID:
-![](./resources/images/6/6_8.png)
+![](./resources/images/6/8.png)
 
 2. Configuration page opens. Scroll down to Push Notifications. Enable checkbox**(1)** and click the **'Create Certificate'(2)** button.
-![](./resources/images/6/6_9.png)
+![](./resources/images/6/9.png)
 
 3. A wizard will appear. Click **Continue**:
-![](./resources/images/6/6_10.png)
+![](./resources/images/6/10.png)
 
 4. Click the **'Choose File...'** button to locate the Certificate Request file that you have saved earlier *(Generating a Certificate Request section)*. Click **Generate**:
-![](./resources/images/6/6_11.png)
+![](./resources/images/6/11.png)
 
 5. Your SSL Certificate will now be generated. Click **Download** and save it on your hard dick:
-![](./resources/images/6/6_12.png)
+![](./resources/images/6/12.png)
 
 Alternative way for downloading created certificate:
 
@@ -104,15 +104,15 @@ Alternative way for downloading created certificate:
 1. The SSL Certificate that you download is named **aps_developer_identity.cer**. Double-click on it to install it in the Keychain Access application. The SSL certificate will be used by your provider application so that it can contact the APNs to send push notifications to your applications.
 
 2. Launch Keychain Assistant from your Mac and from the 'login' keychain, filter by the 'Certificates' category. You will see an expandable option called “Apple Development iOS Push Services”, paired with a private key:
-![](./resources/images/6/6_13.png)
+![](./resources/images/6/13.png)
 
 3.Right-click on your new push certificate and choose **Export “Apple Development iOS Push Services ...″**. Save this as apns-dev-cert.p12 file somewhere you can access it.
 
 Enter the password for exporting (optional):
-![](./resources/images/6/6_14.png)
+![](./resources/images/6/14.png)
 
 Enter your usual admin password for your computer to confirm and finalize the export process:
-![](./resources/images/6/6_15.png)
+![](./resources/images/6/15.png)
 
 > The same process above applies when generating the production certificate.
 
@@ -122,10 +122,10 @@ Enter your usual admin password for your computer to confirm and finalize the ex
 **Thats all! Now you can upload APNS certificates to Push notifications module in [QuickBlox Admin panel.](https://admin.quickblox.com/signin)**
 
 1. Go to Push notifications
-![](./resources/images/6/6_16.png)
+![](./resources/images/6/16.png)
 
 2. Switch to Settings tab.
-![](./resources/images/6/6_17.png)
+![](./resources/images/6/17.png)
  * Choose certificate enviroment (1).
  * Enter password if certificate has it (2).
  * Choose certificate with p12 format (3).
@@ -136,48 +136,48 @@ Enter your usual admin password for your computer to confirm and finalize the ex
 1. Log in to the [iPhone Developer Connection Portal](https://developer.apple.com/account/)
 
 2. Click on the **Certificates, IDs & Profiles**:
-![](./resources/images/6/6_1.png)
+![](./resources/images/6/1.png)
 
 3. Open Provisioning profiles tab. Click on the 'Create a new provision profile' button:
-![](./resources/images/6/6_18.png)
+![](./resources/images/6/18.png)
 
 4. Select a type of the provisioning profile you need to create (1) and click on 'Continue' button to continue the creation:
-![](./resources/images/6/6_19.png)
+![](./resources/images/6/19.png)
 
 5. Select App ID you are creating the provisioning profile for:
-![](./resources/images/6/6_20.png)
+![](./resources/images/6/20.png)
 
 6. Select the certificates you wish to include in this provisioning profile and click on 'Continue' button:
-![](./resources/images/6/6_21.png)
+![](./resources/images/6/21.png)
 
 7. Select the devices you wish to include in this provisioning profile and click on 'Continue' button:
-![](./resources/images/6/6_22.png)
+![](./resources/images/6/22.png)
 
 8. Input the Provisioning profile name and click on 'Continue' button to generate the profile:
-![](./resources/images/6/6_23.png)
+![](./resources/images/6/23.png)
 
 9. After the generating of the Provisioning Profile was finished screen with the info and available options appears. Click on 'Download' button to download the Provisioning profile:
-![](./resources/images/6/6_24.png)
+![](./resources/images/6/24.png)
 
 >Also you can download the Provisioning profile later. Open a list with all Provisioning profiles and choose the required. Additional options become available:
-![](./resources/images/6/6_25.png)
+![](./resources/images/6/25.png)
 
 10. After click on 'Download' button the Provision profile will be downloaded to your hard disk.Double click on it:
-![](./resources/images/6/6_26.png)
+![](./resources/images/6/26.png)
 
 ## Configuring an App for Push Notifications
 
 1. The first step is to change the App ID. Go to App Settings -> General and change Bundle Identifier to identifier that you type on [Step 1]():
-![](./resources/images/6/6_27.png)
+![](./resources/images/6/27.png)
 
 2. Then in the section named "Singing (Debug or Release)" select your Provision Profile
-![](./resources/images/6/6_28.png)
+![](./resources/images/6/28.png)
 
 3. Go to App Settings -> Capabilities and flip the switch for Push Notifications to On.
-![](./resources/images/6/6_29.png)
+![](./resources/images/6/29.png)
 
 >If you are using Xcode version prior to 8 you can go to **Build Settings**  and find (or search for) the "Code Signing Identity" field. Then in the section named "Provision Profile" select your Provision Profile:
-![](./resources/images/6/6_30.png)
+![](./resources/images/6/30.png)
 
 ## Registering for Push Notifications
 
@@ -230,7 +230,7 @@ func application(application: UIApplication, didRegisterForRemoteNotificationsWi
 ```
 
 4. Build and run. When the app launches, you should receive a prompt that asks for permission to send you notifications:
-![](./resources/images/6/6_31.png)
+![](./resources/images/6/31.png)
 
 5. If the user accepts, iOS will call your application delegate's application:didRegisterForRemoteNotificationWithDeviceToken: method, passing in the APNs device token. It is a token provided by APNS that uniquely identifies this app on this particular device. When sending a push notification, the app uses device tokens as “addresses” to direct notifications to the correct devices. Add the following code to AppDelegate:
 
@@ -273,16 +273,16 @@ QuickBlox provides several solutions for triggering the delivery of push notific
 
 ## Sending Push Notifications from the Admin panel
 1. Go to [QuickBlox Admin panel](https://admin.quickblox.com/signin) and choose 'Push notifications' section:
-![](./resources/images/6/6_16.png)
+![](./resources/images/6/16.png)
 
 2. Choose Environment (1), Channel(2), type the message(3) and press the 'Prepare Notification' button(4):
-![](./resources/images/6/6_32.png)
+![](./resources/images/6/32.png)
 
 3. Your message will be delivered to all subscribed Users. You will see:
-![](./resources/images/6/6_33.png)
+![](./resources/images/6/33.png)
 
 4. If you've installed the app on a device, you should see the notification appear within a few seconds.
-![](./resources/images/6/6_34.png)
+![](./resources/images/6/34.png)
 
 >You won’t see anything if the app is open and running in the foreground. The notification is delivered, but there’s nothing in the app to handle it yet. Simply close the app and send the notification again.
 
