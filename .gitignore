@@ -39,6 +39,7 @@ Thumbs.db
 # IDE files
 .idea
 
+!.DS_Store
 # But not these files...
 !.gitignore
 !docs/
