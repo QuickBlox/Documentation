@@ -1,0 +1,50 @@
+swagger: '2.0'
+info:
+  title: QuickBlox Server API, Endpoints API.
+  description: QuickBlox provides a flexible mechanism for apps to retrieve all the correct endpoints (API, Chat, etc) to work with. This mechanism allows smooth transition between <a href=https://quickblox.com/plans>Plans</a>. We recommend to call it each 1 hour.
+    <br><br>
+    Then use these endpoints in your application. It should be ideally the very first request in your application before all other requests to QuickBlox API.
+  version: 1.0
+# the domain of the service
+host: quickblox.com
+# array of all schemes that QuickBlox API supports
+schemes:
+  - https
+basePath: /api
+produces:
+  - application/json
+paths:
+  /account_settings.json:
+    get:
+      summary: Retrieve endpoints
+      operationId: Retrieve_Endpoints_Id
+      description: |
+        Request all the application endpoints.
+      parameters:
+        - name: "QB-Account-Key"
+          in: header
+          description: QuickBlox Account Key. To get the **QB-Account-Key** open [https://admin.quickblox.com/account](https://admin.quickblox.com/account) url and copy the **Account key** value.
+          required: true
+          type: string
+          default: 2yvNe18TnjNiqDoewfqp
+      responses:
+        '200':
+          description: "Endpoints object"
+          schema:
+            $ref: '#/definitions/EndpointsObject'
+definitions:
+  EndpointsObject:
+    type: object
+    properties:
+      account_id:
+        type: integer
+        example: 55
+      api_endpoint:
+        type: string
+        example: "https://api.quickblox.com"
+      chat_endpoint:
+        type: string
+        example: "chat.quickblox.com"
+      turnserver_endpoint:
+        type: string
+        example: "turnserver.quickblox.com"
