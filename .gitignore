@@ -29,7 +29,6 @@
 # OS generated files #
 ######################
 .DS_Store
-.DS_Store?
 ._*
 .Spotlight-V100
 .Trashes
@@ -39,7 +38,6 @@ Thumbs.db
 # IDE files
 .idea
 
-!.DS_Store
 # But not these files...
 !.gitignore
 !docs/
