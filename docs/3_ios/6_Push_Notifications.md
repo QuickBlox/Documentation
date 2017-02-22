@@ -1,5 +1,3 @@
-In order to use QuickBlox Push Notifications APIs you must Create a session & Sign In to QuickBlox OR just create a session with a User.
-
 There are 2 ways that you can integrate Push Notifications into your app:
 
 1. **Broadcasting the same message to all users.** It's a simple method which can be used in informational apps that do not authenticate users and where same push notification messages are broadcasted to everybody. This way when you want to send a push message you may 1) simply go to Admin panel -> Push Notifications -> type your message in Simple mode -> and hit "Send" for all of your users to receive the message; Send a push using Push Notifications API (explained below). Following this way you only need to create ONE QuickBlox User which will have all of your users' devices associated with it. Then simply send your pushes to that User.
@@ -450,16 +448,16 @@ QBRequest.createEvent(event, successBlock: {(response: QBResponse,events: [QBMEv
 Rich Push Notifications allow you to deliver some rich media content (images, video, HTML/CSS/Javascript) to your users. This works as a combination of QB Push Notifications and [QB Content APIs](http://quickblox.com/developers/Content).
 
 1. Go to Content module page on Admin panel, сhoose any image on your hard disk and press Upload button:
-![](./resources/images/6/6_35.png)
+![](./resources/images/6/35.png)
 
 2. While creating the push notification message body, press 'Add Content' button:
-![](./resources/images/6/6_36.png)
+![](./resources/images/6/36.png)
 
 3. Check your uploaded image and press 'Add Selected' button:
-![](./resources/images/6/6_37.png)
+![](./resources/images/6/37.png)
 
 4. The image will be connected to the Push Notifications. Finally, choose **Environment**, **Channel**, type your message body and press the '**Prepare Notification**' button.
-![](./resources/images/6/6_38.png)
+![](./resources/images/6/38.png)
 
 # Handling Push Notifications
 
@@ -532,7 +530,7 @@ The notification needs to be handled differently depending on what state your ap
 The new framework called “**UserNotifications**”	is introduced with iOS 10 SDK. The [UserNotifications framework](https://developer.apple.com/reference/usernotifications) (UserNotifications.framework) supports the delivery and handling of local and remote notifications.
 
 1. Add UserNotifications.framework
-![](./resources/images/6/6_39.png)
+![](./resources/images/6/39.png)
 
 2. Import UserNotifications.framework in your AppDelegate file and add UNUserNotificationCenterDelegate.
 
