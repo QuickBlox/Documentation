@@ -3,42 +3,19 @@
 In order to use QuickBlox Push Notifications APIs you must Create a session & Sign In to QuickBlox OR just create a session with a User.
 
 There are 2 ways that you can integrate Push Notifications into your app:
+
 1. **Broadcasting the same message to all users.** It's a simple method which can be used in informational apps that do not authenticate users and where same push notification messages are broadcasted to everybody. This way when you want to send a push message you may 1) simply go to Admin panel -> Push Notifications -> type your message in Simple mode -> and hit "Send" for all of your users to receive the message; Send a push using Push Notifications API (explained below). Following this way you only need to create ONE QuickBlox User which will have all of your users' devices associated with it. Then simply send your pushes to that User.
-3. **Send individual push alerts.** This is when you want to individually send push notifications to a particular user or a group of users (for example notify users of a new chat message sent while they are offline or tell them about some deal/event happening in close proximity to their location). Following this way you need to have a QuickBlox User created for each of your app users. Note that there are easy ways to transparently create QB Users along with your existing users authentication system or have them sign up with Facebook/Twitter/OAuth (described in Users code sample reference) so your end users don't have to type any additional login credentials or know anything about QuickBlox.
 
-<span id="Need_to_known_information" class="on_page_navigation">
+2. **Send individual push alerts.** This is when you want to individually send push notifications to a particular user or a group of users (for example notify users of a new chat message sent while they are offline or tell them about some deal/event happening in close proximity to their location). Following this way you need to have a QuickBlox User created for each of your app users. Note that there are easy ways to transparently create QB Users along with your existing users authentication system or have them sign up with Facebook/Twitter/OAuth (described in Users code sample reference) so your end users don't have to type any additional login credentials or know anything about QuickBlox.
+
+<span id="Create_APNS_certificates" class="on_page_navigation">
 </span>
-# Need to know information
-Before using the Push Notifications module please read the following:
-
-- [Getting Started]()
-- [Authentication and Authorization]()
-
-<span id="Getting_Started_with_Push_Notifications_API" class="on_page_navigation">
-</span>
-# Getting Started with Push Notifications API
-
-## Getting a QuickBlox account
-http://admin.quickblox.com/register
-
-## Creating applications in the Admin panel
-http://admin.quickblox.com/apps/new
-
->For further reading there is also [5 minutes guide]()
-
-## Connecting QuickBlox to your application
-To get the information on how to connect to the QuickBlox.framework please refer to the IOS-how-to-connect-Quickblox-framework page.
-
-## Creating APNS certificates
+# Create APNS certificates
 
 Each iOS application that uses Apple Push Notifications must have APNS certificates uploaded via the Admin panel. To get the information on how to create APNS certificates and upload them to Admin panel, please, refer to the [How to create APNS certificates page.]()
 
 >You must use valid Provisioning Profiles for your Xcode project.
 
-<span id="How_to_create_APNS_certificates_page" class="on_page_navigation">
-</span>
-
-# How to create APNS certificates
 ## Creating an App ID
 
 Each iOS application that uses the APNs must have a unique application ID that uniquely identifies itself. In this step, you will learn how to create an App ID for push notification.
