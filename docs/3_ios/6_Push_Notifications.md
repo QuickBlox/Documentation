@@ -10,11 +10,9 @@ There are 2 ways that you can integrate Push Notifications into your app:
 
 Each iOS application that uses Apple Push Notifications must have APNS certificates uploaded via the Admin panel. To get the information on how to create APNS certificates and upload them to Admin panel, please, refer to the [How to create APNS certificates page.]()
 
->You must use valid Provisioning Profiles for your Xcode project.
-
 ## Creating an App ID
 
-Each iOS application that uses the APNs must have a unique application ID that uniquely identifies itself. In this step, you will learn how to create an App ID for push notification.
+Each iOS application that uses the Apple Push Notifications must have a unique application ID that uniquely identifies itself. The following steps describe how to create an Apple App ID for your application.
 >If you already have an App ID you can skip this steps
 
 1. Log in to the [iPhone Developer Connection Portal](https://developer.apple.com/account/)
