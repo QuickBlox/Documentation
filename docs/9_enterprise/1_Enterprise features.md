@@ -1,4 +1,4 @@
-Here is a list with detailed description of QuickBlox Enterprise features.
+Here is a list of QuickBlox Enterprise features, with detailed description. All these features are available starting from [Enterprise plan](https://quickblox.com/plans).
  
 <span id="Conference_video_calls" class="on_page_navigation"></span>
 # Conference video calls
@@ -15,11 +15,10 @@ QuickBlox provides the Multiparty Video Conferencing solution which allows to se
 ## Platform supported
 We support Web, iOS and Android platfroms.
 
+<span id="Custom_Identity_provider" class="on_page_navigation"></span>
 # Custom Identity provider
 TBA
- 
-# TNS
-TBA
 
-# Custumizable emails & reset password page
+<span id="TNS_Trust_and_Safety" class="on_page_navigation"></span>
+# TNS (Trust and Safety)
 TBA
