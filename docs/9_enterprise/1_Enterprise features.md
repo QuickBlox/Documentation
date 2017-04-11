@@ -15,6 +15,16 @@ QuickBlox provides the Multiparty Video Conferencing solution which allows to se
 ## Platform supported
 We support Web, iOS and Android platfroms.
 
+## Documentation
+* [Web](https://samples.quickblox.com/videoconf/docs)
+* [iOS](https://samples.quickblox.com/videoconf/ios/docs)
+* [Android](https://samples.quickblox.com/videoconf/android/docs)
+
+## Code samples
+* [Web](https://samples.quickblox.com/videoconf/text_video_chat)
+* [iOS src code](https://samples.quickblox.com/videoconf/ios/sample/ConferenceSample.zip)
+* [Android src code](https://samples.quickblox.com/videoconf/android/sample/ConferenceSample.zip)
+
 <span id="Custom_Identity_provider" class="on_page_navigation"></span>
 # Custom Identity provider
 TBA
