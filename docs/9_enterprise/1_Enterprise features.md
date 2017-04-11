@@ -13,7 +13,7 @@ QuickBlox provides the Multiparty Video Conferencing solution which allows to se
 * Switch video input device (camera) 
 
 ## Platform supported
-We support Web, iOS and Android platfroms.
+We support Web, iOS and Android platforms.
 
 ## Documentation
 * [Web](https://samples.quickblox.com/videoconf/docs)
