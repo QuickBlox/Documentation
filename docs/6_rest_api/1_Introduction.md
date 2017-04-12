@@ -83,7 +83,7 @@ You can create **Application session** and then upgrade it to **User session** o
 ### 3.17.01.1
 * **API**
 	* New
-		* iOS VoIP push notifications.
+		* iOS VoIP push notifications. [Blog post about VoIP push notifications features](https://quickblox.com/blog/voip-push-notifications/).
 		* Added new field 'bundle_identifier' for push susbcriptions model (to support multiple iOS push certificates feature)
 	* Fixed
 		* POST /subscriptions API performance bottleneck
