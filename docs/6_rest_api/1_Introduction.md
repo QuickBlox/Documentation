@@ -43,5 +43,11 @@ You can create **Application session** and then upgrade it to **User session** o
 # Changelog
 
 ## API and Dashboard changelog
-TBA
 
+### 3.17.04.1
+* API
+	* New
+		* Ability to send universal VoIP push notifications via **ios_voip=1** parameter.
+* Other
+	* Fixed
+		* Improved push notifications delivery stability.
