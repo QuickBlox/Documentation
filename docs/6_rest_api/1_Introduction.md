@@ -60,5 +60,36 @@ You can create **Application session** and then upgrade it to **User session** o
 ### 3.17.02.2
 * API
 	* Fixed
-		* POST /subscriptions: allow to pass 'bundle_identifier' parameter for only for iOS push subscriptions (can't do it for Android)
+		* POST /subscriptions: allow to pass 'bundle_identifier' parameter for only for iOS push subscriptions (can't do it for Android).
+
+### 3.17.02.1
+* API
+	* New
+		* API for [unread chat message](https://quickblox.com/developers/Chat#Update_message)
+	* Fixed
+		* Sign In via Twitter Digits performance bottleneck.
+		* Sign In with Facebook performance bottleneck.
+		* Improve performance of GET /users, PUT /users APIs.
+		* Custom Objects: Create new record with permissions API. "Acl" is changed to "permissions" in the error response to not confuse end users.
+		* Current 'user_id' is not added to chat messages's 'delivered_ids' field when use GET /chat/Message request
+		*  Update user API doesn't work if deleted avatar (connected via user's 'blob_id' field) of user from Content module.
+		*  Can't reuse 1-1 chat dialog after delete.
+		*  Users: enable email confirmation: there is no error for unconfirmed users
+		*  POST /chat/message API issue: chat dialog is broken when send not valid xml characters in chat message's body.
+* Dashboard
+	* Fixed
+		* Users page is so slow when have > 1M users in single application.	
+
+### 3.17.01.1
+* API
+	* New
+		* iOS VoIP push notifications.
+		* Added new field 'bundle_identifier' for push susbcriptions model (to support multiple iOS push certificates feature)
+	* Fixed
+		* POST /subscriptions API performance bottleneck
+* Dashboard
+	* New
+		* Ability to upload multiple iOS push certificates
+	* Fixed
+		* Content page is so slow when have many records in single application. 
 
