@@ -155,6 +155,16 @@ You can create **Application session** and then upgrade it to **User session** o
 * **Other**
 	* Fixed
 		* Stability improvements.
+
+### 3.16.07.2
+* **Other**
+	* Fixed
+		* Stability improvements.
+
+### 3.16.07.1
+* **Other**
+	* New
+		* Custom Identity Provider feature
 	
 	
 	
