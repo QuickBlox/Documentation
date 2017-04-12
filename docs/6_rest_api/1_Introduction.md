@@ -93,3 +93,68 @@ You can create **Application session** and then upgrade it to **User session** o
 	* Fixed
 		* Content page is so slow when have many records in single application. 
 
+### 3.16.12.1
+* **API**
+	* Fixed
+		*  Push notifications with badge parameter are not delivered to device.
+* **Dashboard**
+	* New
+		* Added chat 'dialog_name' template variable into Chat Alerts
+		* Improved Custom Identity Provider logic: added 'Allow reuse QuickBlox user' checkbox.
+
+### 3.16.11.3
+* **Other**
+	* New
+		* Moved iOS Push Notifications (APNS) delivery protocol to brand new Apple HTTP/2.
+
+### 3.16.11.2
+* **Other**
+	* Fixed
+		* Stability improvements  
+
+### 3.16.11.1
+* **API**
+	* Fixed
+		* There was no way to create 2 push notifications subscriptions(dev+prod) for single user with same device udid.
+* **Dashboard**
+	* New
+		* Ability to pass URL path parameters for Custom Identity Provider. 
+	* Fixed
+		* Incorrect behaviour when access Content module files with type 'application/octet-stream'.
+	
+### 3.16.10.1
+* **Other**
+	* Fixed
+		* Stability improvements.
+	
+### 3.16.09.2
+* **API**
+	* Fixed 
+		* Speed up search for GET /users/by_full_name API
+		* Two different date formats are displayed if perform requests "create custom class with date format field" and "create dialog with custom parameters"
+		* Filter chat messages via API by "updated_at" field doesn't work.
+		* Custom Objects: incorrect behaviour when upload file to not existent field. 
+* **Dashboard**
+	* Fixed
+		* Information link for GCM API Key on the 'Push notifications' page is broken.  
+		* Custom Objects table size issue
+		* User can not set time seconds and time zone in Custom Objecs's field type "date" when create new record
+		* Users:Settings: empty email template can be sent
+		* CustomObjects: export of Location field doesn’t work
+* **Other**
+	* New
+		* Email templates new design
+		* Ability to customise 'Forgot password' email and page
+		* Send an email when APNS certificate is removed because of expiration date.
+		* 'unsubscribe' email feature  
+		* Add ‘WWW-Authenticate’ header for 401 and 407 statuses
+		* Ability to enable/disable custom templates for Greetings, Forgot Password, SignUp confirmation emails
+		* Ability to enable user SignUp confirmation logic
+
+### 3.16.09.1
+* **Other**
+	* Fixed
+		* Stability improvements.
+	
+	
+	
