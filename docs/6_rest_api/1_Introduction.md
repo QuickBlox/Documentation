@@ -51,3 +51,14 @@ You can create **Application session** and then upgrade it to **User session** o
 * Other
 	* Fixed
 		* Improved push notifications delivery stability.
+
+### 3.17.03.1
+* API
+	* Fixed
+		* Push Notifications: subscription is overrided if install 2 iOS apps on a same device. 
+
+### 3.17.02.2
+* API
+	* Fixed
+		* POST /subscriptions: allow to pass 'bundle_identifier' parameter for only for iOS push subscriptions (can't do it for Android)
+
