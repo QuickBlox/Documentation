@@ -112,89 +112,87 @@ paths:
           description: "Empty body"
   /events.json:
     post:
-      post:
-        summary: Create event
-        operationId: 104_Create_Event
-        description: |
-          Create notification event.
-          This request will immediately produce notification delivery (push notification or email).
-        parameters:
-          - name: event[notification_type]
-            in: formData
-            description: |
-              Type of notification.
-              Allowed values: **push** or **email**.
-            required: true
-            type: enum
-            default: push
-          - name: event[push_type]
-            in: formData
-            description: |
-              Push Notification type. Used only if **event[notification_type] = push**, ignored in other cases.
-              If not present - Notification will be delivered to all possible devices for specified users. Each platform has their own standard format. See (Quickblox Standard Push Notifications Formats)[https://quickblox.com] for more information.
-              If specified - Notification will be delivered to the specified platform only.
-              Allowed values: **apns**, **apns_voip**, **gcm**, **mpns** or **bbps**.
-            required: false
-            type: enum
-            default: apns
-          - name: event[environment]
-            in: formData
-            description: |
-              An environment of the notification.
-              Allowed values: **development** or **production**.
-            required: true
-            type: enum
-            default: development
-          - name: event[event_type]
-            in: formData
-            description: |
-              Allowed values: **one_shot**, **fixed_date** or **period_date**.
-              **one_shot** - a one-time event, which causes by an external object (the value is only valid if the 'date' is not specified).
-              **fixed_date** - a one-time event, which occurs at a specified 'date' (the value is valid only if the 'date' is given).
-              **period_date** - reusable event that occurs within a given 'period' from the initial 'date' (the value is only valid if the 'period' specified).
-              By default:
-              **fixed_date**, if 'date' is specified.
-              **period_date**, if 'period' is specified.
-              **one_shot**, if 'date' is not specified.
-            required: false
-            type: enum
-            default: one_shot
-          - name: event[message]
-            in: formData
-            description: |
-              A payload of event.
-              For push notifications:
-              if **event[push_type]** not present - should be Base64 encoded text.
-              if **event[push_type]** specified - should be formatted as described in (QuickBlox Push Notifications Formats)[https://quickblox.com]
-              For email:
-              Base64 encoded text.
-            required: true
-            type: string
-            default: payload=eyJhcHMiOns....
-        responses:
-          '200':
-            description: "Event object"
-            schema:
-              $ref: '#/definitions/EventResponse'
+      summary: Create event
+      operationId: 104_Create_Event
+      description: |
+        Create notification event.
+        This request will immediately produce notification delivery (push notification or email).
+      parameters:
+        - name: event[notification_type]
+          in: formData
+          description: |
+            Type of notification.
+            Allowed values: **push** or **email**.
+          required: true
+          type: enum
+          default: push
+        - name: event[push_type]
+          in: formData
+          description: |
+            Push Notification type. Used only if **event[notification_type] = push**, ignored in other cases.
+            If not present - Notification will be delivered to all possible devices for specified users. Each platform has their own standard format. See (Quickblox Standard Push Notifications Formats)[https://quickblox.com] for more information.
+            If specified - Notification will be delivered to the specified platform only.
+            Allowed values: **apns**, **apns_voip**, **gcm**, **mpns** or **bbps**.
+          required: false
+          type: enum
+          default: apns
+        - name: event[environment]
+          in: formData
+          description: |
+            An environment of the notification.
+            Allowed values: **development** or **production**.
+          required: true
+          type: enum
+          default: development
+        - name: event[event_type]
+          in: formData
+          description: |
+            Allowed values: **one_shot**, **fixed_date** or **period_date**.
+            **one_shot** - a one-time event, which causes by an external object (the value is only valid if the 'date' is not specified).
+            **fixed_date** - a one-time event, which occurs at a specified 'date' (the value is valid only if the 'date' is given).
+            **period_date** - reusable event that occurs within a given 'period' from the initial 'date' (the value is only valid if the 'period' specified).
+            By default:
+            **fixed_date**, if 'date' is specified.
+            **period_date**, if 'period' is specified.
+            **one_shot**, if 'date' is not specified.
+          required: false
+          type: enum
+          default: one_shot
+        - name: event[message]
+          in: formData
+          description: |
+            A payload of event.
+            For push notifications:
+            if **event[push_type]** not present - should be Base64 encoded text.
+            if **event[push_type]** specified - should be formatted as described in (QuickBlox Push Notifications Formats)[https://quickblox.com]
+            For email:
+            Base64 encoded text.
+          required: true
+          type: string
+          default: payload=eyJhcHMiOns....
+      responses:
+        '200':
+          description: "Event object"
+          schema:
+            $ref: '#/definitions/EventResponse'
   /events/{event_id}.json:
     get:
-      delete:
-        summary: Retrieve event
-        operationId: 106_Retrieve event
-        description: |
-          Retrieve an event by ID.
-        parameters:
-          - name: event_id
-            in: formData
-            description: An id of event to retrieve (path parameter)
-            required: true
-            type: integer
-            default: 34891
-        responses:
-          '200':
-            description: "Event object"
-            schema:
-              $ref: '#/definitions/EventResponse'
+      summary: Retrieve event
+      operationId: 106_Retrieve event
+      description: |
+        Retrieve an event by ID.
+      parameters:
+        - name: event_id
+          in: formData
+          description: An id of event to retrieve (path parameter)
+          required: true
+          type: integer
+          default: 34891
+      responses:
+        '200':
+          description: "Event object"
+          schema:
+            $ref: '#/definitions/EventResponse'
 definitions:
   SubscriptionResponse:
     properties:
