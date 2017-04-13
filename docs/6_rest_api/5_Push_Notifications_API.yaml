@@ -40,16 +40,45 @@ paths:
           default: apns
         - name: push_token[environment]
           in: formData
-          description: Determine application mode. It allows conveniently separate development and production modes.
+          description: |
+            Determine application mode. It allows conveniently separate development and production modes.
+            Allowed values: **evelopment** or **production**.
           required: true
           type: enum
           default: development
         - name: push_token[bundle_identifier]
           in: formData
-          description: A unique identifier for client's application. In iOS, this is the Bundle Identifier. In Android - package id.
+          description: |
+            A unique identifier for client's application.
+            In iOS, this is the Bundle Identifier. In Android - package id.
           required: false
           type: string
           default: com.quickblox.supresample
+        - name: push_token[client_identification_sequence]
+          in: formData
+          description: |
+            Identifies client device in 3-rd party service like APNS, GCM/FCM, BBPS or MPNS.
+            Initially retrieved from 3-rd service and should be send to QuickBlox to let it send push notifications to the client.
+          required: true
+          type: string
+          default: aa557232bc237245ba67686..
+        - name: device[platform]
+          in: formData
+          description: |
+            Platform of device, which is the source of application running.
+            Allowed values: **ios**, **android**, **windows_phone**, **blackberry**.
+          required: true
+          type: string
+          default: ios
+        - name: device[udid]
+          in: formData
+          description: |
+            UDID (Unique Device identifier) of device, which is the source of application running.
+            This must be anything sequence which uniquely identify particular device.
+            This is needed to support schema: 1 User - Multiple devices.
+          required: true
+          type: string
+          default: 2343af3433aa3a4fsv
       responses:
         '201':
           description: "Array os all existent subscriptions objects"
