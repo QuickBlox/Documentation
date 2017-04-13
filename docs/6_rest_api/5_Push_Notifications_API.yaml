@@ -50,15 +50,14 @@ paths:
           default: com.quickblox.supresample
       responses:
         '201':
-          description: "Array os all existent subscriptions"
+          description: "Array os all existent subscriptions objects"
           schema:
             $ref: '#/definitions/SubscriptionResponse'
 definitions:
   SubscriptionResponse:
-    properties:
-      type: array
-      items:
-        $ref: '#/definitions/SubscriptionObject'
+    type: array
+    subscription:
+      $ref: '#/definitions/SubscriptionObject'
   SubscriptionObject:
     properties:
       id:
