@@ -26,9 +26,9 @@ paths:
   /subscriptions.json:
     post:
       summary: Create subscription
-      operationId: Create_Subscription
+      operationId: 101_Create_Subscription
       description: |
-        Create device based subscription.
+        Create device based subscription (subscribes).
       parameters:
         - name: notification_channel
           in: formData
@@ -81,9 +81,34 @@ paths:
           default: 2343af3433aa3a4fsv
       responses:
         '201':
-          description: "Array os all existent subscriptions objects"
+          description: "Array of all existent user's subscriptions"
           schema:
             $ref: '#/definitions/SubscriptionResponse'
+    get:
+      summary: Retrieve subscriptions
+      operationId: 102_Retrieve_Subscriptions
+      description: |
+        Retrieve subscriptions for the user which is specified in the session token.
+      responses:
+        '200':
+          description: "Array of all existent user's subscriptions"
+          schema:
+            $ref: '#/definitions/SubscriptionResponse'
+    delete:
+      summary: Remove subscription
+      operationId: 103_Remove_Subscription
+      description: |
+        Remove a subscription by its identifier (unsubscribes).
+      parameters:
+        - name: subscription_id
+          in: formData
+          description: An id of subscription to remove (path parameter)
+          required: true
+          type: integer
+          default: 34891
+      responses:
+        '200':
+          description: "Empty body"
 definitions:
   SubscriptionResponse:
     properties:
