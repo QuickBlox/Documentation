@@ -110,6 +110,77 @@ paths:
       responses:
         '200':
           description: "Empty body"
+  /events.json:
+    post:
+      post:
+        summary: Create event
+        operationId: 104_Create_Event
+        description: |
+          Create notification event.
+          This request will immediately produce notification delivery (push notification or email).
+        parameters:
+          - name: event[notification_type]
+            in: formData
+            description: |
+              Type of notification.
+              Allowed values: **push** or **email**.
+            required: true
+            type: enum
+            default: push
+          - name: event[push_type]
+            in: formData
+            description: |
+              Push Notification type. Used only if **event[notification_type] = push**, ignored in other cases.
+              If not present - Notification will be delivered to all possible devices for specified users. Each platform has their own standard format. See (Quickblox Standard Push Notifications Formats)[https://quickblox.com] for more information.
+              If specified - Notification will be delivered to the specified platform only.
+              Allowed values: **apns**, **apns_voip**, **gcm**, **mpns** or **bbps**.
+            required: false
+            type: enum
+            default: apns
+          - name: event[environment]
+            in: formData
+            description: |
+              An environment of the notification.
+              Allowed values: **development** or **production**.
+            required: true
+            type: enum
+            default: development
+          - name: event[event_type]
+            in: formData
+            description: |
+              Allowed values: **one_shot**, **fixed_date** or **period_date**.
+              **one_shot** - a one-time event, which causes by an external object (the value is only valid if the 'date' is not specified).
+              **fixed_date** - a one-time event, which occurs at a specified 'date' (the value is valid only if the 'date' is given).
+              **period_date** - reusable event that occurs within a given 'period' from the initial 'date' (the value is only valid if the 'period' specified).
+              By default:
+              **fixed_date**, if 'date' is specified.
+              **period_date**, if 'period' is specified.
+              **one_shot**, if 'date' is not specified.
+            required: false
+            type: enum
+            default: one_shot
+          - name: event[message]
+            in: formData
+            description: |
+              A payload of event.
+              For push notifications:
+              if **event[push_type]** not present - should be Base64 encoded text.
+              if **event[push_type]** specified - should be formatted as described in (QuickBlox Push Notifications Formats)[https://quickblox.com]
+              For email:
+              Base64 encoded text.
+            required: true
+            type: string
+            default: payload=eyJhcHMiOns....
+        responses:
+          '200':
+            description: "Event object"
+            schema:
+              $ref: '#/definitions/EventResponse'
+    get:
+  /events/{event_id}.json:
+    get:
+    put:
+    delete:
 definitions:
   SubscriptionResponse:
     properties:
@@ -141,3 +212,67 @@ definitions:
       name:
         type: string
         example: ios
+  SubscribersSelectorObject:
+    properties:
+      environment:
+        type: string
+        example: production
+      user_ids:
+        type: array
+        example: 56,34,89
+  EventResponse:
+    properties:
+      event:
+        $ref: '#/definitions/EventObject'
+  EventsResponse:
+    properties:
+      current_page:
+        type: integer
+        example: 1
+      per_page:
+        type: integer
+        example: 10
+      total_entries:
+        type: integer
+        example: 2
+      items:
+        $ref: '#/definitions/EventObject'
+  EventObject:
+    properties:
+      id:
+        type: integer
+        example: 1639
+      created_at:
+        type: string
+        example: 2012-05-09T10:24:26Z
+      updated_at:
+        type: string
+        example: 2012-05-09T10:24:26Z
+      event_type:
+        type: string
+        example: one_shot
+      message:
+        type: string
+        example: payload=eyJhcHMiOnl..
+      active:
+        type: boolean
+        example: true
+      user_id:
+        type: integer
+        example: 31232
+      date:
+        type: string
+        example: null
+      end_date:
+        type: string
+        example: null
+      period:
+        type: integer
+        example: null
+      occured_count:
+        type: integer
+        example: 0
+      notification_channel:
+        $ref: '#/definitions/NotificationChannelObject'
+      subscribers_selector:
+        $ref: '#/definitions/SubscribersSelectorObject'
