@@ -94,6 +94,7 @@ paths:
           description: "Array of all existent user's subscriptions"
           schema:
             $ref: '#/definitions/SubscriptionResponse'
+  /subscriptions/{subscription_id}.json:
     delete:
       summary: Remove subscription
       operationId: 103_Remove_Subscription
