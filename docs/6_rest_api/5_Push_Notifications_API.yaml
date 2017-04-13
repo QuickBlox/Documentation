@@ -34,7 +34,7 @@ paths:
           in: formData
           description: |
             Declare which notification channels could be used to notify user about events.
-            Allowed values: apns, apns_voip, gcm, mpns, bbps, email.
+            Allowed values: **apns**, **apns_voip**, **gcm**, **mpns**, **bbps** and **email**.
           required: true
           type: string
           default: apns
