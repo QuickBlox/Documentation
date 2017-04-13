@@ -60,7 +60,7 @@ You can create **Application session** and then upgrade it to **User session** o
 ### 3.17.02.2
 * **API**
 	* Fixed
-		* POST /subscriptions: allow to pass 'bundle_identifier' parameter only for iOS push subscriptions (can't do it for Android).
+		* POST /subscriptions: allow to pass 'bundle_identifier' parameter not only for iOS push subscriptions (but also for Android).
 
 ### 3.17.02.1
 * **API**

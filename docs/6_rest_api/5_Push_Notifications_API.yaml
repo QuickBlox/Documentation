@@ -1,14 +1,11 @@
 swagger: '2.0'
 info:
-  title: QuickBlox REST API, Content API.
+  title: QuickBlox REST API, Push Notifications API.
   description: |
-    Allows you to manage app contents and settings without having to re-publish them.
-    Using a web interface you or your clients can control and make instant changes to the apps.<br><br>
-    • To store chat file attachments<br>
-    • Manage text, rich text, and media via easy to use web admin panel<br>
-    • Can be used to manage ads and banners<br>
-    • App synchronizes content in background, users not affected<br>
-    • Any amount of data can be stored<br>
+    Employs QuickBlox servers’ power to send thousands of technical and marketing
+    messages to your users. Four channels are supported:<br><br>
+    • Push Notifications – sends iOS, Android, WP, BlackBerry pushes. This is being used for technical notifications, reminders and marketing messages. Also used as IM, enabling you or your users to send direct messages to other users (even if they are offline and not using the app). Can be integrated with other functions within the particular application.<br>
+    • Emails – sending e-mails to your users. This is being used for users registration, password reminders, marketing newsletter etc<br>
   version: 1.0
 # the domain of the service
 host: quickblox.com
