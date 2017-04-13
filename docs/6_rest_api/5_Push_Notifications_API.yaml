@@ -4,7 +4,7 @@ info:
   description: |
     Employs QuickBlox servers’ power to send thousands of technical and marketing
     messages to your users. Two channels are supported:<br><br>
-    • Push Notifications – sends iOS, Android, WP, BlackBerry pushes. This is being used for technical notifications, reminders and marketing messages. Also used as IM, enabling you or your users to send direct messages to other users (even if they are offline and not using the app). Can be integrated with other functions within the particular application.<br>
+    • **Push Notifications** – sends iOS, Android, WP, BlackBerry pushes. This is being used for technical notifications, reminders and marketing messages. Also used as IM, enabling you or your users to send direct messages to other users (even if they are offline and not using the app). Can be integrated with other functions within the particular application.<br>
     • Emails – sending e-mails to your users. This is being used for users registration, password reminders, marketing newsletter etc<br>
     <br>
     Features:<br><br>
