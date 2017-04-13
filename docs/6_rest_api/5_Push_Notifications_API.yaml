@@ -130,8 +130,11 @@ paths:
           in: formData
           description: |
             Push Notification type. Used only if **event[notification_type] = push**, ignored in other cases.
-            If not present - Notification will be delivered to all possible devices for specified users. Each platform has their own standard format. See (Quickblox Standard Push Notifications Formats)[https://quickblox.com] for more information.
+
+            If not present - Notification will be delivered to all possible devices for specified users. Each platform has their own standard format. See [Quickblox Standard Push Notifications Formats](https://quickblox.com) for more information.
+
             If specified - Notification will be delivered to the specified platform only.
+            
             Allowed values: **apns**, **apns_voip**, **gcm**, **mpns** or **bbps**.
           required: false
           type: enum
@@ -164,7 +167,7 @@ paths:
             A payload of event.
             For push notifications:
             if **event[push_type]** not present - should be Base64 encoded text.
-            if **event[push_type]** specified - should be formatted as described in (QuickBlox Push Notifications Formats)[https://quickblox.com]
+            if **event[push_type]** specified - should be formatted as described in [QuickBlox Push Notifications Formats](https://quickblox.com)
             For email:
             Base64 encoded text.
           required: true
