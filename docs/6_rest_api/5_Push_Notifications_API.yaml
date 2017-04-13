@@ -4,7 +4,7 @@ info:
   description: |
     Employs QuickBlox servers’ power to send thousands of technical and marketing
     messages to your users. Two channels are supported:<br><br>
-    • **Push Notifications** – sends iOS, Android, WP, BlackBerry pushes. This is being used for technical notifications, reminders and marketing messages. Also used as IM, enabling you or your users to send direct messages to other users (even if they are offline and not using the app). Can be integrated with other functions within the particular application.<br>
+    • Push Notifications – sends iOS, Android, WP, BlackBerry pushes. This is being used for technical notifications, reminders and marketing messages. Also used as IM, enabling you or your users to send direct messages to other users (even if they are offline and not using the app). Can be integrated with other functions within the particular application.<br>
     • Emails – sending e-mails to your users. This is being used for users registration, password reminders, marketing newsletter etc<br>
     <br>
     Features:<br><br>
@@ -23,90 +23,64 @@ basePath: /api
 produces:
   - application/json
 paths:
-  /blobs.json:
+  /subscriptions.json:
     post:
-      summary: Create file
-      operationId: Create_File_Id
+      summary: Create subscription
+      operationId: Create_Subscription
       description: |
-        Create a new file.
+        Create device based subscription.
       parameters:
-        - name: blob[content_type]
+        - name: notification_channel
           in: formData
-          description: The file's mime [content type](https://developer.mozilla.org/ru/docs/Web/HTTP/Basics_of_HTTP/MIME_types/Complete_list_of_MIME_types)
-          required: true
-          type: String
-          default: image/jpeg
-        - name: blob[name]
-          in: formData
-          description: The file's name
+          description: Declare which notification channels could be used to notify user about events.
           required: true
           type: string
-          default: museum.jpg
-        - name: blob[public]
+          default: apns
+        - name: push_token[environment]
           in: formData
-          description: The file's visibility. **public** means it will be possible to access this file without session token provided.
+          description: Determine application mode. It allows conveniently separate development and production modes.
           required: true
+          type: enum
+          default: development
+        - name: push_token[bundle_identifier]
+          in: formData
+          description: A unique identifier for client's application. In iOS, this is the Bundle Identifier. In Android - package id.
+          required: false
           type: string
-          default: false
+          default: com.quickblox.supresample
       responses:
         '201':
-          description: "File object"
+          description: "Subscription object"
           schema:
-            $ref: '#/definitions/FileResponse'
+            $ref: '#/definitions/SubscriptionResponse'
 definitions:
-  FileResponse:
+  SubscriptionResponse:
     properties:
-      blob:
-        $ref: '#/definitions/FileObject'
-  FileObjectAccess:
-    properties:
-      id:
-        type: integer
-        example: 4235
-      blob_id:
-        type: integer
-        example: 163934
-      object_access_type:
-        type: string
-        example: Write
-      expires:
-        type: string
-        example: 2012-04-23T14:22:34Z
-      params:
-        type: string
-        example: https://qbprod.s3.amazonaws.com/?Content-Type=image%2Fpng&Expires=Wed%2C%2030%20Sep%202015%2013%3A25%3A11%20GMT&acl=authenticated-read&key=fbc2d08125e3435ca5cb37f926d5fe8800&policy=eyJleHBpcmF0aW9uIjoiMjAxNS0wOS0zMFQxMzoyNToxMVoiLCJjb25kaXRpb25zIjpbeyJidWNrZXQiOiJxYnByb2QifSx7ImFjbCI6ImF1dGhlbnRpY2F0ZWQtcmVhZCJ9LHsiQ29udGVudC1UeXBlIjoiaW1hZ2UvcG5nIn0seyJzdWNjZXNzX2FjdGlvbl9zdGF0dXMiOiIyMDEifSx7IkV4cGlyZXMiOiJXZWQsIDMwIFNlcCAyMDE1IDEzOjI1OjExIEdNVCJ9LHsia2V5IjoiZmJjMmQwODEyNWUzNDM1Y2E1Y2IzN2Y5MjZkNWZlODgwMCJ9LHsieC1hbXotY3JlZGVudGlhbCI6IkFLSUFJWTdLRk0yM1hHWEo3UjdBLzIwMTUwOTMwL3VzLWVhc3QtMS9zMy9hd3M0X3JlcXVlc3QifSx7IngtYW16LWFsZ29yaXRobSI6IkFXUzQtSE1BQy1TSEEyNTYifSx7IngtYW16LWRhdGUiOiIyMDE1MDkzMFQxMjI1MTFaIn1dfQ%3D%3D&success_action_status=201&x-amz-algorithm=AWS4-HMAC-SHA256&x-amz-credential=AKIAIY7KFM23XGXJ7R7A%2F20150930%2Fus-east-1%2Fs3%2Faws4_request&x-amz-date=20150930T122511Z&x-amz-signature=a5c720c1a3b9b5c0b2549e0220419493ca3b11ce84618f6ece88ad97a96a8ad9
-  FileObject:
+      subscription:
+        $ref: '#/definitions/SubscriptionObject'
+  SubscriptionObject:
     properties:
       id:
         type: integer
         example: 1639
-      created_at:
-        type: string
-        example: 2012-05-09T10:24:26Z
-      updated_at:
-        type: string
-        example: 2012-05-09T10:24:26Z
+      notification_channel:
+        $ref: '#/definitions/NotificationChannelObject'
+      device:
+        $ref: '#/definitions/DeviceObject'
+  NotificationChannelObject:
+    properties:
       name:
         type: string
-        example: museum.jpg
-      content_type:
+        example: apns
+  DeviceObject:
+    properties:
+      udid:
         type: string
-        example: image/jpeg
-      public:
-        type: boolean
-        example: false
-      size:
-        type: integer
-        example: 55332
-      blob_status:
+        example: 3429C429-4C34-5214-8E3C-803AC0CA79ED
+      platform:
+        $ref: '#/definitions/PlatformObject'
+  PlatformObject:
+    properties:
+      name:
         type: string
-        example: complete
-      last_read_access_ts:
-        type: string
-        example: 2012-03-27T13:14:08Z
-      set_completed_at:
-        type: string
-        example: 2012-03-23T16:14:51Z
-      uid:
-        type: string
-        example: 859146a9821e4bef9c6d60e1e8c88b3c00
+        example: ios
