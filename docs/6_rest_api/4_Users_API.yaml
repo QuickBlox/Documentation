@@ -588,6 +588,7 @@ definitions:
       user:
         $ref: '#/definitions/UserObject'
   ArrayOfUsersResponse:
+    type: object
     properties:
       current_page:
         type: integer
@@ -603,6 +604,7 @@ definitions:
         items:
           $ref: '#/definitions/UserObject'
   UserObject:
+    type: object
     properties:
       id:
         type: integer
