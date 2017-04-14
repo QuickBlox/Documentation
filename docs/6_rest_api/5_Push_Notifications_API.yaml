@@ -394,7 +394,7 @@ definitions:
         type: string
         example: production
       user_ids:
-        type: array
+        type: string
         example: 56,34,89
   EventResponse:
     properties:
@@ -412,9 +412,9 @@ definitions:
         type: integer
         example: 2
       items:
+        type: array
         $ref: '#/definitions/EventObject'
   EventObject:
-    type: array
     properties:
       id:
         type: integer
