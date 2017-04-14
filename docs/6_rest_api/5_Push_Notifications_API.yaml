@@ -421,7 +421,8 @@ definitions:
         example: 2
       items:
         type: array
-        $ref: '#/definitions/EventObject'
+        items:
+          $ref: '#/definitions/EventObject'
   EventObject:
     type: object
     properties:
