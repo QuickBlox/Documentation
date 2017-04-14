@@ -20,7 +20,34 @@ key1=c29tZXZhbHVlMQ==&key2=YW5vdGhlcnZhbHVlMg==&key3=dGhpcmRleGFtcGxl
 **Important!** *&* should be escaped by *%26* 
 
 ### iOS
-TBA
+To meet [Apple payload requirements](https://developer.apple.com/library/content/documentation/NetworkingInternet/Conceptual/RemoteNotificationsPG/PayloadKeyReference.html#//apple_ref/doc/uid/TP40008194-CH17-SW1). 
+
+**Example:**
+```
+{
+    "aps" : {
+        "alert" : "You got your emails.",
+        "badge" : 9,
+        "sound" : "bingbong.aiff"
+    },
+    "acme1" : "bar",
+    "acme2" : 42
+}
+```
+
+Base64 Encoded data:
+```
+ew0KICAgICJhcHMiIDogew0KICAgICAgICAiYWxlcnQiIDogIllvdSBnb3QgeW91ciBlbWFpbHMuIiwNCiAgICAgICAgImJhZ
+GdlIiA6IDksDQogICAgICAgICJzb3VuZCIgOiAiYmluZ2JvbmcuYWlmZiINCiAgICB9LA0KICAgICJhY21lMSIgOiAiYmFyIiwNCiAg
+ICAiYWNtZTIiIDogNDINCn0=
+```
+
+Final message (for iOS pushes you should add **payload=** before message):
+```
+event[message]=payload=ew0KICAgICJhcHMiIDogew0KICAgICAgICAiYWxlcnQiIDogIllvdSBnb3QgeW91ciBlbWFpbHMuIiwNCiAgICAgICAg
+ImJhZGdlIiA6IDksDQogICAgICAgICJzb3VuZCIgOiAiYmluZ2JvbmcuYWlmZiINCiAgICB9LA0KICAgICJhY21lMSIgOiAiYmFyIiwNCi
+AgICAiYWNtZTIiIDogNDINCn0=
+```
 
 ### Android
 TBA
