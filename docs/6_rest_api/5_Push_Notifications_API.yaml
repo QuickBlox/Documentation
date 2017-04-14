@@ -230,10 +230,10 @@ paths:
             The period of the event in seconds.
             Required if the **event[event_type] = period_date**.
             Possible values:
-            * 86400 (1 day)
-            * 604800 (1 week)
-            * 2592000 (1 month)
-            * 31557600 (1 year)
+            * 86400 (1 day).
+            * 604800 (1 week).
+            * 2592000 (1 month).
+            * 31557600 (1 year).
           required: false
           type: integer
           default: 86400
@@ -251,7 +251,7 @@ paths:
             $ref: '#/definitions/EventResponse'
     get:
       summary: Retrieve events
-      operationId: 105_Retrieve event
+      operationId: 105_Retrieve_Events
       description: |
         Get all events which were created by current user.
       responses:
@@ -262,7 +262,7 @@ paths:
   /events/{event_id}.json:
     get:
       summary: Retrieve event
-      operationId: 106_Retrieve event
+      operationId: 106_Retrieve_Event
       description: |
         Retrieve an event by ID.
       parameters:
@@ -272,6 +272,71 @@ paths:
           required: true
           type: integer
           default: 34891
+      responses:
+        '200':
+          description: "Event object"
+          schema:
+            $ref: '#/definitions/EventResponse'
+    put:
+      summary: Edit event
+      operationId: 107_Edit_Event
+      description: |
+        Update an event by ID.
+      parameters:
+        - name: event_id
+          in: formData
+          description: An id of event to update (path parameter)
+          required: true
+          type: integer
+          default: 34891
+        - name: event[active]
+          in: formData
+          description: |
+            To mark event as active again (re-initiate delivery of notification one more time)
+          required: false
+          type: boolean
+          default: true
+        - name: event[message]
+          in: formData
+          description: |
+            A payload of event.
+            For push notifications:
+            if **event[push_type]** not present - should be Base64 encoded text.
+            if **event[push_type]** specified - should be formatted as described in [QuickBlox Push Notifications Formats](https://quickblox.com)
+            For email:
+            Base64 encoded text.
+          required: false
+          type: string
+          default: payload=eyJhcHMiOns....
+        - name: event[date]
+          in: formData
+          description: |
+            The date of the event to send on.
+            Required if **event[event_type] = fixed_date** or **period_date**.
+            If **event[event_type] = fixed_date**, the date can not be in the past.
+          required: false
+          type: integer
+          default: 1492176928
+        - name: event[period]
+          in: formData
+          description: |
+            The period of the event in seconds.
+            Required if the **event[event_type] = period_date**.
+            Possible values:
+            * 86400 (1 day).
+            * 604800 (1 week).
+            * 2592000 (1 month).
+            * 31557600 (1 year).
+          required: false
+          type: integer
+          default: 86400
+        - name: event[name]
+          in: formData
+          description: |
+            The name of the event. Service information. Only for your own usage.
+          required: false
+          type: string
+          default: my event
       responses:
         '200':
           description: "Event object"
