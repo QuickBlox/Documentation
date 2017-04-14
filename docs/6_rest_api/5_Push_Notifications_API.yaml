@@ -215,14 +215,14 @@ paths:
             Required if **event[event_type] = fixed_date** or **period_date**.
             If **event[event_type] = fixed_date**, the date can not be in the past.
           required: false
-          type: string
+          type: integer
           default: 1492176928
         - name: event[end_date]
           in: formData
           description: |
             Date of completion of the event. Can't be less than the **event[date]**.
           required: false
-          type: intger (timestamp)
+          type: integer
           default: 1892176928
         - name: event[period]
           in: formData
@@ -235,7 +235,7 @@ paths:
             * 2592000 (1 month)
             * 31557600 (1 year)
           required: false
-          type: intger
+          type: integer
           default: 86400
         - name: event[name]
           in: formData
