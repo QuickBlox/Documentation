@@ -249,6 +249,16 @@ paths:
           description: "Event object"
           schema:
             $ref: '#/definitions/EventResponse'
+    get:
+      summary: Retrieve events
+      operationId: 105_Retrieve event
+      description: |
+        Get all events which were created by current user.
+      responses:
+        '200':
+          description: "Array of events' objects"
+          schema:
+            $ref: '#/definitions/EventsResponse'
   /events/{event_id}.json:
     get:
       summary: Retrieve event
