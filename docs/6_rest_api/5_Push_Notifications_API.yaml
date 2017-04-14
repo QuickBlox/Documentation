@@ -359,9 +359,10 @@ paths:
           description: "Empty body"
 definitions:
   SubscriptionsResponse:
-    type: array
-    items:
-      $ref: '#/definitions/SubscriptionObject'
+    type: object
+    properties:
+      subscription:
+        $ref: '#/definitions/SubscriptionObject'
   SubscriptionObject:
     type: object
     properties:
