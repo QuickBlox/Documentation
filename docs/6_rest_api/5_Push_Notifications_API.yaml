@@ -83,7 +83,7 @@ paths:
         '201':
           description: "Array of all existent user's subscriptions"
           schema:
-            $ref: '#/definitions/SubscriptionResponse'
+            $ref: '#/definitions/SubscriptionsResponse'
     get:
       summary: Retrieve subscriptions
       operationId: 102_Retrieve_Subscriptions
@@ -93,7 +93,7 @@ paths:
         '200':
           description: "Array of all existent user's subscriptions"
           schema:
-            $ref: '#/definitions/SubscriptionResponse'
+            $ref: '#/definitions/SubscriptionsResponse'
   /subscriptions/{subscription_id}.json:
     delete:
       summary: Remove subscription
@@ -358,11 +358,13 @@ paths:
         '200':
           description: "Empty body"
 definitions:
-  SubscriptionResponse:
+  SubscriptionsResponse:
     type: object
     properties:
       subscription:
-        $ref: '#/definitions/SubscriptionObject'
+        type: array
+        items:
+          $ref: '#/definitions/SubscriptionObject'
   SubscriptionObject:
     type: object
     properties:
