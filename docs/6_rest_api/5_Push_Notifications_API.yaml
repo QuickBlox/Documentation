@@ -213,7 +213,7 @@ paths:
           description: |
             The date of the event to send on.
             Required if **event[event_type] = fixed_date** or **period_date**.
-            If the **event[event_type] = fixed_date**, the date can not be in the past.
+            If **event[event_type] = fixed_date**, the date can not be in the past.
           required: false
           type: string
           default: 1492176928
@@ -222,13 +222,13 @@ paths:
           description: |
             Date of completion of the event. Can't be less than the **event[date]**.
           required: false
-          type: intger
+          type: intger (timestamp)
           default: 1892176928
         - name: event[period]
           in: formData
           description: |
             The period of the event in seconds.
-            Required if the **event[event_type] = period_date**
+            Required if the **event[event_type] = period_date**.
             Possible values:
             * 86400 (1 day)
             * 604800 (1 week)
