@@ -414,6 +414,7 @@ definitions:
       items:
         $ref: '#/definitions/EventObject'
   EventObject:
+    type: array
     properties:
       id:
         type: integer
