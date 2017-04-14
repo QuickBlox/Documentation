@@ -342,6 +342,21 @@ paths:
           description: "Event object"
           schema:
             $ref: '#/definitions/EventResponse'
+    delete:
+      summary: Delete event
+      operationId: 108_Delete_Event
+      description: |
+        Delete an event by ID.
+      parameters:
+        - name: event_id
+          in: formData
+          description: An id of event to delete (path parameter)
+          required: true
+          type: integer
+          default: 34891
+      responses:
+        '200':
+          description: "Empty body"
 definitions:
   SubscriptionResponse:
     properties:
