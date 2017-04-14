@@ -130,7 +130,6 @@ paths:
           in: formData
           description: |
             Push Notification type. Used only if **event[notification_type] = push**, ignored in other cases.
-            <br><br>
             If not present - Notification will be delivered to all possible devices for specified users. Each platform has their own standard format. See [Quickblox Standard Push Notifications Formats](https://quickblox.com) for more information.
             If specified - Notification will be delivered to the specified platform only.
             Allowed values: **apns**, **apns_voip**, **gcm**, **mpns** or **bbps**.
@@ -171,6 +170,80 @@ paths:
           required: true
           type: string
           default: payload=eyJhcHMiOns....
+        - name: event[user][ids]
+          in: formData
+          description: |
+            Notification's recipients - should contain a string of users' ids divided by commas.
+          required: false
+          type: string
+          default: 11,25,356,489
+        - name: event[external_user][ids]
+          in: formData
+          description: |
+            Notification's recipients - should contain a string of external users' ids divided by commas.
+          required: false
+          type: string
+          default: 15,24,367,49
+        - name: event[user][tags][any]
+          in: formData
+          description: |
+            Notification's recipients - should contain a string of tags divided by commas.
+            Recipients (users) must have at least one tag that specified in the list.
+          required: false
+          type: string
+          default: good,bad,ugly
+        - name: event[user][tags][all]
+          in: formData
+          description: |
+            Notification's recipients - should contain a string of tags divided by commas.
+            Recipients (users) must exactly have only all tags that specified in list
+          required: false
+          type: string
+          default: man,car
+        - name: event[user][tags][exclude]
+          in: formData
+          description: |
+            Notification's recipients - should contain a string of tags divided by commas.
+            Recipients (users) mustn't have tags that specified in list
+          required: false
+          type: string
+          default: man,car
+        - name: event[date]
+          in: formData
+          description: |
+            The date of the event to send on.
+            Required if **event[event_type] = fixed_date** or **period_date**.
+            If the **event[event_type] = fixed_date**, the date can not be in the past.
+          required: false
+          type: string
+          default: 1492176928
+        - name: event[end_date]
+          in: formData
+          description: |
+            Date of completion of the event. Can't be less than the **event[date]**.
+          required: false
+          type: intger
+          default: 1892176928
+        - name: event[period]
+          in: formData
+          description: |
+            The period of the event in seconds.
+            Required if the **event[event_type] = period_date**
+            Possible values:
+            * 86400 (1 day)
+            * 604800 (1 week)
+            * 2592000 (1 month)
+            * 31557600 (1 year)
+          required: false
+          type: intger
+          default: 86400
+        - name: event[name]
+          in: formData
+          description: |
+            The name of the event. Service information. Only for your own usage.
+          required: false
+          type: string
+          default: my event
       responses:
         '200':
           description: "Event object"
