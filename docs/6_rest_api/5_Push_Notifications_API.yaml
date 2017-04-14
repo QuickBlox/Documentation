@@ -359,10 +359,12 @@ paths:
           description: "Empty body"
 definitions:
   SubscriptionResponse:
+    type: object
     properties:
       subscription:
         $ref: '#/definitions/SubscriptionObject'
   SubscriptionObject:
+    type: object
     properties:
       id:
         type: integer
@@ -372,11 +374,13 @@ definitions:
       device:
         $ref: '#/definitions/DeviceObject'
   NotificationChannelObject:
+    type: object
     properties:
       name:
         type: string
         example: apns
   DeviceObject:
+    type: object
     properties:
       udid:
         type: string
@@ -384,11 +388,13 @@ definitions:
       platform:
         $ref: '#/definitions/PlatformObject'
   PlatformObject:
+    type: object
     properties:
       name:
         type: string
         example: ios
   SubscribersSelectorObject:
+    type: object
     properties:
       environment:
         type: string
@@ -397,10 +403,12 @@ definitions:
         type: string
         example: 56,34,89
   EventResponse:
+    type: object
     properties:
       event:
         $ref: '#/definitions/EventObject'
   EventsResponse:
+    type: object
     properties:
       current_page:
         type: integer
@@ -415,6 +423,7 @@ definitions:
         type: array
         $ref: '#/definitions/EventObject'
   EventObject:
+    type: object
     properties:
       id:
         type: integer
