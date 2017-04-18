@@ -191,6 +191,22 @@ paths:
           description: "File object"
           schema:
             $ref: '#/definitions/FileResponse'
+  blobs/{blob_uid}.json:
+    get:
+      summary: Download file
+      operationId: 106_Download_File
+      description: |
+        Download file by UID. If the file is public then it's possible to download it without a session token.
+      parameters:
+        - name: blob_uid
+          in: formData
+          description: The uid of file to download (path parameter)
+          required: true
+          type: string
+          default: 358d2cba6ca74127a087530f3e82e8d800
+      responses:
+        '301':
+          description: "Redirect to file"
 definitions:
   ArrayOfFilesResponse:
     type: object
