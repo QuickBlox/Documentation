@@ -186,18 +186,3 @@ definitions:
       uid:
         type: string
         example: 859146a9821e4bef9c6d60e1e8c88b3c00
-  S3PostResponse:
-    type: object
-    properties:
-      Location:
-        type: string
-        example: https://blobs-oz.s3.amazonaws.com/d5f92bcf..
-      Bucket:
-        type: string
-        example: blobs-oz
-      Key:
-        type: string
-        example: d5f92bcf..
-      ETag:
-        type: string
-        example: "de1a..
