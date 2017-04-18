@@ -72,25 +72,6 @@ paths:
           description: "Array of files"
           schema:
             $ref: '#/definitions/ArrayOfFilesResponse'
-  qbprod.s3.amazonaws.com:
-    post:
-      summary: Upload file
-      operationId: 102_Upload_File
-      description: |
-        Upload a file to cloud storage.
-        Use params and url from **blob-object-access** element from the response of Create File request.
-      parameters:
-        - name: Content-Type
-          in: formData
-          description: Parameter from **blob-object-access** element
-          required: true
-          type: string
-          default: image/jpeg
-      responses:
-        '200':
-          description: "Success response"
-          schema:
-            $ref: '#/definitions/S3PostResponse'
 definitions:
   ArrayOfFilesResponse:
     type: object
