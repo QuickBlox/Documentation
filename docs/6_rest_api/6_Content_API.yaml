@@ -86,6 +86,66 @@ paths:
           required: true
           type: string
           default: image/jpeg
+        - name: Expires
+          in: formData
+          description: Parameter from **blob-object-access** element
+          required: true
+          type: string
+          default: Wed, 30 Sep 2015 13:29:39 GMT
+        - name: acl
+          in: formData
+          description: Parameter from **blob-object-access** element
+          required: true
+          type: string
+          default: authenticated-read
+        - name: key
+          in: formData
+          description: Parameter from **blob-object-access** element
+          required: true
+          type: string
+          default: 76101edd87fe4b299ff41f63633bf9c100
+        - name: policy
+          in: formData
+          description: Parameter from **blob-object-access** element
+          required: true
+          type: string
+          default: eyJleHBpcmF0aW9uI..
+        - name: success_action_status
+          in: formData
+          description: Parameter from **blob-object-access** element
+          required: true
+          type: string
+          default: 201
+        - name: x-amz-algorithm
+          in: formData
+          description: Parameter from **blob-object-access** element
+          required: true
+          type: string
+          default: AWS4-HMAC-SHA256
+        - name: x-amz-credential
+          in: formData
+          description: Parameter from **blob-object-access** element
+          required: true
+          type: string
+          default: AKIAIY7KFM.../s3/aws4_request
+        - name: x-amz-date
+          in: formData
+          description: Parameter from **blob-object-access** element
+          required: true
+          type: string
+          default: 20150930T122939Z
+        - name: x-amz-signature
+          in: formData
+          description: Parameter from **blob-object-access** element
+          required: true
+          type: string
+          default: eee18ae3d47a745..
+        - name: file
+          in: formData
+          description: Parameter from **blob-object-access** element
+          required: true
+          type: string
+          default: @user_new_avatar.jpg
       responses:
         '200':
           description: "Success response"
