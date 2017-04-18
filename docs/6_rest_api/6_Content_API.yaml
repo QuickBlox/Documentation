@@ -2,9 +2,9 @@ swagger: '2.0'
 info:
   title: QuickBlox REST API, Content API.
   description: |
-    Allows you to manage app contents and settings without having to re-publish them.
-    Using a web interface you or your clients can control and make instant changes to the apps.<br><br>
-    • To store chat file attachments<br>
+    Allows storing rich chat attachments, app content and settings without having to re-publish them.
+    Using a web interface you or your clients can control and make instant changes to the apps. Full list of features: <br><br>
+    • Store chat rich attachments<br>
     • Manage text, rich text, and media via easy to use web admin panel<br>
     • Can be used to manage ads and banners<br>
     • App synchronizes content in background, users not affected<br>
@@ -22,9 +22,9 @@ paths:
   /blobs.json:
     post:
       summary: Create file
-      operationId: Create_File_Id
+      operationId: 101_Create_File
       description: |
-        Create a new file.
+        Create new file object.
       parameters:
         - name: blob[content_type]
           in: formData
@@ -51,10 +51,12 @@ paths:
             $ref: '#/definitions/FileResponse'
 definitions:
   FileResponse:
+    type: object
     properties:
       blob:
         $ref: '#/definitions/FileObject'
   FileObjectAccess:
+    type: object
     properties:
       id:
         type: integer
@@ -72,6 +74,7 @@ definitions:
         type: string
         example: https://qbprod.s3.amazonaws.com/?Content-Type=image%2Fpng&Expires=Wed%2C%2030%20Sep%202015%2013%3A25%3A11%20GMT&acl=authenticated-read&key=fbc2d08125e3435ca5cb37f926d5fe8800&policy=eyJleHBpcmF0aW9uIjoiMjAxNS0wOS0zMFQxMzoyNToxMVoiLCJjb25kaXRpb25zIjpbeyJidWNrZXQiOiJxYnByb2QifSx7ImFjbCI6ImF1dGhlbnRpY2F0ZWQtcmVhZCJ9LHsiQ29udGVudC1UeXBlIjoiaW1hZ2UvcG5nIn0seyJzdWNjZXNzX2FjdGlvbl9zdGF0dXMiOiIyMDEifSx7IkV4cGlyZXMiOiJXZWQsIDMwIFNlcCAyMDE1IDEzOjI1OjExIEdNVCJ9LHsia2V5IjoiZmJjMmQwODEyNWUzNDM1Y2E1Y2IzN2Y5MjZkNWZlODgwMCJ9LHsieC1hbXotY3JlZGVudGlhbCI6IkFLSUFJWTdLRk0yM1hHWEo3UjdBLzIwMTUwOTMwL3VzLWVhc3QtMS9zMy9hd3M0X3JlcXVlc3QifSx7IngtYW16LWFsZ29yaXRobSI6IkFXUzQtSE1BQy1TSEEyNTYifSx7IngtYW16LWRhdGUiOiIyMDE1MDkzMFQxMjI1MTFaIn1dfQ%3D%3D&success_action_status=201&x-amz-algorithm=AWS4-HMAC-SHA256&x-amz-credential=AKIAIY7KFM23XGXJ7R7A%2F20150930%2Fus-east-1%2Fs3%2Faws4_request&x-amz-date=20150930T122511Z&x-amz-signature=a5c720c1a3b9b5c0b2549e0220419493ca3b11ce84618f6ece88ad97a96a8ad9
   FileObject:
+    type: object
     properties:
       id:
         type: integer
@@ -106,3 +109,5 @@ definitions:
       uid:
         type: string
         example: 859146a9821e4bef9c6d60e1e8c88b3c00
+      blob_object_access:
+        $ref: '#/definitions/FileObjectAccess'
