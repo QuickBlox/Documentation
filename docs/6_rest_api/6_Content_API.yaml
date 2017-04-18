@@ -17,8 +17,7 @@ schemes:
   - https
 basePath: /api
 produces:
-  - application/xml  
-  - application/json
+  - application/xml
 paths:
   /blobs.json:
     post:
