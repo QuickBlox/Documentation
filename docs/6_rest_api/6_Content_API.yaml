@@ -211,8 +211,6 @@ definitions:
       Location:
         type: string
         example: https://blobs-oz.s3.amazonaws.com/d5f92bcf..
-        xml:
-          attribute: true
       Bucket:
         type: string
         example: blobs-oz
