@@ -145,7 +145,7 @@ paths:
           description: Parameter from **blob-object-access** element
           required: true
           type: string
-          default: @user_new_avatar.jpg
+          default: user_new_avatar.jpg
       responses:
         '200':
           description: "Success response"
