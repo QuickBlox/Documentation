@@ -18,6 +18,7 @@ schemes:
 basePath: /api
 produces:
   - application/json
+  - application/xml
 paths:
   /blobs.json:
     post:
@@ -72,7 +73,7 @@ paths:
           description: "Array of files"
           schema:
             $ref: '#/definitions/ArrayOfFilesResponse'
-  qbprod.s3.amazonaws.com:
+  https://<s3-region>.amazonaws.com:
     post:
       summary: Upload file
       operationId: 102_Upload_File
@@ -211,6 +212,8 @@ definitions:
       Location:
         type: string
         example: https://blobs-oz.s3.amazonaws.com/d5f92bcf..
+        xml:
+          attribute: true
       Bucket:
         type: string
         example: blobs-oz
@@ -219,4 +222,4 @@ definitions:
         example: d5f92bcf..
       ETag:
         type: string
-        example: de1a..
+        example: "de1a..
