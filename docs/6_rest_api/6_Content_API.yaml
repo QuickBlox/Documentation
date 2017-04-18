@@ -18,6 +18,7 @@ schemes:
 basePath: /api
 produces:
   - application/json
+  - application/xml
 paths:
   /blobs.json:
     post:
