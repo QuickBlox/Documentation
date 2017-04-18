@@ -72,7 +72,7 @@ paths:
           description: "Array of files"
           schema:
             $ref: '#/definitions/ArrayOfFilesResponse'
-  s3-region.amazonaws.com:
+  qbprod.s3.amazonaws.com:
     post:
       summary: Upload file
       operationId: 102_Upload_File
