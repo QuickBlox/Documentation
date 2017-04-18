@@ -274,7 +274,7 @@ paths:
       parameters:
         - name: user_id
           in: formData
-          description: The id of the user to be updated (path parameter)
+          description: The id of user to update (path parameter)
           required: true
           type: integer
           default: 53454

@@ -17,7 +17,7 @@ schemes:
   - https
 basePath: /api
 produces:
-  - application/xml
+  - application/json
 paths:
   /blobs.json:
     post:
@@ -151,6 +151,28 @@ paths:
           description: "Success response"
           schema:
             $ref: '#/definitions/S3PostResponse'
+  blobs/{blob_id}/complete.json:
+    put:
+      summary: Declare file uploaded
+      operationId: 103_Declare_File_Uploaded
+      description: |
+        Declare file uploaded. The file's 'status' field will be set to 'complete'.
+      parameters:
+        - name: blob_id
+          in: formData
+          description: The id of file to declare as uploaded (path parameter)
+          required: true
+          type: integer
+          default: 4
+        - name: blob[size]
+          in: formData
+          description: Size of uploaded file, in bytes
+          required: true
+          type: integer
+          default: 86735
+      responses:
+        '200':
+          description: "Empty body"
 definitions:
   ArrayOfFilesResponse:
     type: object
