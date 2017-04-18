@@ -99,6 +99,75 @@ With custom parameters you can achieve behaviour similar to platform based push 
 Custom parameters only available for iOS and Android platforms.
 ```
 
+There are some standard parameters, which will be translated to particular platform parameters:
+
+* **message** - push text. Will be translated to **aps.alert.body** for iOS and to **data.message** for Android.
+* **ios_badge** - will be translated to **aps.badge** for iOS. Ignored for Android.
+* **ios_sound** - will be translated to **aps.sound** for iOS. Ignored for Android.
+* **ios_content_available=1** - will be translated to **aps.content-available** for iOS. Ignored for Android.
+* **ios_category** - will be translated to **aps.category** for iOS. Ignored for Android.
+* **ios_voip=1** - will initiate VoIP push notification for iOS if user has VoIP push subscription. Otherwise - iOS user will receive standart iOS push. For Android - it will be a standard push.
+
+You can use any other custom parameters - they will be added as well according to specific platform push format. For iOS - it will be root keys, for Android - data.X.
+
+**Payload example**:
+```
+{"message": "Message received from Bob", "ios_badge": 5, "ios_sound": "mysound.wav", "user_id": "234"}
+```
+
+Base64-encoded:
+```
+c29tZXZhbHVlMQc29tZXZhbHVlMQc29tZXZhbHVlMQc29tZXZhbHVlMQc29tZXZhbHVlMQ
+```
+
+Final message:
+```
+event[message]=c29tZXZhbHVlMQc29tZXZhbHVlMQc29tZXZhbHVlMQc29tZXZhbHVlMQc29tZXZhbHVlMQ
+```
+
+Client's application will receive next payload:
+
+**iOS:**
+
+```objectivec
+- (void)application:(UIApplication *)application didReceiveRemoteNotification:(NSDictionary *)userInfo
+{
+    NSLog(@"New push: %@", userInfo);
+}
+ 
+...
+ 
+{
+    aps =     {
+        alert = "Message received from Bob";
+        badge = 5;
+        sound = "mysound.wav";
+    };
+    "user_id" = 234;
+}
+```
+
+**Android:**
+
+```java
+@Override
+protected void onMessage(Context context, Intent intent) {
+    String message = "";
+ 
+    for(String key : intent.getExtras().keySet()){
+         Log.d(LOG_TAG, key + ": " + intent.getExtras().getString(key));
+    }
+}
+ 
+...
+ 
+07-21 11:07:26.489  14443-14842/? D/GCMIntentService﹕ message: Message+received+from+Bob
+07-21 11:07:26.489  14443-14842/? D/GCMIntentService﹕ user_id: 234
+07-21 11:07:26.489  14443-14842/? D/GCMIntentService﹕ collapse_key: event1206083
+07-21 11:07:26.489  14443-14842/? D/GCMIntentService﹕ from: 761750217637
+```
+ 
+
 ### Universal push with just text
 If you would like to send just text push message (without any parameters):
 
