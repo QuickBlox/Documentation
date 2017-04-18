@@ -48,7 +48,7 @@ paths:
         '201':
           description: "File object"
           schema:
-            $ref: '#/definitions/FileResponse'
+            $ref: '#/definitions/FileResponseWithObjectAccess'
     get:
       summary: Retrieve files
       operationId: 104_Retrieve_Files
@@ -163,7 +163,7 @@ paths:
           description: The id of file to declare as uploaded (path parameter)
           required: true
           type: integer
-          default: 4
+          default: 56713
         - name: blob[size]
           in: formData
           description: Size of uploaded file, in bytes
@@ -173,6 +173,24 @@ paths:
       responses:
         '200':
           description: "Empty body"
+  blobs/{blob_id}.json:
+    get:
+      summary: Retrieve file
+      operationId: 104_Retrieve_File
+      description: |
+        Retrieve file object by id.
+      parameters:
+        - name: blob_id
+          in: formData
+          description: The id of file to retrieve (path parameter)
+          required: true
+          type: integer
+          default: 56713
+      responses:
+        '201':
+          description: "File object"
+          schema:
+            $ref: '#/definitions/FileResponse'
 definitions:
   ArrayOfFilesResponse:
     type: object
@@ -190,11 +208,16 @@ definitions:
         type: array
         items:
           $ref: '#/definitions/FileObject'
-  FileResponse:
+  FileResponseWithObjectAccess:
     type: object
     properties:
       blob:
         $ref: '#/definitions/FileObjectWithObjectAccess'
+  FileResponse:
+    type: object
+    properties:
+      blob:
+        $ref: '#/definitions/FileObject'
   FileObjectAccess:
     type: object
     properties:
