@@ -30,7 +30,7 @@ paths:
           in: formData
           description: The file's mime [content type](https://developer.mozilla.org/ru/docs/Web/HTTP/Basics_of_HTTP/MIME_types/Complete_list_of_MIME_types)
           required: true
-          type: String
+          type: string
           default: image/jpeg
         - name: blob[name]
           in: formData
@@ -40,21 +40,60 @@ paths:
           default: museum.jpg
         - name: blob[public]
           in: formData
-          description: The file's visibility. **public** means it will be possible to access this file without session token provided.
-          required: true
-          type: string
+          description: The file's visibility. **public** means it will be possible to access this file without QuickBlox session token provided. Default is 'false'.
+          required: false
+          type: boolean
           default: false
       responses:
         '201':
           description: "File object"
           schema:
             $ref: '#/definitions/FileResponse'
+    get:
+      summary: Retrieve files
+      operationId: 102_Retrieve_Files
+      description: |
+        Get a list of files for current user.
+      parameters:
+        - name: page
+          in: formData
+          description: Used to paginate the results when more than one page of files retrieved
+          required: false
+          type: integer
+          default: 4
+        - name: per_page
+          in: formData
+          description: The maximum number of files to return per page, if not specified then the default is 10
+          required: false
+          type: integer
+          default: 30
+      responses:
+        '200':
+          description: "Array of files"
+          schema:
+            $ref: '#/definitions/ArrayOfFilesResponse'
 definitions:
+  ArrayOfFilesResponse:
+    type: object
+    properties:
+      current_page:
+        type: integer
+        example: 1
+      per_page:
+        type: integer
+        example: 10
+      total_entries:
+        type: integer
+        example: 23
+      items:
+        type: array
+        items:
+          $ref: '#/definitions/FileObject'
   FileResponse:
     type: object
     properties:
       blob:
-        $ref: '#/definitions/FileObject'
+        $ref: '#/definitions/FileObjectWithObjectAccess'
   FileObjectAccess:
     type: object
     properties:
@@ -73,7 +112,7 @@ definitions:
       params:
         type: string
         example: https://qbprod.s3.amazonaws.com/?Content-Type=image%2Fpng&Expires=Wed%2C%2030%20Sep%202015%2013%3A25%3A11%20GMT&acl=authenticated-read&key=fbc2d08125e3435ca5cb37f926d5fe8800&policy=eyJleHBpcmF0aW9uIjoiMjAxNS0wOS0zMFQxMzoyNToxMVoiLCJjb25kaXRpb25zIjpbeyJidWNrZXQiOiJxYnByb2QifSx7ImFjbCI6ImF1dGhlbnRpY2F0ZWQtcmVhZCJ9LHsiQ29udGVudC1UeXBlIjoiaW1hZ2UvcG5nIn0seyJzdWNjZXNzX2FjdGlvbl9zdGF0dXMiOiIyMDEifSx7IkV4cGlyZXMiOiJXZWQsIDMwIFNlcCAyMDE1IDEzOjI1OjExIEdNVCJ9LHsia2V5IjoiZmJjMmQwODEyNWUzNDM1Y2E1Y2IzN2Y5MjZkNWZlODgwMCJ9LHsieC1hbXotY3JlZGVudGlhbCI6IkFLSUFJWTdLRk0yM1hHWEo3UjdBLzIwMTUwOTMwL3VzLWVhc3QtMS9zMy9hd3M0X3JlcXVlc3QifSx7IngtYW16LWFsZ29yaXRobSI6IkFXUzQtSE1BQy1TSEEyNTYifSx7IngtYW16LWRhdGUiOiIyMDE1MDkzMFQxMjI1MTFaIn1dfQ%3D%3D&success_action_status=201&x-amz-algorithm=AWS4-HMAC-SHA256&x-amz-credential=AKIAIY7KFM23XGXJ7R7A%2F20150930%2Fus-east-1%2Fs3%2Faws4_request&x-amz-date=20150930T122511Z&x-amz-signature=a5c720c1a3b9b5c0b2549e0220419493ca3b11ce84618f6ece88ad97a96a8ad9
-  FileObject:
+  FileObjectWithObjectAccess:
     type: object
     properties:
       id:
@@ -111,3 +150,39 @@ definitions:
         example: 859146a9821e4bef9c6d60e1e8c88b3c00
       blob_object_access:
         $ref: '#/definitions/FileObjectAccess'
+  FileObject:
+    type: object
+    properties:
+      id:
+        type: integer
+        example: 1639
+      created_at:
+        type: string
+        example: 2012-05-09T10:24:26Z
+      updated_at:
+        type: string
+        example: 2012-05-09T10:24:26Z
+      name:
+        type: string
+        example: museum.jpg
+      content_type:
+        type: string
+        example: image/jpeg
+      public:
+        type: boolean
+        example: false
+      size:
+        type: integer
+        example: 55332
+      blob_status:
+        type: string
+        example: complete
+      last_read_access_ts:
+        type: string
+        example: 2012-03-27T13:14:08Z
+      set_completed_at:
+        type: string
+        example: 2012-03-23T16:14:51Z
+      uid:
+        type: string
+        example: 859146a9821e4bef9c6d60e1e8c88b3c00
