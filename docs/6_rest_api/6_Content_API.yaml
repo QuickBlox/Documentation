@@ -176,7 +176,7 @@ paths:
   blobs/{blob_id}.json:
     get:
       summary: Retrieve file
-      operationId: 104_Retrieve_File
+      operationId: 105_Retrieve_File
       description: |
         Retrieve file object by id.
       parameters:
