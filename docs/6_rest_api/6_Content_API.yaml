@@ -78,7 +78,7 @@ paths:
       operationId: 102_Upload_File
       description: |
         Upload a file to cloud storage.
-        Use params and url from **blob-object-access** element from the response of Create File request.
+        Use params and url from **blob-object-access** element from the response of 'Create File' request.
       parameters:
         - name: Content-Type
           in: formData
@@ -89,6 +89,8 @@ paths:
       responses:
         '200':
           description: "Success response"
+          schema:
+            $ref: '#/definitions/S3PostResponse'
 definitions:
   ArrayOfFilesResponse:
     type: object
@@ -203,3 +205,18 @@ definitions:
       uid:
         type: string
         example: 859146a9821e4bef9c6d60e1e8c88b3c00
+  S3PostResponse:
+    type: object
+    properties:
+      Location:
+        type: string
+        example: https://blobs-oz.s3.amazonaws.com/d5f92bcf84374e4fb8961537f7a7de6500
+      Bucket:
+        type: string
+        example: blobs-oz
+      Key:
+        type: string
+        example: d5f92bcf84374e4fb8961537f7a7de6500
+      ETag:
+        type: string
+        example: "de1aae3e6beadb83bc8e1e21eb7e2a66"
