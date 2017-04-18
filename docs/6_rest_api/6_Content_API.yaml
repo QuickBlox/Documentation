@@ -142,7 +142,7 @@ paths:
           default: eee18ae3d47a745..
         - name: file
           in: formData
-          description: Parameter from **blob-object-access** element
+          description: File to upload
           required: true
           type: string
           default: user_new_avatar.jpg
