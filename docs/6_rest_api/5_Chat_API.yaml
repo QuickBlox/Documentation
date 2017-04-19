@@ -101,17 +101,17 @@ definitions:
         example: 56
   MessagesResponse:
     type: object
-  properties:
-    limit:
-      type: integer
-      example: 10
-    skip:
-      type: integer
-      example: 10
-    items:
-      type: array
+    properties: asd -=asd::&&  sdsad a 
+      limit:
+        type: integer
+        example: 10
+      skip:
+        type: integer
+        example: 10
       items:
-        $ref: '#/definitions/MessageObject'
+        type: array
+        items:
+          $ref: '#/definitions/MessageObject'
   MessageObject:
     type: object
     properties:
