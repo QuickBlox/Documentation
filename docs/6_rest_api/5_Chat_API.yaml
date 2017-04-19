@@ -139,10 +139,12 @@ definitions:
         example: 56
       delivered_ids:
         type: array
-        example: [56,678]
+        items:
+          example: [56,678]
       read_ids:
         type: array
-        example: [56,678]
+        items:
+          example: [56,678]
       attachments:
         type: array
         items:
