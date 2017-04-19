@@ -74,6 +74,7 @@ definitions:
         type: array
         items:
           type: integer
+          example: 2
       unread_messages_count:
         type: integer
         example: 5
