@@ -11,12 +11,12 @@ info:
     • Any amount of data can be stored<br><br>
     **Typical use сases:**<br><br>
     To Upload file you need to do the following:<br>
-    • Create a file<br>
-    • Upload file<br>
-    • Declare file uploaded<br><br>
+    • [Create a file](#Create_file)<br>
+    • [Upload file](#Upload_file)<br>
+    • [Declare file uploaded](#Declare_file_uploaded)<br><br>
     To Download file you need to do the following:<br>
-    • Retrieve file by ID<br>
-    • Download file<br>
+    • [Retrieve file by ID](#Retrieve_file)<br>
+    • [Download file](#Download_file)<br>
   version: 1.0
 # the domain of the service
 host: quickblox.com
