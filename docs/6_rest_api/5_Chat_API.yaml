@@ -24,8 +24,8 @@ paths:
       description: |
         Create chat dialog.
         There are 3 types of chat dialogs:
-        * Use **type=1** (PUBLIC_GROUP) to create a public group dialog. All the users from your application will be able to join it. Server will create a public group chat and return a detailed information about newly created dialog. Field xmpp_room_jid will contain a Chat room JID to which you should connect to start chatting.
-        * Use **type=2** (GROUP) to create a group dialog only for specific users provided in occupants_ids. Server will create an only members group chat and return a detailed information about newly created dialog. Field xmpp_room_jid will contain a Chat room JID to which you should connect to start chatting.
+        * Use **type=1** (PUBLIC_GROUP) to create a public group dialog. All the users from your application will be able to join it. Server will create a public group chat and return a detailed information about newly created dialog. Field **xmpp_room_jid** will contain a Chat room JID to which you should join to start chatting.
+        * Use **type=2** (GROUP) to create a group dialog only for specific users provided in **occupants_ids**. Server will create an only members group chat and return a detailed information about newly created dialog. Field **xmpp_room_jid** will contain a Chat room JID to which you should join to start chatting.
         * Use **type=3** (PRIVATE) to create a private dialog between 2 users. Server will return a detailed information about newly created dialog. If user sends a chat message to some user and private dialog wasn't created - it will be created automatically with 1st chat message.
       parameters:
         - name: type
@@ -36,6 +36,14 @@ paths:
           required: true
           type: integer
           default: 2
+        - name: occupants_ids
+          in: formData
+          description: |
+            Users' IDs who will be able to chat in this dialog. Don't need to pass current user ID - it will be added automatically
+            Required if **type=2** (GROUP) or **type=3** (PRIVATE).
+          required: false
+          type: array
+          default: 56,558,12
       responses:
         '201':
           description: "Chat dialog object"
