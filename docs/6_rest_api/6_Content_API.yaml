@@ -191,6 +191,59 @@ paths:
           description: "File object"
           schema:
             $ref: '#/definitions/FileResponse'
+    put:
+      summary: Update file
+      operationId: 107_Update_File
+      description: |
+        Edit file by id.
+      parameters:
+        - name: blob_id
+          in: formData
+          description: The id of file to update (path parameter)
+          required: true
+          type: integer
+          default: 56713
+      parameters:
+        - name: blob[content_type]
+          in: formData
+          description: The file's mime [content type](https://developer.mozilla.org/ru/docs/Web/HTTP/Basics_of_HTTP/MIME_types/Complete_list_of_MIME_types)
+          required: false
+          type: integer
+          default: image/png
+      parameters:
+        - name: blob[name]
+          in: formData
+          description: The file new name
+          required: false
+          type: string
+          default: GreatPlace
+      parameters:
+        - name: blob[new]
+          in: formData
+          description: Pass **1** if you want to update file's content (upload new version of file).
+          required: false
+          type: integer
+          default: 1
+      responses:
+        '200':
+          description: "File object"
+          schema:
+            $ref: '#/definitions/FileResponse'
+    delete:
+      summary: Delete file
+      operationId: 108_Delete_File
+      description: |
+        Delete file by id.
+      parameters:
+        - name: blob_id
+          in: formData
+          description: The id of file to delete (path parameter)
+          required: true
+          type: integer
+          default: 56713
+      responses:
+        '200':
+          description: "Empty body"
   blobs/{blob_uid}.json:
     get:
       summary: Download file
