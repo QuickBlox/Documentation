@@ -73,7 +73,7 @@ definitions:
       occupants_ids:
         type: array
         items:
-          $ref: '#/definitions/ReadIds'
+          type: integer
       unread_messages_count:
         type: integer
         example: 5
