@@ -426,11 +426,11 @@ paths:
       summary: Retrieve user by full name
       operationId: 109_Retrieve_User_By_Full_Name_Id
       description: |
-        Retrieve users by user full name
+        Retrieve users by full name
       parameters:
         - name: full_name
           in: formData
-          description: The full name of the user to be retrieved
+          description: The full name of users to be retrieved
           required: true
           type: string
           default: samuel67
@@ -534,7 +534,9 @@ paths:
           in: formData
           description: A comma seperated list of tags associated with users
           required: true
-          type: string
+          type: array
+          items:
+            type: string
           default: man,car
         - name: page
           in: formData
