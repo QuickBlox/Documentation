@@ -175,14 +175,18 @@ paths:
           description: |
             Notification's recipients - should contain a string of users' ids divided by commas.
           required: false
-          type: string
+          type: array
+          items:
+            type: integer
           default: 11,25,356,489
         - name: event[external_user][ids]
           in: formData
           description: |
             Notification's recipients - should contain a string of external users' ids divided by commas.
           required: false
-          type: string
+          type: array
+          items:
+            type: integer
           default: 15,24,367,49
         - name: event[user][tags][any]
           in: formData
@@ -190,7 +194,9 @@ paths:
             Notification's recipients - should contain a string of tags divided by commas.
             Recipients (users) must have at least one tag that specified in the list.
           required: false
-          type: string
+          type: array
+          items:
+            type: string
           default: good,bad,ugly
         - name: event[user][tags][all]
           in: formData
@@ -198,7 +204,9 @@ paths:
             Notification's recipients - should contain a string of tags divided by commas.
             Recipients (users) must exactly have only all tags that specified in list
           required: false
-          type: string
+          type: array
+          items:
+            type: string
           default: man,car
         - name: event[user][tags][exclude]
           in: formData
@@ -206,7 +214,9 @@ paths:
             Notification's recipients - should contain a string of tags divided by commas.
             Recipients (users) mustn't have tags that specified in list
           required: false
-          type: string
+          type: array
+          items:
+            type: string
           default: man,car
         - name: event[date]
           in: formData
@@ -400,8 +410,10 @@ definitions:
         type: string
         example: production
       user_ids:
-        type: string
-        example: 56,34,89
+        type: array
+        items:
+          type: integer
+          example: 56
   EventResponse:
     type: object
     properties:
