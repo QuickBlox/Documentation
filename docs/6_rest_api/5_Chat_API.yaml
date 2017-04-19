@@ -43,6 +43,8 @@ paths:
             Required if **type=2** (GROUP) or **type=3** (PRIVATE).
           required: false
           type: array
+          items:
+            type: integer
           default: 56,558,12
       responses:
         '201':
