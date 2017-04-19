@@ -7,7 +7,7 @@ info:
     • Push Notifications – sends iOS, Android, WP, BlackBerry pushes. This is being used for technical notifications, reminders and marketing messages. Also used as IM, enabling you or your users to send direct messages to other users (even if they are offline and not using the app). Can be integrated with other functions within the particular application.<br>
     • Emails – sending e-mails to your users. This is being used for users registration, password reminders, marketing newsletter etc<br>
     <br>
-    Features:<br><br>
+    **Features**:<br><br>
     • Messages Queue – messages can be either sent instantly or assigned a specific time/date and pushed into a Message Queue which allows to send delayed and recurring messages such as reminders, planned marketing announcements or any planned notifications for the better engagement of the users. <br>
     • Recurring notifications – set up a time interval and the message will be repeated automatically by the server. <br>
     • User tags - a feature powered by integration with our Users module, allowing to specify a group of users the message shall be sent to. <br>
