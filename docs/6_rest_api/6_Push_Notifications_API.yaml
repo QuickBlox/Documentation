@@ -44,7 +44,7 @@ paths:
             Determine application mode. It allows conveniently separate development and production modes.
             Allowed values: **evelopment** or **production**.
           required: true
-          type: enum
+          type: string
           default: development
         - name: push_token[bundle_identifier]
           in: formData
@@ -124,7 +124,7 @@ paths:
             Type of notification.
             Allowed values: **push** or **email**.
           required: true
-          type: enum
+          type: string
           default: push
         - name: event[push_type]
           in: formData
@@ -134,7 +134,7 @@ paths:
             If specified - Notification will be delivered to the specified platform only.
             Allowed values: **apns**, **apns_voip**, **gcm**, **mpns** or **bbps**.
           required: false
-          type: enum
+          type: string
           default: apns
         - name: event[environment]
           in: formData
@@ -142,7 +142,7 @@ paths:
             An environment of the notification.
             Allowed values: **development** or **production**.
           required: true
-          type: enum
+          type: string
           default: development
         - name: event[event_type]
           in: formData
@@ -156,7 +156,7 @@ paths:
             **period_date**, if 'period' is specified.
             **one_shot**, if 'date' is not specified.
           required: false
-          type: enum
+          type: string
           default: one_shot
         - name: event[message]
           in: formData
