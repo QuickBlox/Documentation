@@ -1,0 +1,161 @@
+swagger: '2.0'
+info:
+  title: QuickBlox REST API, Chat API.
+  description: |
+    QuickBlox Chat is a quick and reliable chat solution which combines benefits of scalable cloud hosted XMPP chat server,
+    seamless Single Sign-On authorization via [Users](/rest_api/Users_API.html), incoming IM / chat alerts via [Push Notifications](/rest_api/Push_Notifications_API.html) and file attachments via [Content](/rest_api/Content_API.html).
+    <br><br>
+    Chat REST API provides an access to Chat history.
+    We operate with 2 models: Chat Dialogs and Chat Messages.
+  version: 1.0
+# the domain of the service
+host: quickblox.com
+# array of all schemes that QuickBlox API supports
+schemes:
+  - https
+basePath: /api
+produces:
+  - application/json
+paths:
+  /chat/Dialog.json:
+    post:
+      summary: Create dialog
+      operationId: 101_Create_Dialog
+      description: |
+        Create chat dialog.
+        There are 3 types of chat dialogs:<br>
+      parameters:
+        - name: type
+          in: formData
+          description: |
+            Type of chat dialog.
+            Allowed values: **1** (PUBLIC_GROUP), **2** (GROUP), **3** (PRIVATE).
+          required: true
+          type: integer
+          default: 2
+      responses:
+        '201':
+          description: "Chat dialog object"
+          schema:
+            $ref: '#/definitions/DialogObject'
+definitions:
+  DialogsResponse:
+    type: object
+    properties:
+      limit:
+        type: integer
+        example: 10
+      skip:
+        type: integer
+        example: 10
+      total_entries:
+        type: integer
+        example: 30
+      items:
+        type: array
+        items:
+          $ref: '#/definitions/DialogObject'
+  DialogObject:
+    type: object
+    properties:
+      _id:
+        type: string
+        example: 53aaa06f535c12cea9007496
+      created_at:
+        type: string
+        example: 2016-03-23T17:00:42Z
+      updated_at:
+        type: string
+        example: 2016-03-23T17:00:42Z
+      type:
+        type: integer
+        example: 2
+      occupants_ids:
+        type: array
+        example: [56,678,1233]
+      unread_messages_count:
+        type: integer
+        example: 5
+      last_message:
+        type: string
+        example: How is going?
+      last_message_date_sent:
+        type: integer
+        example: 1492592179
+      last_message_user_id:
+        type: integer
+        example: 56
+      name:
+        type: string
+        example: Chat with Bob, Sam, Garry
+      photo:
+        type: string
+        example: 53aaa06f535c12cea9007423
+      xmpp_room_jid:
+        type: string
+        example: 92_53aaa06f535c12cea9007496@muc.chat.quickblox.com
+      user_id:
+        type: integer
+        example: 56
+  MessagesResponse:
+    type: object
+    properties:
+      limit:
+        type: integer
+        example: 10
+      skip:
+        type: integer
+        example: 10
+      items:
+        type: array
+        items:
+          $ref: '#/definitions/MessageObject'
+  MessageObject:
+    type: object
+    properties:
+      _id:
+        type: string
+        example: 53aaa06f535c12cea9007496
+      created_at:
+        type: string
+        example: 2016-03-23T17:00:42Z
+      updated_at:
+        type: string
+        example: 2016-03-23T17:00:42Z
+      chat_dialog_id:
+        type: string
+        example: 43aaa06f535812cea9007496
+      message:
+        type: string
+        example: How is going?
+      date_sent:
+        type: integer
+        example: 1492592179
+      sender_id:
+        type: integer
+        example: 56
+      recipient_id:
+        type: integer
+        example: 56
+      delivered_ids:
+        type: array
+        example: [56,678]
+      read_ids:
+        type: array
+        example: [56,678]
+      attachments:
+        type: array
+        items:
+          $ref: '#/definitions/MessageAttachmentObject'
+  MessageAttachmentObject:
+    type: object
+    properties:
+      type:
+        type: string
+        example: video
+      id:
+        type: string
+        example: 47863
+      url:
+        type: string
+        example: http://jabber.org/avatar.jpg
