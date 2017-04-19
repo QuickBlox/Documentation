@@ -39,13 +39,28 @@ paths:
         - name: occupants_ids
           in: formData
           description: |
-            Users' IDs who will be able to chat in this dialog. Don't need to pass current user ID - it will be added automatically
+            Users' IDs who will be able to chat in this dialog. Don't need to pass current user ID - it will be added automatically.
             Required if **type=2** (GROUP) or **type=3** (PRIVATE).
           required: false
           type: array
           items:
             type: integer
           default: 56,558,12
+        - name: name
+          in: formData
+          description: |
+            Name of chat dialog.
+            Required if **type=2** (GROUP) or **type=1** (PUBLIC_GROUP).
+          required: false
+          type: string
+          default: Chat with Bob, Sam, Garry
+        - name: photo
+          in: formData
+          description: |
+            A link to chat dialog's photo (image id, url whatever)
+          required: false
+          type: string
+          default: 67834
       responses:
         '201':
           description: "Chat dialog object"
