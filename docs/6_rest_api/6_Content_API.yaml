@@ -203,21 +203,18 @@ paths:
           required: true
           type: integer
           default: 56713
-      parameters:
         - name: blob[content_type]
           in: formData
           description: The file's mime [content type](https://developer.mozilla.org/ru/docs/Web/HTTP/Basics_of_HTTP/MIME_types/Complete_list_of_MIME_types)
           required: false
           type: integer
           default: image/png
-      parameters:
         - name: blob[name]
           in: formData
           description: The file new name
           required: false
           type: string
           default: GreatPlace
-      parameters:
         - name: blob[new]
           in: formData
           description: Pass **1** if you want to update file's content (upload new version of file).
