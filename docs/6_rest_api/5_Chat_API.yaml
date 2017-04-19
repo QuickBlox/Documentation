@@ -101,7 +101,7 @@ definitions:
         example: 56
   MessagesResponse:
     type: object
-    properties: asd -=asd::&&  sdsad a 
+    properties:
       limit:
         type: integer
         example: 10
