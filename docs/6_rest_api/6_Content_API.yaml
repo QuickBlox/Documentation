@@ -8,7 +8,12 @@ info:
     • Manage text, rich text, and media via easy to use web admin panel<br>
     • Can be used to manage ads and banners<br>
     • App synchronizes content in background, users not affected<br>
-    • Any amount of data can be stored<br>
+    • Any amount of data can be stored<br><br>
+    **Typical use сases:**<br><br>
+    To Upload file you need to do the following:<br><br>
+    • Create a file<br>
+    • Upload file<br>
+    • Declare file uploaded<br>
   version: 1.0
 # the domain of the service
 host: quickblox.com
