@@ -74,7 +74,7 @@ definitions:
         type: array
         items:
           type: integer
-          example: 2
+          example: 56
       unread_messages_count:
         type: integer
         example: 5
@@ -141,11 +141,14 @@ definitions:
         example: 56
       delivered_ids:
         type: array
-        example: [56,678]
+        items:
+          type: integer
+          example: 56
       read_ids:
         type: array
         items:
-          $ref: '#/definitions/ReadIds'
+          type: integer
+          example: 56
       attachments:
         type: array
         items:
@@ -162,6 +165,3 @@ definitions:
       url:
         type: string
         example: http://jabber.org/avatar.jpg
-  ReadIds:
-    type: object
-    example: 2
