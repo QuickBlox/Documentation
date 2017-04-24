@@ -90,6 +90,34 @@ paths:
           required: false
           type: string
           default: type[in]=1,2
+        - name: limit
+          in: formData
+          description: |
+            Limit search results to N records. Useful for pagination. Default (if not specified) - 100.
+          required: false
+          type: integer
+          default: 100
+        - name: skip
+          in: formData
+          description: |
+            Skip N records in search results. Useful for pagination. Default (if not specified) - 0.
+          required: false
+          type: integer
+          default: 100
+        - name: count
+          in: formData
+          description: |
+            Count search results. Response will contain only count of records found.
+          required: false
+          type: integer
+          default: 1
+        - name: sort_desc/sort_asc
+          in: formData
+          description: |
+            Search results will be sorted by specified field in ascending/descending order.
+          required: false
+          type: string
+          default: sort_desc=last_message_date_sent
       responses:
         '200':
           description: "Array of chat dialogs"
