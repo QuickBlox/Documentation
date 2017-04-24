@@ -77,10 +77,19 @@ paths:
           in: formData
           description: |
             Search records with field which contains exactly specified value.
-            Applied fields - _id, type, name, last_message_date_sent, created_at, updated_at.
+            Applied fields - **_id**, **type**, **name**, **last_message_date_sent**, **created_at**, **updated_at**.
           required: false
           type: string
-          default: 53aabe15e4b077ddd43e7fd6
+          default: type=2
+        - name: '{field_name}[{search_operator}]'
+          in: formData
+          description: |
+            Search records with field which contains value according to specified value and operator.
+            Possible filters - **lt** (Less Than operator), **lte** (Less Than or Equal to operator), **gt** (Greater Than operator), **gte** (Greater Than or Equal to operator), **ne** (Not Equal to operator), **in** (Contained IN array operator), **nin** (Not contained IN array), **all** (ALL contained IN array), **ctn** (Contains substring operator).
+            Applied fields - **_id**, **type**, **name**, **last_message_date_sent**, **created_at**, **updated_at**.
+          required: false
+          type: string
+          default: type[in]=1,2
       responses:
         '200':
           description: "Array of chat dialogs"
