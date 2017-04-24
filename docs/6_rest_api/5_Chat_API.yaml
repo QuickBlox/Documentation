@@ -73,11 +73,12 @@ paths:
         Retrieve all dialogs associated with current user.
         Server will return all dialogs where current user id is in **occupants_ids** field OR if **type=1** (PUBLIC_GROUP).
       parameters:
-        - name: dialog_id
+        - name: {field_name}
           in: formData
           description: |
-            The id of chat dialog to delete (path parameter)
-          required: true
+            Search records with field which contains exactly specified value.
+            Applied fields - _id, type, name, last_message_date_sent, created_at, updated_at.
+          required: false
           type: string
           default: 53aabe15e4b077ddd43e7fd6
       responses:
