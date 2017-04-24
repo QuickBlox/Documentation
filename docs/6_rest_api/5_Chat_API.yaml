@@ -192,7 +192,13 @@ definitions:
       WrongPermissions:
         $ref: '#/definitions/IDsObject'
       NotFound:
-        $ref: '#/definitions/IDsObject'
+        type: object
+        properties:
+          ids:
+            type: array
+            items:
+              type: string
+              example: 53afbe15e4b077ddd43e7fd5
   IDsObject:
     type: object
     properties:
