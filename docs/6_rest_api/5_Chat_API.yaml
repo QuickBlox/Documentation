@@ -84,7 +84,7 @@ paths:
         '200':
           description: "Array of chat dialogs"
           schema:
-            $ref: '#/definitions/DialogsResponse' 
+            $ref: '#/definitions/DialogsResponse'
   /chat/Dialog/{dialog_id}.json:
     delete:
       summary: Delete dialog
@@ -107,7 +107,7 @@ paths:
       summary: Delete dialogs
       operationId: 104_Delete_Dialogs
       description: |
-        Delete multiple chat dialog.
+        Delete multiple chat dialogs.
       parameters:
         - name: dialog_ids
           in: formData
@@ -194,10 +194,13 @@ definitions:
       NotFound:
         $ref: '#/definitions/IDsObject'
   IDsObject:
-    type: array
-    items:
-      type: string
-      example: 53aabe15e4b077ddd43e7fd6
+    type: object
+    properties:
+      ids:
+        type: array
+        items:
+          type: string
+          example: 53aabe15e4b077ddd43e7fd6
   MessagesResponse:
     type: object
     properties:
