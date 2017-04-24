@@ -73,7 +73,7 @@ paths:
         Retrieve all dialogs associated with current user.
         Server will return all dialogs where current user id is in **occupants_ids** field OR if **type=1** (PUBLIC_GROUP).
       parameters:
-        - name: {field_name}
+        - name: 'field_name'
           in: formData
           description: |
             Search records with field which contains exactly specified value.
