@@ -188,9 +188,21 @@ definitions:
     type: object
     properties:
       SuccessfullyDeleted:
-        $ref: '#/definitions/IDsObject'
+        type: object
+        properties:
+          ids:
+            type: array
+            items:
+              type: string
+              example: 536fbe15123127d63d43e7fe4
       WrongPermissions:
-        $ref: '#/definitions/IDsObject'
+        type: object
+        properties:
+          ids:
+            type: array
+            items:
+              type: string
+              example: 53efbe15e4b077d33d43e7fd2
       NotFound:
         type: object
         properties:
@@ -199,14 +211,6 @@ definitions:
             items:
               type: string
               example: 53afbe15e4b077ddd43e7fd5
-  IDsObject:
-    type: object
-    properties:
-      ids:
-        type: array
-        items:
-          type: string
-          example: 53aabe15e4b077ddd43e7fd6
   MessagesResponse:
     type: object
     properties:
