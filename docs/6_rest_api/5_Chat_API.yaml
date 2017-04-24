@@ -66,6 +66,63 @@ paths:
           description: "Chat dialog object"
           schema:
             $ref: '#/definitions/DialogObject'
+    get:
+      summary: Retrieve dialogs
+      operationId: 102_Retrieve_Dialogs
+      description: |
+        Retrieve all dialogs associated with current user.
+        Server will return all dialogs where current user id is in **occupants_ids** field OR if **type=1** (PUBLIC_GROUP).
+      parameters:
+        - name: dialog_id
+          in: formData
+          description: |
+            The id of chat dialog to delete (path parameter)
+          required: true
+          type: string
+          default: 53aabe15e4b077ddd43e7fd6
+      responses:
+        '200':
+          description: "Array of chat dialogs"
+          schema:
+            $ref: '#/definitions/DialogsResponse' 
+  /chat/Dialog/{dialog_id}.json:
+    delete:
+      summary: Delete dialog
+      operationId: 103_Delete_Dialog
+      description: |
+        Delete chat dialog.
+      parameters:
+        - name: dialog_id
+          in: formData
+          description: |
+            The id of chat dialog to delete (path parameter)
+          required: true
+          type: string
+          default: 53aabe15e4b077ddd43e7fd6
+      responses:
+        '200':
+          description: "Empty body"
+  /chat/Dialog/{dialog_ids}.json:
+    delete:
+      summary: Delete dialogs
+      operationId: 104_Delete_Dialogs
+      description: |
+        Delete multiple chat dialog.
+      parameters:
+        - name: dialog_ids
+          in: formData
+          description: |
+            The ids of chat dialogs to delete (path parameter)
+          required: true
+          type: array
+          items:
+            type: string
+          default: 53aabe15e4b077ddd43e7fd6,23aabe15e4b077ddd43e7fd1
+      responses:
+        '200':
+          description: "Delete dialogs response"
+          schema:
+            $ref: '#/definitions/DeleteDialogsResponse'
 definitions:
   DialogsResponse:
     type: object
@@ -127,6 +184,20 @@ definitions:
       user_id:
         type: integer
         example: 56
+  DeleteDialogsResponse:
+    type: object
+    properties:
+      SuccessfullyDeleted:
+        $ref: '#/definitions/IDsObject'
+      WrongPermissions:
+        $ref: '#/definitions/IDsObject'
+      NotFound:
+        $ref: '#/definitions/IDsObject'
+  IDsObject:
+    type: array
+    items:
+      type: string
+      example: 53aabe15e4b077ddd43e7fd6
   MessagesResponse:
     type: object
     properties:
