@@ -147,6 +147,7 @@ paths:
         * Any user from **occupants_ids** can add other users.
         * Any user from **occupants_ids** can remove only himself.
         * Only dialog's creator(owner) can remove any users from **occupants_ids**.
+        
         The following rules are applied if **type=1** (PUBLIC_GROUP):
         * Only dialog’s owner can update it.
       parameters:
