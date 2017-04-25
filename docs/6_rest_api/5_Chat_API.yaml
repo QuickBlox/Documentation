@@ -23,7 +23,7 @@ paths:
       operationId: 101_Create_Dialog
       description: |
         Create chat dialog.
-        'There are 3 types of chat dialogs:'
+        There are 3 types of chat dialogs:
         * Use **type=1** (PUBLIC_GROUP) to create a public group dialog. All the users from your application will be able to join it. Server will create a public group chat and return a detailed information about newly created dialog. Field **xmpp_room_jid** will contain a Chat room JID to which you should join to start chatting.
         * Use **type=2** (GROUP) to create a group dialog only for specific users provided in **occupants_ids**. Server will create an only members group chat and return a detailed information about newly created dialog. Field **xmpp_room_jid** will contain a Chat room JID to which you should join to start chatting.
         * Use **type=3** (PRIVATE) to create a private dialog between 2 users. Server will return a detailed information about newly created dialog. If user sends a chat message to some user and private dialog wasn't created - it will be created automatically with 1st chat message.
@@ -129,10 +129,11 @@ paths:
       operationId: 103_Update_Dialog
       description: |
         Update chat dialog. You can update the dialog's name, photo or add/remove users.
-        'The following rules are applied if **type=2** (GROUP): '
+        The following rules are applied if **type=2** (GROUP):
         * Any user from **occupants_ids** can add other users.
         * Any user from **occupants_ids** can remove only himself.
         * Only dialog's creator(owner) can remove any users from **occupants_ids**.
+        
         'The following rules are applied if **type=1** (PUBLIC_GROUP):'
         * Only dialog’s owner can update it.
       parameters:
