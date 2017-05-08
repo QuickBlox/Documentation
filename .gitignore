@@ -37,6 +37,8 @@ Thumbs.db
 
 # IDE files
 .idea
+# Sublime Editor
+*.sublime-*
 
 # But not these files...
 !.gitignore
