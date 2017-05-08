@@ -7,7 +7,7 @@ Below is the sample you'll create using this tutorial.
 <iframe src="https://samples.quickblox.com/web/data" width="100%" height="550px" frameborder="0" scrolling="no">
 
 
-## Try is yourself 
+## Try it yourself 
 Before all, adding a Custom Data structure to your application.
 
 <div class="panel panel-warning">
