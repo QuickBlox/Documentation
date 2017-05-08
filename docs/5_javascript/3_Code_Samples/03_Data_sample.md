@@ -4,7 +4,7 @@ It allows you to create any server side data structure, authorize and work with 
 Below is the sample you'll create using this tutorial.
 
 <!--- TODO: change to src DATA sample insted of chat --->
-<iframe src="http://quickblox.github.io/quickblox-javascript-sdk/samples/newChat" width="100%" height="550px">
+<iframe src="https://quickblox.github.io/quickblox-javascript-sdk/samples/newChat" width="100%" height="550px">
 
 ## Try is yourself 
 Before all, adding a Custom Data structure to your application.
