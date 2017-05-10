@@ -17,7 +17,7 @@ Before all, adding a Custom Data structure to your application.
 
 To start using the Custom Objects module you should create your data scheme. Go to [admin.quickblox.com](https://admin.quickblox.com/), find the Custom Objects module page and press the Add new class button. The 'add new class' popup will then appear.
 
-![Create a new class](./resources/create_class_popup.png)
+![Create a new class](../resources/create_class_popup.png)
 
 Enter Class name, add fields any you want. Allow 7 types of fields:
 * Integer;
