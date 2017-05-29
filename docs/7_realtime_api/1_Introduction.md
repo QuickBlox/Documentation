@@ -22,7 +22,7 @@ All standard XMPP libraries are supported (please check the list here [http://xm
 * XEP-0079 - [http://xmpp.org/extensions/xep-0079.html](http://xmpp.org/extensions/xep-0079.html) - Advanced Message Processing
 * XEP-0045 - [http://xmpp.org/extensions/xep-0045.html](http://xmpp.org/extensions/xep-0045.html) - Multi User Chat
 * XEP-0047 - [http://xmpp.org/extensions/xep-0047.html](http://xmpp.org/extensions/xep-0047.html) - In-Band Bytestreams (p2p file transfer)
-* XEP-0333 - [(http://xmpp.org/extensions/xep-0333.html](http://xmpp.org/extensions/xep-0333.html) - Chat Markers
+* XEP-0333 - [http://xmpp.org/extensions/xep-0333.html](http://xmpp.org/extensions/xep-0333.html) - Chat Markers
 * XEP-0308 - [http://xmpp.org/extensions/xep-0308.html](http://xmpp.org/extensions/xep-0308.html) - Last Message Correction
 * XEP-0174 - [http://xmpp.org/extensions/xep-0174.html](http://xmpp.org/extensions/xep-0174.html) - Serverless Messaging
 * XEP-0237 - [http://xmpp.org/extensions/xep-0237.html](http://xmpp.org/extensions/xep-0237.html) - Roster Versioning
@@ -55,6 +55,22 @@ Your user’s password for XMPP connection depends on what type of user authenti
 
 * Standard login+password authentication: use same password.
 * Facebook/Twitter/Twitter Digits/Custom identity authentication: use QuickBlox session token as password.
+
+# Handshake/Login Flow
+
+# XML stanza formats
+
+# Stream management
+Stream management ([XEP-0198](http://xmpp.org/extensions/xep-0198.html)) defines an XMPP protocol extension for active management of a stream between two users, including features for stanza acknowledgements and stream resumption. This protocol aims to resolve the issue with lost messages in a case of very poor Internet connection.
+
+The basic concept behind stream management is that the initiating entity (a client) and the receiving entity (a server) can exchange "commands" for active management of the stream. The following stream management features are of particular interest because they are expected to improve network reliability and the end-user experience:
+
+* Stanza Acknowledgements -- the ability to know if a stanza or series of stanzas has been received by one's peer.
+* Stream Resumption -- the ability to quickly resume a stream that has been terminated.
+
+The main interesting part here is **Stanza Acknowledgements** because it allows to achieve 100% reliability. To better understand how it works we prepared the follosing picture:
+
+![](./resources/images/xep-0198_flow.png)
  
 <span id="Changelog" class="on_page_navigation"></span>
 # Changelog
