@@ -56,6 +56,7 @@ Your user’s password for XMPP connection depends on what type of user authenti
 * Standard login+password authentication: use same password.
 * Facebook/Twitter/Twitter Digits/Custom identity authentication: use QuickBlox session token as password.
 
+<span id="Handshake/Login_flow" class="on_page_navigation"></span>
 # Handshake/Login Flow
 Use this documentation to understand what the typical stanzas used in the QuickBlox XMPP handshake flow are.
 
