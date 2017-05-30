@@ -235,6 +235,8 @@ Each attachment contains the following attributes:
 * content-type (optional) - an attachment's content type
 * name (optional) - an attachment's name
 
+**format:**
+
 ```xml
 <message id="546dbf438c54ad2aded63b25" type="groupchat" to="2_546d14c19c29532398000496@muc.chat.quickblox.com">
     <body>Nice to met you!</body>
@@ -298,6 +300,8 @@ There is a special channel for any system notifications. The end user can use it
 All such messages should contain **extraParams.moduleIdentifier=SystemNotifications** and use **type=headline**.
 
 You can send system messages directly to user only (grou chat is not supported).
+
+**format:**
 
 ```xml
 <message id="..." type="headline" to="...@chat.quickblox.com">
