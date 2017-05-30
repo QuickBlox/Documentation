@@ -57,6 +57,110 @@ Your user’s password for XMPP connection depends on what type of user authenti
 * Facebook/Twitter/Twitter Digits/Custom identity authentication: use QuickBlox session token as password.
 
 # Handshake/Login Flow
+Use this documentation to understand what the typical stanzas used in the QuickBlox XMPP handshake flow are.
+
+*******SASL Authentication Handshake Begin*******
+
+Client:
+
+```xml
+<open xmlns='urn:ietf:params:xml:ns:xmpp-framing' to='chat.quickblox.com' version='1.0'/>
+```
+Server:
+
+```xml
+<open xmlns='urn:ietf:params:xml:ns:xmpp-framing' from='chat.quickblox.com' id='e4b1d1be-45a9-4d1a-aea1-a5d17de4ecae' version='1.0' xml:lang='en' />
+```
+Server:
+
+```xml
+<stream:features xmlns:stream="http://etherx.jabber.org/streams">
+  <sm xmlns="urn:xmpp:sm:3"/>
+  <mechanisms xmlns="urn:ietf:params:xml:ns:xmpp-sasl">
+    <mechanism>PLAIN</mechanism>
+    <mechanism>ANONYMOUS</mechanism>
+    <mechanism>PLAIN_FAST</mechanism>
+  </mechanisms>
+  <ver xmlns="urn:xmpp:features:rosterver"/>
+  <starttls xmlns="urn:ietf:params:xml:ns:xmpp-tls"/>
+  <compression xmlns="http://jabber.org/features/compress">
+  	 <method>zlib</method>
+  </compression>
+</stream:features>
+```
+
+Client:
+
+```xml
+<auth xmlns='urn:ietf:params:xml:ns:xmpp-sasl' mechanism='PLAIN'>MjY5MDQ1OTQtMjk2NTBAY2hhdC5xdWlja2Jsb3guY29tADI2OTA0NTk0LTI5NjUwAGpzX2phc21pbmUyMjI=</auth>
+```
+
+Server:
+
+```xml
+<success xmlns="urn:ietf:params:xml:ns:xmpp-sasl"/>
+```
+
+*******SASL Authentication Handshake End*******
+
+Client:
+
+```xml
+<open xmlns='urn:ietf:params:xml:ns:xmpp-framing' to='chat.quickblox.com' version='1.0'/>
+```
+
+Server:
+
+```xml
+<open xmlns='urn:ietf:params:xml:ns:xmpp-framing' from='chat.quickblox.com' id='e4b1d1be-45a9-4d1a-aea1-a5d17de4ecae' version='1.0' xml:lang='en' />
+```
+
+Server:
+
+```xml
+<stream:features xmlns:stream="http://etherx.jabber.org/streams">
+  <sm xmlns="urn:xmpp:sm:3"/>
+  <ver xmlns="urn:xmpp:features:rosterver"/>
+  <starttls xmlns="urn:ietf:params:xml:ns:xmpp-tls"/>
+  <compression xmlns="http://jabber.org/features/compress">
+    <method>zlib</method>
+  </compression>
+  <bind xmlns="urn:ietf:params:xml:ns:xmpp-bind"/>
+  <session xmlns="urn:ietf:params:xml:ns:xmpp-session"/>
+</stream:features>
+```
+
+*******Bind Resource Begin*******
+
+Client:
+
+```xml
+<iq type='set' id='_bind_auth_2' xmlns='jabber:client'><bind xmlns='urn:ietf:params:xml:ns:xmpp-bind'/></iq>
+```
+
+Server:
+
+```xml
+<iq to="26904594-29650@chat.quickblox.com/1571722472-quickblox-2386480" xmlns="jabber:client" type="result" id="_bind_auth_2"><bind xmlns="urn:ietf:params:xml:ns:xmpp-bind"><jid>26904594-29650@chat.quickblox.com/1571722472-quickblox-2386480</jid></bind></iq>
+```
+
+*******Bind Resource End*******
+
+*******Initial Presence Begin*******
+
+Client:
+
+```xml
+<presence xmlns='jabber:client'/>
+```
+
+Server:
+
+```xml
+<presence to="26904594-29650@chat.quickblox.com" from="26904594-29650@chat.quickblox.com/1571722472-quickblox-2386480" xmlns="jabber:client"/>
+```
+
+*******Initial Presence End*******
 
 # XML stanza formats
 
@@ -70,7 +174,7 @@ The basic concept behind stream management is that the initiating entity (a clie
 
 The main interesting part here is **Stanza Acknowledgements** because it allows to achieve 100% reliability. To better understand how it works we prepared the follosing picture:
 
-![](./resources/images/xep-0198_flow.png)
+![XEP-0198 Stream management flow](./resources/images/xep-0198_flow.png)
  
 <span id="Changelog" class="on_page_navigation"></span>
 # Changelog
