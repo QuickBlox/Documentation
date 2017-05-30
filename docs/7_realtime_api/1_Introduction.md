@@ -56,11 +56,11 @@ Your user’s password for XMPP connection depends on what type of user authenti
 * Standard login+password authentication: use same password.
 * Facebook/Twitter/Twitter Digits/Custom identity authentication: use QuickBlox session token as password.
 
-<span id="Handshake/Login_flow" class="on_page_navigation"></span>
+<span id="Login_flow" class="on_page_navigation"></span>
 # Handshake/Login Flow
 Use this documentation to understand what the typical stanzas used in the QuickBlox XMPP handshake flow are.
 
-*******SASL Authentication Handshake Begin*******
+**SASL Authentication Handshake Begin**
 
 Client:
 
@@ -102,7 +102,7 @@ Server:
 <success xmlns="urn:ietf:params:xml:ns:xmpp-sasl"/>
 ```
 
-*******SASL Authentication Handshake End*******
+**SASL Authentication Handshake End**
 
 Client:
 
@@ -131,7 +131,7 @@ Server:
 </stream:features>
 ```
 
-*******Bind Resource Begin*******
+**Bind Resource Begin**
 
 Client:
 
@@ -145,9 +145,9 @@ Server:
 <iq to="26904594-29650@chat.quickblox.com/1571722472-quickblox-2386480" xmlns="jabber:client" type="result" id="_bind_auth_2"><bind xmlns="urn:ietf:params:xml:ns:xmpp-bind"><jid>26904594-29650@chat.quickblox.com/1571722472-quickblox-2386480</jid></bind></iq>
 ```
 
-*******Bind Resource End*******
+**Bind Resource End**
 
-*******Initial Presence Begin*******
+**Initial Presence Begin**
 
 Client:
 
@@ -161,7 +161,7 @@ Server:
 <presence to="26904594-29650@chat.quickblox.com" from="26904594-29650@chat.quickblox.com/1571722472-quickblox-2386480" xmlns="jabber:client"/>
 ```
 
-*******Initial Presence End*******
+**Initial Presence End**
 
 # XML stanza formats
 
