@@ -314,6 +314,7 @@ You can send system messages directly to user only (grou chat is not supported).
 </message>
 ```
 
+<span id="Stream_management" class="on_page_navigation"></span>
 # Stream management
 Stream management ([XEP-0198](http://xmpp.org/extensions/xep-0198.html)) defines an XMPP protocol extension for active management of a stream between two users, including features for stanza acknowledgements and stream resumption. This protocol aims to resolve the issue with lost messages in a case of very poor Internet connection.
 
