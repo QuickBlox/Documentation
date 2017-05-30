@@ -1,12 +1,29 @@
-Video chat API will be here.
-
 <span id="Introduction" class="on_page_navigation"></span>
 # Introduction
-TBA
+Video chat or video calling is essentially streaming both audio and video inputs asynchronously between two or more end users. Video calling is a great way to have productive and visual communication between your users hence high popularity of this feature in QuickBlox developers community.
+
+Typically both audio and video calling is used along with 1:1 / IM textual chat communication but there are use cases (such is in gaming or when walking / driving for example) where they are used on their own.
+
+<span id="How_it_works" class="on_page_navigation"></span>
+# How it works
+QuickBlox SDK client library works with input sources (camera, microphone), codecs, compression and then the data is streamed peer-to-peer between end users. This way video calling doesn't impact the server much so the system is highly scalable. Server however enables the handshake between end users before streaming starts to take place and also it resolves NAT traversal in case configuration of networks and firewalls between end users makes call impossible otherwise. This is done with the help of QuickBlox STUN/TURN server.
 
 <span id="Technologies_used" class="on_page_navigation"></span>
 # Technologies used
-TBA
+Our latest video chat solution uses the open-source technology [WebRTC](https://webrtc.org/). It is intended for the organisation of streaming media data between browsers or other supporting it applications for peer-to-peer technology without any additional plugins.
+
+Get an overview of WebRTC from the [Google I/O presentation](https://www.youtube.com/watch?v=p2HzZkd2A40) or read [WebRTC FAQ](https://webrtc.org/faq).
+
+To achieve real-time media communication, several transfer servers for data exchanges and a specific signaling mechanism are needed. 
+
+Their roles are:
+
+* Get network information such as IP addresses and ports, and exchange this with other WebRTC clients (known as **peers**) to enable connection, even through NATs and firewalls
+* Coordinate signaling communication to report errors and initiate or close sessions
+* Exchange information about media and client capability, such as resolution and codecs
+* Communicate streaming audio, video or data
+
+The signaling in QuickBox WebRTC module is implemented over **XMPP protocol** using QuickBlox Real-time API. The Video chat module is a high-level solution around WebRTC technology. Read more about signaling in the next paragraph.
 
 <span id="Connecting_to_server" class="on_page_navigation"></span>
 # Connecting to server
