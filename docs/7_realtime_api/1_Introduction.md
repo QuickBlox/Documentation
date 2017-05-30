@@ -163,7 +163,70 @@ Server:
 
 **Initial Presence End**
 
+<span id="XML_stanza_formats" class="on_page_navigation"></span>
 # XML stanza formats
+QuickBlox Real-time API is based on orifgin XMPP standards, but with slighty changes. Here we list the XML stanzas formats for every modified feature.
+
+## Send/Receive chat message 
+**1-1 message:**
+
+```xml
+<message id="53fc4604565c128132016612" to="26904594-29650@chat.quickblox.com" type="chat">
+	<body xmlns="jabber:client">This is 1-1 message!</body>
+	<extraParams xmlns="jabber:client">
+		<save_to_history>1</save_to_history>
+		<date_sent>1409146118</date_sent>
+	</extraParams>
+</message>
+```
+
+**group chat message:**
+
+```xml
+<message id="53ac4604565c128132016614" to="11492_53fc460b515c128132016675@muc.chat.quickblox.com" type="groupchat">
+	<body xmlns="jabber:client">This is group chat message!</body>
+	<extraParams xmlns="jabber:client">
+		<save_to_history>1</save_to_history>
+		<date_sent>1409146118</date_sent>
+	</extraParams>
+</message>
+```
+
+QuickBlox introduces a very simple server-side chat history functionality. This features is useful for many cases such as moderation, restoring messages on a new device via REST, making chat logs be easily downloadable, etc. We (Quickblox) are not able to read your messages - only you, as the account owner, have access to them.
+
+Just by adding a custom parameters **save_to_history** to your XMPP messages, the messages will be stored on the server.
+
+You'll notice there's also a **date_sent** field in the extra parameters. This is optional - if you don't supply it, the server will automatically add it when it receives the message. But if for example, you need to "resend" a message that failed, you can use this field to specify the correct time. It is in a unix timestamp format.
+
+**Receive message format:**
+
+```xml
+<message xmlns="jabber:client" from="92_54789d40535c12b1a5001172@muc.chat.quickblox.com/1501966" to="1501966-92@chat.quickblox.com/0C1E1229-6B3C-47F3-BFDC-D1CFD351D274" type="groupchat" id="54789d5e6df5e6f921b7acda">
+    <body>Nice to met you!</body>
+    <extraParams xmlns="jabber:client">
+        <save_to_history>1</save_to_history>
+        <date_sent>1409146118</date_sent>
+        <dialog_id>54789d40535c12b1a5001172</dialog_id>
+    </extraParams>
+</message>
+```
+
+As you can see, server automatically adds a **dialog_id** extra parameter so a recipient knows to which chat dialog this message relates.
+
+## File attachments
+TBA
+
+## 'Is typing' status
+TBA
+
+## 'Delivered' status
+TBA
+
+## 'Read' status
+TBA
+
+## System messages
+TBA
 
 # Stream management
 Stream management ([XEP-0198](http://xmpp.org/extensions/xep-0198.html)) defines an XMPP protocol extension for active management of a stream between two users, including features for stanza acknowledgements and stream resumption. This protocol aims to resolve the issue with lost messages in a case of very poor Internet connection.
