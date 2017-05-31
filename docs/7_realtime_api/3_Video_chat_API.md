@@ -72,7 +72,7 @@ The following signaling protocol is used in QuickBlox WebRTC Video chat iOS/Andr
 
 Developers also can use this protocol to build WebRTC library and video chat applications for other platforms (e.g. desktop apps).
 
-<div class="highlighted">
-All video chat signalling messages have **type=headline** and an extra parameter **<moduleIdentifier>...</moduleIdentifier>**.
+<div class="attention">
+All video chat signalling messages have <b>type=headline<b> and an extra parameter <b><moduleIdentifier>...</moduleIdentifier><b>.
 Check these 2 values to detect the video chat signalling message.
 </div>
