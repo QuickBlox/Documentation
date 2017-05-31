@@ -27,8 +27,52 @@ The signaling in QuickBox WebRTC module is implemented over **XMPP protocol** us
 
 <span id="Connecting_to_server" class="on_page_navigation"></span>
 # Connecting to server
-TBA
+Signaling is the process of coordinating communication. In order for a WebRTC application to set up a 'call', its clients need to exchange information. Video Chat API uses the same [Real-time API](/realtime_api/Introduction.html#Authenticating_requests) channel for signaling.
+
+<span id="ICE_servers" class="on_page_navigation"></span>
+# ICE servers
+WebRTC apps can use the [ICE](https://en.wikipedia.org/wiki/Interactive_Connectivity_Establishment) framework to overcome the complexities of real-world networking. To enable this to happen, your application must pass ICE server URLs to RTCPeerConnection, as described below.
+
+ICE tries to find the best path to connect peers. It tries all possibilities in parallel and chooses the most efficient option that works. ICE first tries to make a connection using the host address obtained from a device's operating system and network card; if that fails (which it will for devices behind NATs) ICE obtains an external address using a STUN server, and if that fails, traffic is routed via a TURN relay server.
+
+We use 3 TURN servers: in North Virginia, Asia and Europe.
+
+TURN server endpoint: **turn.quickblox.com**.
+
+**How does WebRTC select which TURN server to use if multiple options are given?** During the connectivity checking phase, WebRTC will choose the TURN relay with the lowest round-trip time. Thus, setting multiple TURN servers allows your application to scale-up in terms of bandwidth and number of users.
+
+Here is a list with default settings that we use, you can customise all of them or only some particular:
+
+```javascript
+var iceServers = [
+  {
+    'url': 'stun:stun.l.google.com:19302'
+  },
+  {
+    'url': 'stun:turn.quickblox.com',
+    'username': 'quickblox',
+    'credential': 'baccb97ba2d92d71e26eb9886da5f1e0'
+  },
+  {
+    'url': 'turn:turn.quickblox.com:3478?transport=udp',
+    'username': 'quickblox',
+    'credential': 'baccb97ba2d92d71e26eb9886da5f1e0'
+  },
+  {
+    'url': 'turn:turn.quickblox.com:3478?transport=tcp',
+    'username': 'quickblox',
+    'credential': 'baccb97ba2d92d71e26eb9886da5f1e0'
+  }
+]
+```
 
 <span id="Signaling" class="on_page_navigation"></span>
 # Signaling v1.0
-TBA
+The following signaling protocol is used in QuickBlox WebRTC Video chat iOS/Android/Web code samples.
+
+Developers also can use this protocol to build WebRTC library and video chat applications for other platforms (e.g. desktop apps).
+
+<div class="highlighted">
+All video chat signalling messages have **type=headline** and an extra parameter **<moduleIdentifier>...</moduleIdentifier>**.
+Check these 2 values to detect the video chat signalling message.
+</div>
