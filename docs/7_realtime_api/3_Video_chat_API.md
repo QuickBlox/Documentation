@@ -169,6 +169,8 @@ A signal to reject an incoming call.
 | platform | A type of platform. Can be **ios**, **android**, **web** |
 | userInfo | An optional user info. Can be used to pass some extra data to opponents |
 
+If a client doesn't support WebRTC then he should send the auto reject request with **user_info={not_supported: 1}**.
+
 ## Hang Up
 A signal to finish the call.
 
@@ -253,3 +255,6 @@ A signal to notify an opponent that some call's parameters is updated.
 | moduleIdentifier | An identifier of the module, hold the **WebRTCVideoChat** value |
 | signalType | A type of signal, hold the **update** value |
 | sessionID | An unique id of current video chat session. Users have to use the same **sessionID** within particular call. Timestamp can be used as a **sessionID** value |
+| param1 |  Extra parameter |
+| ... | ... |  
+| paramN |  Extra parameter |
