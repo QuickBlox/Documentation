@@ -76,3 +76,21 @@ Developers also can use this protocol to build WebRTC library and video chat app
 All video chat signalling messages have <b>type=headline</b> and an extra parameter <b>moduleIdentifier</b>.
 Check these 2 values to detect the video chat signalling message.
 </div>
+
+## Call
+TBA
+
+## Accept
+TBA
+
+## Reject
+TBA
+
+## Hang Up
+TBA
+
+## ICE candidates
+TBA
+
+## Update parameters
+TBA
