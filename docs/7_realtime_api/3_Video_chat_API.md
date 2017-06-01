@@ -102,7 +102,18 @@ A signal to initiate a call.
 ```
 
 ### Parameters
-TBA
+
+| Parameter | Description |
+|----|-------|
+| moduleIdentifier | An identifier of the module, hold the **WebRTCVideoChat** value |
+| signalType | A type of signal, hold the **update** value |
+| sessionID | An unique id of current video chat session. Users have to use the same **sessionID** within particular call. Timestamp can be used as a **sessionID** value |
+| callType | |
+| sdp | |
+| platform | |
+| callerID | |
+| opponentsIDs | |
+| userInfo | |
 
 ## Accept
 A signal to accept an incoming call.
@@ -122,7 +133,12 @@ A signal to accept an incoming call.
 ```
 
 ### Parameters
-TBA
+
+| Parameter | Description |
+|:----:|:-------:|
+| moduleIdentifier | An identifier of the module, hold the **WebRTCVideoChat** value |
+| signalType | A type of signal, hold the **update** value |
+| sessionID | An unique id of current video chat session. Users have to use the same **sessionID** within particular call. Timestamp can be used as a **sessionID** value |
 
 ## Reject
 
@@ -141,7 +157,12 @@ A signal to reject an incoming call.
 ```
 
 ### Parameters
-TBA
+
+| Parameter | Description |
+|:----:|:-------:|
+| moduleIdentifier | An identifier of the module, hold the **WebRTCVideoChat** value |
+| signalType | A type of signal, hold the **update** value |
+| sessionID | An unique id of current video chat session. Users have to use the same **sessionID** within particular call. Timestamp can be used as a **sessionID** value |
 
 ## Hang Up
 A signal to finish the call.
@@ -159,7 +180,12 @@ A signal to finish the call.
 ```
 
 ### Parameters
-TBA
+
+| Parameter | Description |
+|:----:|:-------:|
+| moduleIdentifier | An identifier of the module, hold the **WebRTCVideoChat** value |
+| signalType | A type of signal, hold the **update** value |
+| sessionID | An unique id of current video chat session. Users have to use the same **sessionID** within particular call. Timestamp can be used as a **sessionID** value |
 
 ## ICE candidates
 A signal to send WebRTC ICE candidates.
@@ -189,7 +215,12 @@ A signal to send WebRTC ICE candidates.
 ```
 
 ### Parameters
-TBA
+
+| Parameter | Description |
+|:----:|:-------:|
+| moduleIdentifier | An identifier of the module, hold the **WebRTCVideoChat** value |
+| signalType | A type of signal, hold the **update** value |
+| sessionID | An unique id of current video chat session. Users have to use the same **sessionID** within particular call. Timestamp can be used as a **sessionID** value |
 
 ## Update parameters
 A signal to notify an opponent that some call's parameters is updated.
@@ -211,7 +242,7 @@ A signal to notify an opponent that some call's parameters is updated.
 ### Parameters
 
 | Parameter | Description |
-|:----:|:-------:|
+|----|-------|
 | moduleIdentifier | An identifier of the module, hold the **WebRTCVideoChat** value |
 | signalType | A type of signal, hold the **update** value |
 | sessionID | An unique id of current video chat session. Users have to use the same **sessionID** within particular call. Timestamp can be used as a **sessionID** value |
