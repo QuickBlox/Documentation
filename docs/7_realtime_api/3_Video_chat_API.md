@@ -255,6 +255,6 @@ A signal to notify an opponent that some call's parameters is updated.
 | moduleIdentifier | An identifier of the module, hold the **WebRTCVideoChat** value |
 | signalType | A type of signal, hold the **update** value |
 | sessionID | An unique id of current video chat session. Users have to use the same **sessionID** within particular call. Timestamp can be used as a **sessionID** value |
-| param1 |  Extra parameter |
-| ... | ... |  
-| paramN |  Extra parameter |
+| param1 | Extra parameter |
+| ... | ... |
+| paramN | Extra parameter |
