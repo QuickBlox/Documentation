@@ -78,19 +78,135 @@ Check these 2 values to detect the video chat signalling message.
 </div>
 
 ## Call
+A signal to initiate a call.
+
+### Format
+```xml
+<message to="..."  type="headline" id="...">
+    <extraParams xmlns="jabber:client">
+        <moduleIdentifier>WebRTCVideoChat</moduleIdentifier>
+        <signalType>call</signalType>
+        <sessionID>...</sessionID>
+        <callType>...</callType>
+        <sdp>...</sdp>
+        <platform>...</platform>
+        <callerID>...</callerID>
+        <opponentsIDs>
+           <opponentID>...</opponentID>
+           <opponentID>...</opponentID>
+           ...
+        </opponentsIDs>
+        <userInfo>... </userInfo>
+    </extraParams>
+</message>
+```
+
+### Parameters
 TBA
 
 ## Accept
+A signal to accept an incoming call.
+
+### Format
+```xml
+<message to="..."  type="headline" id="...">
+    <extraParams xmlns="jabber:client">
+        <moduleIdentifier>WebRTCVideoChat</moduleIdentifier>
+        <signalType>accept</signalType>
+        <sessionID>...</sessionID>
+        <sdp>...</sdp>
+        <platform>...</platform>
+        <userInfo>...</userInfo>
+    </extraParams>
+</message>
+```
+
+### Parameters
 TBA
 
 ## Reject
+
+A signal to reject an incoming call.
+
+### Format
+```xml
+<message to="..."  type="headline" id="...">
+    <extraParams xmlns="jabber:client">
+        <moduleIdentifier>WebRTCVideoChat</moduleIdentifier>
+        <signalType>reject</signalType>
+        <sessionID>...</sessionID>
+        <userInfo>...<userInfo>
+    </extraParams>
+</message>
+```
+
+### Parameters
 TBA
 
 ## Hang Up
+A signal to finish the call.
+
+### Format
+```xml
+<message to="..."  type="headline" id="...">
+    <extraParams xmlns="jabber:client">
+        <moduleIdentifier>WebRTCVideoChat</moduleIdentifier>
+        <signalType>hangUp</signalType>
+        <sessionID>...</sessionID>
+        <userInfo>...</userInfo>
+    </extraParams>
+</message>
+```
+
+### Parameters
 TBA
 
 ## ICE candidates
+A signal to send WebRTC ICE candidates.
+
+### Format
+```xml
+<message to="..."  type="headline" id="...">
+    <extraParams xmlns="jabber:client">
+        <moduleIdentifier>WebRTCVideoChat</moduleIdentifier>
+        <signalType>iceCandidates</signalType>
+        <sessionID>...</sessionID>
+        <iceCandidates>
+            <iceCandidate>
+                <sdpMLineIndex>...</sdpMLineIndex>
+            	<sdpMid>...</sdpMid>
+            	<candidate>...</candidate>
+            </iceCandidate>
+            <iceCandidate>
+            	<sdpMLineIndex>...</sdpMLineIndex>
+            	<sdpMid>...</sdpMid>
+            	<candidate>...</candidate>
+             </iceCandidate>
+             ...
+         </iceCandidates>
+    </extraParams>
+</message>
+```
+
+### Parameters
 TBA
 
 ## Update parameters
+A signal to notify an opponent that some call's parameters is updated.
+
+### Format
+```xml
+<message to="..."  type="headline" id="...">
+    <extraParams xmlns="jabber:client">
+        <moduleIdentifier>WebRTCVideoChat</moduleIdentifier>
+        <signalType>update</signalType>
+        <sessionID>...</sessionID>
+        <param1>...</param1>
+        <param2>...</param2>
+        ...
+    </extraParams>
+</message>
+```
+
+### Parameters
 TBA
