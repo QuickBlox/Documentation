@@ -108,12 +108,12 @@ A signal to initiate a call.
 | moduleIdentifier | An identifier of the module, hold the **WebRTCVideoChat** value |
 | signalType | A type of signal, hold the **update** value |
 | sessionID | An unique id of current video chat session. Users have to use the same **sessionID** within particular call. Timestamp can be used as a **sessionID** value |
-| callType | |
-| sdp | |
-| platform | |
-| callerID | |
-| opponentsIDs | |
-| userInfo | |
+| callType | A type of the call. Use 1 for video call, 2 for audio call |
+| sdp | Local session description, value of [**RTCSessionDescription.sdp**](http://w3c.github.io/webrtc-pc/#rtcsessiondescription-class) property, obtained after ‘createOffer’ call. More info about [SDP anatomy](https://webrtchacks.com/sdp-anatomy) |
+| platform | A type of platform. Can be **ios**, **android**, **web** |
+| callerID | An id of user who initiates a call. Used for group calls |
+| opponentsIDs | An array of users ids with whom caller initiates a call. Used for group calls |
+| userInfo | An optional user info. Can be used to pass some extra data to opponents |
 
 ## Accept
 A signal to accept an incoming call.
