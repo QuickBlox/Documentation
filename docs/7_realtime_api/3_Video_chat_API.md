@@ -106,7 +106,7 @@ A signal to initiate a call.
 | Parameter | Description |
 |----|-------|
 | moduleIdentifier | An identifier of the module, hold the **WebRTCVideoChat** value |
-| signalType | A type of signal, hold the **update** value |
+| signalType | A type of signal, hold the **call** value |
 | sessionID | An unique id of current video chat session. Users have to use the same **sessionID** within particular call. Timestamp can be used as a **sessionID** value |
 | callType | A type of the call. Use 1 for video call, 2 for audio call |
 | sdp | Local session description, value of [**RTCSessionDescription.sdp**](http://w3c.github.io/webrtc-pc/#rtcsessiondescription-class) property, obtained after ‘createOffer’ call. More info about [SDP anatomy](https://webrtchacks.com/sdp-anatomy) |
@@ -135,10 +135,13 @@ A signal to accept an incoming call.
 ### Parameters
 
 | Parameter | Description |
-|:----:|:-------:|
+|----|-------|
 | moduleIdentifier | An identifier of the module, hold the **WebRTCVideoChat** value |
-| signalType | A type of signal, hold the **update** value |
+| signalType | A type of signal, hold the **accept** value |
 | sessionID | An unique id of current video chat session. Users have to use the same **sessionID** within particular call. Timestamp can be used as a **sessionID** value |
+| sdp | Local session description, value of [**RTCSessionDescription.sdp**](http://w3c.github.io/webrtc-pc/#rtcsessiondescription-class) property, obtained after ‘createOffer’ call. More info about [SDP anatomy](https://webrtchacks.com/sdp-anatomy) |
+| platform | A type of platform. Can be **ios**, **android**, **web** |
+| userInfo | An optional user info. Can be used to pass some extra data to opponents |
 
 ## Reject
 
@@ -159,10 +162,12 @@ A signal to reject an incoming call.
 ### Parameters
 
 | Parameter | Description |
-|:----:|:-------:|
+|----|-------|
 | moduleIdentifier | An identifier of the module, hold the **WebRTCVideoChat** value |
-| signalType | A type of signal, hold the **update** value |
+| signalType | A type of signal, hold the **reject** value |
 | sessionID | An unique id of current video chat session. Users have to use the same **sessionID** within particular call. Timestamp can be used as a **sessionID** value |
+| platform | A type of platform. Can be **ios**, **android**, **web** |
+| userInfo | An optional user info. Can be used to pass some extra data to opponents |
 
 ## Hang Up
 A signal to finish the call.
@@ -182,10 +187,11 @@ A signal to finish the call.
 ### Parameters
 
 | Parameter | Description |
-|:----:|:-------:|
+|----|-------|
 | moduleIdentifier | An identifier of the module, hold the **WebRTCVideoChat** value |
-| signalType | A type of signal, hold the **update** value |
+| signalType | A type of signal, hold the **hangUp** value |
 | sessionID | An unique id of current video chat session. Users have to use the same **sessionID** within particular call. Timestamp can be used as a **sessionID** value |
+| userInfo | An optional user info. Can be used to pass some extra data to opponents |
 
 ## ICE candidates
 A signal to send WebRTC ICE candidates.
@@ -217,10 +223,11 @@ A signal to send WebRTC ICE candidates.
 ### Parameters
 
 | Parameter | Description |
-|:----:|:-------:|
+|----|-------|
 | moduleIdentifier | An identifier of the module, hold the **WebRTCVideoChat** value |
-| signalType | A type of signal, hold the **update** value |
+| signalType | A type of signal, hold the **iceCandidates** value |
 | sessionID | An unique id of current video chat session. Users have to use the same **sessionID** within particular call. Timestamp can be used as a **sessionID** value |
+| iceCandidates | An array of WebRTC ICE candidates. [More info](http://w3c.github.io/webrtc-pc/#rtcicecandidate-interface) |
 
 ## Update parameters
 A signal to notify an opponent that some call's parameters is updated.
