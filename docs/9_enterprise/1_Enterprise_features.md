@@ -30,5 +30,5 @@ We support Web, iOS and Android platforms.
 TBA
 
 <span id="TNS_Trust_and_Safety" class="on_page_navigation"></span>
-# TNS (Trust and Safety)
+# TnS (Trust and Safety)
 TBA
