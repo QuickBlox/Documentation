@@ -226,6 +226,53 @@ paths:
           description: "Delete dialogs response"
           schema:
             $ref: '#/definitions/DeleteDialogsResponse'
+  /chat/Dialog/{dialog_id}/notifications.json:
+    get:
+      summary: Get notifications settings
+      operationId: 106_Get_Notifications_Settings
+      description: |
+        Get status of push notifications enabled or not for particular chat dialog for current user.
+      parameters:
+        - name: dialog_id
+          in: formData
+          description: |
+            An id of chat dialog to obtain notifications settings for. (path parameter)
+          required: true
+          type: string
+          default: 53aabe15e4b077ddd43e7fd6
+      responses:
+        '200':
+          description: "Dialog notifications response"
+          schema:
+            $ref: '#/definitions/DialogNotificationsResponse'
+    put:
+      summary: Update notifications settings
+      operationId: 107_Update_Notifications_Settings
+      description: |
+        Sey status of push notifications enabled or not for particular chat dialog for current user.
+        By default when a user is offline and other user sent a message to him then he will receive a push notification.
+        It is possible to disable this feature.
+        Default value is ON.
+      parameters:
+        - name: dialog_id
+          in: formData
+          description: |
+            An id of chat dialog to update notifications settings for. (path parameter)
+          required: true
+          type: string
+          default: 53aabe15e4b077ddd43e7fd6
+        - name: enabled
+          in: formData
+          description: |
+            New value of the setting, ON or OFF.
+          required: true
+          type: integer
+          default: 0
+      responses:
+        '200':
+          description: "Dialog notifications response"
+          schema:
+            $ref: '#/definitions/DialogNotificationsResponse'
 definitions:
   DialogsResponse:
     type: object
@@ -314,6 +361,15 @@ definitions:
             items:
               type: string
               example: 53afbe15e4b077ddd43e7fd5
+  DialogNotificationsResponse:
+    type: object
+    properties:
+      notifications:
+        type: object
+        properties:
+          enabled:
+            type: integer
+            example: 1
   MessagesResponse:
     type: object
     properties:
