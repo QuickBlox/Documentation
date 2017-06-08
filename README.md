@@ -1,5 +1,4 @@
 # Overview
-
 The markdown sources of QuickBlox documentation.
 
 # Live demo (alpha)
@@ -10,4 +9,3 @@ On every push to GitHub master branch your docs will be automatically deployed t
 
 # How to write REST API documentation
 [http://swagger.io/specification](http://swagger.io/specification)
-
