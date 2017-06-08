@@ -1,5 +1,4 @@
 # Overview
-
 The markdown sources of QuickBlox documentation.
 
 # Live demo (alpha)
