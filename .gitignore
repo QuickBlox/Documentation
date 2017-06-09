@@ -37,6 +37,7 @@ Thumbs.db
 
 # IDE files
 .idea
+*.iml
 
 # But not these files...
 !.gitignore
