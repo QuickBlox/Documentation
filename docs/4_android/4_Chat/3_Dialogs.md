@@ -209,79 +209,82 @@ new QBEntityCallback<QBChatDialog>() {
         
 ```
 
-== Chatting in dialog==
+3. Chatting in dialog
 
-=== QBChatDialog model===
+* QBChatDialog model
 
-'''QBChatDialog''' model is responsible for full chatting functionality : sending/receiving messages, typing statuses etc.
+```QBChatDialog``` model is responsible for full chatting functionality: sending/receiving messages, typing statuses etc.
 
-To use '''QBChatDialog''' you should load existed dialogs from server or create a new one on server. <br>
-'''QBChatDialog''' is initialized with active chat connection when it is created on server or loaded.<br>
-So, '''if you not logged into chat service you can't send and receive messages via QBChatDialog'''.<br>
-In order to chatting you should make login before using '''QBChatDialog'''.
-<syntaxhighlight lang="java">
+To use ```QBChatDialog``` you should load existed dialogs from server or create a new one on server. <br>
+```QBChatDialog``` is initialized with active chat connection when it is created on server or loaded.<br>
+So, **if you not logged into chat service you can't send and receive messages via QBChatDialog.**<br>
+In order to chatting you should make login before using ```QBChatDialog```.
+```java
 //login to chat firstly
 QBChatService.getInstance().login(qbUser);
 
 //Then load or create QBChatDialog on server
 
 QBChatDialog chatDialog = ...;
-</syntaxhighlight>
+```
 
-If you make logout at some point in application your '''QBChatDialog  detaches''' from chat service and lose connection. <br>
-If you save '''QBChatDialog''' model and make re-login to chat, you can still use '''QBChatDialog''' without reloading. In this case just initialize '''QBChatDialog''' with active chat service:
-<syntaxhighlight lang="java">
+If you make logout at some point in application your **QBChatDialog  detaches from chat** service and lose connection. <br>
+If you save ```QBChatDialog``` model and make re-login to chat, you can still use ```QBChatDialog``` without reloading. In this case just initialize ```QBChatDialog``` with active chat service:
+```java
 ...
 QBChatService.getInstance().logout();
 ...
+
 QBChatService.getInstance().login(qbUser);
+
 // init saved chatDialog with active chat service
 chatDialog.initForChat(QBChatService.getInstance());
-</syntaxhighlight>
+```
 
-==== Passing QBChatDialog inside app====
+==== Passing QBChatDialog inside app ====
 
-Staring from sdk '''3.3.0'''
-'''QBChatDialog''' can be passed between Activities or Fragments components via Intents.
+Staring from sdk **3.3.0**
+```QBChatDialog``` can be passed between Activities or Fragments components via Intents.
 
-<syntaxhighlight lang="java">
+```java
 
-QBChatDialog dialog = ...;
+QBChatDialog chatDialog = ...;
 Intent intent = new Intent(activity, ChatActivity.class);
-intent.putExtra(EXTRA_DIALOG_ID, dialog);
+intent.putExtra(EXTRA_DIALOG, dialog);
 activity.startActivity(intent);
-</syntaxhighlight>
+```
 
 To make received dialog able to chatting after receiving just attach it to active chat service :
-<syntaxhighlight lang="java">
+```java
 
 public class ChatActivity extends BaseActivity {
-...
+    ...
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
     ...
-    qbChatDialog = (QBChatDialog) getIntent().getSerializableExtra(EXTRA_DIALOG_ID);
+    qbChatDialog = (QBChatDialog) getIntent().getSerializableExtra(EXTRA_DIALOG);
     qbChatDialog.initForChat(QBChatService.getInstance());
     ...
    }
 }
-</syntaxhighlight>
+```
 <br>
 
 === Receiving incoming messages===
-In SDK version 3.0 was inroduced '''QBIncomingMessagesManager''' to listen for all incoming messages from all dialogs. '''Pay attention, messages from group chat dialogs will be received in QBIncomingMessagesManager only after joining to this group chat dialog.'''
 
-For using '''QBIncomingMessagesManager''' just retrieve it from '''QBChatService''' after '''login in chat''':
-<syntaxhighlight lang="java">
+In SDK version 3.0 was introduced ```QBIncomingMessagesManager``` to listen for all incoming messages from all dialogs.<br>
+**Pay attention, messages from group chat dialogs will be received in ```QBIncomingMessagesManager``` only after joining to this group chat dialog.**
+
+For using ```QBIncomingMessagesManager``` just retrieve it from ```QBChatService``` after **login in chat**:
+```java
 QBIncomingMessagesManager incomingMessagesManager = chatService.getIncomingMessagesManager();
-</syntaxhighlight>
+```
 
 
-To listen for messages from any chat dialogs just register '''QBChatDialogMessageListener''':
-<syntaxhighlight lang="java">
-incomingMessagesManager.addMessageListener(
-new QBChatDialogMessageListener() {
+To listen for messages from any chat dialogs just register ```QBChatDialogMessageListener```:
+```java
+incomingMessagesManager.addMessageListener(new QBChatDialogMessageListener() {
             @Override
             public void processMessage(String dialogId, QBChatMessage message, Integer senderId) {
                
@@ -292,12 +295,13 @@ new QBChatDialogMessageListener() {
 
             }
         });
-</syntaxhighlight>
+```
 
 
 === Chat in private dialog ===
-To send a message in 1-1 chat use the '''QBChatDialog''' instance:
-<syntaxhighlight lang="java">
+
+To send a message in 1-1 chat use the ```QBChatDialog``` instance:
+```java
 try {
     QBChatDialog privateDialog = ...;
     QBChatMessage chatMessage = new QBChatMessage();
@@ -320,16 +324,15 @@ privateDialog.addMessageListener(new QBChatDialogMessageListener() {
 
     }
 });
-</syntaxhighlight>
+```
 
-'''If you receive message from participant from Dialog, you haven't had before, you can construct Dialog for chatting by dialogId.'''
-<syntaxhighlight lang="java">
+**If you receive message from participant from Dialog, you haven't had before, you can construct Dialog for chatting by dialogId.***
+```java
 
 //Dialogs cache
 Map<String, QBChatDialog> opponentsDialogMap = ...;
 
-incomingMessagesManager.addDialogMessageListener(
-new QBChatDialogMessageListener() {
+incomingMessagesManager.addDialogMessageListener(new QBChatDialogMessageListener() {
             @Override
             public void processMessage(String dialogId, QBChatMessage message, Integer senderId) {
             //if you don't have dialog with this dialogId just construct it:
@@ -356,13 +359,12 @@ new QBChatDialogMessageListener() {
 
             }
         });
-</syntaxhighlight>
-
+```
 === Chat in group dialog ===
 
 Before start chatting in a group dialog you should join this dialog.
 
-<syntaxhighlight lang="java">
+```java
 QBChatDialog groupChatDialog = ...;
 
 DiscussionHistory discussionHistory = new DiscussionHistory();
@@ -379,20 +381,20 @@ groupChatDialog.join(discussionHistory, new QBEntityCallback() {
 
     }
 });
-</syntaxhighlight>
+```
 
-'''You can set ''autojoin'' settings in QBChatService to automatically join loaded or created on server dialogs:'''. In that way you don't need to join chat dialog manually in code.
+**You can set *autojoin* settings in QBChatService to automatically join loaded or created on server dialogs:**. In that way you don't need to join chat dialog manually in code.
 
-<syntaxhighlight lang="java">
+```java
 //Set it before login in chat
 QBChatService.ConfigurationBuilder builder = new QBChatService.ConfigurationBuilder();
 builder.setAutojoinEnabled(true);
 QBChatService.setConfigurationBuilder(builder);
-</syntaxhighlight>
+```
 
 After join you can send and receive messages:
 
-<syntaxhighlight lang="java">
+```java
 try {
     QBChatMessage chatMessage = new QBChatMessage();
     chatMessage.setBody("Hi there!");
@@ -414,11 +416,12 @@ groupChatDialog.addMessageListener(new QBChatDialogMessageListener() {
 
     }
 });
-</syntaxhighlight>
+```
 
 ==== Get online users ====
+
 You can request online users in group chat dialog without joining chat:
-<syntaxhighlight lang="java">
+```java
 Collection<Integer> onlineUsers = null;
 
 try {
@@ -426,12 +429,12 @@ try {
 } catch (XMPPException.XMPPErrorException | SmackException.NotConnectedException | SmackException.NoResponseException e) {
 
 }
-</syntaxhighlight>
+```
 
 '''Method chatDialog.getOnlineUsers is deprecated.'''
 
 And you also can handle online users in real time:
-<syntaxhighlight lang="java">
+```java
 private QBChatDialogParticipantListener participantListener;
 
 participantListener = new QBChatDialogParticipantListener() {
@@ -443,26 +446,29 @@ participantListener = new QBChatDialogParticipantListener() {
 
 private QBChatDialog groupChatDialog = ...;
 groupChatDialog.addParticipantListener(participantListener);
-</syntaxhighlight>
+```
 
 ==== Leave group chat dialog ====
-<syntaxhighlight lang="java">
+
+```java
 try {
     groupChatDialog.leave();
     groupChatDialog = null;
 } catch (XMPPException | SmackException.NotConnectedException e) {
     
 }
-</syntaxhighlight>
+```
 
 
 === Send and receive a message with attachment ===
+
 ==== Send attachment ====
+
 It's possible to add attachments to message: for example, image, audio file or video file. We don't have any restrictions here - you can attach any type of file.
 
 To send a message with attachments you should use the same way as you send regular message with text, but add to it an attachment object. Attachment can be:
-* A file in Content module: [http://quickblox.com/developers/SimpleSample-content-android Android example]
-* A file in Custom Objects module: [http://quickblox.com/developers/SimpleSample-customObjects-android#Files Android example]
+* A file in Content module: [Android example](http://quickblox.com/developers/SimpleSample-content-android)
+* A file in Custom Objects module: [Android example](http://quickblox.com/developers/SimpleSample-customObjects-android#Files)
 * Can be an url to any file in Internet
 <br>
 
@@ -470,42 +476,43 @@ To send a message with attachment you have to upload a file to Content module, C
 
 For example, we use Content module to store attachments. Next snippets show how to upload a file to Content module and send it as an attach: 
 
-<syntaxhighlight lang="java">
+```java
 File filePhoto = new File("holy_grail.png");
 Boolean fileIsPublic = false;
 String [] tags = new String[]{"tag_1", "tag_2"};
 QBContent.uploadFileTask(filePhoto, fileIsPublic, tags, new QBProgressCallback() {
-    @Override
-    public void onProgressUpdate(int i) {
-        // i - progress in percentages
-    }
-}).performAsync(new QBEntityCallback<QBFile>() {
-    @Override
-    public void onSuccess(QBFile qbFile, Bundle bundle) {
-        // create a message
-        QBChatMessage chatMessage = new QBChatMessage();
-        chatMessage.setSaveToHistory(true); // Save a message to history
+        @Override
+        public void onProgressUpdate(int i) {
+            // i - progress in percentages
+        }
+    }).performAsync(new QBEntityCallback<QBFile>() {
+        @Override
+        public void onSuccess(QBFile qbFile, Bundle bundle) {
+            // create a message
+            QBChatMessage chatMessage = new QBChatMessage();
+            chatMessage.setSaveToHistory(true); // Save a message to history
         
-        // attach a photo
-        QBAttachment attachment = new QBAttachment("photo");
-        attachment.setId(file.getId().toString());
-        chatMessage.addAttachment(attachment);
+            // attach a photo
+            QBAttachment attachment = new QBAttachment("photo");
+            attachment.setId(file.getId().toString());
+            chatMessage.addAttachment(attachment);
 
-        // send a message
-        // ...
-    }
+            // send a message
+            // ...
+        }
 
-    @Override
-    public void onError(QBResponseException e) {
-        // error
-    }
+        @Override
+        public void onError(QBResponseException e) {
+            // error
+        }
 });
-</syntaxhighlight>
+```
 
 ==== Receive attachment ====
+
 For example we use Content module to store attachments. Next snippets allow to receive a message with an attachment and download it:
 
-<syntaxhighlight lang="java">
+```java
 // QBChatDialogMessageListener
 
 ...
@@ -532,25 +539,26 @@ public void processMessage(String dialogId, QBChatMessage chatMessage, Integer s
 
 ... 
    
-</syntaxhighlight>
+```
 
 
 ===Use custom parameters in a message===
+
 You can use custom parameters for the messages you send in the chat, for example to send some additional info or to send control messages:
 
-<syntaxhighlight lang="java">
+```java
 QBChatMessage chatMessage = new QBChatMessage();
 chatMessage.setBody("Hi there");
                 
 chatMessage.setProperty("name", "Bob");
 chatMessage.setProperty("age", "25");
-</syntaxhighlight>
+```
 
 ===Unread messages count===
 
 You can request total unread messages count or unread count for particular dialog:
 
-<syntaxhighlight lang="java">
+```java
 Set<String> dialogsIds = new HashSet<String>();
     dialogsIds.add("56f3fac3a0eb4786ae00003f");
     dialogsIds.add("56f3f546a28f9affc0000033");
@@ -568,15 +576,13 @@ QBRestChatService.getTotalUnreadMessagesCount(dialogsIds).performAsync(new QBEnt
 
     }
 });
-</syntaxhighlight>
+```
 
 == Update group dialog ==
-User can update group chat dialog name, add new occupants or leave this group chat. Use '''QBDialogRequestBuilder''' to add more occupants or to leave group chat (remove yourself) or to remove other users. '''But only dialog's creator(owner) can remove any users from occupants_ids.''' Refer to http://quickblox.com/developers/Chat#Update_dialog
 
-[[File:Chat2_update_dialog_android.png]]
+User can update group chat dialog name, add new occupants or leave this group chat. Use ```QBDialogRequestBuilder``` to add more occupants or to leave group chat (remove yourself) or to remove other users. **But only dialog's creator(owner) can remove any users from occupants_ids.** Refer to http://quickblox.com/developers/Chat#Update_dialog
 
-
-<syntaxhighlight lang="java">
+```java
 QBDialogRequestBuilder requestBuilder = new QBDialogRequestBuilder();
 requestBuilder.addUsers(378); // add another users
 // requestBuilder.removeUsers(22); // Remove yourself (user with ID 22)
@@ -595,11 +601,11 @@ QBRestChatService.updateGroupChatDialog(chatDialog, requestBuilder).performAsync
 
             }
         });
-</syntaxhighlight>
+```
 
 To notify all occupants that you updated a group chat we use chat notifications - it's simple chat message with extra parameters inside. These parameters used to separate chat notifications from regular text chat messages:
 
-<syntaxhighlight lang="java">
+```java
 public static QBChatMessage createChatNotificationForGroupChatUpdate(QBChatDialog chatDialog) {
     String dialogId = String.valueOf(chatDialog.getDialogId());
     String roomJid = chatDialog.getRoomJid();
@@ -661,13 +667,13 @@ QBSystemMessageListener systemMessageListener = new QBSystemMessageListener() {
     }
 };
 systemMessagesManager.addSystemMessageListener(systemMessageListener);
-</syntaxhighlight>
+```
 
 == Delete dialogs ==
 
 To delete a dialog use next snippet:
 
-<syntaxhighlight lang="java">
+```java
 QBRestChatService.deleteDialog(dialogId, forceDelete).performAsync(new QBEntityCallback<Void>() {
     @Override
     public void onSuccess(Void aVoid, Bundle bundle) {
@@ -679,13 +685,13 @@ QBRestChatService.deleteDialog(dialogId, forceDelete).performAsync(new QBEntityC
 
     }
 });
-</syntaxhighlight>
+```
 
 This request will remove this dialog for current user, but other users still will be able to chat there.
 '''To completely remove a dialog use parameter ''forceDelete''.''' Refer to http://quickblox.com/developers/Chat#Delete_dialog
 
 To delete many dialogs use next :
-<syntaxhighlight lang="java">
+```java
 StringifyArrayList<String> dialogIds = new StringifyArrayList<>();
 dialogIds.add(dialogId);
 QBRestChatService.deleteDialogs(dialogIds, forceDelete).performAsync(new QBEntityCallback<ArrayList<String>>() {
@@ -699,4 +705,4 @@ QBRestChatService.deleteDialogs(dialogIds, forceDelete).performAsync(new QBEntit
 
     }
 });
-</syntaxhighlight>
+```

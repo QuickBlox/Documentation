@@ -3,9 +3,10 @@
 
 [**Creating applications in the Admin panel**](http://admin.quickblox.com/apps/new)
 
-In addition, there is this helpful[5 minute guide](http://quickblox.com/developers/5_Mins_Guide).
+In addition, there is this helpful [5 minute guide](http://quickblox.com/developers/5_Mins_Guide).
 
 **Prepare Chat service**
+You have to initialize chat service after [configuration and initialization QuickBlox framework]() .  
 
 To initialise chat service use:
 ```java
@@ -88,7 +89,10 @@ QBUsers.signIn(user).performAsync(new QBEntityCallback<QBUser>() {
 ```
 Note: If you don't use session automanagement, you have to create session before Sign in to QuickBlox. <br>
 
-To handle different connection states use ConnectionListener:
+
+<br>**Listen chat connection states**
+
+To handle different connection states use ```ConnectionListener```:
 ```java
 ConnectionListener connectionListener = new ConnectionListener() {
     @Override
@@ -137,7 +141,37 @@ QBChatService.getInstance().addConnectionListener(connectionListener);
 Android  provides 'true' background mode but the better way to handle correctly chat offline messages is to do 'Chat logout' when app goes to background and does 'Chat login' when app goes to foreground.
 
 
-**Logout from Chat**
+<br>**Mobile optimisations**
+
+In default configuration messages and other chat packets are sent to client when processing is finished, but in mobile environment sending or receiving data drains battery due to use of radio.
+
+To save energy data should be sent to client only if it is important or client is waiting for it.
+
+When mobile client is entering inactive it is possible to notify the backend about this:
+
+```java
+try {
+    QBChatService.getInstance().enterInactiveState();
+} catch (SmackException.NotConnectedException e) {
+
+}
+```
+
+After receiving packets server starts queueing packets which should be send to mobile client. Only last presence from each source is kept in queue, also Message Carbons are queued. Any other packets (such as iq or plain message) is sent immediately to the client. 
+
+When mobile client is entering active it is possible to notify the backend about this:
+```java
+try {
+    QBChatService.getInstance().enterActiveState();
+} catch (SmackException.NotConnectedException e) {
+
+}
+```
+
+After receiving this server sends all queued packets to the client. Also all packets from queue will be sent if number of packets in queue will reach queue size limit - limit is set to 50.
+
+
+<br>**Logout from Chat**
 
 Next code does chat logout:
 ```java
@@ -163,9 +197,15 @@ chatService.logout(new QBEntityCallback() {
 });
 ```
 
-**Reconnection**
+<br>**Reconnection**
 
 By default Android SDK reconnects automatically when connection to server is lost. 
-But you can disable this and then manage this manually, for it you have to set 'false' to parameter ```setReconnectionAllowed(false)``` for 
+But you can disable this and then manage this manually, for it you have to set ```false``` to parameter ```setReconnectionAllowed(false)``` for 
 ```QBTcpConfigurationBuilder```
+
+You can get worked app on GitHub
+
+[**Chat sample on GIT**](https://github.com/QuickBlox/quickblox-android-sdk/tree/master/sample-chat)
+
+[**All  latest Android Samples in ZIP**](https://github.com/QuickBlox/quickblox-android-sdk/archive/master.zip)
 
