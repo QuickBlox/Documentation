@@ -1,4 +1,5 @@
-=Chat history=
+<span id="Messages" class="on_page_navigation"></span>
+# Messages
 You can choose a way to save chat message to history or not. If you decided to store - you should call method ```setSaveToHistory(true)```:
 
 ```java
@@ -11,8 +12,8 @@ chatMessage.setSaveToHistory(true);
 <br>If you decided to use ```chatMessage.setSaveToHistory(true)``` parameter - all chat messages will be stored to history and
 user can request a chat history for particular dialog.
 
-
-=== Create/send chat message via REST request===
+<span id="Create_and_send_chat_message_via_REST_request" class="on_page_navigation"></span>
+## Create/send chat message via REST request
 
 It's also possible to create/send chat message via REST request:
 ```java
@@ -44,8 +45,8 @@ QBRestChatService.createMessage(chatMessage, sendToDialog).performAsync(new QBEn
 });
 ```
 
-
-===Retrieve list of messages===
+<span id="Retrieve_list_of_messages" class="on_page_navigation"></span>
+## Retrieve list of messages
 
 To get a chat history for particular dialog use next request:
 ```java
@@ -67,7 +68,7 @@ QBRestChatService.getDialogMessages(chatDialog, messageGetBuilder).performAsync(
 });
 ```
 
-==== Filters ====
+#### Filters
 
 There are some filters to get only chat messages you need, not just all.
 
@@ -106,12 +107,13 @@ messageGetBuilder.sortAsc("date_sent");
 messageGetBuilder.gt("updated_at", "1455098137");
 ```
 
-<span style="color:red;">Note</span>: All retrieved chat messages will be marked as read after request. 
+> <span style="color:red;">Note</span>: All retrieved chat messages will be marked as read after request. 
 If you decided not to mark chat messages as read add next parameter to request: ```messageGetBuilder.markAsRead(false);```
 
-=== Update chat messages ===
+<span id="Update_chat_messages" class="on_page_navigation"></span>
+## Update chat messages
 
-<br>To update chat messages use ```QBMessageUpdateBuilder``` like in next snippet:
+To update chat messages use ```QBMessageUpdateBuilder``` like in next snippet:
 
 ```java
 QBMessageUpdateBuilder messageUpdateBuilder = new QBMessageUpdateBuilder();
@@ -134,8 +136,8 @@ QBRestChatService.updateMessage(messageId, dialogId, messageUpdateBuilder).perfo
 
 For more information refer to http://quickblox.com/developers/Chat#Update_message
 
-
-=== Mark messages as read ===
+<span id="Mark_messages_as_read_via_REST_request" class="on_page_navigation"></span>
+## Mark messages as read via REST
 
 You can mark many messages as read on server using snippet:
 ```java
@@ -168,8 +170,8 @@ QBRestChatService.markMessagesAsRead(dialogId, null).performAsync(new QBEntityCa
 });
 ```
 
-
-=== Delete chat messages ===
+<span id="Delete_chat_messages" class="on_page_navigation"></span>
+## Delete chat messages
 
 To delete chat messages use next snippets:
 ```java
@@ -193,7 +195,7 @@ QBRestChatService.deleteMessages(messagesIDs, false).performAsync(new QBEntityCa
 
 This request will remove chat messages for current user, but other users still will be able to request them.
 
-**Use parameter ```forceDelete``` to completely remove messages as described here**: http://quickblox.com/developers/Chat#Delete_message
+**Use parameter ```forceDelete = true``` to completely remove messages as described here**: http://quickblox.com/developers/Chat#Delete_message
 ```java
 Set<String> messagesIds = ...;
 boolean forceDelete = true;

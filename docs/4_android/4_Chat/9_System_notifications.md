@@ -1,4 +1,5 @@
-== System notifications ==
+<span id="System_notifications" class="on_page_navigation"></span>
+## System notifications
 
 There is a way to send system notifications to other users about some events. These messages work over separated channel and won't be mixed with the regular chat messages:
 

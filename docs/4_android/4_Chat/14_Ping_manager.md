@@ -1,4 +1,7 @@
-==Ping manager==
+<span id="Ping_manager" class="on_page_navigation"></span>
+## Ping manager
+
+### Ping a server
 The Ping manager allows a user to ping the backend by simply sending a ping to it. This is useful in a case to check a connection between user and server. 
 
 ```java
@@ -38,7 +41,7 @@ pingManager.addPingFailedListener(new PingFailedListener(){
 });
 ```
 
-===Ping a user===
+### Ping a user
 
 It's also possible to ping some user to check whethere he is online or not:
 ```java

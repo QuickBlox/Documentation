@@ -1,9 +1,10 @@
-==Stickers==
+<span id="Stickers" class="on_page_navigation"></span>
+## Stickers
 
 This sample also demonstrates how to add stickers to your chat (full
 sample on [https://github.com/908Inc/stickerpipe-chat-sample](https://github.com/908Inc/stickerpipe-chat-sample])
 
-===Dependencies===
+### Dependencies
 
 Add stickers repository in **build.gradle**:
 ```
@@ -22,12 +23,12 @@ compile('vc908.stickers:stickerfactory:x.x.x@aar') {
 List of available versions you can find
 here http://maven.stickerpipe.com/artifactory/stickerfactory/vc908/stickers/stickerfactory/
 
-===Eclipse IDE===
+### Eclipse IDE
 
 Use this guide https://github.com/908Inc/stickerpipe-android-sdk-for-eclipse
 to add StickerPipe library in Eclipse.
 
-===Manifest===
+### Manifest
 
 Add content provider with your application package to your manifest file:
 ```xml
@@ -37,7 +38,7 @@ Add content provider with your application package to your manifest file:
      android:exported="false"/>
 ```
 
-===Initialization===
+### Initialization
 
 Initialize library at your Application ```onCreate()``` method
 ```java
@@ -46,7 +47,7 @@ StickersManager.initialize(“847b82c49db21ecec88c510e377b452c", this);
 
 You can get your own API Key on http://stickerpipe.com to have customized packs set.
 
-=== Stickers fragment and customisation===
+### Stickers fragment and customisation
 
 Create stickers fragment
 ```java
@@ -102,7 +103,7 @@ Set image color filter for empty view at recent tab
 
 Then you only need to show fragment.
 
-===Stickers showing and customizations===
+### Stickers showing and customizations
 
 To send stickers you need to set listener and handle results
 

@@ -1,4 +1,5 @@
-==Sent status==
+<span id="Sent_status" class="on_page_navigation"></span>
+## Sent status
 
 You can track the 'sent' status of your message. It means that your message has been delivered to the server.
 

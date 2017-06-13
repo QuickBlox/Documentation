@@ -1,4 +1,5 @@
-==Typing status==
+<span id="Typing_status" class="on_page_navigation"></span>
+## Typing status
 
 Many instant messaging systems include notifications about the state of one's conversation partner in a one-to-one chat (or, sometimes, in a many-to-many chat). In essence, chat state notifications can be thought of as a form of chat-specific presence. 
 

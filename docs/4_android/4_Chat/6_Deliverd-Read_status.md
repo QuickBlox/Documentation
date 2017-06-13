@@ -1,4 +1,5 @@
-==Delivered status==
+<span id="Delivered_status" class="on_page_navigation"></span>
+## Delivered status
 
 SDK automatically manages delivery notifications for all 'online' messages if you use marked messages.
 
@@ -49,8 +50,8 @@ try {
 ```
 <br>
 
-
-==Read status==
+<span id="Read_status" class="on_page_navigation"></span>
+## Read status
 
 You can manage 'read' notifications in chat. For example, User1 sends messages to User2 and User1 would like to know when User2 reads these messages.
 

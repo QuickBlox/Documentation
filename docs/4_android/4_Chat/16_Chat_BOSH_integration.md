@@ -1,8 +1,9 @@
-= Chat BOSH integration=
+<span id="Chat_BOSH_integration" class="on_page_navigation"></span>
+## Chat BOSH integration
 
 For using chat functions over **BOSH** protocol in QuickBlox Android SDK you need :
 
-* **Add dependency on quickblox-android-sdk-chat-extensions** module to the **buil.gradle** file of your project
+1. Add dependency on quickblox-android-sdk-chat-extensions** module to the **buil.gradle** file of your project
 ```groovy
 def qbSdkVersion = "3.2.0"
 
@@ -14,7 +15,7 @@ dependencies {
 }
 ``` 
 
-* **Create and configure QBBoshConfigurationBuilder**
+2. Create and configure QBBoshConfigurationBuilder
 
 ```java
 QBBoshConfigurationBuilder configurationBuilder = new QBBoshConfigurationBuilder()
@@ -29,12 +30,12 @@ QBBoshConfigurationBuilder configurationBuilder = new QBBoshConfigurationBuilder
                 .setAutojoinEnabled(false); //Sets true to automatically join loaded or created on server dialogs. By default sets false.
 ```
 
-* **Create QBBoshChatConnectionFabric with custom configs**
+3. Create QBBoshChatConnectionFabric with custom configs
 ```java
 QBBoshChatConnectionFabric connectionFabric = new QBBoshChatConnectionFabric(configurationBuilder);
 ```
 
-* **Set connection fabric to QBChatService**
+4. Set connection fabric to QBChatService
 ```java
 QBChatService.setConnectionFabric(connectionFabric);
 ```
@@ -122,56 +123,4 @@ chatDialog.sendIsTypingNotification(new QBEntityCallback<Void>() {
         });
 ```
 and other main methods.
-
-<div class="tabs">
-<title="Objective-C">
-@implementation AppDelegate
-
-// this is our AppDelegate class
-
-- (void)applicationWillTerminate:(UIApplication *)application
-{
-   [[QBChat instance] disconnectWithCompletionBlock:^(NSError * _Nullable error) {
-   
-   }];
-}
-
-- (void)applicationDidEnterBackground:(UIApplication *)application
-{
-   [[QBChat instance] disconnectWithCompletionBlock:^(NSError * _Nullable error) {
-   
-   }];
-}
-
-- (void)applicationWillEnterForeground:(UIApplication *)application
-{
-    [[QBChat instance] connectWithUser:user  completion:^(NSError * _Nullable error) {
-      
-    }];
-}
-</syntaxhighlight>
-<syntaxhighlight lang="objc" title="Swift">
-
-class AppDelegate: UIResponder, UIApplicationDelegate {
-
-    func applicationDidEnterBackground(application: UIApplication) {
-	QBChat.instance().disconnectWithCompletionBlock { (error: NSError?) -> Void in
-            
-        }	
-    }
-
-    func applicationWillTerminate(application: UIApplication) {
-	QBChat.instance().disconnectWithCompletionBlock { (error: NSError?) -> Void in
-            
-        }
-    }
-
-    func applicationWillEnterForeground(application: UIApplication) { 
-	QBChat.instance().connectWithUser(user) { (error: NSError?) -> Void in
-            
-        }
-    }
-}
-</syntaxhighlight>
-</div>
 

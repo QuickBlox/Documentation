@@ -1,8 +1,9 @@
-==Privacy lists==
+<span id="Privacy_lists" class="on_page_navigation"></span>
+## Privacy lists
 
 Privacy list API allows to enable or disable communication with other users in a chat. Privacy list API also enables a user to create, modify, or delete his privacy lists, define a default list.
 
-===Retrieve privacy lists===
+### Retrieve privacy lists
 
 User can have multiple privacy lists. To get a list of all your privacy lists' use next request:
 ```java
@@ -22,7 +23,7 @@ try {
 }
 ```
 
-===Create a privacy list or edit existing list===
+### Create a privacy list or edit existing list
 
 A privacy list must have at least one element in order to create it.
 
@@ -88,7 +89,7 @@ try {
 //set new privacy list after
 ```
 
-===Activate a privacy list===
+### Activate a privacy list
 
 User can have multiple privacy lists, but default can be only one.
 In order to activate rules from a privacy list you must set it as default.
@@ -105,7 +106,7 @@ try {
 }
 ```
 
-===Retrieve a privacy list===
+### Retrieve a privacy list
 ```java
 QBPrivacyList list = null;
 try {
@@ -119,7 +120,7 @@ try {
 }
 ```
 
-===Delete existing privacy list===
+### Delete existing privacy list
 ```java
 try {
     privacyListsManager.deletePrivacyList("public");
@@ -132,7 +133,7 @@ try {
 }
 ```
 
-===Blocked user attempts to communicate with user===
+### Blocked user attempts to communicate with user
 
 Blocked entities will be receiving an error when try to chat with a user in a 1-1 chat and will be receiving nothing in a group chat:
 

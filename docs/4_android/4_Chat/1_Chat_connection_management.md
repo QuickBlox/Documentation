@@ -1,11 +1,5 @@
-[**Getting a QuickBlox account**](http://admin.quickblox.com/register)
-
-
-[**Creating applications in the Admin panel**](http://admin.quickblox.com/apps/new)
-
-In addition, there is this helpful [5 minute guide](http://quickblox.com/developers/5_Mins_Guide).
-
-**Prepare Chat service**
+<span id="Chat_connection_management" class="on_page_navigation"></span>
+## Prepare Chat service
 You have to initialize chat service after [configuration and initialization QuickBlox framework]() .  
 
 To initialise chat service use:
@@ -43,7 +37,7 @@ QBTcpConfigurationBuilder configurationBuilder = new QBTcpConfigurationBuilder()
 QBChatService.setConnectionFabric(new QBTcpChatConnectionFabric(configurationBuilder));
 ```
 
-**Login to Chat**
+## Login to Chat
 
 Note: In order to login to the chat please read the information about [Chat login/password](http://quickblox.com/developers/Chat#Login_.2F_ID) formation. <br>
 
@@ -90,7 +84,7 @@ QBUsers.signIn(user).performAsync(new QBEntityCallback<QBUser>() {
 Note: If you don't use session automanagement, you have to create session before Sign in to QuickBlox. <br>
 
 
-<br>**Listen chat connection states**
+## Listen chat connection states
 
 To handle different connection states use ```ConnectionListener```:
 ```java
@@ -136,12 +130,12 @@ QBChatService.getInstance().addConnectionListener(connectionListener);
 
 <br>
 
-**Chat in background mode**
+## Chat in background mode
 
 Android  provides 'true' background mode but the better way to handle correctly chat offline messages is to do 'Chat logout' when app goes to background and does 'Chat login' when app goes to foreground.
 
 
-<br>**Mobile optimisations**
+## Mobile optimisations
 
 In default configuration messages and other chat packets are sent to client when processing is finished, but in mobile environment sending or receiving data drains battery due to use of radio.
 
@@ -171,7 +165,7 @@ try {
 After receiving this server sends all queued packets to the client. Also all packets from queue will be sent if number of packets in queue will reach queue size limit - limit is set to 50.
 
 
-<br>**Logout from Chat**
+## Logout from Chat
 
 Next code does chat logout:
 ```java
@@ -197,7 +191,7 @@ chatService.logout(new QBEntityCallback() {
 });
 ```
 
-<br>**Reconnection**
+## Reconnection
 
 By default Android SDK reconnects automatically when connection to server is lost. 
 But you can disable this and then manage this manually, for it you have to set ```false``` to parameter ```setReconnectionAllowed(false)``` for 

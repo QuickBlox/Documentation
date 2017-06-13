@@ -1,6 +1,7 @@
-==Contact list==
+<span id="Contact_list" class="on_page_navigation"></span>
+## Contact list
 
-===Contact list mode===
+### Contact list mode
 
 In traditional IM applications, the "buddy" system is rather straightforward.
 User A sends a request to become "friends" with user B. User B accepts the friend request. And now user A and B appear in each other's roster.
@@ -20,9 +21,9 @@ To enable Facebook like logic pass ```QBRoster.SubscriptionMode.mutual``` value 
 QBRoster chatRoster = QBChatService.getInstance().getRoster(QBRoster.SubscriptionMode.mutual, subscriptionListener);
 ```
 
-===Access to the Contact list===
+### Access to the Contact list
 
-==== Main setup ====
+#### Main setup
 
 To access contact list you have to obtain it and set all needed listeners:
 ```java
@@ -65,7 +66,7 @@ chatRoster.addRosterListener(rosterListener);
 
 ```QBSubscriptionListener``` is a listener that is fired on "subscribe" (add to contact list) request from any user.
 
-==== Access contact list users ====
+#### Access contact list users
 
 To get users from contact list:
 ```java
@@ -91,7 +92,7 @@ if (presence.getType() == QBPresence.Type.online) {
 }
 ```
 
-===Add/Remove users===
+### Add/Remove users
 
 To add users to the contact list just use the method below:
 ```java
@@ -165,7 +166,7 @@ try {
 }
 ```
 
-===Custom status===
+### Custom status
 
 A client MAY provide detailed status information to his contacts by constructing a presence object by himself:
 ```java
