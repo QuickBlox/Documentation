@@ -61,11 +61,218 @@ paths:
           required: false
           type: string
           default: 67834
+        - name: 'data[class_name]'
+          in: formData
+          description: |
+            A link to chat dialog's photo (image id, url whatever)
+          required: false
+          type: string
+          default: 67834
+        - name: 'data[field_name]'
+          in: formData
+          description: |
+            A link to chat dialog's photo (image id, url whatever)
+          required: false
+          type: string
+          default: 67834
       responses:
         '201':
           description: "Chat dialog object"
           schema:
             $ref: '#/definitions/DialogObject'
+    get:
+      summary: Retrieve dialogs
+      operationId: 102_Retrieve_Dialogs
+      description: |
+        Retrieve all dialogs associated with current user.
+        Server will return all dialogs where current user id is in **occupants_ids** field OR if **type=1** (PUBLIC_GROUP).
+      parameters:
+        - name: '{field_name}'
+          in: formData
+          description: |
+            Search records with field which contains exactly specified value.
+            Applied fields - **_id**, **type**, **name**, **last_message_date_sent**, **created_at**, **updated_at**.
+          required: false
+          type: string
+          default: type=2
+        - name: '{field_name}[{search_operator}]'
+          in: formData
+          description: |
+            Search records with field which contains value according to specified value and operator.
+            Possible filters - **lt** (Less Than operator), **lte** (Less Than or Equal to operator), **gt** (Greater Than operator), **gte** (Greater Than or Equal to operator), **ne** (Not Equal to operator), **in** (Contained IN array operator), **nin** (Not contained IN array), **all** (ALL contained IN array), **ctn** (Contains substring operator).
+            Applied fields - **_id**, **type**, **name**, **last_message_date_sent**, **created_at**, **updated_at**.
+          required: false
+          type: string
+          default: type[in]=1,2
+        - name: limit
+          in: formData
+          description: |
+            Limit search results to N records. Useful for pagination. Default (if not specified) - 100.
+          required: false
+          type: integer
+          default: 100
+        - name: skip
+          in: formData
+          description: |
+            Skip N records in search results. Useful for pagination. Default (if not specified) - 0.
+          required: false
+          type: integer
+          default: 100
+        - name: count
+          in: formData
+          description: |
+            Count search results. Response will contain only count of records found.
+          required: false
+          type: integer
+          default: 1
+        - name: sort_desc/sort_asc
+          in: formData
+          description: |
+            Search results will be sorted by specified field in ascending/descending order.
+          required: false
+          type: string
+          default: sort_desc=last_message_date_sent
+      responses:
+        '200':
+          description: "Array of chat dialogs"
+          schema:
+            $ref: '#/definitions/DialogsResponse'
+  /chat/Dialog/{dialog_id}.json:
+    put:
+      summary: Update dialog
+      operationId: 103_Update_Dialog
+      description: |
+        Update chat dialog. You can update the dialog's name, photo or add/remove users.
+        The following rules are applied if **type=2** (GROUP) -
+        * Any user from **occupants_ids** can add other users.
+        * Any user from **occupants_ids** can remove only himself.
+        * Only dialog's creator(owner) can remove any users from **occupants_ids**.
+
+        The following rules are applied if **type=1** (PUBLIC_GROUP) -
+        * Only dialog’s owner can update it.
+      parameters:
+        - name: 'push_all[occupants_ids][]'
+          in: formData
+          description: |
+            Update the dialog's occupants list - add new occupants.
+          required: false
+          type: array
+          items:
+            type: integer
+          default: 45,67
+        - name: 'pull_all[occupants_ids][]'
+          in: formData
+          description: |
+            Update the dialog's occupants list - remove occupants.
+          required: false
+          type: array
+          items:
+            type: integer
+          default: 56,78
+        - name: name
+          in: formData
+          description: |
+            Name of chat dialog.
+            Applied if **type=2** (GROUP) or **type=1** (PUBLIC_GROUP).
+          required: false
+          type: string
+          default: Chat with Bob, Sam, Garry
+        - name: photo
+          in: formData
+          description: |
+            A link to chat dialog's photo (image id, url whatever)
+          required: false
+          type: string
+          default: 67834
+      responses:
+        '200':
+          description: "Chat dialog object"
+          schema:
+            $ref: '#/definitions/DialogObject'
+    delete:
+      summary: Delete dialog
+      operationId: 104_Delete_Dialog
+      description: |
+        Delete chat dialog.
+      parameters:
+        - name: dialog_id
+          in: formData
+          description: |
+            The id of chat dialog to delete (path parameter)
+          required: true
+          type: string
+          default: 53aabe15e4b077ddd43e7fd6
+      responses:
+        '200':
+          description: "Empty body"
+  /chat/Dialog/{dialog_ids}.json:
+    delete:
+      summary: Delete dialogs
+      operationId: 105_Delete_Dialogs
+      description: |
+        Delete multiple chat dialogs.
+      parameters:
+        - name: dialog_ids
+          in: formData
+          description: |
+            The ids of chat dialogs to delete (path parameter)
+          required: true
+          type: array
+          items:
+            type: string
+          default: 53aabe15e4b077ddd43e7fd6,23aabe15e4b077ddd43e7fd1
+      responses:
+        '200':
+          description: "Delete dialogs response"
+          schema:
+            $ref: '#/definitions/DeleteDialogsResponse'
+  /chat/Dialog/{dialog_id}/notifications.json:
+    get:
+      summary: Get notifications settings
+      operationId: 106_Get_Notifications_Settings
+      description: |
+        Get status of push notifications enabled or not for particular chat dialog for current user.
+      parameters:
+        - name: dialog_id
+          in: formData
+          description: |
+            An id of chat dialog to obtain notifications settings for. (path parameter)
+          required: true
+          type: string
+          default: 53aabe15e4b077ddd43e7fd6
+      responses:
+        '200':
+          description: "Dialog notifications response"
+          schema:
+            $ref: '#/definitions/DialogNotificationsResponse'
+    put:
+      summary: Update notifications settings
+      operationId: 107_Update_Notifications_Settings
+      description: |
+        Sey status of push notifications enabled or not for particular chat dialog for current user.
+        By default when a user is offline and other user sent a message to him then he will receive a push notification.
+        It is possible to disable this feature.
+        Default value is ON.
+      parameters:
+        - name: dialog_id
+          in: formData
+          description: |
+            An id of chat dialog to update notifications settings for. (path parameter)
+          required: true
+          type: string
+          default: 53aabe15e4b077ddd43e7fd6
+        - name: enabled
+          in: formData
+          description: |
+            New value of the setting, ON or OFF.
+          required: true
+          type: integer
+          default: 0
+      responses:
+        '200':
+          description: "Dialog notifications response"
+          schema:
+            $ref: '#/definitions/DialogNotificationsResponse'
 definitions:
   DialogsResponse:
     type: object
@@ -127,6 +334,42 @@ definitions:
       user_id:
         type: integer
         example: 56
+  DeleteDialogsResponse:
+    type: object
+    properties:
+      SuccessfullyDeleted:
+        type: object
+        properties:
+          ids:
+            type: array
+            items:
+              type: string
+              example: 536fbe15123127d63d43e7fe4
+      WrongPermissions:
+        type: object
+        properties:
+          ids:
+            type: array
+            items:
+              type: string
+              example: 53efbe15e4b077d33d43e7fd2
+      NotFound:
+        type: object
+        properties:
+          ids:
+            type: array
+            items:
+              type: string
+              example: 53afbe15e4b077ddd43e7fd5
+  DialogNotificationsResponse:
+    type: object
+    properties:
+      notifications:
+        type: object
+        properties:
+          enabled:
+            type: integer
+            example: 1
   MessagesResponse:
     type: object
     properties:
