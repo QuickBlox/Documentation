@@ -78,14 +78,14 @@ try {
 
 After initialization ```QBChatDialog``` model with current chat connection you can start send messages.
 For it you can use next code snippets:
-##### Send simple message without any additional parameters:
+### Send simple message without any additional parameters:
 ```java
 QBChatDialog chatDialog = ...;
 
 chatDialog.sendMessage("Hi Bob!");
 ```
 
-##### Send message with some additional parameters:
+### Send message with some additional parameters:
 ```java
 QBChatDialog chatDialog = ...;
 
@@ -98,7 +98,7 @@ QBChatMessage chatMessage = new QBChatMessage();
 chatDialog.sendMessage(chatMessage);
 ```
 
-##### Send message with custom parameters:
+### Send message with custom parameters:
 
 There are cases when it is necessary to send custom parameters inside message, you can do it using nex code snippet:
 ```java
@@ -114,7 +114,7 @@ QBChatMessage chatMessage = new QBChatMessage();
 chatDialog.sendMessage(chatMessage);
 ```
 
-##### Send message with Attachment:
+### Send message with Attachment:
 Of course, QuickBlox maintain sending messages with attachments.<br>
 It's possible to add any type of attachments to message: for example, image, audio file or video file. We don't have any restrictions here - you can attach any type of file.
 
@@ -181,7 +181,7 @@ QBChatDialogMessageListener messagesListener = new QBChatDialogMessageListener()
 };
 ```
  
-##### Listening messages from all chats
+### Listening messages from all chats
 In QuickBlox Android SDK introduced ```QBIncomingMessagesManager``` to listen for all incoming messages from all dialogs.<br>
 >Pay attention, messages from group chat dialogs will be received in ```QBIncomingMessagesManager``` only after joining to this group chat dialog.
 
@@ -197,7 +197,7 @@ QBChatDialogMessageListener messagesListener = ...;
 incomingMessagesManager.addMessageListener(messagesListener);
 ```
 
-##### Listening messages from certain chat
+### Listening messages from certain chat
 For listening from certain chat just add ```QBChatDialogMessageListener``` to this ```QBChatDialog```:
 ```java
 QBChatDialog chatDialog = ...;
@@ -206,40 +206,39 @@ QBChatDialogMessageListener messagesListener = ...;
 chatDialog.addMessageListener(messagesListener);
 ```
 
-###### Receive attachment
+### Receive attachment
 
 For example we use Content module to store attachments. Next snippets allow to receive a message with an attachment and download it:
       
-      ```java
-      // QBChatDialogMessageListener
+```java
+// QBChatDialogMessageListener
       
-      ...
+    ...
       
-      @Override
-      public void processMessage(String dialogId, QBChatMessage chatMessage, Integer senderId) {
-          for (QBAttachment attachment : chatMessage.getAttachments()){
-              String fileId = attachment.getId();
+    @Override
+    public void processMessage(String dialogId, QBChatMessage chatMessage, Integer senderId) {
+        for (QBAttachment attachment : chatMessage.getAttachments()){
+            String fileId = attachment.getId();
       
-              // download a file
-              QBContent.downloadFile(fileId).performAsync(new QBEntityCallback<InputStream>(){
-                  @Override
-                  public void onSuccess(InputStream inputStream, Bundle params) {
-                      // process file
-                  }
+            // download a file
+            QBContent.downloadFile(fileId).performAsync(new QBEntityCallback<InputStream>(){
+                @Override
+                public void onSuccess(InputStream inputStream, Bundle params) {
+                    // process file
+                }
       
-                  @Override
-                  public void onError(QBResponseException errors) {
-                      // errors
-                  }
-              });
-          }
-      }
+                @Override
+                public void onError(QBResponseException errors) {
+                    // errors
+                }
+            });
+        }
+    }
       
-      ... 
-         
-      ```
+    ... 
+```
 
-###### Receive message from private chat, you haven't had before
+### Receive message from private chat, you haven't had before
 If you receive message from participant from Dialog, you haven't had before, you can construct private ```QBChatDialog``` for chatting by dialogId.
 ```java
 
