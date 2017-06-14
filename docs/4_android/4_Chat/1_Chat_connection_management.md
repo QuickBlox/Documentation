@@ -32,7 +32,7 @@ QBTcpConfigurationBuilder configurationBuilder = new QBTcpConfigurationBuilder()
         setUseStreamManagement(false) //Enables Stream Management feature. By default Stream Management feature is disabled.
         setUseStreamManagementResumption(false)
         setAutojoinEnabled(false) //Enables autojoin to group chat after QBChatDialog creation, downloading  or updating it on REST. By default autojoin is disabled.
-        setAutoMarkDelivered(true) //Enables marking messages as delivered when they came to the device. By default Auto Mark Delivered feature is enabled.
+        setAutoMarkDelivered(true); //Enables marking messages as delivered when they came to the device. By default Auto Mark Delivered feature is enabled.
         
 QBChatService.setConnectionFabric(new QBTcpChatConnectionFabric(configurationBuilder));
 ```

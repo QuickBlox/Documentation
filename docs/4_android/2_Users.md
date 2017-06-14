@@ -294,13 +294,13 @@ QBUsers.signOut().performAsync( new QBEntityCallback<Void>(){
 
 Retrieve all [API Users]() for current account.
 
-====Retrieve all Users====
+### Retrieve all Users
 
-Use **QBPagedRequestBuilder** to set pagination info for request.
+Use ```QBPagedRequestBuilder``` to set pagination info for request.
 
 You can use page parameters like:
-* '''perPage''' - how many users will contain each page (max 100)
-* '''page''' - current page
+* **perPage** - how many users will contain each page (max 100)
+* **page** - current page
 
 ```java
 QBPagedRequestBuilder pagedRequestBuilder = new QBPagedRequestBuilder();
@@ -325,7 +325,7 @@ QBUsers.getUsers(pagedRequestBuilder, params).performAsync( new QBEntityCallback
 });
 ```
 
-====Retrieve users by filter====
+### Retrieve users by filter
 There are lots of filters to retrieve users:
 
 * Retrieve Users by IDs
@@ -341,7 +341,7 @@ There are lots of filters to retrieve users:
 * Retrieve User by email
 * Retrieve User by external ID. You can connect user from 3d party system to QuickBlox user through external
 
-Use getUsersByXXX methods to retrieve users by filters.
+Use ```getUsersByXXX``` methods to retrieve users by filters.
 For example following code loads users by login:
 
 
