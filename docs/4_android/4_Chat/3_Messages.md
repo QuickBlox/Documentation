@@ -15,7 +15,7 @@ user can request a chat history for particular dialog.
 <span id="Create_and_send_chat_message_via_REST_request" class="on_page_navigation"></span>
 ## Create/send chat message via REST request
 
-It's also possible to create/send chat message via REST request:
+To create/send chat message via REST request you can use next snippet:
 ```java
 QBChatMessage msg = new QBChatMessage();
 msg.setBody("hello worls");
@@ -112,6 +112,7 @@ If you decided not to mark chat messages as read add next parameter to request: 
 
 <span id="Update_chat_messages" class="on_page_navigation"></span>
 ## Update chat messages
+User can update ```QBChatMessage``` for marking it as delivered/read or for changing messages'text.
 
 To update chat messages use ```QBMessageUpdateBuilder``` like in next snippet:
 
@@ -169,6 +170,8 @@ QBRestChatService.markMessagesAsRead(dialogId, null).performAsync(new QBEntityCa
     }
 });
 ```
+>Keep in mind, when you mark messages as delivered/read via REST, other user will not know about it realtime. 
+If you want to opponent get info about changing message's status, you have to mark it delivered/read via chat, for details refer to [stub link to docs]()
 
 <span id="Delete_chat_messages" class="on_page_navigation"></span>
 ## Delete chat messages

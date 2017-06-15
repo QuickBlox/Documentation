@@ -35,43 +35,23 @@ Before start chatting in a group chat (```QBChatDialog``` with type ```QBDialogT
 
 ```java
 QBChatDialog groupChatDialog = ...;
+QBEntityCallback callback = ...;
 
 DiscussionHistory discussionHistory = new DiscussionHistory();
 discussionHistory.setMaxStanzas(0);
 
-groupChatDialog.join(discussionHistory, new QBEntityCallback() {
-    @Override
-    public void onSuccess(Object o, Bundle bundle) {
-                
-    }
-
-    @Override
-    public void onError(QBResponseException e) {
-
-    }
-});
-```
-
-**You can set *autojoin* settings in QBChatService to automatically join loaded or created on server dialogs:**. In that way you don't need to join chat dialog manually in code.
-
-```java
-//Set it before login in chat
-QBChatService.ConfigurationBuilder builder = new QBChatService.ConfigurationBuilder();
-builder.setAutojoinEnabled(true);
-QBChatService.setConfigurationBuilder(builder);
+groupChatDialog.join(discussionHistory, callback);
 ```
 After join you can send and receive messages.
 
+**You can set ```setAutojoinEnabled(true)``` during configuration ```QBChatService``` to automatically join loaded or created on server dialogs:**. In that 
+way you don't need to join chat dialog manually in code. For more details about configurations ```QBChatService``` see [documentation stub link]()
+
 When you decide to stop using chatting functionality for group dialog, you should perform leave from group dialog.
 ```java
-try {
-    groupChatDialog.leave();
-    groupChatDialog = null;
-} catch (XMPPException | SmackException.NotConnectedException e) {
-    
-}
+QBChatDialog groupChatDialog = ...;
+groupChatDialog.leave();
 ```
-<br>
 
 <span id="Sending_messages" class="on_page_navigation"></span>
 ## Sending messages
@@ -166,7 +146,7 @@ QuickBlox Android SDK provides two ways of listening incoming messages:
 * listening messages from all chats using ```QBIncomingMessagesManager```;
 * listening messages only for specific chat;
  
-For this both ways used same messages listener ```QBChatDialogMessageListener```.
+For this both ways use same messages listener ```QBChatDialogMessageListener```.
 ```java
 QBChatDialogMessageListener messagesListener = new QBChatDialogMessageListener() {
     @Override

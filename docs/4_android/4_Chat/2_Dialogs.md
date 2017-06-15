@@ -88,12 +88,14 @@ You can set avatar for dialog with **type = 1** (```QBDialogType.PUBLIC_GROUP```
 For example, we use Content module to store the dialog's photo. Next snippets show how to upload a file to Content module and set it as a photo of a dialog: 
 
 ```java
+QBChatDialog groupChatDialog = ...;
+
 File filePhoto = new File("dialog_avatar.png");
 Boolean fileIsPublic = false;
 QBContent.uploadFileTask(filePhoto, fileIsPublic, null).performAsync(new QBEntityCallback<QBFile>() {
     @Override
     public void onSuccess(QBFile qbFile, Bundle bundle) {
-        dialog.setPhoto(file.getId().toString);
+        groupChatDialog.setPhoto(qbFile.getId().toString);
     }
 
     @Override
@@ -221,7 +223,6 @@ new QBEntityCallback<QBChatDialog>() {
 ```QBChatDialog``` can be passed between Activities or Fragments components via Intents.
 
 ```java
-
 QBChatDialog chatDialog = ...;
 Intent intent = new Intent(activity, ChatActivity.class);
 intent.putExtra(EXTRA_DIALOG, dialog);
@@ -230,7 +231,6 @@ activity.startActivity(intent);
 
 To make received dialog able to chatting after receiving just attach it to active chat service :
 ```java
-
 public class ChatActivity extends BaseActivity {
     ...
 
@@ -243,7 +243,7 @@ public class ChatActivity extends BaseActivity {
    }
 }
 ```
-<br>
+
 
 <span id="Getting_unread_messages_count_for_dialogs" class="on_page_navigation"></span>
 ## Getting unread messages count for dialogs
@@ -273,7 +273,12 @@ QBRestChatService.getTotalUnreadMessagesCount(dialogsIds).performAsync(new QBEnt
 <span id="Updating_group_dialog" class="on_page_navigation"></span>
 ## Updating group dialog
 
-User can update group chat dialog name, add new occupants or leave this group chat. Use ```QBDialogRequestBuilder``` to add more occupants or to leave group chat (remove yourself) or to remove other users. **But only dialog's creator(owner) can remove any users from occupants_ids.** Refer to http://quickblox.com/developers/Chat#Update_dialog
+Any user from ```occupants_ids``` can update dialog with type ```QBDialogType.GROUP```. Possible fields for update: 
+```occupants_ids```(add new occupants or leave this group chat), ```name```, ```photo```. Use ```QBDialogRequestBuilder``` to add more 
+occupants or to leave group chat (remove yourself) or to remove other users.
+**But only dialog's creator(owner) can remove any users from occupants_ids.** 
+
+**Only dialog's owner can update dialog with type ```QBDialogType.PUBLIC_GROUP```** 
 
 ```java
 QBDialogRequestBuilder requestBuilder = new QBDialogRequestBuilder();
@@ -296,8 +301,10 @@ QBRestChatService.updateGroupChatDialog(chatDialog, requestBuilder).performAsync
         });
 ```
 
-To notify all occupants that you updated a group chat we use chat notifications - it's simple chat message with extra parameters inside. These parameters used to separate chat notifications from regular text chat messages:
+For details about REST API for updating dialogs refer to http://quickblox.com/developers/Chat#Update_dialog
 
+To notify all occupants that you updated a group chat we use chat notifications - it's simple chat message with extra parameters inside. 
+These parameters used to separate chat notifications from regular text chat messages:
 ```java
 public static QBChatMessage createChatNotificationForGroupChatUpdate(QBChatDialog chatDialog) {
     String dialogId = String.valueOf(chatDialog.getDialogId());
@@ -365,7 +372,7 @@ systemMessagesManager.addSystemMessageListener(systemMessageListener);
 <span id="Deleting_dialogs" class="on_page_navigation"></span>
 ## Deleting dialogs
 
-To delete a dialog use next snippet:
+### To delete a dialog use next snippet:
 
 ```java
 boolean forceDelete = false;
@@ -386,7 +393,7 @@ QBRestChatService.deleteDialog(dialogId, forceDelete).performAsync(new QBEntityC
 This request will remove this dialog for current user, but other users still will be able to chat there.
 To completely remove a dialog use parameter ```forceDelete = true```. Refer to http://quickblox.com/developers/Chat#Delete_dialog
 
-To delete many dialogs use next:
+### To delete many dialogs use next:
 ```java
 StringifyArrayList<String> dialogIds = new StringifyArrayList<>();
 dialogIds.add(dialogId);
