@@ -14,13 +14,11 @@ QBPrivacyListListener privacyListListener = new QBPrivacyListListener() {
     @Override
     public void setPrivacyList(String listName, List<QBPrivacyListItem> listItem){
         //notify about setting privacy list with name 'listName' and inems 'listItem'
-
     }
 
     @Override
     public void updatedPrivacyList(String listName) {
         //notyfy about updating privacy list with name 'listName'
-
     }
 };
 ```
@@ -36,7 +34,7 @@ privacyListsManager.addPrivacyListListener(privacyListListener);
 // get all privacy lists
 List<QBPrivacyList> lists = privacyListsManager.getPrivacyLists();
 ```
-Or you can get single privacy list by name:
+Or you can get **single** privacy list **by name**:
 ```
 QBPrivacyList list = privacyListsManager.getPrivacyList("public");
 ```
@@ -91,27 +89,13 @@ User can have multiple privacy lists, but default can be only one.
 In order to activate rules from a privacy list you must set it as default.
 
 ```java
-try {
-    privacyListsManager.setPrivacyListAsDefault("public");
-} catch (SmackException.NotConnectedException e) {
-    e.printStackTrace();
-} catch (XMPPException.XMPPErrorException e) {
-    e.printStackTrace();
-} catch (SmackException.NoResponseException e) {
-    e.printStackTrace();
-}
+privacyListsManager.setPrivacyListAsDefault("public");
 ```
 
 ### Delete existing privacy list
+You can delete privacy list by name:
 ```java
-try {
-    privacyListsManager.deletePrivacyList("public");
-} catch (SmackException.NotConnectedException e) {
-    e.printStackTrace();
-} catch (XMPPException.XMPPErrorException e) {
-    e.printStackTrace();
-} catch (SmackException.NoResponseException e) {
-    e.printStackTrace();
+privacyListsManager.deletePrivacyList("public");
 }
 ```
 
@@ -120,12 +104,9 @@ try {
 Blocked entities will be receiving an error when try to chat with a user in a 1-1 chat and will be receiving nothing in a group chat:
 
 ```java
-QBChatMessage chatMessage = new QBChatMessage();
-chatMessage.setBody("Hey man!");
-
-QBChatDialog chatDialog = ...;
+QBChatDialog privateDialog = ...;
  
-chatDialog.sendMessage(chatMessage);
+privateDialog.sendMessage("Hey man!");
 
 ...
 
