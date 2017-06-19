@@ -1,15 +1,18 @@
 <span id="Chat_connection_management" class="on_page_navigation"></span>
 ## Prepare Chat service
-You have to initialize chat service after [configuration and initialization QuickBlox framework]() .  
+You have to initialize chat service after [configuration and initialization QuickBlox framework]() .
 
-To initialise chat service use:
+By default ```QBChatService``` **configured with default settings**, but it is possible to configure it for work with specific settings, 
+possible setting provided below:
+
 ```java
-QBChatService.setDebugEnabled(true); // enable chat logging
- 
-QBChatService.setDefaultPacketReplyTimeout(10000); //set reply timeout in milliseconds for connection's packet. Can be used for events like login, join to dialog to increase waiting response time from server if network is slow.
+QBChatService.setDebugEnabled(true); // Enables chat logging
+QBChatService.setDefaultPacketReplyTimeout(10000); //Sets reply timeout in milliseconds for connection's packet. Can be used for events like login, join to dialog to increase waiting response time from server if network is slow.
+QBChatService.setDefaultAutoSendPresenceInterval(60); //Sets interval to send presence to server to keep connection active.
+QBChatService.setDefaultConnectionTimeout(30000); //Sets how long the socket will wait until a TCP connection is established (in milliseconds).
 ```
 
-To configure chat use ```QBTcpConfigurationBuilder``` (for TCP connection).
+To configure chat connection use ```QBTcpConfigurationBuilder``` (for TCP connection).
 
 ```java
 QBTcpConfigurationBuilder configurationBuilder = new QBTcpConfigurationBuilder()
@@ -37,52 +40,66 @@ QBTcpConfigurationBuilder configurationBuilder = new QBTcpConfigurationBuilder()
 QBChatService.setConnectionFabric(new QBTcpChatConnectionFabric(configurationBuilder));
 ```
 
+For creating instance of ```QBChatService``` need call ```QBChatService.getInstance();```
+
 ## Login to Chat
 
-Note: In order to login to the chat please read the information about [Chat login/password](http://quickblox.com/developers/Chat#Login_.2F_ID) formation. <br>
+QuickBlox provide two ways of login to chat:
+* with user's ID and password;
+* with user's ID and QuickBlox REST token.
 
-In order to use QuickBlox Chat APIs you must:
-* Sign In to QuickBlox;
-* Login to QuickBlox Chat
+First option fit for login user, created before by login and password or by e-mail and password or another ways when we have password. 
 
+Second option option fit in case, when you don't have user's password, e.g. user was created using Facebook, Twitter, Twitter Digits or another ways. 
 
-Please follow the lines below:
+For this both options you have to have QBUser with ID. For getting QBUser with ID you have to create it on QuickBlox server. Needed information located
+ in section [Users stub link]();
 
-**Sign in User and Login to QuickBlox Chat**
+* Prepare QBUser for login by ID and password
+After getting QBUser from server you have to set it password manually before login to chat 
 ```java
-// Initialise Chat service
-QBChatService chatService = QBChatService.getInstance();
- 
-final QBUser user = new QBUser("garrysantos", "garrysantospass");
- 
-QBUsers.signIn(user).performAsync(new QBEntityCallback<QBUser>() {
-    @Override
-    public void onSuccess(QBUser result, Bundle params) {
-        // success, login to chat
-        user.setId(result.getId());
-                
-        chatService.login(user, new QBEntityCallback() {
-            @Override
-            public void onSuccess() {
-                
-            }
-                
-            @Override
-            public void onError(QBResponseException errors) {
-                
-            }
-        });
-    }
-
-     @Override
-     public void onError(QBResponseException responseException) {
-        
-     }
-});
-
+QBUser qbUser = ...;
+qbUser.setPassword(password);
 ```
-Note: If you don't use session automanagement, you have to create session before Sign in to QuickBlox. <br>
 
+* Prepare QBUser for login by ID and QuickBlox REST token
+After getting QBUser from server you have to set it QuickBlox REST token as password.  
+```java
+QBUser qbUser = ...;
+
+String qbToken = QBSessionManager.getInstance().getToken();
+qbUser.setPassword(qbToken);
+```
+> Keep in mind, for using token as password for login to chat, QBSession have to be created **with user**, more there [link on docs with authorization]()
+
+After configuration QBUser you have to login to chat using this user. Code will be same for both options:
+```java
+QBChatService.getInstance().login(qbUser, new QBEntityCallback() {
+        @Override
+        public void onSuccess() {
+            //login to chat was successful
+        }
+                
+        @Override
+        public void onError(QBResponseException errors) {
+            //login failed
+        }
+    });
+```
+
+By default user will be logged to chat with default resource ID, but QuickBlox provide overloaded method for login to chat with custom resource ID, you can use next snippet 
+for it:
+```java
+QBEntityCallback callback = ...;
+QBChatService.getInstance().login(qbUser, customResource, callback);
+```
+
+## Check login state
+
+For getting chat state for current used, you can use next snippet:
+```java
+QBChatService.getInstance().isLoggedIn(); //returns 'true' if current user is logged in chat now or 'false' otherwise
+```
 
 ## Listen chat connection states
 

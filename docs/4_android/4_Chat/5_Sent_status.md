@@ -20,12 +20,12 @@ Next - you can attach the ```QBChatDialogMessageSentListener``` listener to your
 QBChatDialogMessageSentListener messageSentListener = new QBChatDialogMessageSentListener() {
     @Override
     public void processMessageSent(String dialogId, QBChatMessage qbChatMessage) {
-
+        // qbChatMessage was sent
     }
 
     @Override
     public void processMessageFailed(String dialogId, QBChatMessage qbChatMessage) {
-
+        //sending message failed
     }
 };
         

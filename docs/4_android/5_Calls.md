@@ -198,7 +198,7 @@ QBRTCSurfaceView surfaceView = ...;
 EglBase eglContext = QBRTCClient.getInstance(getContext()).getEglContext();
 surfaceView.init(eglContext.getEglBaseContext(), null);
 ```
-<br>
+
 Method ```release()``` should be called when video track is no more valid, for ex when you receive ```onConnectionClosedForUser()```
 callback from ```QBRTCSession``` or when ```QBRTCSession``` is going to close. But you should call ```release()``` before the 
 **Activity** is destroyed and the **EGLContext** is still valid. If you don't call this method(), the **GL resources** might leak.

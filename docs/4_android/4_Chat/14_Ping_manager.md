@@ -5,38 +5,35 @@
 The Ping manager allows a user to ping the backend by simply sending a ping to it. This is useful in a case to check a connection between user and server. 
 
 ```java
-final QBPingManager pingManager = QBChatService.getInstance().getPingManager();
+QBPingManager pingManager = QBChatService.getInstance().getPingManager();
 
 pingManager.pingServer(new QBEntityCallback<Void>() {
     @Override
     public void onSuccess() {
-
+        //reply was received from the server
     }
 
     @Override
     public void onError(QBResponseException error) {
-
+        //any errors occured during ping server
     }
 });
 
 // or sync version
-final QBPingManager pingManager = QBChatService.getInstance().getPingManager();
 
-try {
-    boolean pingSuccess = pingManager.pingServer();
-} catch (SmackException.NotConnectedException e) {
-    e.printStackTrace();
-}
+//true if a reply was received from the server, false otherwise.
+boolean pingSuccess = pingManager.pingServer();
 ```
 
-PingManger also periodically sends XMPP pings to the server every 30 minutes to avoid NAT timeouts and to test the connection status. To configure the ping interval and to listen for fails: 
+PingManger also periodically sends XMPP pings to the server every 30 minutes to avoid NAT timeouts and to test the connection status. 
+To configure the ping interval and to listen for fails: 
 
 ```java
 QBChatService.getInstance().setPingInterval(30);
 
 pingManager.addPingFailedListener(new PingFailedListener(){
     public void pingFailed(){
-    
+        //some error occured during ping server
     }
 });
 ```
@@ -52,19 +49,17 @@ int userId = 56456;
 pingManager.pingUser(userId, new QBEntityCallback<Void>() {
     @Override
     public void onSuccess(Void result, Bundle params) {
-
+        //reply was received from the user
     }
 
     @Override
     public void onError(QBResponseException e) {
-
+        //some error occured during ping user
     }
 });
 
 // or sync version
-try {
-    boolean pingUser = pingManager.pingUser(userId);
-} catch (SmackException.NotConnectedException e) {
 
-}
+//true if a reply was received from the user, false otherwise.
+boolean pingUser = pingManager.pingUser(userId);
 ```
