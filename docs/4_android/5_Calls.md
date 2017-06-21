@@ -9,7 +9,7 @@ There are two approaches for WebRTC audio/video calls implementation in QuickBlo
 - Client side (Peer-to-peer or Mesh) - доступно для всех клиентов;
 - Server side  (SFU) implementation - доступно только для ентерпрайз клиентов;
 
-![](./resources/call/call_schemes.png)
+![Call scheme](./resources/call/call_schemes.png)
 
 Используя Mesh схему организации звонков вы можете использовать следующие возможности нашего СДК:
 * поддержка аудио звонков;
@@ -93,7 +93,9 @@ Detailed information about app permission here [Working with System Permissions]
 ## Integrate calls to your application
 Ниже представлена схема, которая описывает простой жизненный цикл звонка
 
-![](./resources/call/call_life_cycle.jpg)
+<!-- ![](./resources/call/call_life_cycle.jpg) -->
+
+[![](./resources/call/call_life_cycle.jpg)](./resources/call/call_life_cycle.jpg)
 
 <!-- For making scheme used web app https://www.draw.io/ For make changes can use next source file ./resources/call/call_life_cycle_source.xml -->
 
