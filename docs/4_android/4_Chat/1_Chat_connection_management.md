@@ -1,10 +1,8 @@
 <span id="Chat_connection_management" class="on_page_navigation"></span>
 ## Prepare Chat service
-You have to initialize chat service after [configuration and initialization QuickBlox framework]() .
+You need to initialize chat service after [configuration and initialization QuickBlox framework]() .
 
-By default ```QBChatService``` **configured with default settings**, but it is possible to configure it for work with specific settings, 
-possible setting provided below:
-
+If you wish to **change default settings** of ```QBChatService``` you can do that the following way:
 ```java
 QBChatService.setDebugEnabled(true); // Enables chat logging
 QBChatService.setDefaultPacketReplyTimeout(10000); //Sets reply timeout in milliseconds for connection's packet. Can be used for events like login, join to dialog to increase waiting response time from server if network is slow.
@@ -44,35 +42,38 @@ For creating instance of ```QBChatService``` need call ```QBChatService.getInsta
 
 ## Login to Chat
 
-QuickBlox provide two ways of login to chat:
+QuickBlox provides two ways of the login to chat:
 * with user's ID and password;
 * with user's ID and QuickBlox REST token.
 
-First option fit for login user, created before by login and password or by e-mail and password or another ways when we have password. 
+First option fits if user logs into application using login and password or email and password (or any other way, where 
+password is included).
 
-Second option option fit in case, when you don't have user's password, e.g. user was created using Facebook, Twitter, Twitter Digits or another ways. 
+Second option fit in case, you don't have user's password, e.g. user was created using Facebook, Twitter, Twitter Digits or another ways. 
 
-For this both options you have to have QBUser with ID. For getting QBUser with ID you have to create it on QuickBlox server. Needed information located
- in section [Users stub link]();
+For both options you need ```QBUser``` **with ID**. For getting QBUser with ID you have to create it on QuickBlox server. 
+Needed information is located in section [Users stub link]();
 
 * Prepare QBUser for login by ID and password
-After getting QBUser from server you have to set it password manually before login to chat 
+
+After getting QBUser from server you have to set the password manually before login to chat 
 ```java
 QBUser qbUser = ...;
 qbUser.setPassword(password);
 ```
 
 * Prepare QBUser for login by ID and QuickBlox REST token
-After getting QBUser from server you have to set it QuickBlox REST token as password.  
+
+After getting QBUser from server you have to set QuickBlox REST token as password.  
 ```java
 QBUser qbUser = ...;
 
 String qbToken = QBSessionManager.getInstance().getToken();
 qbUser.setPassword(qbToken);
 ```
-> Keep in mind, for using token as password for login to chat, QBSession have to be created **with user**, more there [link on docs with authorization]()
+> Keep in mind, that for using token as password for login to chat, QBSession has to be created **with user**, you can find more there [link on docs with authorization]()
 
-After configuration QBUser you have to login to chat using this user. Code will be same for both options:
+After configuring QBUser you have to login to chat using this user. Code will be the same for both options:
 ```java
 QBChatService.getInstance().login(qbUser, new QBEntityCallback() {
         @Override
@@ -96,7 +97,7 @@ QBChatService.getInstance().login(qbUser, customResource, callback);
 
 ## Check login state
 
-For getting chat state for current used, you can use next snippet:
+For getting chat state for current user, you can use next snippet:
 ```java
 QBChatService.getInstance().isLoggedIn(); //returns 'true' if current user is logged in chat now or 'false' otherwise
 ```
@@ -149,12 +150,16 @@ QBChatService.getInstance().addConnectionListener(connectionListener);
 
 ## Chat in background mode
 
-Android  provides 'true' background mode but the better way to handle correctly chat offline messages is to do 'Chat logout' when app goes to background and does 'Chat login' when app goes to foreground.
-
+Android  provides 'true' background mode but the better way to handle correctly chat offline messages is to do 
+'Chat logout' when app goes to background and do 'Chat login' when app goes to foreground.
+<br>QuickBlox provides a way to setup automatic push notifications for the offline users. It means if your opponent 
+is offline while you sending a message - he will automatically receive push notification.
+Read how to setup automatic push notifications in Admin panel in [Alerts section](http://quickblox.com/developers/Chat#Alerts).
 
 ## Mobile optimisations
 
-In default configuration messages and other chat packets are sent to client when processing is finished, but in mobile environment sending or receiving data drains battery due to use of radio.
+In default configuration messages and other chat packets are sent to client when processing is finished, but in mobile environment 
+sending or receiving data drains battery due to use of radio.
 
 To save energy data should be sent to client only if it is important or client is waiting for it.
 
@@ -168,7 +173,8 @@ try {
 }
 ```
 
-After receiving packets server starts queueing packets which should be send to mobile client. Only last presence from each source is kept in queue, also Message Carbons are queued. Any other packets (such as iq or plain message) is sent immediately to the client. 
+After receiving packets server puts them into query to mobile client. Only last presence from each source is kept in queue, 
+also Message Carbons are queued. Any other packets (such as iq or plain message) are sent immediately to the client. 
 
 When mobile client is entering active it is possible to notify the backend about this:
 ```java
@@ -179,12 +185,13 @@ try {
 }
 ```
 
-After receiving this server sends all queued packets to the client. Also all packets from queue will be sent if number of packets in queue will reach queue size limit - limit is set to 50.
+After receiving this server sends all queued packets to the client. Also all packets from queue will be sent if number of packets 
+in queue reaches queue size limit - limit is set to 50.
 
 
 ## Logout from Chat
 
-Next code does chat logout:
+The following code does chat logout:
 ```java
 boolean isLoggedIn = chatService.isLoggedIn();
 
@@ -211,7 +218,7 @@ chatService.logout(new QBEntityCallback() {
 ## Reconnection
 
 By default Android SDK reconnects automatically when connection to server is lost. 
-But you can disable this and then manage this manually, for it you have to set ```false``` to parameter ```setReconnectionAllowed(false)``` for 
+But you can disable this and then manage reconnection manually, just set ```false``` to parameter ```setReconnectionAllowed(false)``` for 
 ```QBTcpConfigurationBuilder```
 
 You can get worked app on GitHub

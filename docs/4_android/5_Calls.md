@@ -1,11 +1,33 @@
 <span id="Overview" class="on_page_navigation"></span>
 # Overview
-The WebRTC VideoChat module allows you easily add video calling features into your Android app. 
-Enable a video call function similar to Skype using this code sample as a basis.
 
-It is built on the top of WebRTC technology.
+## Основные возможности:
+Quickblox Android SDK позволяет с легкостью реализовать приложение для организации аудио и видео звонков. Наше СДК обладает надором
+необходимого для этого функционала.
 
-<span id="System_requirements" class="on_page_navigation"></span>
+There are two approaches for WebRTC audio/video calls implementation in QuickBlox:
+- Client side (Peer-to-peer or Mesh) - доступно для всех клиентов;
+- Server side  (SFU) implementation - доступно только для ентерпрайз клиентов;
+
+![](./resources/call/call_schemes.png)
+
+Используя Mesh схему организации звонков вы можете использовать следующие возможности нашего СДК:
+* поддержка аудио звонков;
+* поддержка видео звонков;
+* поддержка приватных звонков (пир-ту-пир);
+* поддержка групповых звонков (поддерживается стабильный аудио звонок с 10-ю участниками и видеозвонок с 6-ю участниками);
+* предусмотрена логика осуществления зонков участникам, которые на момент звонка находятся вне приложения и не залогинены в чат 
+(с использованием модуля Push-notifications);
+* поддежка популярных аудио-кодеков (opus, ISAC);
+* поддержка популярных видео-кодеков (VP8, VP9, H264);
+* скриншаринг (возможность демонстрации собстенного экрана девайса не только с текущего приложения, но и всей системы);
+* произвольная организация UI-елементов на экране звонка.
+
+Дополнительно к вышеперечисленным возможностям ентерпрайз клиентов могут воспользоваться SFU схемой организации звонков, что позволяет:
+* увеличить количество участников звонка до 12 (или 15, надо уточнить, + уточнить максимальное количество для аудио звонка);
+* управлять оппонентами во время звонка (на стороне сервера);
+* узерам присоединяться к уже существующему звонку;
+
 ## System requirements
 Quickblox Android video chat webrtc sdk supports:
 * armeabi, armeabi-v7a, armeabi64-v8a, and x86 architectures.
@@ -14,20 +36,20 @@ but on such devices can be problems with video quality.
 * devices from Samsung, Google, Motorola Moto, and LG Optimus families. And other official android devices like Nexus family.
 * Wi-Fi and 4G LTE networks.
 
-<span id="Prepare_your_application_forQuickBlox_Android_SDK" class="on_page_navigation"></span>
+<span id="Prepare_your_application_for_QuickBlox_Android_SDK" class="on_page_navigation"></span>
 ## Prepare your application for Android SDK
-Preparation includes next steps:
-* Create QuickBlox account
-* Register an application in Dashboard
-* Integrate QuickBlox SDK into application
+Данная инструкция предполагает, что вы уже знакомы с порядком интеграции Quickblox фреймворка в приложение и уже выполнели такие 
+действия для своего приложении:
 
-### Get QuickBlox account
-For creating your personal account refer to [registration page](http://admin.quickblox.com/register).
+* [Created QuickBlox account](http://admin.quickblox.com/register)
+* [Registerer an application in Dashboard](http://quickblox.com/developers/5_Mins_Guide)
+* [Integrated QuickBlox SDK into application - stub link]()
 
-### Create application in Admin panel
-The steps of creating application in admin panel are represented in http://admin.quickblox.com/apps/new page.
+Следующие шаги описывают порядок интеграции **модуля звонков** в ваше андроид приложение:
 
-Also you can look through [5 min guide](http://quickblox.com/developers/5_Mins_Guide).
+* добавление зависимости на мавен репозиторий с **модулем звонков**;
+* добавление нативных библиотек, необходимых для работы нашего СДК;
+* добавление необходимых разрещений в ```AndroidManifest.xml``` вашего приложения;
 
 ### Integrate QuickBlox Android SDK in your application
 To use video chat based on WebRTC technology in your app, you just have to add dependency in **build.gradle** project file:
@@ -37,14 +59,16 @@ dependencies {
 }
 ```
 
-**Add native libraries - libjingle_peerconnection_so.so files.** 
+### Add native libraries
 Put native library for each platform: arm64-v8a, armeabi-v7a, x86, x86_64 under ```app/src/main/jniLibs``` folder.<br> 
 You can find native files in [Video Chat sample](https://github.com/QuickBlox/quickblox-android-sdk/tree/master/sample-videochat-webrtc/src/main/jniLibs)  under ```/src/main/jniLibs``` folder.
 
-[[File:Android_webrtc_native_libraries.png]]
+ [[File:Android_webrtc_native_libraries.png]]
 
+### Добавление необходимых разрещений в ```AndroidManifest.xml```
 
-**Video chat** module requires camera, microphone, internet and storage permissions. Make sure you add relevant permissions to your app manifest:
+**Video chat** module requires camera, microphone, internet and storage permissions. Make sure you add relevant permissions to your 
+app manifest:
 ```xml
   <uses-permission android:name="android.permission.CAMERA" />
   <uses-permission android:name="android.permission.MODIFY_AUDIO_SETTINGS" />
@@ -64,66 +88,56 @@ Detailed information about app permission here [Working with System Permissions]
 
 * To request permission at runtime please refer to official documentation: [Requesting Permissions at Run Time](http://developer.android.com/training/permissions/requesting.html).
 
+
 <span id="Integrate_video_calls_to_your_application" class="on_page_navigation"></span>
-## Integrate video calls to your application
+## Integrate calls to your application
+Ниже представлена схема, которая описывает простой жизненный цикл звонка
 
-### Initialize framework with application credentials
-For fast applying of user credentials use code below:
+![](./resources/call/call_life_cycle.jpg)
 
-```java
-static final String APP_ID = "961";
-static final String AUTH_KEY = "PBZxXW3WgGZtFZv";
-static final String AUTH_SECRET = "vvHjRbVFF6mmeyJ";
-static final String ACCOUNT_KEY = "961";
-//
-QBSettings.getInstance().init(getApplicationContext(), APP_ID, AUTH_KEY, AUTH_SECRET);
-QBSettings.getInstance().setAccountKey(ACCOUNT_KEY);
-```
+<!-- For making scheme used web app https://www.draw.io/ For make changes can use next source file ./resources/call/call_life_cycle_source.xml -->
 
 ### Create session, sign in user and set QBChatService up
 In order to use QuickBlox Chat APIs you must:
-* Create a session with user
-* Log in chat service
+* Sign in user to REST
+* Log in user in chat service
 
 Please follow lines below:
-
 ```java
 String login = "login";
-String password = "password"; 
+String password = "password";
 
 final QBUser user = new QBUser(login, password);
 
 // CREATE SESSION WITH USER
 // If you use create session with user data,  
 // then the user will be logged in automatically
-QBAuth.createSession(login, password, new QBEntityCallback<QBSession>() {
+QBUsers.signIn(user).performAsync(new QBEntityCallback<QBUser>() {
     @Override
-    public void onSuccess(QBSession session, Bundle bundle) {
-                
-        user.setId(session.getUserId());                
-    
+    public void onSuccess(QBUser qbUser, Bundle params) {
+        user.setId(qbUser.getId());
+
         // INIT CHAT SERVICE
         chatService = QBChatService.getInstance();
 
         // LOG IN CHAT SERVICE
-        chatService.login(user, new QBEntityCallback<QBUser>() {
+        chatService.login(user, new QBEntityCallback() {
+           @Override
+           public void onSuccess(Object result, Bundle params) {
+                // логин в чат выполнен успешно, после этого можно начинать подготовку приложения осуществлению зонков
+           }
 
-            @Override
-            public void onSuccess() {
-                // success
-            }
-
-            @Override
-            public void onError(QBResponseException errors) {
-                //error
-            }
+           @Override
+           public void onError(QBResponseException errors) {
+               //error
+           }
         });
     }
 
-   @Override
-   public void onError(QBResponseException errors) {
-      //error
-   }
+    @Override
+    public void onError(QBResponseException responseException) {
+        //error
+    }
 });
 ```
 
@@ -134,6 +148,7 @@ To use QuickBlox WebRTC video calls follow next steps:
 * Set video view for remote video track
 * Set video view for local video track
 * Notify RTCClient that you are ready to receive calls
+
 
 
 #### Add signalling manager
@@ -167,7 +182,7 @@ public void addSessionCallbacksListener(QBRTCClientSessionCallbacks callback)
 
 #### Setup views
 
-Use QBRTCSurfaceView to render frames.
+Use ```QBRTCSurfaceView``` to render frames.
 
 Set in your layout views for remote and local video tracks:
 
@@ -270,7 +285,7 @@ void onCallAcceptByUser(QBRTCSession session, Integer userID, Map<String, String
 /**
  * Called in case when opponent hung up
  */
-void onReceiveHangUpFromUser(QBRTCSession session, Integer userID);
+void onReceiveHangUpFromUser(QBRTCSession session, Integer userID, Map<String, String> userInfo);
 
 /**
  * Called in case when session will close
@@ -311,7 +326,6 @@ void onCallAcceptByUser(QBRTCSession session, Integer userID, Map<String, String
  * Called in case when opponent hung up
  */
 void onReceiveHangUpFromUser(QBRTCSession session, Integer userID);
-
 
 /**
  * Called when session is closed.
