@@ -30,7 +30,7 @@ chatDialog.initForChat(QBChatService.getInstance());
 ```
 <br>
 
-##### Specificity of use chatting functionality for group chats
+### Specificity of use chatting functionality for group chats
 Before start chatting in a group chat (```QBChatDialog``` with type ```QBDialogType.GROUP```) you should join this dialog.
 
 ```java
