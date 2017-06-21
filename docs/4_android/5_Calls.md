@@ -91,9 +91,7 @@ Detailed information about app permission here [Working with System Permissions]
 
 <span id="Integrate_video_calls_to_your_application" class="on_page_navigation"></span>
 ## Integrate calls to your application
-Ниже представлена схема, которая описывает простой жизненный цикл звонка
-
-<!-- ![](./resources/call/call_life_cycle.jpg) -->
+Ниже представлена схема, которая описывает простой жизненный цикл звонка (нажмите на картинку что просмотреть ее в полном размере).
 
 [![](./resources/call/call_life_cycle.jpg)](./resources/call/call_life_cycle.jpg)
 
