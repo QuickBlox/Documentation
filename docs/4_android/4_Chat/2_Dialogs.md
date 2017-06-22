@@ -4,7 +4,7 @@
 <span id="Creating_dialogs" class="on_page_navigation"></span>
 ## Creating dialogs
 
-#### Creating group and private dialogs example:
+### Example of creating group and private dialogs::
 ```java
 ArrayList<Integer> occupantIdsList = new ArrayList<Integer>();
 occupantIdsList.add(34);
@@ -36,7 +36,7 @@ QBRestChatService.createChatDialog(dialog).performAsync(new QBEntityCallback<QBC
 });
 ```
 
-To notify occupants you've created chat dialog you can use ```QBSystemMessagesManager```:
+To notify occupants that you've created chat dialog you can use ```QBSystemMessagesManager```:
 ```java
 public static final String PROPERTY_OCCUPANTS_IDS = "occupants_ids";
 public static final String PROPERTY_DIALOG_TYPE = "dialog_type";
@@ -70,14 +70,16 @@ public void sendSystemMessageAboutCreatingDialog(QBSystemMessagesManager systemM
 
 #### Create a Public group chat dialog
 
-It's also possible to create a public group chat, so any user from you application can join it. There is no a list with occupants, this chat is just open for everybody.
+It's also possible to create a public group chat, so that any user from you application can join it. There is no list with occupants, 
+this chat is just open for everybody.
 
-To create a public group chat use the same logic as for group chat, but change the dialog's **type** to ```QBDialogType.PUBLIC_GROUP``` and don't pass the **occupantsIds** value.
+To create a public group chat use the same logic as for group chat, but change the dialog's **type** 
+to ```QBDialogType.PUBLIC_GROUP``` and do not pass the **occupantsIds** value.
 <br><br>
 
 #### Set dialog's avatar<br>
 
-The Chat dialog contains a field **photo**. It's a string field, can contain any value:
+The Chat dialog contains a field **photo**. It's a string field, which can contain any value:
 * An ID of a file in Content module: [Android example](http://quickblox.com/developers/SimpleSample-content-android)
 * An ID of a file in Custom Objects module: [Android example](http://quickblox.com/developers/SimpleSample-customObjects-android#Files)
 * Can be an url to any file in Internet
@@ -85,7 +87,8 @@ The Chat dialog contains a field **photo**. It's a string field, can contain any
 You can set avatar for dialog with **type = 1** (```QBDialogType.PUBLIC_GROUP```) or **type = 2** (```QBDialogType.GROUP```). 
 <br>
 
-For example, we use Content module to store the dialog's photo. Next snippets show how to upload a file to Content module and set it as a photo of a dialog: 
+For example, we use Content module to store the dialog's photo. Next snippets show how to upload a file to the Content module and 
+set it as a photo of a dialog: 
 
 ```java
 QBChatDialog groupChatDialog = ...;
@@ -108,11 +111,14 @@ QBContent.uploadFileTask(filePhoto, fileIsPublic, null).performAsync(new QBEntit
 
 #### Set custom parameters
 
-Dialogs can store additional parameters. These parameters can be used to store an additional data. Also these parameters can be used in dialogs retrieval requests.
+Dialogs can store some additional parameters. These parameters can be used to store an additional data. Also these parameters 
+can be used in dialogs retrieval requests.
 
-To start use additional parameters it needs to create an additional schema of your parameters. This is a [CustomObjects class](http://quickblox.com/developers/Custom_Objects#Create_data_schema). Just create an empty class with all needed fields. These fields will be your dialog additional parameters.
+To start use additional parameters you need to create an additional schema of your parameters. 
+This is a [CustomObjects class](http://quickblox.com/developers/Custom_Objects#Create_data_schema). 
+Just create an empty class with all needed fields. These fields will be additional parameters of your dialog.
 
-When you create a dialog then set a dialog's field **customData**:
+When you create a dialog set a dialog's field ```customData```:
 ```java
 QBDialogCustomData data = new QBDialogCustomData("Advert"); // class name
 data.putString("title", "Magic Beans"); // field 'title'
@@ -120,7 +126,7 @@ data.putInteger("advert_id", 5665); // field 'advert_id'
 newDialog.setCustomData(data);
 ```
 
-It's also possible to use custom parameters in a dialogs retrieval requests so dialogs can be filtered through custom parameters:
+It's also possible to use custom parameters in a dialog's retrieval requests to filter them custom parameters:
 
 ```java
 QBRequestGetBuilder requestBuilder = new QBRequestGetBuilder();
@@ -190,7 +196,7 @@ requestBuilder.gt("updated_at", "1455098137");
 ```
 
 
-Also possible to use custom parameters in a dialogs retrieval requests so dialogs can be filtered through custom parameters:
+Also it is possible to use custom parameters in a dialog's retrieval requests to filter them through custom parameters:
 ```java
 QBRequestGetBuilder requestBuilder = new QBRequestGetBuilder();
 requestBuilder.addRule("data[class_name]", QueryRule.EQ, "Advert");
@@ -198,7 +204,7 @@ requestBuilder.addRule("data[title]", QueryRule.EQ, "bingo");
 ```
 
 
-You can request single dialog using code: 
+You can request single dialog following the code: 
 ```java
 String dialogId = ...;
 
@@ -229,7 +235,7 @@ intent.putExtra(EXTRA_DIALOG, dialog);
 activity.startActivity(intent);
 ```
 
-To make received dialog able to chatting after receiving just attach it to active chat service :
+To make received dialog available chatting after receiving just attach it to active chat service :
 ```java
 public class ChatActivity extends BaseActivity {
     ...
@@ -248,7 +254,7 @@ public class ChatActivity extends BaseActivity {
 <span id="Getting_unread_messages_count_for_dialogs" class="on_page_navigation"></span>
 ## Getting unread messages count for dialogs
 
-You can request total unread messages count or unread count for particular dialog:
+You can request total unread messages count or unread messages count for particular dialog:
 
 ```java
 Set<String> dialogsIds = new HashSet<String>();
@@ -273,10 +279,10 @@ QBRestChatService.getTotalUnreadMessagesCount(dialogsIds).performAsync(new QBEnt
 <span id="Updating_group_dialog" class="on_page_navigation"></span>
 ## Updating group dialog
 
-Any user from ```occupants_ids``` can update dialog with type ```QBDialogType.GROUP```. Possible fields for update: 
+Any user from ```occupants_ids``` can update dialog with type ```QBDialogType.GROUP```. The following fields could be updated: 
 ```occupants_ids```(add new occupants or leave this group chat), ```name```, ```photo```. Use ```QBDialogRequestBuilder``` to add more 
 occupants or to leave group chat (remove yourself) or to remove other users.
-**But only dialog's creator(owner) can remove any users from occupants_ids.** 
+**But only dialog's creator(owner) can remove any users from ```occupants_ids```.** 
 
 **Only dialog's owner can update dialog with type ```QBDialogType.PUBLIC_GROUP```** 
 
@@ -301,7 +307,7 @@ QBRestChatService.updateGroupChatDialog(chatDialog, requestBuilder).performAsync
         });
 ```
 
-For details about REST API for updating dialogs refer to http://quickblox.com/developers/Chat#Update_dialog
+For details about updating via REST API refer to http://quickblox.com/developers/Chat#Update_dialog
 
 To notify all occupants that you updated a group chat we use chat notifications - it's simple chat message with extra parameters inside. 
 These parameters used to separate chat notifications from regular text chat messages:
@@ -372,7 +378,7 @@ systemMessagesManager.addSystemMessageListener(systemMessageListener);
 <span id="Deleting_dialogs" class="on_page_navigation"></span>
 ## Deleting dialogs
 
-### To delete a dialog use next snippet:
+### To delete a dialog use the following snippet:
 
 ```java
 boolean forceDelete = false;
@@ -390,8 +396,8 @@ QBRestChatService.deleteDialog(dialogId, forceDelete).performAsync(new QBEntityC
 });
 ```
 
-This request will remove this dialog for current user, but other users still will be able to chat there.
-To completely remove a dialog use parameter ```forceDelete = true```. Refer to http://quickblox.com/developers/Chat#Delete_dialog
+This request will remove the dialog for current user, but other users still will be able to chat there.
+To remove the dialog completely use parameter ```forceDelete = true```. Refer to http://quickblox.com/developers/Chat#Delete_dialog
 
 ### To delete many dialogs use next:
 ```java
