@@ -3,6 +3,7 @@
 
 [Download ZIP](https://github.com/QuickBlox/quickblox-android-sdk/archive/master.zip)
 
+<span id="Overview" class="on_page_navigation"></span>
 # Overview
 
 ## How QuickBlox Push Notifications work
@@ -40,6 +41,7 @@ QuickBlox предоставляет возможность воспользов
 
 Данный раздел документации предназначен для того, чтобы показать пользователю как работать с QuickBlox Push Notifications API.
 
+<span id="Preparing_app_for_QuickBlox_Push-notifications" class="on_page_navigation"></span>
 Для того чтоб получить возможность пользоваться QuickBlox Push-notifications надо:
 
 1. Добавить необходимые настройки в админке;
@@ -48,13 +50,14 @@ QuickBlox предоставляет возможность воспользов
 * настройка GCM пушей;
 * настройка FCM пушей;
 
+<span id="Admin_panel_congiguration" class="on_page_navigation"></span>
 ## Нвастройка админки
 
 need smal guide 
 
 Then you can start use QuickBlox Push Notification API.
 
-
+<span id="Integration_QuickBlox_Push-notifications_module_in_application" class="on_page_navigation"></span>
 ## Integration QuickBlox Push-notifications module in application
 Данная инструкция предполагает, что вы уже знакомы с порядком интеграции Quickblox фреймворка в приложение и уже выполнили такие 
 действия для своего приложении:
@@ -71,6 +74,7 @@ dependencies {
 }
 ```
 
+<span id="Configuring_app_for_work_with_Push-notifications_module_of_QuickBlox_Android_SDK" class="on_page_navigation"></span>
 ## Настройка приложения для работы с Push-notifications module of QuickBlox Android SDK
 Наше СДК позаботилось об организации подписки на пуши вместо вас. Вам нет необходимости заботиться о получении GCM or FCM токена, 
 подписке на пуши и отслеживании статуса подписки, эти все работы выполняются самостоятельно внутри СДК. Для того чтобы получить 
@@ -187,7 +191,7 @@ Android app handles them differently. Refer to https://firebase.google.com/docs/
 Now Google Cloud Messaging can be two types: Google Cloud Messaging (GCM) or Firebase Cloud Messaging (FCM). Our SDK provides both. 
 You can set this type in meta-data.
 
-
+<span id="Receiving_simple_push_notifications" class="on_page_navigation"></span>
 ## Receiving simple push notifications
 To receive push notification just register BroadcastReceiver:
 ```java
@@ -205,6 +209,7 @@ LocalBroadcastManager.getInstance(this).registerReceiver(pushBroadcastReceiver, 
 ```
 And that’s all! You are ready now to receive push notifications.
 
+<span id="Receiving_push_notifications_with_additional_parameters" class="on_page_navigation"></span>
 ## Receiving push notifications with additional parameters
 Пуш также может содержать и дополнительные параметры кроме ```message``` and ```from```.
 В таком случае вам нужно:
@@ -263,7 +268,7 @@ public class FcmPushListenerService extends QBFcmPushListenerService {
     android:name="com.quickblox.my_app.services.FcmPushListenerService"
 ```
 
-
+<span id="Sumscription_management" class="on_page_navigation"></span>
 ## Управление подпиской на пуши
 
 
@@ -322,6 +327,7 @@ SubscribeService.unSubscribeFromPushes(context);
     }
 ```
 
+<span id="Migrate_to_FCM" class="on_page_navigation"></span>
 ## Migrate to FCM
 Firebase Cloud Messaging (FCM) is the new version of GCM. It inherits the reliable and scalable GCM infrastructure, plus new features! 
 See the [FAQ](http://firebase.google.com/support/known-issues/#gcm-fcm) to learn more. If you are integrating messaging in a new app, start 
@@ -332,8 +338,9 @@ Google prepared great guide how to [Migrate a GCM Client App for Android to Fire
 **QuickBlox backend does support FCM endpoints** so you need to update **only client-side** code.
 
 
-
 ## Sending Push Notifications
+
+<span id="Send_Push_Notifications_from_Admin_panel" class="on_page_navigation"></span>
 ### Send Push Notifications from Admin panel
 
 Just go to Push Notifications module on Admin panel, choose '''Environment''', '''Channel''', type message and press '''Send message''' button:
@@ -359,6 +366,7 @@ Delivery settings
 
 ![](./resources/push/PushNotificationsDeliverySettings.png)
 
+<span id="Send_Push_Notifications_from_Application" class="on_page_navigation"></span>
 ### Send Push Notifications from Application
 Как говорилось ранее it's possible to send 2 types of push notifications:
 * Platform based Push Notifications
@@ -366,7 +374,7 @@ Delivery settings
 
 Refer to the [Push Notification Formats](http://quickblox.com/developers/Messages#Push_Notification_Formats) document to better understand what happens under hood. 
 
-
+<span id="Platform_based_Push_Notifications" class="on_page_navigation"></span>
 #### Platform based Push Notifications
 Send Platform based push notifications (GCM) (only works for Android). Platform based push notification will be delivered to **specified** platform only - in our case it's Android:
 
@@ -433,6 +441,7 @@ QBPushNotifications.createEvent(event).performAsync( new QBEntityCallback<QBEven
 ##### Send VOIP Push Notifications (iOS only)
 To initiate iOS VoIP push notification use ```event.setPushType(QBPushType.APNS_VOIP);``` in above example.
 
+<span id="Universal_push_notifications" class="on_page_navigation"></span>
 #### Universal push notifications
 Universal push notifications will be delivered to all possible platforms and devices for specified users.
 With universal push notifications there are 2 ways to send it:
