@@ -52,8 +52,20 @@ QuickBlox предоставляет возможность воспользов
 
 <span id="Admin_panel_congiguration" class="on_page_navigation"></span>
 ## Нвастройка админки
+Для работы с QuickBlox Push-notifications module вам понадобится GCM API key, для его получения из Firebase developer console нужно:
+* пойти в Firebase developer console;
+* выбрать нужное приложение;
+* open Settings/Project Settings
+* go to Cloud Messaging
+* copy Legacy Server key
 
-need smal guide 
+![](./resources/push/firebase_get_api_key.png)
+
+Для настройки QuickBlox админ панели вам необходимо засетить GCM API key. Чтобы это сделать, перейдите по пути Home -> app_name 
+-> Push notifications -> Settings, перейдите в секцию "Google Cloud Messaging (GCM) API key" и засетьте свой API key. Вы можете использовать один и тот же
+  API key для Development и Production enviroments.
+
+![](./resources/push/admin_gcm_api_key.png)
 
 Then you can start use QuickBlox Push Notification API.
 
