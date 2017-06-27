@@ -1,7 +1,7 @@
 <span id="Stickers" class="on_page_navigation"></span>
 ## Stickers
 
-This sample also demonstrates how to add stickers to your chat (full
+This section describe how to add stickers to your chat (full
 sample on [https://github.com/908Inc/stickerpipe-chat-sample](https://github.com/908Inc/stickerpipe-chat-sample])
 
 ### Dependencies
@@ -40,7 +40,7 @@ Add content provider with your application package to your manifest file:
 
 ### Initialization
 
-Initialize library at your Application ```onCreate()``` method
+Initialize library at your Application in ```onCreate()``` method
 ```java
 StickersManager.initialize(“847b82c49db21ecec88c510e377b452c", this);
 ```
@@ -60,46 +60,46 @@ Set sticker selected listener
 It’s highly recommended to set listener outside of builder, directly to fragment when creating or restoring activity.
 
 * ```setStickerPlaceholderDrawableRes```
-Set custom placeholder for stickers in list
+Sets custom placeholder for stickers in list
 
 * ```setStickerPlaceholderColorFilterRes```
-Set color filter for sticker’s placeholder
+Sets color filter for sticker’s placeholder
 
 * ```setStickersListBackgroundDrawableRes```
-Set background drawable resource for stickers list with ```Shader.TileMode.REPEAT```
+Sets background drawable resource for stickers list with ```Shader.TileMode.REPEAT```
 
 * ```setStickersListBackgroundColorRes```
-Set stickers list background color
+Sets stickers list background color
 
 * ```setTabPlaceholderDrawableRes```
-Set custom placeholder for tab icons
+Sets custom placeholder for tab icons
 
 * ```setTabBackgroungColorRes```
-Set tab panal background color
+Sets tab panal background color
 
 * ```setTabUnderlineColorRes```
-Set selected tab underline color
+Sets selected tab underline color
 
 * ```setTabIconsFilterColorRes```
-Set color filter for default tab icons placeholder
+Sets color filter for default tab icons placeholder
 
 * ```setMaxStickerWidth```
-Set max width for sticker cell
+Sets max width for sticker cell
 
 * ```setBackspaceFilterColorRes```
-Set color filter for backspace button at emoji tab
+Sets color filter for backspace button at emoji tab
 
 * ```setEmptyRecentTextRes```
-Set text for empty view at recent tab
+Sets text for empty view at recent tab
 
 * ```setEmptyRecentTextColorRes```
-Set text color for empty view at recent tab
+Sets text color for empty view at recent tab
 
 * ```setEmptyRecentImageRes```
-Set image for empty view at recent tab
+Sets image for empty view at recent tab
 
 * ```setEmptyRecentColorFilterRes```
-Set image color filter for empty view at recent tab
+Sets image color filter for empty view at recent tab
 
 Then you only need to show fragment.
 

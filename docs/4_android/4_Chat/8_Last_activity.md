@@ -1,7 +1,8 @@
 <span id="Last_activity" class="on_page_navigation"></span>
 ## Last activity
 
-It is often helpful to know the time of the last activity for user whether he is in your contact list or no. You can use methods below to discover when a disconnected user last accessed its server.
+It is often helpful to know the time of the last activity of user. There is no need to add the user to contact list to get information about last user's activity.
+ You can use methods below to discover when a disconnected user accessed the server last time.
 
 ```java
 QBUser targetUser = ...;

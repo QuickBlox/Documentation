@@ -1,9 +1,9 @@
 <span id="Chat_BOSH_integration" class="on_page_navigation"></span>
 ## Chat BOSH integration
 
-For using chat functions over **BOSH** protocol in QuickBlox Android SDK you need :
+To use chat functions over **BOSH** protocol in QuickBlox Android SDK you need to follow these steps:
 
-1. Add dependency on quickblox-android-sdk-chat-extensions** module to the **buil.gradle** file of your project
+1. Add quickblox-android-sdk-chat-extensions** module dependency in the **buil.gradle** file of your project
 ```groovy
 def qbSdkVersion = "3.2.0"
 
@@ -42,7 +42,7 @@ QBChatService.setConnectionFabric(connectionFabric);
 
 That's all, now ```QBChatService``` will use BOSH type connection.
 
-**BOSH** configuration supports also connection over **proxy**. To set your proxy settings for BOSH connection use:
+**BOSH** configuration also supports connection over **proxy**. To set your proxy settings for BOSH connection use:
 ```java
 ProxyInfo proxyInfo = new ProxyInfo(ProxyInfo.ProxyType.HTTP, "10.30.30.1", 3128, null, null);
 
@@ -51,7 +51,10 @@ boshConfigurationBuilder.setProxyInfo(proxyInfo);
 ```
 
 
-<br><span style="color:red;">Note:</span> By using BOSH protocol all chat requests are executed synchronously. To increase app's performance you can use asynchronous methods for standard chat features to run requests on non-main thread. QuickBlox Android SDK provides asynchronous implementation for next chat methods:
+<br><span style="color:red;">Note:</span> If you use BOSH protocol all chat requests are executed synchronously. 
+To optimize app's performance you can use asynchronous methods (чтобы выполнять основные чат функции (методы) не на главном потоке) for standard chat 
+features to run requests on non-main thread. 
+QuickBlox Android SDK provides asynchronous implementation for next chat methods:
 
 ```java
 chatDialog.sendMessage(chatMessage, new QBEntityCallback<Void>() {

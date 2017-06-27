@@ -1,33 +1,32 @@
 <span id="Contact_list" class="on_page_navigation"></span>
 # Contact list
 
-In QuickBlox Android SDK contact list functionality realized via ```QBRoster```. Using this model you can add users to contact list, accept or reject request and perform 
-other typical functions with contacts. 
+In QuickBlox Android SDK contact list functionality is implemented via ```QBRoster```. Using this model you can add users to contact list, accept or 
+reject request and perform other typical actions with contacts. 
 
-To getting ```QBRoster``` just call:
+To get ```QBRoster``` just call:
 ```java
 QBRoster chatRoster = QBChatService.getInstance().getRoster();
 ```
 
 ## Contact list mode
-
-User A sends a request to become "friends" with user B. User B accepts the friend request. And now user A and B appear in each other's roster.
+Let's imagine the following situation: user A sends a request to become "friends" with user B. User B accepts the friend request. And now user A and 
+B appear in the roster of each other.
 
 <br>
-But, alternatively, you can use twitter like logic. User A sends a presence subscription request to user B. Think about this more like following on twitter. 
-User A is requesting permission to receive presence information from user B (following their presence). User B can accept this request, but may not be interested 
-in receiving presence info from user B. Again, this is more like twitter following, but with the addition of required permission. 
-So when user B accepts the request, this *only* means that user A will receive presence from user B. It does *not* mean that user B will receive presence 
-from user A. Again, twitter-style, user A is now "following" user B. In diagram form, presence is flowing like this:
+Alternatively, you can use "twitter like" logic. User A sends a presence subscription request to user B. Think about this more like following on twitter. 
+User A requests permission to receive presence information from user B (following his presence). User B can accept this request, but may not be interested 
+in receiving presence info from user A. So when user B accepts the request, this *only* means that user A will receive presence from user B. It does *not* mean that user B will receive presence 
+from user A. In diagram form, presence is flowing like this:
 <br>
   A <-- B
 <br>
-Now, if B also wants to receive presence from user A, then user B must request this permission. And furthermore, user A must accept the request. 
+Now, if B also wants to receive presence from user A, then user B should this permission. And furthermore, user A should accept the request. 
 Just because B has granted A permission to receive presence, doesn't mean that B gets a free pass to receive presence from A.
 
-By default this SDK provides **twitter like** mode.
+By default this SDK provides **"twitter like"** mode.
 
-To enable Facebook like logic pass ```QBRoster.SubscriptionMode.mutual``` value when you are obtaining a roster:
+To enable **"Facebook like"** logic pass ```QBRoster.SubscriptionMode.mutual``` value when you are obtaining a roster:
 ```java
 QBRoster chatRoster = QBChatService.getInstance().getRoster(QBRoster.SubscriptionMode.mutual, subscriptionListener);
 ```
@@ -36,10 +35,10 @@ QBRoster chatRoster = QBChatService.getInstance().getRoster(QBRoster.Subscriptio
 
 ### Main setup
 
-To access contact list you have to obtain it and set all needed listeners:
-* ```QBRosterListener``` is a listener that is fired any time a roster is changed or the presence of a user in the roster is changed (user becomes online/offline)
+To access contact list you need to obtain it and set all needed listeners:
+* ```QBRosterListener``` is a listener called any time a roster is changed or the presence of a user in the roster is changed (user becomes online/offline)
 
-* ```QBSubscriptionListener``` is a listener that is fired on "subscribe" (add to contact list) request from any user.
+* ```QBSubscriptionListener``` is a listener called on "subscribe" (add to contact list) request from any user.
 
 Setting listeners to ```QBRoster```:
 ```java
@@ -167,5 +166,5 @@ QBPresence presence = new QBPresence(QBPresence.Type.online, "I'm at home", 1, Q
 chatRoster.sendPresence(presence);
 ```
 
-In this case there is **no need to use** ```QBChatService.getInstance().startAutoSendPresence(60)```, you have to manage it by yourself. 
+This case there is **no need to use** ```QBChatService.getInstance().startAutoSendPresence(60)```, you have to manage it by yourself. 
 <br>

@@ -107,11 +107,11 @@ If you use google play services in your project, use version 9.8.0 or higher (ve
 all com.google.android.gms libraries must use the exact same version specification.
 
 
-> If you use version **higher** 9.8.0 just add explicit dependency:
+> If you use version **higher** 10.2.1 just add explicit dependency:
 ```groovy
-compile "com.google.android.gms:play-services-gcm:10.0.1"
-compile "com.google.firebase:firebase-messaging:10.0.1"
-compile "com.google.firebase:firebase-core:10.0.1"
+compile "com.google.android.gms:play-services-gcm:10.2.6"
+compile "com.google.firebase:firebase-messaging:10.2.6"
+compile "com.google.firebase:firebase-core:10.2.6"
 ```
 
 Include gms plugin in the **bottom** of your module ```build.gradle```: 
@@ -227,7 +227,7 @@ And that’s all! You are ready now to receive push notifications.
 В таком случае вам нужно:
 * для **GCM** пушей:
 надо расширить класс ```QBGcmPushListenerService``` из нашего СДК и переопределить его метод ```onMessageReceived(String from, Bundle data)```
-Параметр ```data``` будет содержать все дополнительные параметры вашего пуша. В примере ниже, вы можете посмотреть, как это сделать:
+Параметр ```data``` будет содержать все дополнительные параметры вашего пуша. В примере ниже, вы можете посмотреть, как получить дополнительные данные из GCM пуша:
 ```java
 public class GcmPushListenerService extends QBGcmPushListenerService {
     ...
@@ -254,8 +254,9 @@ public class GcmPushListenerService extends QBGcmPushListenerService {
 ```
 
 * для **FCM** пушей:
-надо расширить класс ```QBGcmPushListenerService``` из нашего СДК и переопределить его метод ```onMessageReceived(String from, Bundle data)```
-Параметр ```data``` будет содержать все дополнительные параметры вашего пуша. В примере ниже, вы можете посмотреть, как это сделать:
+надо расширить класс ```QBFcmPushListenerService``` из нашего СДК и переопределить его метод ```onMessageReceived(RemoteMessage remoteMessage)```
+Параметр ```remoteMessage``` будет содержать в том числе все дополнительные параметры вашего пуша. В примере ниже, вы можете посмотреть, как получить
+дополнительные параметры из **FCM** пуша:
 ```java
 public class FcmPushListenerService extends QBFcmPushListenerService {
     ..
@@ -333,10 +334,10 @@ SubscribeService.subscribeToPushes(context, false);
 SubscribeService.unSubscribeFromPushes(context);
 
 //second param true - if you use InstanceIDListenerService and google token onTokenRefresh
- @Override
-    public void onTokenRefresh() {
- 	SubscribeService.subscribeToPushes(context, true);
-    }
+@Override
+public void onTokenRefresh() {
+    SubscribeService.subscribeToPushes(context, true);
+}
 ```
 
 <span id="Migrate_to_FCM" class="on_page_navigation"></span>

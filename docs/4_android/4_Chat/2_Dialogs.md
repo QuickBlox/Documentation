@@ -126,7 +126,7 @@ data.putInteger("advert_id", 5665); // field 'advert_id'
 newDialog.setCustomData(data);
 ```
 
-It's also possible to use custom parameters in a dialog's retrieval requests to filter them custom parameters:
+It's also possible to use custom parameters in a dialog's retrieval requests to filter them through custom parameters:
 
 ```java
 QBRequestGetBuilder requestBuilder = new QBRequestGetBuilder();
@@ -309,8 +309,8 @@ QBRestChatService.updateGroupChatDialog(chatDialog, requestBuilder).performAsync
 
 For details about updating via REST API refer to http://quickblox.com/developers/Chat#Update_dialog
 
-To notify all occupants that you updated a group chat we use chat notifications - it's simple chat message with extra parameters inside. 
-These parameters used to separate chat notifications from regular text chat messages:
+To notify all occupants that you updated a group chat we use chat notifications - it's simple chat message with extra parameters inside it. 
+These parameters are used to separate chat notifications from regular text chat messages:
 ```java
 public static QBChatMessage createChatNotificationForGroupChatUpdate(QBChatDialog chatDialog) {
     String dialogId = String.valueOf(chatDialog.getDialogId());

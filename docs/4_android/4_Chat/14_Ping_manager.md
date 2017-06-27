@@ -2,7 +2,7 @@
 ## Ping manager
 
 ### Ping a server
-The Ping manager allows a user to ping the backend by simply sending a ping to it. This is useful in a case to check a connection between user and server. 
+The Ping manager allows a user to ping the backend by simply sending a ping to it. This is useful in case you need to check a connection between user and server. 
 
 ```java
 QBPingManager pingManager = QBChatService.getInstance().getPingManager();
@@ -25,7 +25,7 @@ pingManager.pingServer(new QBEntityCallback<Void>() {
 boolean pingSuccess = pingManager.pingServer();
 ```
 
-PingManger also periodically sends XMPP pings to the server every 30 minutes to avoid NAT timeouts and to test the connection status. 
+PingManger also sends XMPP pings to the server every 30 minutes to avoid NAT timeouts and to test the status of the connection. 
 To configure the ping interval and to listen for fails: 
 
 ```java
@@ -40,7 +40,7 @@ pingManager.addPingFailedListener(new PingFailedListener(){
 
 ### Ping a user
 
-It's also possible to ping some user to check whethere he is online or not:
+It's also possible to ping some user to check whether he is online or not:
 ```java
 final QBPingManager pingManager = QBChatService.getInstance().getPingManager();
 

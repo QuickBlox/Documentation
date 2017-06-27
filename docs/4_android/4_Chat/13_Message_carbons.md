@@ -1,13 +1,14 @@
 <span id="Message_carbons" class="on_page_navigation"></span>
 ## Message carbons
-This feature defines an approach for ensuring that all of user's devices get both sides of all conversations in order to avoid confusion. Information about the current state of a conversation is shared between all of a user's clients that enable this feature.
+This feature defines an approach to ensure that all of user's devices get messages from the side of all participants. Information about the current state of a conversation is shared between all of a user's clients that 
+have this feature enabled.
 
 Is it convenient to **enable** carbons after chat login:
 ```java
 QBChatService.getInstance().enableCarbons();
 ```
 
-To **disabling** carbons use:
+To **disable** carbons use:
 ```java
 QBChatService.getInstance().disableCarbons();
 ```

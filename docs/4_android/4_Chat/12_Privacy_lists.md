@@ -1,13 +1,13 @@
 <span id="Privacy_lists" class="on_page_navigation"></span>
 ## Privacy lists
 
-Privacy list API allows to enable or disable communication with other users in a chat. Privacy list API also enables a 
+Privacy list API allows to enable or disable communication with other users in a chat. Privacy list API also gives possibility 
 user to create, modify, or delete his privacy lists, define a default list.
 
-For managing of privacy lists this SDK uses ```QBPrivacyListsManager```, you can get it just call ```QBChatService.getInstance().getPrivacyListsManager()``` 
+To manage privacy lists SDK uses ```QBPrivacyListsManager```, to get it you can just call ```QBChatService.getInstance().getPrivacyListsManager()``` 
 after success login to chat.
 
-Also you can listen any changes in privacy lists, for it you can use ```QBPrivacyListListener```
+Also you can listen any changes in privacy lists, for that you can use ```QBPrivacyListListener```
 ```java
 // set listener
 QBPrivacyListListener privacyListListener = new QBPrivacyListListener() {
@@ -26,7 +26,7 @@ QBPrivacyListListener privacyListListener = new QBPrivacyListListener() {
 
 ### Retrieve privacy lists
 
-User can have multiple privacy lists. To get a list of all your privacy lists' use next request:
+User can have multiple privacy lists. To get a list of all your privacy lists', use the following request:
 ```java
 QBPrivacyListsManager privacyListsManager = ...;
 privacyListsManager.addPrivacyListListener(privacyListListener);
@@ -40,18 +40,18 @@ QBPrivacyList list = privacyListsManager.getPrivacyList("public");
 ```
 
 ### Create a privacy list or edit existing list
-For describing one item in privacy list this SDK uses ```QBPrivacyListItem``` model.
+To describe one item in privacy list this SDK uses ```QBPrivacyListItem``` model.
 
 ```QBPrivacyListItem``` model takes 4 arguments:
-* **type** - use ```USER_ID``` block a user in 1-1 chat or ```GROUP_USER_ID``` to block in a group chat.
+* **type** - use ```USER_ID``` to block a user in 1-1 chat or ```GROUP_USER_ID``` to block in a group chat.
 * **valueForType** - ID of a user to apply an action
-* **allow** - can be ```true/false```.
+* **allow** - can be ```true/false``` (разрешить слать мне месседжи или нет).
 * **mutualBlock** - to block user's message in both directions, can be ```true/false```.
 
-A privacy list must have at least one element in order to create it.
+A privacy list should have at least one element in order to create it.
 
 **If no elements are specified then the list with given name will be deleted.
-When you want to update a privacy list, it must include all of the desired items (i.e., not a "delta").**
+When you want to update a privacy list, you should include all of the desired items (i.e., not a "delta").**
 ```java
 QBPrivacyList list = new QBPrivacyList();
 list.setName("public");
@@ -73,7 +73,8 @@ privacyListsManager.setPrivacyList(list);
 
 ```
 
-**Pay attention, if you want to update or set new privacy list instead of current you should firstly decline current default and active lists:**
+**Pay attention, if you want to update or set new privacy list instead of current you should decline current default 
+and active lists firstly:**
 ```java
 QBPrivacyListsManager privacyListsManager = ...;
 
@@ -86,7 +87,7 @@ privacyListsManager.declineDefaultList();
 ### Activate a privacy list
 
 User can have multiple privacy lists, but default can be only one.
-In order to activate rules from a privacy list you must set it as default.
+In order to activate rules from a privacy list you should set it as default.
 
 ```java
 privacyListsManager.setPrivacyListAsDefault("public");
@@ -101,7 +102,7 @@ privacyListsManager.deletePrivacyList("public");
 
 ### Blocked user attempts to communicate with user
 
-Blocked entities will be receiving an error when try to chat with a user in a 1-1 chat and will be receiving nothing in a group chat:
+Blocked entities will receive an error when try to chat with a user in a 1-1 chat and will receive nothing in a group chat:
 
 ```java
 QBChatDialog privateDialog = ...;
