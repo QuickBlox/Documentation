@@ -38,7 +38,7 @@ but on such devices can be problems with video quality.
 
 <span id="Prepare_your_application_for_QuickBlox_Android_SDK" class="on_page_navigation"></span>
 ## Prepare your application for Android SDK
-Данная инструкция предполагает, что вы уже знакомы с порядком интеграции Quickblox фреймворка в приложение и уже выполнели такие 
+Данная инструкция предполагает, что вы уже знакомы с порядком интеграции Quickblox фреймворка в приложение и уже выполнили такие 
 действия для своего приложении:
 
 * [Created QuickBlox account](http://admin.quickblox.com/register)
