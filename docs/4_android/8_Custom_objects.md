@@ -25,12 +25,14 @@ Also you can look through [http://quickblox.com/developers/5_Mins_Guide 5 min gu
 To get the information on how to connect to the quickblox.jar, please, refer to the [http://quickblox.com/developers/Android#How_to:_add_SDK_to_IDE_and_connect_to_the_cloud Android-how-to-connect-quickblox-jar] page.
 
 ==Add Custom Data structure to your application==
-'''Note:''' This guide based on [http://quickblox.com/developers/Custom_Objects Custom Objects REST API] documentation. It is very helpful, describes full list of QuickBlox Custom Objects API features and need to be read during reading this guide.
+>Note: This guide based on [http://quickblox.com/developers/Custom_Objects Custom Objects REST API] documentation. It is 
+very helpful, describes full list of QuickBlox Custom Objects API features and need to be read during reading this guide.
 
 To start using Custom Objects module you should create your data schema.
-Go to [http://admin.quickblox.com admin.quickblox.com], Custom Objects module page and press '''Add new class''' button. 'Add new class' popup will be appeared.
+Go to [http://admin.quickblox.com admin.quickblox.com], Custom Objects module page and press **Add new class** button. 
+**Add new class** popup will be appeared.
 
-Enter Class name, add fields any you want. Allow 7 types of fields:
+Enter **Class name**, add fields any you want. Allow 7 types of fields:
 * Integer
 * Float
 * Boolean (true/false)
@@ -39,29 +41,31 @@ Enter Class name, add fields any you want. Allow 7 types of fields:
 * Location
 * Array (of Integers, Floats, Booleans, Strings)
 
-[[File:COCreateClass.png]] 
+![](./resources/custom_objects/COCreateClass.png)
 
-Press '''Create class''' button - new class will be created
+Press **Create class** button - new class will be created
 
-[[File:COPredefinedFields.png]] 
+![](./resources/custom_objects/COPredefinedFields.png)
 
 There are some predefined fields, that described in [http://quickblox.com/developers/Custom_Objects#Module_description Custom Objects REST API Module description] documentation.
-<br>
 
-=== Create record ===
+
+
+# Create record 
 There are 2 ways to create record:
 * through Admin panel
 * using Android SDK
 
-<br>
-==== Create record through Admin panel ====
-Just go to [http://admin.quickblox.com admin.quickblox.com], Custom Objects module page and press '''Add record''' button. 'Add new record' popup will be appeared. Fill any fields you want and press '''Add record''' button. New record will be added & shown in table.
 
-<br>
-==== Create a record using Android SDK ====
+## Create record through Admin panel
+Just go to [admin.quickblox.com](http://admin.quickblox.com), **Custom Objects module** page and press **Add record** button. **Add new record** popup 
+will be appeared. Fill any fields you want and press **Add record** button. New record will be added & shown in table.
+
+
+## Create a record using QuickBlox Android SDK
 To create a record use the snippet bellow:
 
-<syntaxhighlight lang="java">
+```java
 QBCustomObject object = new QBCustomObject();
 
 // put fields
@@ -72,187 +76,140 @@ object.putString("genre", "fantasy");
 // set the class name
 object.setClassName("Movie");
 
-QBCustomObjects.createObject(newRecord, new QBEntityCallback<QBCustomObject>() {
+QBCustomObjects.createObject(object).performAsync(new QBEntityCallback<QBCustomObject>() {
     @Override
-    public void onSuccess(QBCustomObject createdObject, Bundle params) {
-
+    public void onSuccess(QBCustomObject qbCustomObject, Bundle bundle) {
+    
     }
 
     @Override
-    public void onError(QBResponseException errors) {
+    public void onError(QBResponseException e) {
 
     }
 });
-</syntaxhighlight>
+```
 
-<br>
+# Retrieve records
 
-=== Retrieve records===
-
-==== By ID ====
+## By ID
 To retrieve record by id:
-<syntaxhighlight lang="java">
+```java
 QBCustomObject customObject = new QBCustomObject("Note", "50e3f8c7535c126073000d52");
 
-QBCustomObjects.getObject(object, new QBEntityCallback<QBCustomObject>(){
+QBCustomObjects.getObject(customObject).performAsync(new QBEntityCallback<QBCustomObject>() {
     @Override
-    public void onSuccess(QBCustomObject customObject, Bundle params) {
-
+    public void onSuccess(QBCustomObject qbCustomObject, Bundle bundle) {
+    
     }
 
     @Override
-    public void onError(QBResponseException errors) {
+    public void onError(QBResponseException e) {
 
     }
 });
-</syntaxhighlight>
+```
 
-<br>
-
-==== By IDs ====
+## By IDs
 To retrieve records by ids:
-<syntaxhighlight lang="java">
+```java
 StringifyArrayList<String> coIDs = new StringifyArrayList<String>();
 coIDs.add("50e67e6e535c121c66004c74");
 coIDs.add("50e67e6d535c127f66004f47");
 coIDs.add("50e67e6b535c121c66004c72");
 coIDs.add("50e59f81535c121c660015fd");
 
-QBCustomObjects.getObjectsByIds("Note", coIDs, new QBEntityCallback<ArrayList<QBCustomObject>>() {
+QBCustomObjects.getObjectsByIds("Note", coIDs).performAsync(new QBEntityCallback<ArrayList<QBCustomObject>>() {
     @Override
-    public void onSuccess(ArrayList<QBCustomObject> customObjects, Bundle params) {
-
+    public void onSuccess(ArrayList<QBCustomObject> qbCustomObjects, Bundle bundle) {
+    
     }
 
     @Override
-    public void onError(QBResponseException errors) {
+    public void onError(QBResponseException e) {
 
     }
 });
-</syntaxhighlight>
+```
 
 
-==== With filters ====
+## With filters
 There are lots of operators and filters that you can use to retrieve records:
 
-
-===== Filters =====
+### Filters
 The request can contain all, some or none of next filters.
 
 
 Filter | Applicable to types | Usage example | Description
 -------|---------------------|---------------|------------
-|**{field_name}** |All types  | requestBuilder.eq("rating", "2"); | Search records with field which contains exactly specified value
-|{field_name}[{search_operator}] | All types  | requestBuilder.gt("rating", "5"); | Search record with field which contains value according to specified value and operator
-|'''sort_asc''' | All types  | requestBuilder.sortAsc("field_name") | Search results will be sorted by specified field in ascending order
-|'''sort_desc''' | All types  | requestBuilder.sortDesc("field_name") | Search results will be sorted by specified field in descending order
-|'''skip''' | Integer | requestBuilder.setSkip(100) | Skip N records in search results. Useful for pagination. Default (if not specified): 0
-|'''limit''' | Integer | requestBuilder.setLimit(50) | Limit search results to N records. Useful for pagination. Default value - 100. Also can set 1000.'''If limit is equal to -1 only last record will be returned'''
-|'''count''' | Integer | There is a separate method to count records | Count search results. Response will contain only count of records found
-|'''output[include]''' | All types | requestBuilder.outputInclude(arrayOfFields) | The '''output''' parameter takes the form of a record with a list of fields for inclusion or exclusion from the result set. '''output[include]''' specifies the fields to include. The '''_id''' field is, by default, included in the result set. To exclude the '''_id''' field from the result set, you need to specify in the '''output[exclude]''' value the exclusion of the _id field.
-|'''output[exclude]''' | All types | requestBuilder.outputExclude(arrayOfFields) | The '''output''' parameter takes the form of a record with a list of fields for inclusion or exclusion from the result set. '''output[exclude]''' specifies the fields to exclude. The '''_id''' field is, by default, included in the result set. To exclude the '''_id''' field from the result set, you need to specify in the '''output[exclude]''' value the exclusion of the '''_id''' field.
-|'''near''' | Location | requestBuilder.near("user_location", new Double[]{34.666, 12.445}, 10) |  Search records in a specific radius with current position in meters. Format: field_name,longitude,latitude,radius(in meters)
+|**{field_name}** |All types  | ```requestBuilder.eq("rating", "2");``` | Search records with field which contains exactly specified value
+|**{field_name}[{search_operator}]** | All types  | ```requestBuilder.gt("rating", "5");``` | Search record with field which contains value according to specified value and operator
+|**sort_asc** | All types  | ```requestBuilder.sortAsc("field_name");``` | Search results will be sorted by specified field in ascending order
+|**sort_desc** | All types  | ```requestBuilder.sortDesc("field_name");``` | Search results will be sorted by specified field in descending order
+|**skip** | Integer | ```requestBuilder.setSkip(100);``` | Skip N records in search results. Useful for pagination. Default (if not specified): 0
+|**limit** | Integer | ```requestBuilder.setLimit(50);``` | Limit search results to N records. Useful for pagination. Default value - 100. Also can set 1000.**If limit is equal to -1 only last record will be returned**
+|**count** | Integer | There is a separate method to count records | Count search results. Response will contain only count of records found
+|**output[include]** | All types | ```requestBuilder.outputInclude(arrayOfFields);``` | The **output** parameter takes the form of a record with a list of fields for inclusion or exclusion from the result set. **output[include]** specifies the fields to include. The **_id** field is, by default, included in the result set. To exclude the **_id** field from the result set, you need to specify in the **output[exclude]** value the exclusion of the **_id** field.
+|**output[exclude]** | All types | ```requestBuilder.outputExclude(arrayOfFields);``` | The **output** parameter takes the form of a record with a list of fields for inclusion or exclusion from the result set. **output[exclude]** specifies the fields to exclude. The **_id** field is, by default, included in the result set. To exclude the **_id** field from the result set, you need to specify in the **output[exclude]** value the exclusion of the **_id** field.
+|**near** | Location | ```requestBuilder.near("user_location", new Double[]{34.666, 12.445}, 10);``` |  Search records in a specific radius with current position in meters. Format: field_name,longitude,latitude,radius(in meters)
 
 
-===== Search operators =====
+### Search operators 
 
 The request can contain all, some or none of next search operators. Combinations of operators are allowed.
 
-{| border="1" cellpadding="10" cellspacing="0"
-!align="center" |Operator !!Applicable to types !!Usage example !!Description
-|-
-| '''lt'''
-| Integer, Float
-| requestBuilder.lt("rating", 5)
-| '''L'''ess '''T'''han operator
-|-
-| '''lte'''
-| Integer, Float
-| requestBuilder.lte("rating", 5)
-| '''L'''ess '''T'''han or '''E'''qual to operator
-|-
-| '''gt'''
-| Integer, Float
-| requestBuilder.gt("rating", 5)
-| '''G'''reater '''T'''han operator
-|-
-| '''gte'''
-| Integer, Float
-| requestBuilder.gte("rating", 5)
-| '''G'''reater '''T'''han or '''E'''qual to operator
-|-
-| '''ne'''
-| Integer, Float, String, Boolean
-| requestBuilder.ne("rating", 5)
-| '''N'''ot '''E'''qual to operator
-|-
-| '''in'''
-| Integer, Float, String,Array
-| requestBuilder.in("tags", "man", "golf")
-| Contained '''IN''' array operator
-|-
-| '''nin'''
-| Integer, Float, String,Array
-| requestBuilder.nin("tags", "man", "golf")
-| '''N'''ot contained '''IN''' array
-|-
-| '''all'''
-| Array
-| requestBuilder.all("tags", "man", "golf")
-| '''ALL''' contained '''IN''' array
-|-
-| '''or'''
-| Integer, Float, String
-| 1.requestBuilder.or("name", "igor", "bob");<br>2.requestBuilder.or("name", "igor").or("lastname", "khomenko")
-| 1.Will return records with name '''igor''' or '''bob''' <br>2.Will return records with name '''igor''' or lastname '''khomenko'''
-|-
-| '''ctn'''
-| String
-| requestBuilder.ctn("name", "ar")
-| Will return all records where '''username''' field contains '''ar''' substring
-|-
-|}
+Operator | Applicable to types | Usage example | Description
+---------|---------------------|---------------|-------------
+| **lt** | Integer, Float | ```requestBuilder.lt("rating", 5);``` | **L**ess **T**han operator
+| **lte** | Integer, Float | ```requestBuilder.lte("rating", 5);``` | **L**ess **T**han or **E**qual to operator
+| **gt** | Integer, Float | ```requestBuilder.gt("rating", 5);``` | **G**reater **T**han operator
+| **gte** | Integer, Float | ```requestBuilder.gte("rating", 5);``` | **G**reater **T**han or **E**qual to operator
+| **ne** | Integer, Float, String, Boolean | ```requestBuilder.ne("rating", 5);``` | **N**ot **E**qual to operator
+| **in**| Integer, Float, String,Array | ```requestBuilder.in("tags", "man", "golf");``` | Contained **N** array operator
+| **nin** | Integer, Float, String,Array | ```requestBuilder.nin("tags", "man", "golf");``` | **N**ot contained **IN** array
+| **all** | Array | ```requestBuilder.all("tags", "man", "golf");``` | **ALL** contained **IN** array
+| **or** | Integer, Float, String | 1.```requestBuilder.or("name", "igor", "bob");```<br>2.```requestBuilder.or("name", "igor").or("lastname", "khomenko");``` | 1.Will return records with name **igor** or **bob** <br>2.Will return records with name **igor** or lastname **khomenko**
+| **ctn** | String | ```requestBuilder.ctn("username", "ar");``` | Will return all records where **username** field contains **ar** substring
 
 
 For example, we want to retrieve 5 movies that:
-* Have '''rating > 5.5'''
+* Have **rating > 5.5**
 * Not documentary
-* Movies must be sorted by '''rating''' field in ascending order 
+* Movies must be sorted by **rating** field in ascending order 
 
-<syntaxhighlight lang="java">
+```java
 QBRequestGetBuilder requestBuilder = new QBRequestGetBuilder();
 requestBuilder.gt("rating", "5.5");
-requestBuilder.setPagesLimit(5);
+requestBuilder.setLimit(5);
 requestBuilder.eq("documentary", "false");
 requestBuilder.sortAsc("rating");
 
-QBCustomObjects.getObjects("Movie", requestBuilder, new QBEntityCallback<ArrayList<QBCustomObject>>() {
+QBCustomObjects.getObjects("Movie", requestBuilder).performAsync(new QBEntityCallback<ArrayList<QBCustomObject>>() {
     @Override
     public void onSuccess(ArrayList<QBCustomObject> customObjects, Bundle params) {
-        int skip = params.getInt(Consts.SKIP);
-        int limit = params.getInt(Consts.LIMIT);
+        int skip = params.getInt("skip");
+        int limit = params.getInt("limit");
     }
 
     @Override
     public void onError(QBResponseException errors) {
-    
+
     }
 });
-</syntaxhighlight>
+```
 
-=== Update record ===
-To update existing record you should know record ID. 
-Let's update Movie with ID 502f7c4036c9ae2163000002 - set '''rating''' to 7.88:
+# Update record
+To update existing record you should know record **ID**. 
+Let's update Movie with **ID 502f7c4036c9ae2163000002** - set **rating** to **7.88**:
 
-<syntaxhighlight lang="java">
+```java
 QBCustomObject record = new QBCustomObject();
 record.setClassName("Movie");
-HashMap<String, Object> fields = new HashMap<String, Object>();
+HashMap<String, Object> fields = new HashMap<>();
 fields.put("rating", "7.88");
 record.setFields(fields);
 record.setCustomObjectId("502f7c4036c9ae2163000002");
 
-QBCustomObjects.updateObject(record, null, new QBEntityCallback<QBCustomObject>() {
+QBCustomObjects.updateObject(record, null).performAsync(new QBEntityCallback<QBCustomObject>() {
     @Override
     public void onSuccess(QBCustomObject object, Bundle params) {
 
@@ -263,7 +220,7 @@ QBCustomObjects.updateObject(record, null, new QBEntityCallback<QBCustomObject>(
 
     }
 });
-</syntaxhighlight>
+```
 
 Also there are Special update operators, that are very helpful for some purpose, e.g. update Array field etc:
 
