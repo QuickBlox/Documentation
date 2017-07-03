@@ -1,35 +1,36 @@
+<span id="Overview" class="on_page_navigation"></span>
 # Overview
-This sample demonstrates how to work with QuickBlox Custom Objects API.<br> 
-It allows to create any server side data structure, use it as you want, create any logic and a lot of others custom features.
+Используя Custom Objects module of QuickBlox Android SDK you can create any server side data structure, use it as you want, create any logic and a 
+lot of others custom features.
 
-It shows how to:
+Используя этот гайд вы узнаете, как:
 * Create own server data structure & use it. In our example we created data structure, that represents simple Note.
 * Get, Create, Update, Delete your data using a lot of filters.
 
-<br>
+<span id="Prepare_your_application_for_QuickBlox_Android_SDK" class="on_page_navigation"></span>
+# Prepare your application for Android SDK
+Данная инструкция предполагает, что вы уже знакомы с порядком интеграции Quickblox фреймворка в приложение и уже выполнили такие 
+действия для своего приложении:
 
-<img size=150>http://files.quickblox.com/Custom1.png</img> <img size=150>http://files.quickblox.com/Custom2.png</img><img size=150>http://files.quickblox.com/Custom3.png</img><img size=150>http://files.quickblox.com/Custom4.png</img>
+* [Created QuickBlox account](http://admin.quickblox.com/register)
+* [Registerer an application in Dashboard](http://quickblox.com/developers/5_Mins_Guide)
+* [Integrated QuickBlox SDK into application - stub link]()
 
-<br>
 
-=Guide: Get Started with Custom Objects API=
-==Get QuickBlox account==
-[http://admin.quickblox.com/register http://admin.quickblox.com/register] 
+<span id="Integrate_Custom_Objects_module_in_your_application" class="on_page_navigation"></span>
+# Integrate Custom Objects module of QuickBlox Android SDK in your application
+To use Custom Objects module in your app, you just have to add dependency in **build.gradle** project file:
+```groovy
+dependencies {
+    compile "com.quickblox:quickblox-android-sdk-customobjects:3.3.3"
+}
+```
 
-==Create application on Admin panel==
-[http://admin.quickblox.com/apps/new http://admin.quickblox.com/apps/new]
 
-Also you can look through [http://quickblox.com/developers/5_Mins_Guide 5 min guide].
-
-==Connect QuickBlox to your application==
-To get the information on how to connect to the quickblox.jar, please, refer to the [http://quickblox.com/developers/Android#How_to:_add_SDK_to_IDE_and_connect_to_the_cloud Android-how-to-connect-quickblox-jar] page.
-
-==Add Custom Data structure to your application==
->Note: This guide based on [http://quickblox.com/developers/Custom_Objects Custom Objects REST API] documentation. It is 
-very helpful, describes full list of QuickBlox Custom Objects API features and need to be read during reading this guide.
-
+<span id="Add_Custom_Data_structure_to_your_application" class="on_page_navigation"></span>
+# Add Custom Data structure to your application
 To start using Custom Objects module you should create your data schema.
-Go to [http://admin.quickblox.com admin.quickblox.com], Custom Objects module page and press **Add new class** button. 
+Go to **[Admin panel](http://admin.quickblox.com) -> Custom Objects module page** and press **Add new class** button. 
 **Add new class** popup will be appeared.
 
 Enter **Class name**, add fields any you want. Allow 7 types of fields:
@@ -47,10 +48,9 @@ Press **Create class** button - new class will be created
 
 ![](./resources/custom_objects/COPredefinedFields.png)
 
-There are some predefined fields, that described in [http://quickblox.com/developers/Custom_Objects#Module_description Custom Objects REST API Module description] documentation.
+There are some predefined fields, that described in [Custom Objects REST API Module description](http://quickblox.com/developers/Custom_Objects#Module_description)  documentation.
 
-
-
+<span id="Create_record" class="on_page_navigation"></span>
 # Create record 
 There are 2 ways to create record:
 * through Admin panel
@@ -89,6 +89,8 @@ QBCustomObjects.createObject(object).performAsync(new QBEntityCallback<QBCustomO
 });
 ```
 
+
+<span id="Retrieve_records" class="on_page_navigation"></span>
 # Retrieve records
 
 ## By ID
@@ -197,6 +199,8 @@ QBCustomObjects.getObjects("Movie", requestBuilder).performAsync(new QBEntityCal
 });
 ```
 
+
+<span id="Update_record" class="on_page_navigation"></span>
 # Update record
 To update existing record you should know record **ID**. 
 Let's update Movie with **ID 502f7c4036c9ae2163000002** - set **rating** to **7.88**:
@@ -224,57 +228,22 @@ QBCustomObjects.updateObject(record, null).performAsync(new QBEntityCallback<QBC
 
 Also there are Special update operators, that are very helpful for some purpose, e.g. update Array field etc:
 
-==== Special update oparators ====
-{| border="1" cellpadding="10" cellspacing="0"
-! align="center" | Operator !!Applicable to types !!Usage example !! Description
-|-
-| inc
-| Integer, Float
-| updateBuilder.inc("rating", 1);
-| Increment field to specified value. Value can positive or negative (i.e. decrement operation)
-|-
-| pull
-| Arrays
-| updateBuilder.pull("tags", "man")
-| Removes specified value from array field
-|-
-| pull '''with filter'''
-| Arrays
-| updateBuilder.pullWithFilter("user_ids", "gt", 10)
-| Removes all elements, which filtered by filter operator, from array
-|-
-| pull_all
-| Arrays
-| updateBuilder.pullAll("tags", "one", "two")
-| Removes all specified values from array
-|-
-| pop
-| Arrays
-| updateBuilder.pop("tags", 1) 
-| Removes last element from array. To remove first element value should be equal '''-1'''
-|-
-| push
-| Arrays
-| updateBuilder.push("tags", "one", "two")
-| Appends specified values to array
-|-
-| add_to_set
-| Arrays
-| updateBuilder.addToSet("tags", "man")
-| Adds a value to an array only if the value is not in the array already
-|-
-| Update array element by index operator
-| Arrays
-| updateBuilder.updateArrayValue("tags", 1, "two")
-| Update array element by index
-|-
-|}
+## Special update oparators
+
+Operator | Applicable to types | Usage example | Description
+---------|---------------------|---------------|-------------
+| inc | Integer, Float | ```updateBuilder.inc("rating", 1);``` | Increment field to specified value. Value can positive or negative (i.e. decrement operation)
+| pull | Arrays | ```updateBuilder.pull("tags", "man");``` | Removes specified value from array field 
+| pull **with filter** | Arrays | ```updateBuilder.pullWithFilter("user_ids", "gt", 10);``` | Removes all elements, which filtered by filter operator, from array
+| pull_all | Arrays | ```updateBuilder.pullAll("tags", "one", "two");``` | Removes all specified values from array
+| pop | Arrays | ```updateBuilder.pop("tags", 1);``` | Removes last element from array. To remove first element value should be equal '''-1'''
+| push | Arrays | ```updateBuilder.push("tags", "one", "two");``` | Appends specified values to array
+| add_to_set | Arrays | ```updateBuilder.addToSet("tags", "man");``` | Adds a value to an array only if the value is not in the array already
+| Update array element by index operator | Arrays | ```updateBuilder.updateArrayValue("tags", 1, "two");``` | Update array element by index
 
 
-Let's update an element with index 1 in array 'tags' with value 'man':
-
-
-<syntaxhighlight lang="java">
+Let's update an element with index 1 in array **tags** with value **man**:
+```java
 QBCustomObject record = new QBCustomObject();
 record.setClassName("Movie");
 record.setCustomObjectId("502f7c4036c9ae2163000002");
@@ -282,7 +251,7 @@ record.setCustomObjectId("502f7c4036c9ae2163000002");
 QBRequestUpdateBuilder updateBuilder = new QBRequestUpdateBuilder();
 updateBuilder.updateArrayValue("tags", 1, "man");
 
-QBCustomObjects.updateObject(null, updateBuilder, new QBEntityCallback<QBCustomObject>() {
+QBCustomObjects.updateObject(record, updateBuilder).performAsync(new QBEntityCallback<QBCustomObject>() {
     @Override
     public void onSuccess(QBCustomObject object, Bundle params) {
 
@@ -293,48 +262,49 @@ QBCustomObjects.updateObject(null, updateBuilder, new QBEntityCallback<QBCustomO
 
     }
 });
-</syntaxhighlight>
-<br>
+```
 
-=== Delete record ===
-To delete existing record you should know record ID. Let's delete Movie with ID 502f83ed36c9aefa62000002:
-<syntaxhighlight lang="java">
+
+<span id="Delete_record" class="on_page_navigation"></span>
+# Delete record
+To delete existing record you **should know record ID**. Let's delete Movie with ID **502f83ed36c9aefa62000002**:
+```java
 QBCustomObject customObject = new QBCustomObject("Movie", "502f83ed36c9aefa62000002");
 
-QBCustomObjects.deleteObject(customObject, new QBEntityCallbackImpl() {
+QBCustomObjects.deleteObject(customObject).performAsync(new QBEntityCallback<Void>(){
     @Override
-    public void onSuccess() {
+    public void onSuccess(Void aVoid, Bundle bundle) {
 
     }
 
     @Override
-    public void onError(QBResponseException errors) {
+    public void onError(QBResponseException e) {
 
     }
 });
-</syntaxhighlight>
+```
 
-<br>
 
-=== Multi operations ===
+<span id="Multi_operations" class="on_page_navigation"></span>
+# Multi operations
 It is possible to do some operations on multiple objects in a single query.
 
-==== Create multiple records ====
+## Create multiple records
 Create multiple records in a single query:
-<syntaxhighlight lang="java">
+```java
 // Create 3 random records
 List<QBCustomObject> customObjectsList = new ArrayList<QBCustomObject>(3);
-//
+
 for (int i = 0; i < 3; i++){
     Random random = new Random();
     QBCustomObject customObject = new QBCustomObject("Note");
     customObject.putInteger("rating", random.nextInt(100));
     customObject.putString("description", "Hello world");
-    //
+  
     customObjectsList.add(customObject);
 }
 
-QBCustomObjects.createObjects(customObjectsList, new QBEntityCallback<ArrayList<QBCustomObject>>() {
+QBCustomObjects.createObjects(customObjectsList).performAsync(new QBEntityCallback<ArrayList<QBCustomObject>>() {
     @Override
     public void onSuccess(ArrayList<QBCustomObject> customObjects, Bundle args) {
 
@@ -345,31 +315,29 @@ QBCustomObjects.createObjects(customObjectsList, new QBEntityCallback<ArrayList<
 
     }
 });
-</syntaxhighlight>
+```
 
-<br>
-
-==== Update multiple records ====
+## Update multiple records
 Update multiple records in a single query:
-<syntaxhighlight lang="java">
+```java
 QBCustomObject co1 = new QBCustomObject("Note");
 co1.putInteger("rating", 10);
-co1.setCustomObjectId("50e3f85f535c123376000d31");
-//
+co1.setCustomObjectId("50e67e6d535c127f66004f47");
+
 QBCustomObject co2 = new QBCustomObject("Note");
 co2.putInteger("rating", 8);
-co2.setCustomObjectId("50e3f85f535c123376000d31");
-//
+co2.setCustomObjectId("50e67e6b535c121c66004c72");
+
 QBCustomObject co3 = new QBCustomObject("Note");
 co3.putInteger("rating", 12);
-co3.setCustomObjectId("50e3f85f535c123376000d31");
-//
-List<QBCustomObject> customObjectList = new LinkedList<QBCustomObject>();
+co3.setCustomObjectId("50e59f81535c121c660015fd");
+
+List<QBCustomObject> customObjectList = new LinkedList<>();
 customObjectList.add(co1);
 customObjectList.add(co2);
 customObjectList.add(co3);
 
-QBCustomObjects.updateObjects(customObjectList, new QBEntityCallback<ArrayList<QBCustomObject>>() {
+QBCustomObjects.updateObjects(customObjectList).performAsync(new QBEntityCallback<ArrayList<QBCustomObject>>() {
     @Override
     public void onSuccess(ArrayList<QBCustomObject> objects, Bundle params) {
 
@@ -380,24 +348,24 @@ QBCustomObjects.updateObjects(customObjectList, new QBEntityCallback<ArrayList<Q
 
     }
 });
-</syntaxhighlight>
+```
 
-<br>
-
-==== Delete multiple records ====
+## Delete multiple records
 Delete multiple records in a single query:
-<syntaxhighlight lang="java">
-StringifyArrayList<String> deleteIds = new StringifyArrayList<String>();
+```java
+StringifyArrayList<String> deleteIds = new StringifyArrayList<>();
 deleteIds.add("50e3f85f535c123376000d31");
 deleteIds.add("50e3f85f535c123376000d32");
 
-QBCustomObjects.deleteObjects("Note", deleteIds, QBEntityCallback<ArrayList<String>>() {
+QBCustomObjects.deleteObjects("Note", deleteIds).performAsync(new  QBEntityCallback<ArrayList<String>>() {
     @Override
     public void onSuccess(ArrayList<String> deletedObjects, Bundle params) {
         Log.i(TAG, ">>> deleted: " + deletedObjects.toString());
+                
         ArrayList<String> notFound = params.getStringArrayList(com.quickblox.customobjects.Consts.NOT_FOUND_IDS);
-        ArrayList<String> wrongPermissions = params.getStringArrayList(com.quickblox.customobjects.Consts.WRONG_PERMISSIONS_IDS);
         Log.i(TAG, ">>> notFound: " + notFound.toString());
+
+        ArrayList<String> wrongPermissions = params.getStringArrayList(com.quickblox.customobjects.Consts.WRONG_PERMISSIONS_IDS);
         Log.i(TAG, ">>> wrongPermissions: " + wrongPermissions.toString());
     }
 
@@ -406,22 +374,22 @@ QBCustomObjects.deleteObjects("Note", deleteIds, QBEntityCallback<ArrayList<Stri
 
     }
 });
-</syntaxhighlight>
+```
 
-<br>
 
-=== Relations ===
-We allow to organize relation between 2 objects - just use special field '''_parent_id'''. 
+<span id="Relations" class="on_page_navigation"></span>
+# Relations
+We allow to organize relation between 2 objects - just use special field **_parent_id**. 
 
 For example, if you want to add Comments to movie - you can use code snippet bellow:
 
-<syntaxhighlight lang="java">
+```java
 QBCustomObject customObject = new QBCustomObject("Comment"); // your Class name
 customObject.putInteger(fieldHealth, 99);
 customObject.putString("text", "The first film in the series was originally released on May 25, 1977, under the title Star Wars, by 20th Century Fox");
 customObject.setParentId("50aa4d8fefa357fa14000001");
 
-QBCustomObjects.createObject(customObject, new QBEntityCallback<QBCustomObject>() {
+QBCustomObjects.createObject(customObject).performAsync(new QBEntityCallback<QBCustomObject>() {
     @Override
     public void onSuccess(QBCustomObject object, Bundle params) {
 
@@ -432,19 +400,22 @@ QBCustomObjects.createObject(customObject, new QBEntityCallback<QBCustomObject>(
 
     }
 });
-</syntaxhighlight>
+```
 
 This is strong reference - it means that if you will delete parent record (Movie) - all children records (Comments) will be deleted too.
-This field ('''_parent_id''') may be included in Retrieve/Create/Update queries as well.
 
-<br>
+This field (```_parent_id```) may be included in Retrieve/Create/Update queries as well.
 
-=== Permissions ===
-A Permissions (access control list)  is a list of  permissions attached to an record in Custom Objects module. This list specifies which users are granted access to records, as well as what operations are allowed on given objects (READ,CREATE,UPDATE,DELETE).
 
-Each entry in a typical Permissions specifies a subject and an operation. For instance, if a record has a permission that contains (Garry, EDIT), this would give Garry permission to edit this record.
+<span id="Permissions" class="on_page_navigation"></span>
+# Permissions
+A Permissions (access control list)  is a list of  permissions attached to an record in Custom Objects module. This list specifies which 
+users are granted access to records, as well as what operations are allowed on given objects (**READ, CREATE, UPDATE, DELETE**).
 
-Read [http://quickblox.com/developers/Custom_Objects#Permissions Permissions REST API description] to better understand how it works
+Each entry in a typical Permissions specifies a subject and an operation. For instance, if a record has a permission that contains (Garry, EDIT), 
+this would give Garry permission to edit this record.
+
+Read [Permissions REST API description](http://quickblox.com/developers/Custom_Objects#Permissions)  to better understand how it works
 
 There are 4 typical operations on record:
 * CREATE
@@ -452,52 +423,50 @@ There are 4 typical operations on record:
 * UPDATE
 * DELETE
 
-'''CREATE''' operations can't be set through API (only in Admin panel)
+```CREATE``` operations can't be set through API (only in Admin panel)
 
 Each operation has info who can perform it on object.
 
-There are 5 values ('''QBPermissionsLevel'''):
-* '''QBPermissionsLevel.OPEN''' - any user can perform operation on this record
-* '''QBPermissionsLevel.OWNER''' - only owner can perform operation on this record
-* '''QBPermissionsLevel.NOT_ALLOWED''' - nobody can perform operation on this record (except Owner)
-* '''QBPermissionsLevel.OPEN_FOR_USER_IDS''' - users with these IDs can perform operation on this record
-* '''QBPermissionsLevel.OPEN_FOR_GROUPS''' - users in these groups can perform operation on this record
+There are 5 values (```QBPermissionsLevel```):
+* ```QBPermissionsLevel.OPEN``` - any user can perform operation on this record
+* ```QBPermissionsLevel.OWNER``` - only owner can perform operation on this record
+* ```QBPermissionsLevel.NOT_ALLOWED``` - nobody can perform operation on this record (except Owner)
+* ```QBPermissionsLevel.OPEN_FOR_USER_IDS``` - users with these IDs can perform operation on this record
+* ```QBPermissionsLevel.OPEN_FOR_GROUPS``` - users in these groups can perform operation on this record
 
-'''Note:''' Owner always has access to own record (except case when [http://quickblox.com/developers/Custom_Objects#Permission_levels Class permissions level] is enabled)
+> **Note:** Owner always has access to own record (except case when [Class permissions level](http://quickblox.com/developers/Custom_Objects#Permission_levels)  is enabled)
 
-<br>
-==== Create record with Permissions ====
+## Create record with Permissions
 Let's create record with next permissions:
-* READ: Open
-* UPDATE: Users in groups '''golf, man'''
-* DELETE: Users with IDs '''3060, 63635'''
+* ```READ```: Open
+* ```UPDATE```: Users in groups **golf, man**
+* ```DELETE```: Users with IDs **3060, 63635**
 
-<syntaxhighlight lang="java">
+```java
 QBCustomObject newRecord = new QBCustomObject("Note");
 newRecord.put("rating", 99);
 newRecord.put("description", "Hello world");
 
-//
 // set permissions:
 // READ
 QBPermissions permissions = new QBPermissions();
 permissions.setReadPermission(QBPermissionsLevel.OPEN);
-//
+
 // UPDATE
-ArrayList<String> usersTags = new  ArrayList<String>();
+ArrayList<String> usersTags = new  ArrayList<>();
 usersTags.add("golf");
 usersTags.add("man");
 permissions.setDeletePermission(QBPermissionsLevel.OPEN_FOR_GROUPS, usersTags);
-//
+
 // DELETE
-ArrayList<String> usersIDS = new  ArrayList<String>();
+ArrayList<String> usersIDS = new  ArrayList<>();
 usersIDS.add("3060");
 usersIDS.add("63635");
-permissions.setDeletePermission(QBPermissionsLevel.OPEN_FOR_USER_IDS, openPermissionsForUserIDS);
-                
+permissions.setDeletePermission(QBPermissionsLevel.OPEN_FOR_USER_IDS, usersIDS);
+
 newRecord.setPermission(permissions);
 
-QBCustomObjects.createObject(newRecord, new QBEntityCallback<QBCustomObject>() {
+QBCustomObjects.createObject(newRecord).performAsync(new QBEntityCallback<QBCustomObject>() {
     @Override
     public void onSuccess(QBCustomObject object, Bundle params) {
 
@@ -508,15 +477,13 @@ QBCustomObjects.createObject(newRecord, new QBEntityCallback<QBCustomObject>() {
 
     }
 });
-</syntaxhighlight>
+```
 
-<br>
-
-==== Obtain record's Permissions ====
+## Obtain record's Permissions
 You can obtain info about record permissions by it ID - info only about own records are available for user: 
 
-<syntaxhighlight lang="java">
-QBCustomObjects.getObjectPermissions("Note", "53f44e7befa3573473000002", new QBEntityCallback<QBPermissions>() {
+```java
+QBCustomObjects.getObjectPermissions("Note", "53f44e7befa3573473000002").performAsync(new QBEntityCallback<QBPermissions>() {
     @Override
     public void onSuccess(QBPermissions permissions, Bundle params) {
 
@@ -527,39 +494,36 @@ QBCustomObjects.getObjectPermissions("Note", "53f44e7befa3573473000002", new QBE
 
     }
 });
-</syntaxhighlight>
+```
 
-<br>
-
-==== Update record's Permissions ====
+## Update record's Permissions
 Let's update record's permissions to next:
-* READ: Users in groups '''car, developers'''
-* UPDATE: Owner
-* DELETE: Owner
+* ```READ```: Users in groups **car, developers**
+* ```UPDATE```: Owner
+* ```DELETE```: Owner
 
-<syntaxhighlight lang="java">
+```java
 QBCustomObject record = new QBCustomObject();
 record.setClassName("Note");
 record.setCustomObjectId("52b30274535c12fbf80121bd");
 
-//
 // update permissions:
 // READ
 QBPermissions permissions = new QBPermissions();
-ArrayList<String> usersTags = new  ArrayList<String>();
+ArrayList<String> usersTags = new  ArrayList<>();
 usersTags.add("car");
 usersTags.add("developers");
 permissions.setDeletePermission(QBPermissionsLevel.OPEN_FOR_GROUPS, usersTags);
-//
+
 // UPDATE
 permissions.setUpdatePermission(QBPermissionsLevel.OWNER);
-//
+
 // DELETE
 permissions.setDeletePermission(QBPermissionsLevel.OWNER);
-                
+
 record.setPermission(permissions);
 
-QBCustomObjects.updateObject(record, null, new QBEntityCallback<QBCustomObject>() {
+QBCustomObjects.updateObject(record, null).performAsync(new QBEntityCallback<QBCustomObject>() {
     @Override
     public void onSuccess(QBCustomObject object, Bundle params) {
 
@@ -570,23 +534,29 @@ QBCustomObjects.updateObject(record, null, new QBEntityCallback<QBCustomObject>(
 
     }
 });
-</syntaxhighlight>
+```
 
-=== Files ===
-Custom Objects module supports ‘File’ field type. It is created for easily working with content from Custom Objects module. There is an ability to upload, download, update and delete content of file fields.
 
-'''Note:''' The '''max''' file size is '''32 MB'''.
+<span id="Files" class="on_page_navigation"></span>
+# Files
+Custom Objects module supports ```File``` field type. It is created for easily working with content from Custom Objects module. 
+There is an ability to upload, download, update and delete content of file fields.
 
-<br>
-==== Upload/Update file ====
-<syntaxhighlight lang="java">
+> **Note:** The **max** file size is **32 MB**.
+
+## Upload/Update file
+```java
 // get file
 File file = ...;
 
 QBCustomObject customObject = new QBCustomObject("Note", "a234234abc647fed6473333");
 
- QBCustomObjectsFiles.uploadFile(file, customObject, "avatar", new QBEntityCallback<QBCustomObjectFileField>() {
+QBCustomObjectsFiles.uploadFile(file, customObject, "avatar", new QBProgressCallback() {
+    @Override
+    public void onProgressUpdate(int progress) {
 
+    }
+}).performAsync(new QBEntityCallback<QBCustomObjectFileField>() {
     @Override
     public void onSuccess(QBCustomObjectFileField uploadFileResult, Bundle params) {
 
@@ -596,21 +566,19 @@ QBCustomObject customObject = new QBCustomObject("Note", "a234234abc647fed647333
     public void onError(QBResponseException errors) {
 
     }
-}, new QBProgressCallback() {
+});
+```
+
+## Download file
+```java
+QBCustomObject customObject = new QBCustomObject("Note", "a234234abc647fed6473333");
+
+QBCustomObjectsFiles.downloadFile(customObject, "avatar", new QBProgressCallback() {
     @Override
     public void onProgressUpdate(int progress) {
 
     }
-});
-</syntaxhighlight>
-
-<br>
-
-==== Download file ====
-<syntaxhighlight lang="java">
-QBCustomObject customObject = new QBCustomObject("Note", "a234234abc647fed6473333");
-
-QBCustomObjectsFiles.downloadFile(customObject, "avatar", new QBEntityCallback<InputStream>(){
+}).performAsync(new QBEntityCallback<InputStream>(){
     @Override
     public void onSuccess(InputStream inputStream, Bundle params) {
 
@@ -620,25 +588,17 @@ QBCustomObjectsFiles.downloadFile(customObject, "avatar", new QBEntityCallback<I
     public void onError(QBResponseException errors) {
 
     }
-}, new QBProgressCallback() {
-    @Override
-    public void onProgressUpdate(int progress) {
-
-    }
 });
-</syntaxhighlight>
+```
 
-<br>
-
-==== Delete file ====
-<syntaxhighlight lang="java">
+## Delete file
+```java
 QBCustomObject customObject = new QBCustomObject("Note", "a234234abc647fed6473333");
 
-QBCustomObjectsFiles.deleteFile(customObject, "avatar", new QBEntityCallback() {
-
+QBCustomObjectsFiles.deleteFile(customObject, "avatar").performAsync(new QBEntityCallback<Void>() {
     @Override
-    public void onSuccess() {
-
+    public void onSuccess(Void aVoid, Bundle bundle) {
+                
     }
 
     @Override
@@ -646,9 +606,10 @@ QBCustomObjectsFiles.deleteFile(customObject, "avatar", new QBEntityCallback() {
 
     }
 });
-</syntaxhighlight>
+```
 
-= Sources =
-'''Project homepage on GIT —''' [https://github.com/QuickBlox/quickblox-android-sdk/tree/master/sample-custom-objects https://github.com/QuickBlox/quickblox-android-sdk/tree/master/sample-custom-objects]
+<span id="Sources" class="on_page_navigation"></span>
+# Sources
+Project homepage on GIT - https://github.com/QuickBlox/quickblox-android-sdk/tree/master/sample-custom-objects
 
-'''Download ZIP - ''' [https://github.com/QuickBlox/quickblox-android-sdk/archive/master.zip https://github.com/QuickBlox/quickblox-android-sdk/archive/master.zip]
+Download ZIP - https://github.com/QuickBlox/quickblox-android-sdk/archive/master.zip
