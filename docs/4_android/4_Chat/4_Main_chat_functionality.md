@@ -165,8 +165,11 @@ QBChatDialogMessageListener messagesListener = new QBChatDialogMessageListener()
 ```
  
 ### Listening messages from all chats
-```QBIncomingMessagesManager``` is used to listen for all incoming messages from all dialogs.<br>
->Pay attention! Messages from group chat dialogs will be received in ```QBIncomingMessagesManager``` only after joining to this group chat dialog.
+```QBIncomingMessagesManager``` is used to listen for all incoming messages from all dialogs.
+<div class="attention">
+Pay attention! Messages from group chat dialogs will be received in <code>QBIncomingMessagesManager</code> <b>only after joining</b> to 
+this group chat dialog.
+<div>
 
 To use ```QBIncomingMessagesManager``` just retrieve it from ```QBChatService``` after **login in chat**:
 ```java

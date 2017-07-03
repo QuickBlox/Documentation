@@ -109,7 +109,7 @@ messageGetBuilder.gt("updated_at", "1455098137");
 
 <div class="attention">
 Note: All retrieved chat messages will be marked as read after the request. 
-If you decide not to mark chat messages as read, add next parameter to the request: <b>messageGetBuilder.markAsRead(<span style="color:red;">false</span>);</b>
+If you decide not to mark chat messages as read, add next parameter to the request: <code>messageGetBuilder.markAsRead(<span style="color:red;">false</span>);</code>
 </div>
 
 <span id="Update_chat_messages" class="on_page_navigation"></span>
@@ -172,8 +172,12 @@ QBRestChatService.markMessagesAsRead(dialogId, null).performAsync(new QBEntityCa
     }
 });
 ```
->Keep in mind, when you mark messages as delivered/read via REST, other users will not know about it instantly. 
-If you want your opponent to get info about changing message's status, you have to mark it as delivered/read via chat, for details refer to [stub link to docs]()
+
+<div class="attention">
+Keep in mind, when you mark messages as delivered/read via REST, <b>other users will not know about it instantly</b>. 
+If you want your opponent to get info about changing message's status, you have to mark it as delivered/read via chat, 
+for details refer to <a href="stub link to docs">stub link to docs (fix me)</a>
+</div>
 
 <span id="Delete_chat_messages" class="on_page_navigation"></span>
 ## Delete chat messages

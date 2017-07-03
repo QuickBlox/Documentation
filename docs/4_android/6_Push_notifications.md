@@ -101,18 +101,23 @@ dependencies {
 …
 }
 ```
+<div class="attention">
+Note: If you use google play services in your project, use version 9.8.0 or higher (version we use in our SDK) as  
+all com.google.android.gms libraries must use the exact <b>same version</b> specification.
+</div>
 
-> Note: 
-If you use google play services in your project, use version 9.8.0 or higher (version we use in our SDK) as  
-all com.google.android.gms libraries must use the exact same version specification.
-
-
-> If you use version **higher** 10.2.1 just add explicit dependency:
-```groovy
+<div class="attention">
+If you use version <b>higher</b> 10.2.1 just add explicit dependency:
+<code>
+<br>
 compile "com.google.android.gms:play-services-gcm:10.2.6"
+<br>
 compile "com.google.firebase:firebase-messaging:10.2.6"
+<br>
 compile "com.google.firebase:firebase-core:10.2.6"
-```
+</code>
+</div>
+
 
 Include gms plugin in the **bottom** of your module ```build.gradle```: 
 ```groovy
@@ -244,14 +249,18 @@ public class GcmPushListenerService extends QBGcmPushListenerService {
 }
 ```
 
-> Будьте внимательны, если вы используете свой сервис для прослушивания GCM пушей, то в шаге [линка на пункт]() вам необходимо вместо класса
-```QBGcmPushListenerService``` засеть свой сервис:
-```xml
-<!-- вместо нашего сервиса -->
-    android:name="com.quickblox.messages.services.gcm.QBGcmPushListenerService"
-<!-- надо использовать свой сервис -->
-    android:name="com.quickblox.my_app.services.GcmPushListenerService"
-```
+<div class="attention">
+Будьте внимательны! Если вы используете свой сервис для прослушивания GCM пушей, то в шаге [линка на пункт]() вам необходимо вместо класса
+<code>QBGcmPushListenerService</code> засетить свой сервис:
+<code>
+<br>
+вместо нашего сервиса <br>
+android:name="com.quickblox.messages.services.gcm.QBGcmPushListenerService"<br>
+
+надо использовать свой сервис <br>
+android:name="com.quickblox.my_app.services.GcmPushListenerService"
+</code>
+</div>
 
 * для **FCM** пушей:
 надо расширить класс ```QBFcmPushListenerService``` из нашего СДК и переопределить его метод ```onMessageReceived(RemoteMessage remoteMessage)```
@@ -272,14 +281,20 @@ public class FcmPushListenerService extends QBFcmPushListenerService {
     }
 }
 ```
-> Будьте внимательны, если вы используете свой сервис для прослушивания FCM пушей, то в шаге [линка на пункт]() вам необходимо вместо класса
-```QBFcmPushListenerService``` засеть свой сервис:
-```xml
-<!-- вместо нашего сервиса -->
-    android:name="com.quickblox.messages.services.fcm.QBFcmPushListenerService">
-<!-- надо использовать свой сервис -->
-    android:name="com.quickblox.my_app.services.FcmPushListenerService"
-```
+
+<div class="attention">
+Будьте внимательны! Если вы используете свой сервис для прослушивания FCM пушей, то в шаге [линка на пункт]() вам необходимо вместо класса
+<code>QBFcmPushListenerService</code> засеть свой сервис:
+<code>
+<br>
+вместо нашего сервиса <br>
+android:name="com.quickblox.messages.services.fcm.QBFcmPushListenerService"<br>
+
+надо использовать свой сервис <br>
+android:name="com.quickblox.my_app.services.FcmPushListenerService"
+</code>
+</div>
+
 
 <span id="Sumscription_management" class="on_page_navigation"></span>
 ## Управление подпиской на пуши

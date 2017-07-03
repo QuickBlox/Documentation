@@ -243,9 +243,9 @@ As soon as your app is ready for calls processing and activity exists, use code 
 ```java
 QBRTCClient.getInstance(this).prepareToProcessCalls();
 ```
-
->**Pay attention** if you forgot to add signalling manager you will not be able to process calls.
-
+<div class="attention">
+Pay attention! If you forgot to add signalling manager you will not be able to process calls.
+</div>
 
 <span id="Track_session_states_via_QBRTCClientSessionCallbacks_interface" class="on_page_navigation"></span>
 ## Track session states via QBRTCClientSessionCallbacks interface
@@ -613,10 +613,14 @@ This method unregisters ```QBRTCClient``` from receiving any video chat events, 
 
 <span id="Manage_streams" class="on_page_navigation"></span>
 ## Manage streams
-To manage audio & video streams ```QBRTCSession``` provides ```QBMediaStreamManager``` class. <br>
-```QBMediaStreamManager``` holds user's local audio & video tracks and provides way to change current ***video capturer***. <br>
->**Pay attentions, ```QBMediaStreamManager``` attaches to ```QBRTCSession``` lifecycle. According to  ```QBRTCSession``` lifecycle, 
-you should use ```QBMediaStreamManager``` only when ```QBRTCSession``` is active or has been started.**
+To manage audio & video streams ```QBRTCSession``` provides ```QBMediaStreamManager``` class. 
+
+```QBMediaStreamManager``` holds user's local audio & video tracks and provides way to change current ***video capturer***.
+
+<div class="attention">
+Pay attentions! <code>QBMediaStreamManager</code> attaches to <code>QBRTCSession</code> lifecycle. According to <code>QBRTCSession</code> lifecycle, 
+you should use <code>QBMediaStreamManager</code> only when <code>QBRTCSession</code> is active or has been started.**
+</div>
 
 ## Disable/enable audio stream
 
