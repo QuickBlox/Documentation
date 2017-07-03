@@ -543,7 +543,7 @@ Custom Objects module supports ```File``` field type. It is created for easily w
 There is an ability to upload, download, update and delete content of file fields.
 
 <div class="attention">
-**Note:** The **max** file size is **32 MB**.
+Note: The <b>max</b> file size is <b>32 MB</b>.
 </div>
 
 ## Upload/Update file
