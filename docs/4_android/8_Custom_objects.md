@@ -542,7 +542,9 @@ QBCustomObjects.updateObject(record, null).performAsync(new QBEntityCallback<QBC
 Custom Objects module supports ```File``` field type. It is created for easily working with content from Custom Objects module. 
 There is an ability to upload, download, update and delete content of file fields.
 
-> **Note:** The **max** file size is **32 MB**.
+<div class="attention">
+**Note:** The **max** file size is **32 MB**.
+</div>
 
 ## Upload/Update file
 ```java
