@@ -107,8 +107,10 @@ messageGetBuilder.sortAsc("date_sent");
 messageGetBuilder.gt("updated_at", "1455098137");
 ```
 
-> <span style="color:red;">Note</span>: All retrieved chat messages will be marked as read after the request. 
-If you decide not to mark chat messages as read, add next parameter to the request: ```messageGetBuilder.markAsRead(false);```
+<div class="attention">
+Note: All retrieved chat messages will be marked as read after the request. 
+If you decide not to mark chat messages as read, add next parameter to the request: <b>messageGetBuilder.markAsRead(<span style="color:red;">false</span>);</b>
+</div>
 
 <span id="Update_chat_messages" class="on_page_navigation"></span>
 ## Update chat messages

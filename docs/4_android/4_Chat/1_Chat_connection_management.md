@@ -71,7 +71,10 @@ QBUser qbUser = ...;
 String qbToken = QBSessionManager.getInstance().getToken();
 qbUser.setPassword(qbToken);
 ```
-> Keep in mind, that for using token as password for login to chat, QBSession has to be created **with user**, you can find more there [link on docs with authorization]()
+<div class="attention">
+Keep in mind, that for using token as password for login to chat, QBSession has to be created <b>with user</b>, 
+you can find more  <a href="link on docs with authorization">there (fix me)</a>
+</div>
 
 After configuring QBUser you have to login to chat using this user. Code will be the same for both options:
 ```java
