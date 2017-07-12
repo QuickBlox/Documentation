@@ -273,6 +273,152 @@ paths:
           description: "Dialog notifications response"
           schema:
             $ref: '#/definitions/DialogNotificationsResponse'
+  /chat/Message.json:
+    get:
+      summary: Retrieve messages
+      operationId: 108_Retrieve_Messages
+      description: |
+        Retrieve all chat messages within particular chat dialog.
+        It's only possible to retrieve chat messages in dialog if current user id is in **occupants_ids** field or if dialog's **type=1**(PUBLIC_GROUP).
+        Server will return chat messages sorted ascending by **date_sent** field.
+        All retrieved chat messages will be marked as **read** after the request.
+      parameters:
+        - name: chat_dialog_id
+          in: formData
+          description: |
+            An id of chat dialog to retrieve chat messages for. (path parameter)
+          required: true
+          type: string
+          default: 53aabe15e4b077ddd43e7fd6
+        - name: '{field_name}'
+          in: formData
+          description: |
+            Search records with field which contains exactly specified value.
+            Applied fields - **_id**, **message**, **date_sent**, **sender_id**, **recipient_id**, **attachments.type**, **updated_at**.
+          required: false
+          type: string
+          default: sender_id=2960
+        - name: '{field_name}[{search_operator}]'
+          in: formData
+          description: |
+            Search records with field which contains value according to specified value and operator.
+            Possible filters - **lt** (Less Than operator), **lte** (Less Than or Equal to operator), **gt** (Greater Than operator), **gte** (Greater Than or Equal to operator), **ne** (Not Equal to operator), **in** (Contained IN array operator), **nin** (Not contained IN array), **all** (ALL contained IN array), **ctn** (Contains substring operator).
+            Applied fields - **_id**, **message**, **date_sent**, **sender_id**, **recipient_id**, **attachments.type**, **updated_at**.
+          required: false
+          type: string
+          default: sender_id[in]=134,2566
+        - name: limit
+          in: formData
+          description: |
+            Limit search results to N records. Useful for pagination. Default (if not specified) - 100.
+          required: false
+          type: integer
+          default: 100
+        - name: skip
+          in: formData
+          description: |
+            Skip N records in search results. Useful for pagination. Default (if not specified) - 0.
+          required: false
+          type: integer
+          default: 100
+        - name: count
+          in: formData
+          description: |
+            Count search results. Response will contain only count of records found.
+          required: false
+          type: integer
+          default: 1
+        - name: sort_desc/sort_asc
+          in: formData
+          description: |
+            Search results will be sorted by specified field in ascending/descending order.
+          required: false
+          type: string
+          default: sort_desc=last_message_date_sent
+        - name: mark_as_read
+          in: formData
+          description: |
+            Do not mark the received messages as read (default is 1)
+          required: false
+          type: string
+          default: mark_as_read=0
+      responses:
+        '200':
+          description: "Array of chat messages"
+          schema:
+            $ref: '#/definitions/MessagesResponse'
+    post:
+      summary: Create message
+      operationId: 109_Create_Message
+      description: |
+        Create a chat message.
+        You can initiate the message delivery via XMPP real-time transport or just inject it directly into history.
+      parameters:
+        - name: chat_dialog_id
+          in: formData
+          description: |
+            An id of chat dialog to create chat message in.
+            Required if a **recipient_id** parameter is not specified.
+          required: true
+          type: string
+          default: 53aabe15e4b077ddd43e7fd6
+        - name: message
+          in: formData
+          description: |
+            Text of the message (CGI-escaped)
+          required: false
+          type: string
+          default: Wish I could be here!
+        - name: recipient_id
+          in: formData
+          description: |
+            ID of a recipient to send message to.
+            Useful only when dialog's **type=3**(PRIVATE).
+            Required if a **chat_dialog_id** parameter is not specified.
+          required: true
+          type: string
+          default: 4124234
+        - name: 'attachments[n][type/id/url]'
+          in: formData
+          description: |
+            Array of attachments objects.
+            Each attachment object contains 3 keys: type(audio/video/image/...), id(link to file ID in QuickBlox), url(link to file in Internet)
+          required: false
+          type: string
+          default: ttachments[0][id]=47863&attachments[0][type]=image
+        - name: send_to_chat
+          in: formData
+          description: |
+            Initiate message delivery via XMPP real-time transport.
+          required: false
+          type: string
+          default: 1
+        - name: markable
+          in: formData
+          description: |
+            Mark the message to signalize that is supports read/delivered statuses.
+          required: false
+          type: string
+          default: 1
+        - name: '{custom_field_name}'
+          in: formData
+          description: |
+            Key-value custom parameter.
+            Chat message can contain additional custom parameters.
+          required: false
+          type: string
+          default: age=25
+      responses:
+        '201':
+          description: "Chat message object"
+          schema:
+            $ref: '#/definitions/MessageObject'
+parameters:
+  /chat/Message/{messages_ids}.json:
+    put:
+    delete:
+  /chat/Message/unread.json:
+    get:
 definitions:
   DialogsResponse:
     type: object
