@@ -1,3 +1,4 @@
+<span id="Summary" class="on_page_navigation"></span>
 # Summary
 
 The user module manages all things related to user accounts handling, authentication, account data, password reminding etc.
@@ -8,7 +9,7 @@ The user module manages all things related to user accounts handling, authentica
 - User tags – set up user tags and address them separately in your app or through the admin panel – supported by other modules such as Messages;
 - Existing user base integration – our module supports connection to your system by storing your existent IDs table and matching them to new ones.
 
-
+<span id="QBUser_properties" class="on_page_navigation"></span>
 # QBUser properties
 **QBUser** model has such main fields:
 
@@ -20,6 +21,8 @@ The user module manages all things related to user accounts handling, authentica
 
 # Users API
 
+
+<span id="Signing_Up" class="on_page_navigation"></span>
 ## Signing Up
 
 To Create new User call:
@@ -50,6 +53,7 @@ QBUsers.signUp(user).performAsync( new QBEntityCallback<QBUser>() {
 });
 ```
 
+<span id="Sign_In_and_Social_authorization" class="on_page_navigation"></span>
 ## Sign In & Social authorization
 
 There are 4 methods that you can use to sign in to QuickBlox:
@@ -59,6 +63,8 @@ There are 4 methods that you can use to sign in to QuickBlox:
 * Sign in using Facebook/Twitter access token
 * Sign in In with Twitter Digits
 
+
+<span id="Sign_In_with_login_and_password" class="on_page_navigation"></span>
 ### Sign In with login & password
 ```java
 QBUser user = new QBUser("garry", "garry2892pass")
@@ -76,6 +82,8 @@ QBUsers.signIn(user).performAsync( new QBEntityCallback<QBUser>() {
 });
 ```
 
+
+<span id="Sign_In_with_email_and_password" class="on_page_navigation"></span>
 ### Sign In with email & password
 ```java
 QBUser user = new QBUser();
@@ -95,7 +103,7 @@ QBUsers.signIn(user).performAsync( new QBEntityCallback<QBUser>() {
 });
 ```
 
-
+<span id="Sign_In_using_Facebook_Twitter_access_token" class="on_page_navigation"></span>
 ### Sign In using Facebook/Twitter access token
 ```java
 String facebookAccessToken = "AAAEra8jNdnkBABYf3ZBSAz9dgLfyK7tQNttIoaZA1cC40niR6HVS0nYuufZB0ZCn66VJc" +
@@ -114,6 +122,8 @@ QBUsers.signInUsingSocialProvider(QBProvider.FACEBOOK,  facebookAccessToken, nul
 });
 ```
 
+
+<span id="Signing_In_with_Twitter_Digits" class="on_page_navigation"></span>
 ### Signing In with Twitter Digits
 
 Digits lets people create an account or sign into your app using nothing but their phone number on iOS
@@ -174,6 +184,8 @@ private Map<String, String> getAuthHeadersBySession(DigitsSession digitsSession)
 
 ```
 
+
+<span id="Update_own_profile" class="on_page_navigation"></span>
 ## Update own profile
 If you want to update your profile - just use method bellow. You can update only your own user, just put your User's ID:
 ```java
@@ -195,6 +207,8 @@ QBUsers.updateUser(user).performAsync( new QBEntityCallback<QBUser>(){
 });
 ```
 
+
+<span id="Update_profile_picture_avatar" class="on_page_navigation"></span>
 ## Update profile picture (avatar)
 
 In case you want set or update user's avatar you should :
@@ -249,7 +263,7 @@ Glide.with(context)
                 .into(imageView);
 ```
 
-
+<span id="Reset_password" class="on_page_navigation"></span>
 ## Reset password
 
 If you forgot your password - you can reset it using method bellow.
@@ -270,6 +284,8 @@ QBUsers.resetPassword("mary987@gmail.com").performAysnc( new QBEntityCallback<Vo
 });
 ```
 
+
+<span id="Sign_Out" class="on_page_navigation"></span>
 ## Sign Out
 
 If you want to sign out - just use method bellow:
@@ -294,13 +310,15 @@ QBUsers.signOut().performAsync( new QBEntityCallback<Void>(){
 
 Retrieve all [API Users]() for current account.
 
-====Retrieve all Users====
 
-Use **QBPagedRequestBuilder** to set pagination info for request.
+<span id="Retrieve_all_Users" class="on_page_navigation"></span>
+### Retrieve all Users
+
+Use ```QBPagedRequestBuilder``` to set pagination info for request.
 
 You can use page parameters like:
-* '''perPage''' - how many users will contain each page (max 100)
-* '''page''' - current page
+* **perPage** - how many users will contain each page (max 100)
+* **page** - current page
 
 ```java
 QBPagedRequestBuilder pagedRequestBuilder = new QBPagedRequestBuilder();
@@ -325,7 +343,9 @@ QBUsers.getUsers(pagedRequestBuilder, params).performAsync( new QBEntityCallback
 });
 ```
 
-====Retrieve users by filter====
+
+<span id="Retrieve_users_by_filter" class="on_page_navigation"></span>
+### Retrieve users by filter
 There are lots of filters to retrieve users:
 
 * Retrieve Users by IDs
@@ -341,7 +361,7 @@ There are lots of filters to retrieve users:
 * Retrieve User by email
 * Retrieve User by external ID. You can connect user from 3d party system to QuickBlox user through external
 
-Use getUsersByXXX methods to retrieve users by filters.
+Use ```getUsersByXXX``` methods to retrieve users by filters.
 For example following code loads users by login:
 
 
