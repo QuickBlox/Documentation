@@ -76,7 +76,7 @@ paths:
           required: false
           type: string
           default: data[class_name]=AdditionalDataClass
-        - name: 'data[fieldName1]'
+        - name: 'data[<fieldName1>]'
           in: formData
           description: |
             Custom parameter name and value in format data[<parameter_name>]=<parameter_value>
@@ -149,7 +149,7 @@ paths:
           required: false
           type: string
           default: data[class_name]=AdditionalDataClass
-        - name: 'data[fieldName1]'
+        - name: 'data[<fieldName1>]'
           in: formData
           description: |
             Custom parameter name and value in format data[<parameter_name>]=<parameter_value>
@@ -217,7 +217,7 @@ paths:
           required: false
           type: string
           default: data[class_name]=AdditionalDataClass
-        - name: 'data[fieldName1]'
+        - name: 'data[<fieldName1>]'
           in: formData
           description: |
             Custom parameter name and value in format data[<parameter_name>]=<parameter_value>
