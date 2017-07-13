@@ -1,32 +1,30 @@
 <span id="Overview" class="on_page_navigation"></span>
 # Overview
 
-## Основные возможности:
-Quickblox Android SDK позволяет с легкостью реализовать приложение для организации аудио и видео звонков. Наше СДК обладает надором
-необходимого для этого функционала.
+## Main features:
+Quickblox Android SDK has all needed functionality to implement video and audio calls to application and easily allows to add it to your project.
 
 There are two approaches for WebRTC audio/video calls implementation in QuickBlox:
-- Client side (Peer-to-peer or Mesh) - доступно для всех клиентов;
-- Server side  (SFU) implementation - доступно только для ентерпрайз клиентов;
+- Client side (Peer-to-peer or Mesh) - available for all customers;
+- Server side  (SFU) implementation - available for Enterprise customers (additional server is needed to be set up);
 
 ![Call scheme](./resources/call/call_schemes.png)
 
-Используя Mesh схему организации звонков вы можете использовать следующие возможности нашего СДК:
-* поддержка аудио звонков;
-* поддержка видео звонков;
-* поддержка приватных звонков (пир-ту-пир);
-* поддержка групповых звонков (поддерживается стабильный аудио звонок с 10-ю участниками и видеозвонок с 6-ю участниками);
-* предусмотрена логика осуществления зонков участникам, которые на момент звонка находятся вне приложения и не залогинены в чат 
-(с использованием модуля Push-notifications);
-* поддежка популярных аудио-кодеков (opus, ISAC);
-* поддержка популярных видео-кодеков (VP8, VP9, H264);
-* скриншаринг (возможность демонстрации собстенного экрана девайса не только с текущего приложения, но и всей системы);
-* произвольная организация UI-елементов на экране звонка.
+You can use the following features of SDK with MESH scheme:
+* audio calls;
+* video calls;
+* peer-to-peer call (1-1 private calls);
+* group calls(stable connection is supported with 10 participants for audio call and 6 participants for video);
+* support logic of calls to participants, who are currently not logged into app and not logged into the chat (using Push notifications module);
+* support of popular audio codecs (opus, ISAC);
+* support of popular video codecs (VP8, VP9, H264);
+* screensharing (possibility to demonstrate the screen of your device not only from current app, but from whole system);
+* Arbitrary placement of UI elements on call screen.
 
-Дополнительно к вышеперечисленным возможностям ентерпрайз клиентов могут воспользоваться SFU схемой организации звонков, что позволяет:
-* увеличить количество участников звонка до 12 (или 15, надо уточнить, + уточнить максимальное количество для аудио звонка);
-* управлять оппонентами во время звонка (на стороне сервера);
-* узерам присоединяться к уже существующему звонку;
+Additionally, Enterprise customers could purchase server to use SFU scheme, which allows:
+* increase the number of participants to 12;
+* manage opponents during the call(on server side);
+* join existing call;
 
 ## System requirements
 Quickblox Android video chat webrtc sdk supports:
@@ -38,21 +36,20 @@ but on such devices can be problems with video quality.
 
 <span id="Prepare_your_application_for_QuickBlox_Android_SDK" class="on_page_navigation"></span>
 ## Prepare your application for Android SDK
-Данная инструкция предполагает, что вы уже знакомы с порядком интеграции Quickblox фреймворка в приложение и уже выполнили такие 
-действия для своего приложении:
+The instruction below assumes you are aware of Quickblox integration process and have already performed the following actions:
 
 * [Created QuickBlox account](http://admin.quickblox.com/register)
 * [Registerer an application in Dashboard](http://quickblox.com/developers/5_Mins_Guide)
 * [Integrated QuickBlox SDK into application - stub link]()
 
-Следующие шаги описывают порядок интеграции **модуля звонков** в ваше андроид приложение:
+The following steps describe how to integrate the **call module** into your android application:
 
-* добавление зависимости на мавен репозиторий с **модулем звонков**;
-* добавление нативных библиотек, необходимых для работы нашего СДК;
-* добавление необходимых разрещений в ```AndroidManifest.xml``` вашего приложения;
+* add dependencies to maven repository with **calls module**;
+* add native libraries, needed for proper work of SDK;
+* add needed permissions to ```AndroidManifest.xml``` file of your application;
 
 ### Integrate QuickBlox Android SDK in your application
-To use video chat based on WebRTC technology in your app, you just have to add dependency in **build.gradle** project file:
+To use video chat based on WebRTC technology in your app, you just have to add dependency to **build.gradle** project file:
 ```groovy
 dependencies {
     compile "com.quickblox:quickblox-android-sdk-videochat-webrtc:3.3.3"
@@ -60,12 +57,12 @@ dependencies {
 ```
 
 ### Add native libraries
-Put native library for each platform: arm64-v8a, armeabi-v7a, x86, x86_64 under ```app/src/main/jniLibs``` folder.<br> 
+Add native library for each platform: arm64-v8a, armeabi-v7a, x86, x86_64 under ```app/src/main/jniLibs``` folder.<br> 
 You can find native files in [Video Chat sample](https://github.com/QuickBlox/quickblox-android-sdk/tree/master/sample-videochat-webrtc/src/main/jniLibs)  under ```/src/main/jniLibs``` folder.
 
  [[File:Android_webrtc_native_libraries.png]]
 
-### Добавление необходимых разрещений в ```AndroidManifest.xml```
+### Adding needed permissions to ```AndroidManifest.xml```
 
 **Video chat** module requires camera, microphone, internet and storage permissions. Make sure you add relevant permissions to your 
 app manifest:
@@ -78,9 +75,9 @@ app manifest:
   <uses-permission android:name="android.permission.ACCESS_WIFI_STATE" />
 ```
 
-Detailed information about app permission here [Working with System Permissions](http://developer.android.com/training/permissions/index.html). 
+Detailed information about app permission could be found here [Working with System Permissions](http://developer.android.com/training/permissions/index.html). 
 
-**Pay attention. Beginning in Android 6.0 (API level 23), users grant permissions to apps while the app is running, not when they install the app.**
+**Pay attention. Starting from Android 6.0 (API level 23), users grant permissions to apps while the app is running, not when they install the app.**
 
 **You can grant permissions to your app via device system settings or request them at runtime from your code.**
 
@@ -91,18 +88,18 @@ Detailed information about app permission here [Working with System Permissions]
 
 <span id="Integrate_video_calls_to_your_application" class="on_page_navigation"></span>
 ## Integrate calls to your application
-Ниже представлена схема, которая описывает простой жизненный цикл звонка (нажмите на картинку что просмотреть ее в полном размере).
+Below you can find the scheme, which shows lifecycle of the call (press on the picture to view it in full size).
 
 [![](./resources/call/call_life_cycle.jpg)](./resources/call/call_life_cycle.jpg)
 
 <!-- For making scheme used web app https://www.draw.io/ For make changes can use next source file ./resources/call/call_life_cycle_source.xml -->
 
 ### Create session, sign in user and set QBChatService up
-In order to use QuickBlox Chat APIs you must:
+In order to use QuickBlox Chat APIs you need to:
 * Sign in user to REST
 * Log in user in chat service
 
-Please follow lines below:
+Please follow the lines below:
 ```java
 String login = "login";
 String password = "password";
@@ -124,7 +121,7 @@ QBUsers.signIn(user).performAsync(new QBEntityCallback<QBUser>() {
         chatService.login(user, new QBEntityCallback() {
            @Override
            public void onSuccess(Object result, Bundle params) {
-                // логин в чат выполнен успешно, после этого можно начинать подготовку приложения осуществлению зонков
+                // login to chat is made successfully, you start app's preparation for calls
            }
 
            @Override
@@ -142,9 +139,9 @@ QBUsers.signIn(user).performAsync(new QBEntityCallback<QBUser>() {
 ```
 
 ### Set QBRTCClient instance up
-To use QuickBlox WebRTC video calls follow next steps:
+To use QuickBlox WebRTC video calls follow the next steps:
 * Add signalling manager
-* Prepare your activity class to audio/video calls
+* Prepare your activity class for audio/video calls
 * Set video view for remote video track
 * Set video view for local video track
 * Notify RTCClient that you are ready to receive calls
@@ -167,15 +164,15 @@ QBChatService.getInstance().getVideoChatWebRTCSignalingManager()
 
 #### Prepare your activity class to audio/video calls
 To enable an ability to receive callbacks about current ```QBRTCSession``` instance state, about video tracks 
-(local and remotes) and session's peer connections states you must implement appropriate interfaces by calling 
-next methods on ```QBRTCSession``` instance:
+(local and remotes) and session's peer connections states you need to implement appropriate interfaces by calling 
+the following methods on ```QBRTCSession``` instance:
 
 ```java
 public void addSessionCallbacksListener(QBRTCSessionConnectionCallbacks callback) 
 public void addVideoTrackCallbacksListener(QBRTCClientVideoTracksCallbacks callback)
 ```
 
-and next method on ```QBRTCClient``` instance:
+and the following method on ```QBRTCClient``` instance:
 ```java
 public void addSessionCallbacksListener(QBRTCClientSessionCallbacks callback)
 ```
@@ -202,20 +199,20 @@ Set in your layout views for remote and local video tracks:
     />
 ```
 
-```QBRTCSurfaceView``` it's a SurfaceView renderers video track. <br>
-It has lifecycle for rendering. It uses ```init()``` method for preparing to render and ```release()``` to release resource 
-when video track no more exist. <br>
-```QBRTCSurfaceView``` is automatically initialized after the surface is created - on ```surfaceCreated()``` method callback. <br>
-You can manually initialize ```QBRTCSurfaceView``` using  Egl context getting from ```QBRTCClient```. Use this method only 
-when **Activity** is alive and **GL resources** are exist.
+```QBRTCSurfaceView``` is a SurfaceView renderers video track. <br>
+It has lifecycle for rendering. You need to uses ```init()``` method to prepare rendering and ```release()``` to release resource 
+when video track does not exist anymore. <br>
+```QBRTCSurfaceView``` is initialized automatically after the surface is created - on ```surfaceCreated()``` method callback. <br>
+You can manually initialize ```QBRTCSurfaceView``` using  Egl context got from ```QBRTCClient```. Use this method only 
+when **Activity** is alive and **GL resources** exist.
 ```java
 QBRTCSurfaceView surfaceView = ...;
 EglBase eglContext = QBRTCClient.getInstance(getContext()).getEglContext();
 surfaceView.init(eglContext.getEglBaseContext(), null);
 ```
 
-Method ```release()``` should be called when video track is no more valid, for ex when you receive ```onConnectionClosedForUser()```
-callback from ```QBRTCSession``` or when ```QBRTCSession``` is going to close. But you should call ```release()``` before the 
+Method ```release()``` should be called when video track is not valid anymore, for ex when you receive ```onConnectionClosedForUser()```
+callback from ```QBRTCSession``` or when ```QBRTCSession``` is going to be closed. But you should call ```release()``` before the 
 **Activity** is destroyed and the **EGLContext** is still valid. If you don't call this method(), the **GL resources** might leak.
 
 ```QBRTCSurfaceView``` allows to use several views on screen layout and to overlap each other.
@@ -248,10 +245,10 @@ Pay attention! If you forgot to add signalling manager you will not be able to p
 </div>
 
 <span id="Track_session_states_via_QBRTCClientSessionCallbacks_interface" class="on_page_navigation"></span>
-## Track session states via QBRTCClientSessionCallbacks interface
-For managing all session's states you must implement interface QBRTCClientSessionCallbacks.
+## Track session states via ```QBRTCClientSessionCallbacks``` interface
+For managing all session's states you need to implement interface ```QBRTCClientSessionCallbacks```.
 
-Once you called method ```QBRTCClient.getInstance(this).prepareToProcessCalls()``` and added instance of class, that implements 
+Once you call method ```QBRTCClient.getInstance(this).prepareToProcessCalls()``` and add instance of class, that implements 
 ```QBRTCClientSessionCallbacks``` to ```QBRTCClient``` via method 
 ```QBRTCClient.getInstance(this).addSessionCallbacksListener(QBRTCClientSessionCallbacks listener)```, 
 you will start receive sessions callbacks.
@@ -263,32 +260,32 @@ you will start receive sessions callbacks.
 void onReceiveNewSession(QBRTCSession session);
 
 /**
- * Called in case when user didn't make any actions on received session
+ * Called in case user didn't make any actions on received session
  */
 void onUserNoActions(QBRTCSession session, Integer userID);
 
 /**
- * Called in case when user didn't answer in timer expiration period
+ * Called in case user didn't answer in timer expiration period
  */
 void onUserNotAnswer(QBRTCSession session, Integer userID);
 
 /**
- * Called in case when opponent has rejected you call
+ * Called in case opponent has rejected you call
  */
 void onCallRejectByUser(QBRTCSession session, Integer userID, Map<String, String> userInfo);
 
 /**
- * Called in case when opponent has accepted you call
+ * Called in case opponent has accepted you call
  */
 void onCallAcceptByUser(QBRTCSession session, Integer userID, Map<String, String> userInfo);
 
 /**
- * Called in case when opponent hung up
+ * Called in case opponent hung up
  */
 void onReceiveHangUpFromUser(QBRTCSession session, Integer userID, Map<String, String> userInfo);
 
 /**
- * Called in case when session will close
+ * Called in case session is going to be closed
  */
 void onSessionStartClose(QBRTCSession session);
 
@@ -308,22 +305,22 @@ QBRTCClient.getInstance(this).removeSessionCallbacksListener(this);
 To track **only main session events you** can use ```QBRTCSessionEventsCallback```.
 ```java
 /**
- * Called in case when user didn't answer in timer expiration period
+ * Called in case user didn't answer in time expiration period
  */
 void onUserNotAnswer(QBRTCSession session, Integer userID);
 
 /**
- * Called in case when opponent has rejected you call
+ * Called in case opponent has rejected you call
  */
 void onCallRejectByUser(QBRTCSession session, Integer userID, Map<String, String> userInfo);
 
 /**
- * Called in case when opponent has accepted you call
+ * Called in case opponent has accepted you call
  */
 void onCallAcceptByUser(QBRTCSession session, Integer userID, Map<String, String> userInfo);
 
 /**
- * Called in case when opponent hung up
+ * Called in case opponent hung up
  */
 void onReceiveHangUpFromUser(QBRTCSession session, Integer userID);
 
@@ -350,17 +347,17 @@ To manage connection with a user you should implement interface ```QBRTCSessionS
 void onStateChanged(QBRTCSession session, BaseSession.QBRTCSessionState state);
 
 /**
- * Called in case when connection with the opponent is established
+ * Called in case connection with the opponent is established
  */
 void onConnectedToUser(QBRTCSession session, Integer userID);
 
 /**
- * Called in case when the opponent is disconnected
+ * Called in case the opponent is disconnected
  */
 void onDisconnectedFromUser(QBRTCSession session, Integer userID);
 
 /**
- * Called in case when connection is closed
+ * Called in case connection is closed
  */
 void onConnectionClosedForUser(QBRTCSession session, Integer userID);
 ```
@@ -369,17 +366,17 @@ void onConnectionClosedForUser(QBRTCSession session, Integer userID);
 To track **extended connection's states** use ```QBRTCSessionConnectionCallbacks``` which has additional events 
 ```java
 /**
- * Called in case when connection establishment process is started
+ * Called when connection establishment process is started
  */
 void onStartConnectToUser(QBRTCSession session, Integer userID);
 
 /**
- * Called in case when the opponent is disconnected by timeout
+ * Called when the opponent is disconnected by timeout
  */
 void onDisconnectedTimeoutFromUser(QBRTCSession session, Integer userID);
 
 /**
- * Called in case when connection has failed with the opponent
+ * Called in case connection has failed with the opponent
  */
 void onConnectionFailedWithUser(QBRTCSession session, Integer userID);
 ```
@@ -391,17 +388,17 @@ rtcSession.removeSessionnCallbacksListener(this);
 ```
 
 <span id="Obtain_video_tracks" class="on_page_navigation"></span>
-## Obtain video tracks via QBRTCClientVideoTracksCallbacks interface
+## Obtain video tracks via ```QBRTCClientVideoTracksCallbacks``` interface
 For managing video tracks you must implement interface ```QBRTCClientVideoTracksCallbacks```.
 
 ```java
 /**
- * Called when local video track was received
+ * Called when local video track is received
  */
 void onLocalVideoTrackReceive(QBRTCSession session, QBRTCVideoTrack localVideoTrack);
 
 /**
- * Called when remote video track was received
+ * Called when remote video track is received
  */
 void onRemoteVideoTrackReceive(QBRTCSession session, QBRTCVideoTrack remoteVideoTrack, Integer userID);
 ```
@@ -414,16 +411,16 @@ rtcSession.removeVideoTrackCallbacksListener(this);
 
 <span id="Obtain_audio_tracks" class="on_page_navigation"></span>
 ## Obtain audio tracks
-For managing audio tracks you must implement interface '''QBRTCClientAudioTracksCallback'''.
+For managing audio tracks you need to implement interface '''QBRTCClientAudioTracksCallback'''.
 
 ```java
 /**
- * Called when local audio track was received
+ * Called when local audio track is received
  */
  void onLocalAudioTrackReceive(QBRTCSession session, QBRTCAudioTrack audioTrack);
 
 /**
- * Called when remote audio track was received
+ * Called when remote audio track is received
  */
 void onRemoteAudioTrackReceive(QBRTCSession session, QBRTCAudioTrack audioTrack, Integer userID);
 ```
@@ -492,7 +489,7 @@ opponents.add(12345); //12345 - QBUser ID
 
 //Set user information 
 // User can set any string key and value in user info
-// Then retrieve this data from sessions which is returned in callbacks
+// Then retrieve this data from sessions which are returned in callbacks
 // and parse them as he wish
 Map<String, String> userInfo = new HashMap<>();
 userInfo.put("key", "value");
@@ -507,7 +504,7 @@ session.startCall(userInfo);
 ## Accept call
 
 You should process a session received in ```QBRTCClientSessionCallbacks.onReceiveNewSession(QBRTCSession)``` callback.
-There are few ways how to process it:
+There are two possible situations:
 * accept incoming call;
 * reject incoming call.
 
@@ -526,7 +523,7 @@ public void onReceiveNewSession(QBRTCSession session){
 
    
    // Set userInfo
-   // User can set any string key and value in user info
+   // User can set any string key and value to user info
    Map<String,String> userInfo = new HashMap<String,String>;
    userInfo.put("Key", "Value");   
 
@@ -535,7 +532,7 @@ public void onReceiveNewSession(QBRTCSession session){
 }
 ```
 
-After accepting the call your opponent will receive a **accept** signal in appropriate callback method:
+After accepting the call your opponent will receive an **accept** signal in appropriate callback method:
 
 ```java
 public void onCallAcceptByUser(QBRTCSession session, Integer userID, Map<String, String> userInfo){
@@ -560,7 +557,7 @@ public void onReceiveNewSession(QBRTCSession session){
    // .....
   
    // Set userInfo
-   // User can set any string key and value in user info
+   // User can set any string key and value to user info
    Map<String,String> userInfo = new HashMap<String,String>;
    userInfo.put("Key", "Value");   
 
@@ -585,7 +582,7 @@ public void onCallRejectByUser(QBRTCSession session, Integer userID, Map<String,
 To hang up a call:
 ```java
 // Set userInfo
-// User can set any string key and value in user info
+// User can set any string key and value to user info
 Map<String,String> userInfo = new HashMap<String,String>;
 userInfo.put("Key", "Value");   
 
@@ -602,12 +599,12 @@ public void onReceiveHangUpFromUser(QBRTCSession session, Integer userID){
 
 ## Stop receiving calls and release resource
 
-If you don't want to receive and process sessions amymore just call: 
+If you don't want to receive and process sessions anymore just call: 
 ```java
 QBRTCClient.getInstance(this).destroy();
 ```
 
-This method unregisters ```QBRTCClient``` from receiving any video chat events, clear session callbacks and closes existing signal channels.
+This method unregisters ```QBRTCClient``` from receiving any video chat events, clears session callbacks and closes existing signal channels.
 
 # Session Media management
 
@@ -618,7 +615,7 @@ To manage audio & video streams ```QBRTCSession``` provides ```QBMediaStreamMana
 ```QBMediaStreamManager``` holds user's local audio & video tracks and provides way to change current ***video capturer***.
 
 <div class="attention">
-Pay attentions! <code>QBMediaStreamManager</code> attaches to <code>QBRTCSession</code> lifecycle. According to <code>QBRTCSession</code> lifecycle, 
+Pay attention! <code>QBMediaStreamManager</code> attaches to <code>QBRTCSession</code> lifecycle. According to <code>QBRTCSession</code> lifecycle, 
 you should use <code>QBMediaStreamManager</code> only when <code>QBRTCSession</code> is active or has been started.**
 </div>
 
@@ -632,7 +629,7 @@ mediaStreamManager.setAudioEnabled(false); // disable audio stream
 
 mediaStreamManager.setAudioEnabled(true);  // enable audio stream 
 
-mediaStreamManager.isAudioEnabled();    // returns true if audio track enabled
+mediaStreamManager.isAudioEnabled();    // returns true if audio track enabled or not
 ```
 
 
@@ -736,7 +733,7 @@ videoCapturer.changeCaptureFormat(width, height, framerate);
 
 <span id="Screen_sharing" class="on_page_navigation"></span>
 ## Screen sharing
-QuickBlox Android SDK feature as **Screen sharing** 
+QuickBlox Android SDK has such feature as **Screen sharing** 
 
 Screen sharing allows you to share your device screen with all of your opponents.
 
@@ -803,7 +800,7 @@ AppRTCAudioManager.setAudioDevice - sets current audio device
 AppRTCAudioManager.getAudioDevices - Returns current set of available/selectable audio devices.
 ```
 
-```AppRTCAudioManager.setManageHeadsetByDefault(true)``` - whether ```AppRTCAudioManager``` will handle headset state or no.
+```AppRTCAudioManager.setManageHeadsetByDefault(true)``` - checks whether ```AppRTCAudioManager``` will handle headset state or not.
 
 If ```true``` - ```AppRTCAudioManager``` will handle headset state and selected audio channel.
 In this case when headset is plugged ```AppRTCAudioManager``` sets headset as current audio device. When headset is unplugged, 
@@ -821,7 +818,7 @@ AppRTCAudioManager.close - close audio manager, audio settings will return to de
 ## Media configuration
 You can use methods of ```QBRTCMediaConfig``` class instance to configure a various list of media settings like video/audio codecs, bitrate, fps etc. 
 <br>
-More examples how to use it you can find on [SettingsUtil.java class](https://github.com/QuickBlox/quickblox-android-sdk/blob/master/sample-videochat-webrtc/src/main/java/com/quickblox/sample/groupchatwebrtc/utils/SettingsUtil.java).
+More examples how to use it you can find in [SettingsUtil.java class](https://github.com/QuickBlox/quickblox-android-sdk/blob/master/sample-videochat-webrtc/src/main/java/com/quickblox/sample/groupchatwebrtc/utils/SettingsUtil.java).
 
 ```java
 public static void setAudioCodec(AudioCodec audioCodec);
