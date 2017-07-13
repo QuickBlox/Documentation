@@ -30,7 +30,7 @@ paths:
       summary: Create object
       operationId: 101_Create_object
       description: |
-        Create new file object.
+        Create new custom object.
       parameters:
         - name: class_name
           in: formData
@@ -38,7 +38,7 @@ paths:
           required: true
           type: string
           default: MyScoreTable
-        - name: 'fieldName1'
+        - name: '<fieldName1>'
           in: formData
           description: |
             Custom field name and its value.
