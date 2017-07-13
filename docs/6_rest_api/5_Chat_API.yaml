@@ -202,6 +202,14 @@ paths:
           required: true
           type: string
           default: 53aabe15e4b077ddd43e7fd6
+        - name: force
+          in: formData
+          description: |
+            Pass force=1 to completely remove chat dialog so it will affect the chat history off all users.
+            Only dialogs's creator can do it.
+          required: false
+          type: integer
+          default: 1
       responses:
         '200':
           description: "Empty body"
@@ -221,6 +229,14 @@ paths:
           items:
             type: string
           default: 53aabe15e4b077ddd43e7fd6,23aabe15e4b077ddd43e7fd1
+        - name: force
+          in: formData
+          description: |
+            Pass force=1 to completely remove chat dialog so it will affect the chat history off all users.
+            Only dialogs's creator can do it.
+          required: false
+          type: integer
+          default: 1
       responses:
         '200':
           description: "Delete dialogs response"
