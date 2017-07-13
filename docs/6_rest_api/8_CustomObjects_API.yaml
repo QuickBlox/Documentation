@@ -1,0 +1,401 @@
+swagger: '2.0'
+info:
+  title: QuickBlox REST API, Content API.
+  description: |
+    Allows storing rich chat attachments, app content and settings without having to re-publish them.
+    Using a web interface you or your clients can control and make instant changes to the apps. Full list of features: <br><br>
+    • Store chat rich attachments<br>
+    • Manage text, rich text, and media via easy to use web admin panel<br>
+    • Can be used to manage ads and banners<br>
+    • App synchronizes content in background, users not affected<br>
+    • Any amount of data can be stored<br><br>
+    **Typical use сases:**<br><br>
+    To Upload file you need to do the following:<br>
+    • [Create a file](#Create_file)<br>
+    • [Upload file](#Upload_file)<br>
+    • [Declare file uploaded](#Declare_file_uploaded)<br><br>
+    To Download file you need to do the following:<br>
+    • [Retrieve file by ID](#Retrieve_file)<br>
+    • [Download file](#Download_file)<br>
+  version: 1.0
+# the domain of the service
+host: quickblox.com
+# array of all schemes that QuickBlox API supports
+schemes:
+  - https
+basePath: /api
+produces:
+  - application/json
+paths:
+  /blobs.json:
+    post:
+      summary: Create file
+      operationId: 101_Create_File
+      description: |
+        Create new file object.
+      parameters:
+        - name: blob[content_type]
+          in: formData
+          description: The file's mime [content type](https://developer.mozilla.org/ru/docs/Web/HTTP/Basics_of_HTTP/MIME_types/Complete_list_of_MIME_types)
+          required: true
+          type: string
+          default: image/jpeg
+        - name: blob[name]
+          in: formData
+          description: The file's name
+          required: true
+          type: string
+          default: museum.jpg
+        - name: blob[public]
+          in: formData
+          description: The file's visibility. **public** means it will be possible to access this file without QuickBlox session token provided. Default is 'false'.
+          required: false
+          type: boolean
+          default: false
+      responses:
+        '201':
+          description: "File object"
+          schema:
+            $ref: '#/definitions/FileResponseWithObjectAccess'
+    get:
+      summary: Retrieve files
+      operationId: 104_Retrieve_Files
+      description: |
+        Get a list of files for current user.
+      parameters:
+        - name: page
+          in: formData
+          description: Used to paginate the results when more than one page of files retrieved
+          required: false
+          type: integer
+          default: 4
+        - name: per_page
+          in: formData
+          description: The maximum number of files to return per page, if not specified then the default is 10
+          required: false
+          type: integer
+          default: 30
+      responses:
+        '200':
+          description: "Array of files"
+          schema:
+            $ref: '#/definitions/ArrayOfFilesResponse'
+  https://<s3-region>.amazonaws.com:
+    post:
+      summary: Upload file
+      operationId: 102_Upload_File
+      description: |
+        Upload a file to cloud storage.
+        Use params and url from **blob-object-access** element from the response of 'Create File' request.
+      parameters:
+        - name: Content-Type
+          in: formData
+          description: Parameter from **blob-object-access** element
+          required: true
+          type: string
+          default: image/jpeg
+        - name: Expires
+          in: formData
+          description: Parameter from **blob-object-access** element
+          required: true
+          type: string
+          default: Wed, 30 Sep 2015 13:29:39 GMT
+        - name: acl
+          in: formData
+          description: Parameter from **blob-object-access** element
+          required: true
+          type: string
+          default: authenticated-read
+        - name: key
+          in: formData
+          description: Parameter from **blob-object-access** element
+          required: true
+          type: string
+          default: 76101edd87fe4b299ff41f63633bf9c100
+        - name: policy
+          in: formData
+          description: Parameter from **blob-object-access** element
+          required: true
+          type: string
+          default: eyJleHBpcmF0aW9uI..
+        - name: success_action_status
+          in: formData
+          description: Parameter from **blob-object-access** element
+          required: true
+          type: string
+          default: 201
+        - name: x-amz-algorithm
+          in: formData
+          description: Parameter from **blob-object-access** element
+          required: true
+          type: string
+          default: AWS4-HMAC-SHA256
+        - name: x-amz-credential
+          in: formData
+          description: Parameter from **blob-object-access** element
+          required: true
+          type: string
+          default: AKIAIY7KFM.../s3/aws4_request
+        - name: x-amz-date
+          in: formData
+          description: Parameter from **blob-object-access** element
+          required: true
+          type: string
+          default: 20150930T122939Z
+        - name: x-amz-signature
+          in: formData
+          description: Parameter from **blob-object-access** element
+          required: true
+          type: string
+          default: eee18ae3d47a745..
+        - name: file
+          in: formData
+          description: File to upload
+          required: true
+          type: string
+          default: user_new_avatar.jpg
+      responses:
+        '200':
+          description: "Success response"
+          schema:
+            $ref: '#/definitions/S3PostResponse'
+  blobs/{blob_id}/complete.json:
+    put:
+      summary: Declare file uploaded
+      operationId: 103_Declare_File_Uploaded
+      description: |
+        Declare file uploaded. The file's 'status' field will be set to 'complete'.
+      parameters:
+        - name: blob_id
+          in: formData
+          description: The id of file to declare as uploaded (path parameter)
+          required: true
+          type: integer
+          default: 56713
+        - name: blob[size]
+          in: formData
+          description: Size of uploaded file, in bytes
+          required: true
+          type: integer
+          default: 86735
+      responses:
+        '200':
+          description: "Empty body"
+  blobs/{blob_id}.json:
+    get:
+      summary: Retrieve file
+      operationId: 105_Retrieve_File
+      description: |
+        Retrieve file object by id.
+      parameters:
+        - name: blob_id
+          in: formData
+          description: The id of file to retrieve (path parameter)
+          required: true
+          type: integer
+          default: 56713
+      responses:
+        '201':
+          description: "File object"
+          schema:
+            $ref: '#/definitions/FileResponse'
+    put:
+      summary: Update file
+      operationId: 107_Update_File
+      description: |
+        Edit file by id.
+      parameters:
+        - name: blob_id
+          in: formData
+          description: The id of file to update (path parameter)
+          required: true
+          type: integer
+          default: 56713
+        - name: blob[content_type]
+          in: formData
+          description: The file's mime [content type](https://developer.mozilla.org/ru/docs/Web/HTTP/Basics_of_HTTP/MIME_types/Complete_list_of_MIME_types)
+          required: false
+          type: string
+          default: image/png
+        - name: blob[name]
+          in: formData
+          description: The file new name
+          required: false
+          type: string
+          default: GreatPlace
+        - name: blob[new]
+          in: formData
+          description: Pass **1** if you want to update file's content (upload new version of file).
+          required: false
+          type: integer
+          default: 1
+      responses:
+        '200':
+          description: "File object"
+          schema:
+            $ref: '#/definitions/FileResponse'
+    delete:
+      summary: Delete file
+      operationId: 108_Delete_File
+      description: |
+        Delete file by id.
+      parameters:
+        - name: blob_id
+          in: formData
+          description: The id of file to delete (path parameter)
+          required: true
+          type: integer
+          default: 56713
+      responses:
+        '200':
+          description: "Empty body"
+  blobs/{blob_uid}.json:
+    get:
+      summary: Download file
+      operationId: 106_Download_File
+      description: |
+        Download file by UID. If the file is public then it's possible to download it without a session token.
+      parameters:
+        - name: blob_uid
+          in: formData
+          description: The uid of file to download (path parameter)
+          required: true
+          type: string
+          default: 358d2cba6ca74127a087530f3e82e8d800
+      responses:
+        '301':
+          description: "Redirect to file"
+definitions:
+  ArrayOfFilesResponse:
+    type: object
+    properties:
+      current_page:
+        type: integer
+        example: 1
+      per_page:
+        type: integer
+        example: 10
+      total_entries:
+        type: integer
+        example: 23
+      items:
+        type: array
+        items:
+          $ref: '#/definitions/FileObject'
+  FileResponseWithObjectAccess:
+    type: object
+    properties:
+      blob:
+        $ref: '#/definitions/FileObjectWithObjectAccess'
+  FileResponse:
+    type: object
+    properties:
+      blob:
+        $ref: '#/definitions/FileObject'
+  FileObjectAccess:
+    type: object
+    properties:
+      id:
+        type: integer
+        example: 4235
+      blob_id:
+        type: integer
+        example: 163934
+      object_access_type:
+        type: string
+        example: Write
+      expires:
+        type: string
+        example: 2012-04-23T14:22:34Z
+      params:
+        type: string
+        example: https://qbprod.s3.amazonaws.com/?Content-Type=image%2Fpng&Expires=Wed%2C%2030%20Sep%202015%2013%3A25%3A11%20GMT&acl=authenticated-read&key=fbc2d08125e3435ca5cb37f926d5fe8800&policy=eyJleHBpcmF0aW9uIjoiMjAxNS0wOS0zMFQxMzoyNToxMVoiLCJjb25kaXRpb25zIjpbeyJidWNrZXQiOiJxYnByb2QifSx7ImFjbCI6ImF1dGhlbnRpY2F0ZWQtcmVhZCJ9LHsiQ29udGVudC1UeXBlIjoiaW1hZ2UvcG5nIn0seyJzdWNjZXNzX2FjdGlvbl9zdGF0dXMiOiIyMDEifSx7IkV4cGlyZXMiOiJXZWQsIDMwIFNlcCAyMDE1IDEzOjI1OjExIEdNVCJ9LHsia2V5IjoiZmJjMmQwODEyNWUzNDM1Y2E1Y2IzN2Y5MjZkNWZlODgwMCJ9LHsieC1hbXotY3JlZGVudGlhbCI6IkFLSUFJWTdLRk0yM1hHWEo3UjdBLzIwMTUwOTMwL3VzLWVhc3QtMS9zMy9hd3M0X3JlcXVlc3QifSx7IngtYW16LWFsZ29yaXRobSI6IkFXUzQtSE1BQy1TSEEyNTYifSx7IngtYW16LWRhdGUiOiIyMDE1MDkzMFQxMjI1MTFaIn1dfQ%3D%3D&success_action_status=201&x-amz-algorithm=AWS4-HMAC-SHA256&x-amz-credential=AKIAIY7KFM23XGXJ7R7A%2F20150930%2Fus-east-1%2Fs3%2Faws4_request&x-amz-date=20150930T122511Z&x-amz-signature=a5c720c1a3b9b5c0b2549e0220419493ca3b11ce84618f6ece88ad97a96a8ad9
+  FileObjectWithObjectAccess:
+    type: object
+    properties:
+      id:
+        type: integer
+        example: 1639
+      created_at:
+        type: string
+        example: 2012-05-09T10:24:26Z
+      updated_at:
+        type: string
+        example: 2012-05-09T10:24:26Z
+      name:
+        type: string
+        example: museum.jpg
+      content_type:
+        type: string
+        example: image/jpeg
+      public:
+        type: boolean
+        example: false
+      size:
+        type: integer
+        example: 55332
+      blob_status:
+        type: string
+        example: complete
+      last_read_access_ts:
+        type: string
+        example: 2012-03-27T13:14:08Z
+      set_completed_at:
+        type: string
+        example: 2012-03-23T16:14:51Z
+      uid:
+        type: string
+        example: 859146a9821e4bef9c6d60e1e8c88b3c00
+      blob_object_access:
+        $ref: '#/definitions/FileObjectAccess'
+  FileObject:
+    type: object
+    properties:
+      id:
+        type: integer
+        example: 1639
+      created_at:
+        type: string
+        example: 2012-05-09T10:24:26Z
+      updated_at:
+        type: string
+        example: 2012-05-09T10:24:26Z
+      name:
+        type: string
+        example: museum.jpg
+      content_type:
+        type: string
+        example: image/jpeg
+      public:
+        type: boolean
+        example: false
+      size:
+        type: integer
+        example: 55332
+      blob_status:
+        type: string
+        example: complete
+      last_read_access_ts:
+        type: string
+        example: 2012-03-27T13:14:08Z
+      set_completed_at:
+        type: string
+        example: 2012-03-23T16:14:51Z
+      uid:
+        type: string
+        example: 859146a9821e4bef9c6d60e1e8c88b3c00
+  S3PostResponse:
+    type: object
+    properties:
+      Location:
+        type: string
+        example: https://blobs-oz.s3.amazonaws.com/d5f92bcf84374e4fb8961537f7a7de6500
+      Bucket:
+        type: string
+        example: blobs-oz
+      Key:
+        type: string
+        example: d5f92bcf84374e4fb8961537f7a7de6500
+      ETag:
+        type: string
+        example: "de1aae3e6beadb83bc8e1e21eb7e2a66"
