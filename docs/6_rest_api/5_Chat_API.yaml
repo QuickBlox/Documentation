@@ -27,6 +27,11 @@ paths:
         * Use **type=1** (PUBLIC_GROUP) to create a public group dialog. All the users from your application will be able to join it. Server will create a public group chat and return a detailed information about newly created dialog. Field **xmpp_room_jid** will contain a Chat room JID to which you should join to start chatting.
         * Use **type=2** (GROUP) to create a group dialog only for specific users provided in **occupants_ids**. Server will create an only members group chat and return a detailed information about newly created dialog. Field **xmpp_room_jid** will contain a Chat room JID to which you should join to start chatting.
         * Use **type=3** (PRIVATE) to create a private dialog between 2 users. Server will return a detailed information about newly created dialog. If user sends a chat message to some user and private dialog wasn't created - it will be created automatically with 1st chat message.
+        Dialogs can store additional parameters.
+        These parameters can be used to store an additional data. Also these parameters can be used in dialogs retrieval requests.
+        To start use additional parameters it needs to create an additional schema of your parameters.
+        This is a [CustomObjects class](/rest_api/CustomObjects_API.html#Create_data_schema).
+        Just create an empty class with all needed fields. These fields will be your dialog additional parameters.
       parameters:
         - name: type
           in: formData
@@ -64,17 +69,19 @@ paths:
         - name: 'data[class_name]'
           in: formData
           description: |
-            A link to chat dialog's photo (image id, url whatever)
+            Dialogs can store additional parameters.
+            These parameters can be used to store an additional data.
+            This field **data[class_name]** should contain [CustomObjects](/rest_api/CustomObjects_API.html#Create_data_schema) class name.
           required: false
           type: string
-          default: 67834
-        - name: 'data[field_name]'
+          default: data[class_name]=AdditionalDataClass
+        - name: 'data[fieldName1]'
           in: formData
           description: |
-            A link to chat dialog's photo (image id, url whatever)
+            Custom parameter name and value in format data[<parameter_name>]=<parameter_value>
           required: false
           type: string
-          default: 67834
+          default: data[category]=friends
       responses:
         '201':
           description: "Chat dialog object"
