@@ -140,6 +140,22 @@ paths:
           required: false
           type: string
           default: sort_desc=last_message_date_sent
+        - name: 'data[class_name]'
+          in: formData
+          description: |
+            Dialogs can store additional parameters.
+            These parameters can be used to store an additional data.
+            This field **data[class_name]** should contain [CustomObjects](/rest_api/CustomObjects_API.html#Create_data_schema) class name.
+          required: false
+          type: string
+          default: data[class_name]=AdditionalDataClass
+        - name: 'data[fieldName1]'
+          in: formData
+          description: |
+            Custom parameter name and value in format data[<parameter_name>]=<parameter_value>
+          required: false
+          type: string
+          default: data[category]=friends
       responses:
         '200':
           description: "Array of chat dialogs"
