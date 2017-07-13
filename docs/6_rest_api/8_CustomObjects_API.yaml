@@ -6,15 +6,15 @@ info:
     Schema is defined in [QuickBlox Administration Panel](https://admin.quickblox.com).
     The schema is called **Class** and contains field names and their types.
     <br><br>
-    Available types are:
-    * Integer
-    * String
-    * Float
-    * Boolean
-    * Array
-    * File
-    * Location (array with 2 elements: longitude, latitude)
-    * Date
+    Available types are:<br><br>
+    • Integer<br>
+    • String<br>
+    • Float<br>
+    • Boolean<br>
+    • Array<br>
+    • File<br>
+    • Location (array with 2 elements: longitude, latitude)<br>
+    • Date<br>
   version: 1.0
 # the domain of the service
 host: quickblox.com
