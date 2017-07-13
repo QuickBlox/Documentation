@@ -506,6 +506,26 @@ paths:
             $ref: '#/definitions/DeleteMessagesResponse'
   /chat/Message/unread.json:
     get:
+      summary: Retrieve unread messages count
+      operationId: 112_Retrieve_Unread_Messages_Count
+      description: |
+        Retrieve unread messages count split across dialogs plus total value.
+      parameters:
+        - name: chat_dialog_ids
+          in: formData
+          description: |
+            Array of dialogs ids to get a count of unread messages for.
+            You also can omit this parameter to receive just a total count of all unread messages. (path parameter)
+          required: true
+          type: array
+          items:
+            type: string
+          default: 53aabe15e4b077ddd43e7fd6,23aabe15e4b077ddd43e7fd1
+      responses:
+        '200':
+          description: "Unread messages count response"
+          schema:
+            $ref: '#/definitions/UnreadMessagesCountResponse'
 definitions:
   DialogsResponse:
     type: object
@@ -699,3 +719,15 @@ definitions:
   EmptyBody:
     type: string
     default: 'null'
+  UnreadMessagesCountResponse:
+    type: object
+    properties:
+      total:
+        type: integer
+        example: 5
+      53aabe15e4b077ddd43e7fd6:
+        type: integer
+        example: 2
+      23aabe15e4b077ddd43e7fd1:
+        type: integer
+        example: 3
