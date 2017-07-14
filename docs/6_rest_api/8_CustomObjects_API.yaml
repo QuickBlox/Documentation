@@ -1,0 +1,90 @@
+swagger: '2.0'
+info:
+  title: QuickBlox REST API, CustomObjects API.
+  description: |
+    Custom Objects module provides flexibility to define any data structure(schema) you need.
+    Schema is defined in [QuickBlox Administration Panel](https://admin.quickblox.com).
+    The schema is called **Class** and contains field names and their types.
+    <br><br>
+    Available types are:<br><br>
+    • Integer<br>
+    • String<br>
+    • Float<br>
+    • Boolean<br>
+    • Array<br>
+    • File<br>
+    • Location (array with 2 elements: longitude, latitude)<br>
+    • Date<br>
+  version: 1.0
+# the domain of the service
+host: quickblox.com
+# array of all schemes that QuickBlox API supports
+schemes:
+  - https
+basePath: /api
+produces:
+  - application/json
+paths:
+  /data/{class_name}.json:
+    post:
+      summary: Create object
+      operationId: 101_Create_object
+      description: |
+        Create new custom object.
+      parameters:
+        - name: class_name
+          in: formData
+          description: A class name to which a new object belongs.
+          required: true
+          type: string
+          default: MyScoreTable
+        - name: '<fieldName1>'
+          in: formData
+          description: |
+            Custom field name and its value.
+          required: false
+          type: string
+          default: score_value=1024
+      responses:
+        '201':
+          description: "Custom object"
+          schema:
+            $ref: '#/definitions/CustomObject'
+definitions:
+  ArrayOfCustomObjectsResponse:
+    type: object
+    properties:
+      class_name:
+        type: string
+        example: MyScoreTable
+      skip:
+        type: integer
+        example: 10
+      limit:
+        type: integer
+        example: 100
+      items:
+        type: array
+        items:
+          $ref: '#/definitions/CustomObject'
+  CustomObject:
+    type: object
+    properties:
+      _id:
+        type: string
+        example: 53aaa06f535c12cea9007496
+      created_at:
+        type: integer
+        example: 1345448268
+      updated_at:
+        type: integer
+        example: 1345448268
+      user_id:
+        type: integer
+        example: 57883
+      _parent_id:
+        type: string
+        example: 53aaa06f535c12cea9007496
+      score_value:
+        type: integer
+        example: 1024

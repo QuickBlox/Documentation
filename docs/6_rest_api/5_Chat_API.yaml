@@ -27,6 +27,12 @@ paths:
         * Use **type=1** (PUBLIC_GROUP) to create a public group dialog. All the users from your application will be able to join it. Server will create a public group chat and return a detailed information about newly created dialog. Field **xmpp_room_jid** will contain a Chat room JID to which you should join to start chatting.
         * Use **type=2** (GROUP) to create a group dialog only for specific users provided in **occupants_ids**. Server will create an only members group chat and return a detailed information about newly created dialog. Field **xmpp_room_jid** will contain a Chat room JID to which you should join to start chatting.
         * Use **type=3** (PRIVATE) to create a private dialog between 2 users. Server will return a detailed information about newly created dialog. If user sends a chat message to some user and private dialog wasn't created - it will be created automatically with 1st chat message.
+
+        Dialogs can store additional parameters.
+        These parameters can be used to store an additional data. Also these parameters can be used in dialogs retrieval requests.
+        To start use additional parameters it needs to create an additional schema of your parameters.
+        This is a [CustomObjects class](/rest_api/CustomObjects_API.html#Create_data_schema).
+        Just create an empty class with all needed fields. These fields will be your dialog additional parameters.
       parameters:
         - name: type
           in: formData
@@ -64,17 +70,19 @@ paths:
         - name: 'data[class_name]'
           in: formData
           description: |
-            A link to chat dialog's photo (image id, url whatever)
+            Dialogs can store additional parameters.
+            These parameters can be used to store an additional data.
+            This field **data[class_name]** should contain [CustomObjects](/rest_api/CustomObjects_API.html#Create_data_schema) class name.
           required: false
           type: string
-          default: 67834
-        - name: 'data[field_name]'
+          default: data[class_name]=AdditionalDataClass
+        - name: 'data[<fieldName1>]'
           in: formData
           description: |
-            A link to chat dialog's photo (image id, url whatever)
+            Custom parameter name and value in format data[<parameter_name>]=<parameter_value>
           required: false
           type: string
-          default: 67834
+          default: data[category]=friends
       responses:
         '201':
           description: "Chat dialog object"
@@ -132,6 +140,22 @@ paths:
           required: false
           type: string
           default: sort_desc=last_message_date_sent
+        - name: 'data[class_name]'
+          in: formData
+          description: |
+            Dialogs can store additional parameters.
+            These parameters can be used to store an additional data.
+            This field **data[class_name]** should contain [CustomObjects](/rest_api/CustomObjects_API.html#Create_data_schema) class name.
+          required: false
+          type: string
+          default: data[class_name]=AdditionalDataClass
+        - name: 'data[<fieldName1>]'
+          in: formData
+          description: |
+            Custom parameter name and value in format data[<parameter_name>]=<parameter_value>
+          required: false
+          type: string
+          default: data[category]=friends
       responses:
         '200':
           description: "Array of chat dialogs"
@@ -184,6 +208,22 @@ paths:
           required: false
           type: string
           default: 67834
+        - name: 'data[class_name]'
+          in: formData
+          description: |
+            Dialogs can store additional parameters.
+            These parameters can be used to store an additional data.
+            This field **data[class_name]** should contain [CustomObjects](/rest_api/CustomObjects_API.html#Create_data_schema) class name.
+          required: false
+          type: string
+          default: data[class_name]=AdditionalDataClass
+        - name: 'data[<fieldName1>]'
+          in: formData
+          description: |
+            Custom parameter name and value in format data[<parameter_name>]=<parameter_value>
+          required: false
+          type: string
+          default: data[category]=friends
       responses:
         '200':
           description: "Chat dialog object"
@@ -202,6 +242,14 @@ paths:
           required: true
           type: string
           default: 53aabe15e4b077ddd43e7fd6
+        - name: force
+          in: formData
+          description: |
+            Pass force=1 to completely remove chat dialog so it will affect the chat history off all users.
+            Only dialogs's creator can do it.
+          required: false
+          type: integer
+          default: 1
       responses:
         '200':
           description: "Empty body"
@@ -221,6 +269,14 @@ paths:
           items:
             type: string
           default: 53aabe15e4b077ddd43e7fd6,23aabe15e4b077ddd43e7fd1
+        - name: force
+          in: formData
+          description: |
+            Pass force=1 to completely remove chat dialog so it will affect the chat history off all users.
+            Only dialogs's creator can do it.
+          required: false
+          type: integer
+          default: 1
       responses:
         '200':
           description: "Delete dialogs response"
@@ -273,6 +329,243 @@ paths:
           description: "Dialog notifications response"
           schema:
             $ref: '#/definitions/DialogNotificationsResponse'
+  /chat/Message.json:
+    get:
+      summary: Retrieve messages
+      operationId: 108_Retrieve_Messages
+      description: |
+        Retrieve all chat messages within particular chat dialog.
+        It's only possible to retrieve chat messages in dialog if current user id is in **occupants_ids** field or if dialog's **type=1**(PUBLIC_GROUP).
+        Server will return chat messages sorted ascending by **date_sent** field.
+        All retrieved chat messages will be marked as **read** after the request.
+      parameters:
+        - name: chat_dialog_id
+          in: formData
+          description: |
+            An id of chat dialog to retrieve chat messages for. (path parameter)
+          required: true
+          type: string
+          default: 53aabe15e4b077ddd43e7fd6
+        - name: '{field_name}'
+          in: formData
+          description: |
+            Search records with field which contains exactly specified value.
+            Applied fields - **_id**, **message**, **date_sent**, **sender_id**, **recipient_id**, **attachments.type**, **updated_at**.
+          required: false
+          type: string
+          default: sender_id=2960
+        - name: '{field_name}[{search_operator}]'
+          in: formData
+          description: |
+            Search records with field which contains value according to specified value and operator.
+            Possible filters - **lt** (Less Than operator), **lte** (Less Than or Equal to operator), **gt** (Greater Than operator), **gte** (Greater Than or Equal to operator), **ne** (Not Equal to operator), **in** (Contained IN array operator), **nin** (Not contained IN array), **all** (ALL contained IN array), **ctn** (Contains substring operator).
+            Applied fields - **_id**, **message**, **date_sent**, **sender_id**, **recipient_id**, **attachments.type**, **updated_at**.
+          required: false
+          type: string
+          default: sender_id[in]=134,2566
+        - name: limit
+          in: formData
+          description: |
+            Limit search results to N records. Useful for pagination. Default (if not specified) - 100.
+          required: false
+          type: integer
+          default: 100
+        - name: skip
+          in: formData
+          description: |
+            Skip N records in search results. Useful for pagination. Default (if not specified) - 0.
+          required: false
+          type: integer
+          default: 100
+        - name: count
+          in: formData
+          description: |
+            Count search results. Response will contain only count of records found.
+          required: false
+          type: integer
+          default: 1
+        - name: sort_desc/sort_asc
+          in: formData
+          description: |
+            Search results will be sorted by specified field in ascending/descending order.
+          required: false
+          type: string
+          default: sort_desc=last_message_date_sent
+        - name: mark_as_read
+          in: formData
+          description: |
+            Do not mark the received messages as read (default is 1)
+          required: false
+          type: string
+          default: mark_as_read=0
+      responses:
+        '200':
+          description: "Array of chat messages"
+          schema:
+            $ref: '#/definitions/MessagesResponse'
+    post:
+      summary: Create message
+      operationId: 109_Create_Message
+      description: |
+        Create a chat message.
+        You can initiate the message delivery via XMPP real-time transport or just inject it directly into history.
+      parameters:
+        - name: chat_dialog_id
+          in: formData
+          description: |
+            An id of chat dialog to create chat message in.
+            Required if a **recipient_id** parameter is not specified.
+          required: true
+          type: string
+          default: 53aabe15e4b077ddd43e7fd6
+        - name: message
+          in: formData
+          description: |
+            Text of the message (CGI-escaped)
+          required: false
+          type: string
+          default: Wish I could be here!
+        - name: recipient_id
+          in: formData
+          description: |
+            ID of a recipient to send message to.
+            Useful only when dialog's **type=3**(PRIVATE).
+            Required if a **chat_dialog_id** parameter is not specified.
+          required: true
+          type: string
+          default: 4124234
+        - name: 'attachments[n][type/id/url]'
+          in: formData
+          description: |
+            Array of attachments objects.
+            Each attachment object contains 3 keys: type(audio/video/image/...), id(link to file ID in QuickBlox), url(link to file in Internet)
+          required: false
+          type: string
+          default: attachments[0][id]=47863&attachments[0][type]=image
+        - name: send_to_chat
+          in: formData
+          description: |
+            Initiate message delivery via XMPP real-time transport.
+          required: false
+          type: string
+          default: 1
+        - name: markable
+          in: formData
+          description: |
+            Mark the message to signalize that is supports read/delivered statuses.
+          required: false
+          type: string
+          default: 1
+        - name: '{custom_field_name}'
+          in: formData
+          description: |
+            Key-value custom parameter.
+            Chat message can contain additional custom parameters.
+          required: false
+          type: string
+          default: age=25
+      responses:
+        '201':
+          description: "Chat message object"
+          schema:
+            $ref: '#/definitions/MessageObject'
+  /chat/Message/{message_id}.json:
+    put:
+      summary: Update message
+      operationId: 110_Update_Message
+      description: |
+        Update chat message.
+        At this stage it's possible to do 3 things: mark as read, mark as delivered and update the message's body.
+        It's possible to mark all messages as read/delivered - just don't pass a message id in the request.
+      parameters:
+        - name: message_id
+          in: formData
+          description: |
+            An id of chat message to update. (path parameter)
+          required: true
+          type: string
+          default: 53aabe15e4b077ddd43e7fd6
+        - name: read
+          in: formData
+          description: |
+            	Mark the message as read.
+              It's possible to read and unread chat message.
+          required: true
+          type: integer
+          default: 1
+        - name: delivered
+          in: formData
+          description: |
+            Mark the message as delivered
+          required: true
+          type: integer
+          default: 1
+        - name: message
+          in: formData
+          description: |
+            New message's body.
+          required: true
+          type: string
+          default: Guess where am I!
+      responses:
+        '200':
+          description: Empty body
+          schema:
+            $ref: '#/definitions/EmptyBody'
+  /chat/Message/{messages_ids}.json:
+    delete:
+      summary: Delete messages
+      operationId: 111_Delete_Messages
+      description: |
+        Delete multiple chat messages.
+        Any users from the dialog’s occupant_ids list are able to remove a message.
+        Chat messages will be removed for current user only, but without affecting the history of other users in the chat dialog.
+        It's also possible to completely remove chat message by its owner - you need to pass **force=1**.
+      parameters:
+        - name: messages_ids
+          in: formData
+          description: |
+            The ids of chat messages to delete (path parameter)
+          required: true
+          type: array
+          items:
+            type: string
+          default: 53aabe15e4b077ddd43e7fd6,23aabe15e4b077ddd43e7fd1
+        - name: force
+          in: formData
+          description: |
+            Pass force=1 to completely remove chat message from history so it will affect the chat history off all users in the dialog.
+            Only message's owner (sender) can do it.
+          required: false
+          type: integer
+          default: 1
+      responses:
+        '200':
+          description: "Delete messages response"
+          schema:
+            $ref: '#/definitions/DeleteMessagesResponse'
+  /chat/Message/unread.json:
+    get:
+      summary: Retrieve unread messages count
+      operationId: 112_Retrieve_Unread_Messages_Count
+      description: |
+        Retrieve unread messages count split across dialogs plus total value.
+      parameters:
+        - name: chat_dialog_ids
+          in: formData
+          description: |
+            Array of dialogs ids to get a count of unread messages for.
+            You also can omit this parameter to receive just a total count of all unread messages. (path parameter)
+          required: true
+          type: array
+          items:
+            type: string
+          default: 53aabe15e4b077ddd43e7fd6,23aabe15e4b077ddd43e7fd1
+      responses:
+        '200':
+          description: "Unread messages count response"
+          schema:
+            $ref: '#/definitions/UnreadMessagesCountResponse'
 definitions:
   DialogsResponse:
     type: object
@@ -436,3 +729,45 @@ definitions:
       url:
         type: string
         example: http://jabber.org/avatar.jpg
+  DeleteMessagesResponse:
+    type: object
+    properties:
+      SuccessfullyDeleted:
+        type: object
+        properties:
+          ids:
+            type: array
+            items:
+              type: string
+              example: 536fbe15123127d63d43e7fe4
+      WrongPermissions:
+        type: object
+        properties:
+          ids:
+            type: array
+            items:
+              type: string
+              example: 53efbe15e4b077d33d43e7fd2
+      NotFound:
+        type: object
+        properties:
+          ids:
+            type: array
+            items:
+              type: string
+              example: 53afbe15e4b077ddd43e7fd5
+  EmptyBody:
+    type: string
+    default: 'null'
+  UnreadMessagesCountResponse:
+    type: object
+    properties:
+      total:
+        type: integer
+        example: 5
+      53aabe15e4b077ddd43e7fd6:
+        type: integer
+        example: 2
+      23aabe15e4b077ddd43e7fd1:
+        type: integer
+        example: 3
