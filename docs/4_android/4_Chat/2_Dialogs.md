@@ -15,60 +15,68 @@
   <!-- Tab panes -->
   <div class="tab-content">
     <div role="tabpanel" class="tab-pane active" id="create_group_and_private">
-    <h4>### Example of creating group and private dialogs:</h4>
+    <h4>Example of creating group and private dialogs:</h4>
      <code>
-         ArrayList<Integer> occupantIdsList = new ArrayList<Integer>();
-         occupantIdsList.add(34);
-         occupantIdsList.add(17);
-         <b>                   
-         QBChatDialog dialog = new QBChatDialog();
-         dialog.setName("Chat with Garry and John");
-         dialog.setPhoto("1786");
-         dialog.setType(QBDialogType.GROUP);
-         dialog.setOccupantsIds(occupantIdsList);         
-         //or just use DialogUtils
-         //for creating PRIVATE dialog
-         //QBChatDialog dialog = DialogUtils.buildPrivateDialog(recipientId);         
-         //for creating GROUP dialog
-         //QBChatDialog dialog = DialogUtils.buildDialog("Chat with Garry and John", QBDialogType.GROUP, occupantIdsList);         
-         QBRestChatService.createChatDialog(dialog).performAsync(new QBEntityCallback<QBChatDialog>() {
-             @Override
-             public void onSuccess(QBChatDialog result, Bundle params) {         
-             }         
-             @Override
-             public void onError(QBResponseException responseException) {         
-             }
+         ArrayList<Integer> occupantIdsList = new ArrayList<Integer>();<br>
+         occupantIdsList.add(34);<br>
+         occupantIdsList.add(17);<br>
+         <br>                   
+         QBChatDialog dialog = new QBChatDialog();<br>
+         dialog.setName("Chat with Garry and John");<br>
+         dialog.setPhoto("1786");<br>
+         dialog.setType(QBDialogType.GROUP);<br>
+         dialog.setOccupantsIds(occupantIdsList);<br>
+                  <br>
+         //or just use DialogUtils<br>
+         //for creating PRIVATE dialog<br>
+         //QBChatDialog dialog = DialogUtils.buildPrivateDialog(recipientId);<br>         
+         //for creating GROUP dialog<br>
+         //QBChatDialog dialog = DialogUtils.buildDialog("Chat with Garry and John", QBDialogType.GROUP, occupantIdsList);<br>         
+         QBRestChatService.createChatDialog(dialog).performAsync(new QBEntityCallback<QBChatDialog>() {<br>
+             @Override<br>
+             public void onSuccess(QBChatDialog result, Bundle params) {<br>
+                      <br>
+             }<br>
+                      <br>
+             @Override<br>
+             public void onError(QBResponseException responseException) {<br>
+                      <br>
+             }<br>
          });
       </code>      
       To notify occupants that you've created chat dialog you can use ```QBSystemMessagesManager```:
       <code>
-      public static final String PROPERTY_OCCUPANTS_IDS = "occupants_ids";
-      public static final String PROPERTY_DIALOG_TYPE = "dialog_type";
-      public static final String PROPERTY_DIALOG_NAME = "dialog_name";
-      public static final String PROPERTY_NOTIFICATION_TYPE = "notification_type";      
-      private QBChatMessage buildSystemMessageAboutCreatingGroupDialog(QBChatDialog dialog){
-          QBChatMessage qbChatMessage = new QBChatMessage();
-          qbChatMessage.setDialogId(dialog.getDialogId());
-          qbChatMessage.setProperty(PROPERTY_OCCUPANTS_IDS, QbDialogUtils.getOccupantsIdsStringFromList(dialog.getOccupants()));
-          qbChatMessage.setProperty(PROPERTY_DIALOG_TYPE, String.valueOf(dialog.getType().getCode()));
-          qbChatMessage.setProperty(PROPERTY_DIALOG_NAME, String.valueOf(dialog.getName()));
-          qbChatMessage.setProperty(PROPERTY_NOTIFICATION_TYPE, CREATING_DIALOG);      
-          return qbChatMessage;
-      }      
-      //Let's notify occupants
-      public void sendSystemMessageAboutCreatingDialog(QBSystemMessagesManager systemMessagesManager, QBChatDialog dialog) {
-          QBChatMessage systemMessageCreatingDialog = buildSystemMessageAboutCreatingGroupDialog(dialog);      
-          for (Integer recipientId : dialog.getOccupants()) {
-              if (!recipientId.equals(QBChatService.getInstance().getUser().getId())) {
-                  systemMessageCreatingDialog.setRecipientId(recipientId);
-                  systemMessagesManager.sendSystemMessage(systemMessageCreatingDialog);
-              }
-          }
+      public static final String PROPERTY_OCCUPANTS_IDS = "occupants_ids";<br>
+      public static final String PROPERTY_DIALOG_TYPE = "dialog_type";<br>
+      public static final String PROPERTY_DIALOG_NAME = "dialog_name";<br>
+      public static final String PROPERTY_NOTIFICATION_TYPE = "notification_type";<br>
+            <br>
+      private QBChatMessage buildSystemMessageAboutCreatingGroupDialog(QBChatDialog dialog){<br>
+          QBChatMessage qbChatMessage = new QBChatMessage();<br>
+          qbChatMessage.setDialogId(dialog.getDialogId());<br>
+          qbChatMessage.setProperty(PROPERTY_OCCUPANTS_IDS, QbDialogUtils.getOccupantsIdsStringFromList(dialog.getOccupants()));<br>
+          qbChatMessage.setProperty(PROPERTY_DIALOG_TYPE, String.valueOf(dialog.getType().getCode()));<br>
+          qbChatMessage.setProperty(PROPERTY_DIALOG_NAME, String.valueOf(dialog.getName()));<br>
+          qbChatMessage.setProperty(PROPERTY_NOTIFICATION_TYPE, CREATING_DIALOG);<br>
+                <br>
+          return qbChatMessage;<br>
+      }<br>
+            <br>
+      //Let's notify occupants<br>
+      public void sendSystemMessageAboutCreatingDialog(QBSystemMessagesManager systemMessagesManager, QBChatDialog dialog) {<br>
+          QBChatMessage systemMessageCreatingDialog = buildSystemMessageAboutCreatingGroupDialog(dialog);<br>
+                <br>
+          for (Integer recipientId : dialog.getOccupants()) {<br>
+              if (!recipientId.equals(QBChatService.getInstance().getUser().getId())) {<br>
+                  systemMessageCreatingDialog.setRecipientId(recipientId);<br>
+                  systemMessagesManager.sendSystemMessage(systemMessageCreatingDialog);<br>
+              }<br>
+          }<br>
       }     
       </code>      
       </div>
     <div role="tabpanel" class="tab-pane" id="create_public_group">
-    <h4>#### Create a Public group chat dialog </h4>     
+    <h4>Create a Public group chat dialog </h4>     
       It's also possible to create a public group chat, so that any user from you application can join it. There is no list with occupants, 
       this chat is just open for everybody.      
       To create a public group chat use the same logic as for group chat, but change the dialog's <b>type</b> 
