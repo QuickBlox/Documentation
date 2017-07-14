@@ -1,57 +1,57 @@
 <span id="Overview" class="on_page_navigation"></span>
 # Overview
-QuickBlox Content API предназначен для загрузки и скачивания файлов любых типов. Этот функционал удобно использовать как вспомогательно 
-средство для обмена изображениями, короткими видео- или аудиофайлами (например, видео- или аудио сообщения), либо другими файлами 
-(например, документами) во время чатинга.
+QuickBlox Content API is intended for uploading and downloading files of any types. This functionality is convenient for use as an 
+additional means for exchanging images, short video or audio files (for example, video or audio messages) or other files (documents, 
+for example) while chatting.
 
-Максимальный размер файла, который может быть загружен с использованием QuickBlox Content API составляет 100мб.
+The maximum file size limit for uploads via QuickBlox Content API is 100MB.
 
-QuickBlox предоставляет Unlimited Data Storage.
+QuickBlox provides Unlimited Data Storage.
 
 
-<span id="Manage_content_from_Admin_panel" class="on_page_navigation"></span>
-# Управление контентом через админ панель
+<span id="Content_Management_via_Admin_Panel" class="on_page_navigation"></span>
+# Content Management via Admin Panel
 Content Management System (CMS) allows you to manage the apps contents and settings without having to re-publish it. 
-You can upload any files through web interface, edit them, delete - all typical operations.
+You can upload any files through web interface, edit them, delete, i.e. perform all typical operations.
 
 Go to [Admin panel](http://admin.quickblox.com) -> Content module. You can see list of your files:
 
 ![](./resources/content/CMS1.png)
 
-You may not have files. To upload new file just use **File Upload** section bellow table - select file to upload using **Choose...**
- button, then press **Upload** button - new file will be uploaded.
+You may have no files. To upload a new file just use **File Upload** section bellow table as follows: select file to upload using **Browse...**
+ button, then press **Upload** button and the new file will be uploaded.
 
 You can create rich HTML file using wysiwyg redactor - just press **Add Text/HTML** button - **New file** page will be opened. 
 You can use wysiwyg redactor to create rich content.
 
 
-<span id="Manage_content_from_app" class="on_page_navigation"></span>
-# Управление контентом из приложения
+<span id="Content_Management_via_Application" class="on_page_navigation"></span>
+# Content Management via Application
 
 
 <span id="Prepare_your_application_for_QuickBlox_Android_SDK" class="on_page_navigation"></span>
 ## Prepare your application for Android SDK
-Данная инструкция предполагает, что вы уже знакомы с порядком интеграции Quickblox фреймворка в приложение и уже выполнили такие 
-действия для своего приложении:
+This guide implies that you are already familiar with the procedure of QuickBlox framework integration and you have already 
+taken the following steps for your application:
 
 * [Created QuickBlox account](http://admin.quickblox.com/register)
 * [Registerer an application in Dashboard](http://quickblox.com/developers/5_Mins_Guide)
 * [Integrated QuickBlox SDK into application - stub link]()
 
 ## Integrate QuickBlox Content module in your application
-To use QuickBlox Content API in your app, you just have to add dependency in **build.gradle** project file:
+To use QuickBlox Content API in your app, you just need add the following dependency in **build.gradle** project file:
 ```groovy
 dependencies {
     compile "com.quickblox:quickblox-android-sdk-content:3.3.3"
 }
 ```
 
-Это все, теперь вы можете использовать QuickBlox Content API из вашего приложения.
+That's all! You can use QuickBlox Content API in your application.
 
 
 <span id="Upload_file" class="on_page_navigation"></span>
 # Upload file
-To upload file using Android SDK use code bellow:
+To upload a file using Android SDK use code bellow:
 
 ```java
 File file = ...;
@@ -61,17 +61,17 @@ boolean isPublic = false;
 QBContent.uploadFileTask(file, isPublic, null, new QBProgressCallback() {
             @Override
             public void onProgressUpdate(int progress) {
-                //progress - прогресс в процентах
+                //progress - progress in percent
             }
         }).performAsync(new QBEntityCallback<QBFile>() {
             @Override
             public void onSuccess(QBFile qbFile, Bundle bundle) {
-                //файл успешно загружен
+                //file uploaded successfully
             }
 
             @Override
             public void onError(QBResponseException e) {
-                //произошла ошибка во время загрузки файла
+                //an error occurred during file upload
             }
         });
 ```
@@ -81,7 +81,7 @@ Read more about ```isPublic``` argument [here](http://quickblox.com/developers/S
 
 <span id="Update_file" class="on_page_navigation"></span>
 # Update file
-Для обновления уже существующего файла можно воспользоваться примером ниже:
+For updating an existing file you can use the following example:
 ```java
 File newFile = ...;
 
@@ -111,11 +111,11 @@ QBContent.updateFileTask(newFile, quickBloxFileID, tags, new QBProgressCallback(
 <span id="Retrieve_files" class="on_page_navigation"></span>
 # Retrieve files
 
-You can use page parameters like:
-* ```perPage``` - how many files will contain each page (max 100)
-* ```page``` - current returned page
+You can use the following page parameters:
+* ```perPage``` - how many files each page will contain (max 100)
+* ```page``` - current returned page (номер страницы, которую сервер должен вернуть)
 
-To retrieve list of own files use code bellow:
+To retrieve list of current user's files use code bellow:
 ```java
 QBPagedRequestBuilder requestBuilder = new QBPagedRequestBuilder(5, 2);
 
@@ -168,7 +168,7 @@ QBContent.downloadFile(fileUID, new QBProgressCallback() {
 There are 2 types of files in Content module:
 
 * **Private files** - can be accessed only by QuickBlox user with session token
-* **Public files** - can be accessed from anywhere in Internet, don't need to have a session token. 
+* **Public files** - can be accessed from anywhere in the Internet, don't need to have a session token. 
 
 You can manage this type when you upload a file to Content module via  ```public``` 
 [argument](https://quickblox.com/developers/SimpleSample-content-android#Upload_file).
@@ -197,6 +197,6 @@ String privateUrl = file.getPublicUrlForUID(fileUID);
 
 <span id="Sources" class="on_page_navigation"></span>
 # Sources
-С примерами использования модуля контент вы можете ознакомиться:
-* просмотрев семпл контент [on GIT](https://github.com/QuickBlox/quickblox-android-sdk/tree/master/sample-content)
-* загрузив [ZIP со всеми нашими семплами](https://github.com/QuickBlox/quickblox-android-sdk/archive/master.zip)  и выбрав "sample-content".
+You can find examples of Content module usage in the following ways:
+* by checking sample content [on GIT](https://github.com/QuickBlox/quickblox-android-sdk/tree/master/sample-content)
+* if you download [ZIP with all our samples](https://github.com/QuickBlox/quickblox-android-sdk/archive/master.zip)  and select "sample-content" module.

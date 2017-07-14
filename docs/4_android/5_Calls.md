@@ -213,11 +213,12 @@ surfaceView.init(eglContext.getEglBaseContext(), null);
 
 Method ```release()``` should be called when video track is not valid anymore, for ex when you receive ```onConnectionClosedForUser()```
 callback from ```QBRTCSession``` or when ```QBRTCSession``` is going to be closed. But you should call ```release()``` before the 
-**Activity** is destroyed and the **EGLContext** is still valid. If you don't call this method(), the **GL resources** might leak.
+**Activity** is destroyed and the **EGLContext** is still valid. If you don't call this method(), the **GL resources** might leak. 
+(имеется в виду, будут утечки ресурсов (памяти), т.е. ненужное их расходование)
 
 ```QBRTCSurfaceView``` allows to use several views on screen layout and to overlap each other.
 
-Here is the ```QBRTCSurfaceView``` interface: <br>
+Here is the ```QBRTCSurfaceView``` interface: (просто описание основных возможностей (настроек, методов) класса QBRTCSurfaceView, которые доступны клиенту) <br>
 
 ```java
 QBRTCSurfaceView.init(EglBase.Context, RendererCommon.RendererEvents);//Initialize this view using webrtc Egl context, It is allowed to call init() to reinitialize the view after a previous init()/release() cycle.
@@ -306,6 +307,8 @@ To track **only main session events you** can use ```QBRTCSessionEventsCallback`
 ```java
 /**
  * Called in case user didn't answer in time expiration period
+ * есть настройка setAnswerTimeInterval(интервал) и есть таймер, который считает этот интервал и если юзер не 
+ * ответил за этот интервал, тогда срабатывает этот колбек
  */
 void onUserNotAnswer(QBRTCSession session, Integer userID);
 
@@ -800,7 +803,7 @@ AppRTCAudioManager.setAudioDevice - sets current audio device
 AppRTCAudioManager.getAudioDevices - Returns current set of available/selectable audio devices.
 ```
 
-```AppRTCAudioManager.setManageHeadsetByDefault(true)``` - checks whether ```AppRTCAudioManager``` will handle headset state or not.
+```AppRTCAudioManager.setManageHeadsetByDefault(true)``` - sets whether ```AppRTCAudioManager``` will handle headset state or not.
 
 If ```true``` - ```AppRTCAudioManager``` will handle headset state and selected audio channel.
 In this case when headset is plugged ```AppRTCAudioManager``` sets headset as current audio device. When headset is unplugged, 

@@ -7,79 +7,73 @@
 # Overview
 
 ## How QuickBlox Push Notifications work
-
-Как по-вашему может этот кусок лишний?
-
-=======СТАРТ========
-
-There are 2 ways that you can integrate Push Notifications into your app:
+There are 2 ways to integrate Push Notifications into your app:
 * **Broadcasting the same message to all users**. It's a simple method which can be used in informational apps that do not 
-authenticate users and where same push notification messages are broadcasted to everybody. This way when you want to send a push 
-message you may 1) simply go to Admin panel -> Push Notifications -> type your message in Simple mode -> and hit "Send" for all of 
+authenticate users and where same push notification messages are broadcasted to everybody. To send a push you can: 1) simply go to Admin 
+panel -> Push Notifications -> type your message in Simple mode -> and hit "Send" for all of 
 your users to receive the message; 2) Send a push using Push Notifications API (explained below). Following this way you only need 
 to create ONE QuickBlox User which will have all of your users' devices associated with it. Then simply send your pushes to that User.
-* **Send individual push alerts**. This is when you want to individually send push notifications to a particular user or a group of 
-users (for example notify users of a new chat message sent while they are offline or tell them about some deal/event happening in 
+* **Send individual push alerts**. You can use this when you want to send push notifications to a particular user or a group of 
+users (for example notify users that new chat message was sent while they are offline or tell them about some deal/event happening in 
 close proximity to their location). Following this way you need to have a QuickBlox User created for each of your app users. Note 
 that there are easy ways to transparently create QB Users along with your existing users authentication system or have them sign up 
 with Facebook/Twitter/OAuth (described in [Users code sample reference](http://quickblox.com/developers/SimpleSample-users-android)) 
 so your end users don't have to type any additional login credentials or know anything about QuickBlox.
 
-======КОНЕЦ=======
+Quickblox provides an opportunity to send the notifications(GCM and FCM) the followings ways:
+* using admin panel;
+* using mobile app;
 
-QuickBlox предоставляет возможность воспользоваться пуш уведомлениями (GCM and FCM) для уведомления юзеров о каких либо
-событиях. QuickBlox позволяет отправлять пуш-уветомления с:
-* админки;
-* из мобильного приложения;
+User can send platform-oriented notification (Android, IOS, WP) or universal notification (all user will receive it, no matter from which 
+device they subscribed).
 
-Пользователь может оправить как платформо ориентированное пуш-уведомление (Android, iOS, Windows Phone),  так и универсальное пуш-уведмление (получат 
-все юзеры, не зависимо от того, с какой платформы была оформлена подписка). 
+Also, Quickblox provides "Offline push** option" with which push notifications about newly received messages automatically. This works 
+from private dialogs and for group dialogs, when user is logged into chat, but haven't joined the group dialog. This option is enabled by 
+default, but you can disable it from admin panel anytime.
 
-Также QuickBlox предоставляет такую опцию, как **"Офлайн пуши"** - это опция заключается в автоматической оправке пуш уведомлений о 
-входящих сообщениях из приватных диалогов для офлайн юзеров или о сообщениях из групповых диалогов, когда юзер залогинен в чат, 
-но не заджойнен в этот групповой диалог. Эта опция по умолчанию включена для всех приложений, но клиент может в любое время отключить в админке.
+**Different push types**
 
-Данный раздел документации предназначен для того, чтобы показать пользователю как работать с QuickBlox Push Notifications API.
+Now Google Cloud Messaging can be two types: Google Cloud Messaging (GCM) or Firebase Cloud Messaging (FCM). Our SDK supports both. 
+You can set this type in meta-data.
 
 <span id="Preparing_app_for_QuickBlox_Push-notifications" class="on_page_navigation"></span>
-Для того чтоб получить возможность пользоваться QuickBlox Push-notifications надо:
+To use Quickblox push notifications you need:
 
-1. Добавить необходимые настройки в админке;
-2. Интегрировать QuickBlox Push-notifications module в свое приложение;
+1. Add needed settings in admin panel;
+2. Integrate QuickBlox Push-notifications module to your application;
 3. Настроить приложение для работы с Push-notifications:
 * настройка GCM пушей;
 * настройка FCM пушей;
 
-<span id="Admin_panel_congiguration" class="on_page_navigation"></span>
-## Нвастройка админки
-Для работы с QuickBlox Push-notifications module вам понадобится GCM API key, для его получения из Firebase developer console нужно:
-* пойти в Firebase developer console;
-* выбрать нужное приложение;
+<span id="Admin_panel_setup" class="on_page_navigation"></span>
+## Admin panel setup
+To work with QuickBlox Push-notifications module you need GCM API key. To get it please follow these steps:
+* open Firebase developer console;
+* choose needed app;
 * open Settings/Project Settings
 * go to Cloud Messaging
 * copy Legacy Server key
 
 ![](./resources/push/firebase_get_api_key.png)
 
-Для настройки QuickBlox админ панели вам необходимо засетить GCM API key. Чтобы это сделать, перейдите по пути Home -> app_name 
--> Push notifications -> Settings, перейдите в секцию "Google Cloud Messaging (GCM) API key" и засетьте свой API key. Вы можете использовать один и тот же
-  API key для Development и Production enviroments.
+You will need to set GCM API key. To do that please navigate to Home -> app_name -> Push notifications -> Settings, 
+and access "Google Cloud Messaging (GCM) API key". You can use the **same** api key for **Development** and **Production** environments.
 
 ![](./resources/push/admin_gcm_api_key.png)
 
 Then you can start use QuickBlox Push Notification API.
 
 <span id="Integration_QuickBlox_Push-notifications_module_in_application" class="on_page_navigation"></span>
-## Integration QuickBlox Push-notifications module in application
-Данная инструкция предполагает, что вы уже знакомы с порядком интеграции Quickblox фреймворка в приложение и уже выполнили такие 
-действия для своего приложении:
+## Integration QuickBlox Push-notifications module to application
+The instruction below implies that you are aware of Quickblox integration process and have 
+already performed the following:
 
 * [Created QuickBlox account](http://admin.quickblox.com/register)
 * [Registerer an application in Dashboard](http://quickblox.com/developers/5_Mins_Guide)
 * [Integrated QuickBlox SDK into application - stub link]()
 
 
-To use Push notifications module in your app, you just have to add dependency in **build.gradle** project file:
+To use Push notifications module in your app, you just need to add dependency to **build.gradle** project file:
 ```groovy
 dependencies {
     compile 'com.quickblox:quickblox-android-sdk-messages:3.3.3'
@@ -87,14 +81,14 @@ dependencies {
 ```
 
 <span id="Configuring_app_for_work_with_Push-notifications_module_of_QuickBlox_Android_SDK" class="on_page_navigation"></span>
-## Настройка приложения для работы с Push-notifications module of QuickBlox Android SDK
-Наше СДК позаботилось об организации подписки на пуши вместо вас. Вам нет необходимости заботиться о получении GCM or FCM токена, 
-подписке на пуши и отслеживании статуса подписки, эти все работы выполняются самостоятельно внутри СДК. Для того чтобы получить 
-приложение, подписанное на пуши, достаточно выполнить несколько простых действий ниже.
+## Application setup to work with Push-notifications module of QuickBlox Android SDK
+You do not need to worry about getting GCM or FCM token, tracking subscription's status etc. since all this processes are managed 
+inside Quickblox Android SDK. To subscribe the app for push notifications you can just follow the steps below.
 
-### Настройка зависимостей в ```build.gradle```
+### Dependencies setup in ```build.gradle```
 
-As part of enabling Google APIs or Firebase services in your Android application you may have to add the google-services plugin to your Project build.gradle file:
+As part of enabling Google APIs or Firebase services in your Android application you will need to add the google-services 
+plugin to your Project build.gradle file:
 ```groovy
 dependencies {
     classpath 'com.google.gms:google-services:3.0.0'
@@ -124,9 +118,10 @@ Include gms plugin in the **bottom** of your module ```build.gradle```:
 apply plugin: 'com.google.gms.google-services'
 ```
 
-### Настройка ```google-services.json``` файла
-Для работы вашего приложения с пушами, необходимо скачать с firebase девелопер консоли файл ```google-services.json``` для вашего приложения.
-For **GCM** push type add empty **current_key** settings into your ```google-services.json``` file for your package name (если такого поля нет):
+### Setup of ```google-services.json``` file
+To be able to work with push notifications you will need to download google-services.json file for your application form firebase 
+developer's console. If you choose **GCM** push type you will need to add empty **current_key** settings into your **google-services.json** 
+file for your package name (if you do not have such field):
 ```json
 "client": [
     {
@@ -146,7 +141,7 @@ For **GCM** push type add empty **current_key** settings into your ```google-ser
       ],
 ```
 
-### Setting android manifest
+### Setup android manifest
 To integrate Auto push subscription you just need set values in ```AndroidManifest.xml```:
 ```xml
 <meta-data android:name="com.quickblox.messages.TYPE" android:value="GCM" />
@@ -179,7 +174,7 @@ and as usual, setting for GCM GcmPushListenerService:
 ```
 and other stuff like permissions (look here for details https://developers.google.com/cloud-messaging/android/client).
 
-If you are using type **FCM**, it is a little bit easier, to get message you just need set ```QBFcmPushListenerService``` and 
+If you use **FCM** type, it would be a little bit easier to get message, you just need set ```QBFcmPushListenerService``` and 
 ```QBFcmPushInstanceIDService```:
 ```xml
 <service
@@ -201,12 +196,7 @@ If you are using type **FCM**, it is a little bit easier, to get message you jus
 * Notification messages,
 * Data messages.
 
-Android app handles them differently. Refer to https://firebase.google.com/docs/cloud-messaging/concept-options#notifications_and_data_messages
-
-**Different push types**
-
-Now Google Cloud Messaging can be two types: Google Cloud Messaging (GCM) or Firebase Cloud Messaging (FCM). Our SDK provides both. 
-You can set this type in meta-data.
+Android app uses different approach to handle each type. Refer to https://firebase.google.com/docs/cloud-messaging/concept-options#notifications_and_data_messages
 
 <span id="Receiving_simple_push_notifications" class="on_page_navigation"></span>
 ## Receiving simple push notifications
@@ -224,15 +214,15 @@ private BroadcastReceiver pushBroadcastReceiver = new BroadcastReceiver() {
 
 LocalBroadcastManager.getInstance(this).registerReceiver(pushBroadcastReceiver, new IntentFilter("new-push-event"));
 ```
-And that’s all! You are ready now to receive push notifications.
+And that’s all! You are ready to receive push notifications.
 
 <span id="Receiving_push_notifications_with_additional_parameters" class="on_page_navigation"></span>
 ## Receiving push notifications with additional parameters
-Пуш также может содержать и дополнительные параметры кроме ```message``` and ```from```.
-В таком случае вам нужно:
-* для **GCM** пушей:
-надо расширить класс ```QBGcmPushListenerService``` из нашего СДК и переопределить его метод ```onMessageReceived(String from, Bundle data)```
-Параметр ```data``` будет содержать все дополнительные параметры вашего пуша. В примере ниже, вы можете посмотреть, как получить дополнительные данные из GCM пуша:
+Along with ```message``` and ```from``` parameters it is possible to add custom ones to your push notification. You will need:
+* GCM push notifications: 
+
+Extend class ```QBGcmPushListenerService``` and override the method ```onMessageReceived(String from, Bundle data)```. 
+The parameter ```data``` will contain all additional parameters of your push notification. In the example below you can see, how to get additional data from **GCM** push:
 ```java
 public class GcmPushListenerService extends QBGcmPushListenerService {
     ...
@@ -262,10 +252,11 @@ android:name="com.quickblox.my_app.services.GcmPushListenerService"
 </code>
 </div>
 
-* для **FCM** пушей:
-надо расширить класс ```QBFcmPushListenerService``` из нашего СДК и переопределить его метод ```onMessageReceived(RemoteMessage remoteMessage)```
-Параметр ```remoteMessage``` будет содержать в том числе все дополнительные параметры вашего пуша. В примере ниже, вы можете посмотреть, как получить
-дополнительные параметры из **FCM** пуша:
+* FCM push notifications: 
+
+Extend class ```QBFcmPushListenerService``` and override the method ```onMessageReceived(RemoteMessage remoteMessage)```. 
+The parameter ```remoteMessage``` will contain all additional parameters of your push notification. In the example below you can see, how to get 
+additional data from **FCM** push:
 ```java
 public class FcmPushListenerService extends QBFcmPushListenerService {
     ..
@@ -283,8 +274,8 @@ public class FcmPushListenerService extends QBFcmPushListenerService {
 ```
 
 <div class="attention">
-Будьте внимательны! Если вы используете свой сервис для прослушивания FCM пушей, то в шаге [линка на пункт]() вам необходимо вместо класса
-<code>QBFcmPushListenerService</code> засеть свой сервис:
+Pay attention! If you use custom service to listen <b>FCM</> pushes, on the step [thre will be link] you will need to set your service instead 
+of <code>QBFcmPushListenerService</code>
 <code>
 <br>
 вместо нашего сервиса <br>
@@ -296,15 +287,15 @@ android:name="com.quickblox.my_app.services.FcmPushListenerService"
 </div>
 
 
-<span id="Sumscription_management" class="on_page_navigation"></span>
-## Управление подпиской на пуши
+<span id="How_to_manage_push_subscriptions" class="on_page_navigation"></span>
+## How to manage push subscriptions
 
 
 ### Enable and disable delivering push to application
-SDK has some setting for push notification.
-You can use global setting to enable or disable delivering pushes via ```QBSettings``` (means set this parameter once):
+SDK has some settings for push notification.
+You can use global settings to enable or disable delivering pushes via ```QBSettings``` (just set this parameter once):
 ```java
-QBSettings.getInstance().setEnablePushNotification(false); //as default true
+QBSettings.getInstance().setEnablePushNotification(false); //true by default
 ```
 To check this parameter 
 ```java
@@ -312,9 +303,9 @@ QBSettings.getInstance().isEnablePushNotification();
 ```
 
 ### Tracking subscriptions status
-To be aware about what is happening with push subscription, are you subscribed successful or not, there is ```QBSubscribeListener```.
+To check whether you have subscribed successfully or not, there is ```QBSubscribeListener```.
 Add ```QBSubscribeListener``` right after ```QBSettings.getInstance().init();```
-Code snippet:
+The code snippet is below:
 ```java
 QBPushManager.getInstance().addListener(new QBPushManager.QBSubscribeListener() {
             @Override
@@ -333,10 +324,10 @@ QBPushManager.getInstance().addListener(new QBPushManager.QBSubscribeListener() 
         });
 ```
 
-### Disabling subscribing at all
+### Disabling push subscriptions functionality
 If you don’t want to use auto subscribe feature at all, just do not set ```meta-data```.
 
-In case you were subscribed, now want to unsubscribe and do not subscribe again use global setting ```SubscribePushStrategy.NEVER``` 
+In case you were subscribed, and now you wish to unsubscribe and do not subscribe again use global setting ```SubscribePushStrategy.NEVER``` 
 like this:
 ```java
 // default SubscribePushStrategy.ALWAYS
@@ -344,19 +335,20 @@ QBSettings.getInstance().setSubscribePushStrategy(SubscribePushStrategy.NEVER);
 ```
 
 And of cause you can subscribe or unsubscribe from pushes whatever you need just use:
+И конечно же вы можете самостоятельно подписаться на пуши или отписаться, для этого просто используйте код ниже:
 ```java
-SubscribeService.subscribeToPushes(context, false);
-SubscribeService.unSubscribeFromPushes(context);
+SubscribeService.subscribeToPushes(context, false); //чтобы подписаться на пуши
+SubscribeService.unSubscribeFromPushes(context); //чтобы отписаться от пушей
 
-//second param true - if you use InstanceIDListenerService and google token onTokenRefresh
+//second param should be true - if you use InstanceIDListenerService and google token onTokenRefresh
 @Override
 public void onTokenRefresh() {
     SubscribeService.subscribeToPushes(context, true);
 }
 ```
 
-<span id="Migrate_to_FCM" class="on_page_navigation"></span>
-## Migrate to FCM
+<span id="Migration_to_FCM" class="on_page_navigation"></span>
+## Migration to FCM
 Firebase Cloud Messaging (FCM) is the new version of GCM. It inherits the reliable and scalable GCM infrastructure, plus new features! 
 See the [FAQ](http://firebase.google.com/support/known-issues/#gcm-fcm) to learn more. If you are integrating messaging in a new app, start 
 with FCM. GCM users are strongly recommended to upgrade to FCM, in order to benefit from new FCM features today and in the future.
@@ -383,9 +375,10 @@ and
 
 ![](./resources/push/AndroidPushOnDevice.png)
 
-> Note:You choose byself how to show push to user. There is no standard Android mechanism. 
-
-Also you can set more options through '''Advanced''' mode like:
+<div class="attention">
+> Note:You choose by yourself how to show push to user. There is no standard Android mechanism. 
+</div>
+Also you can set more options through **Advanced** mode like:
 Group of users (using tags), that will receive message
 
 ![](./resources/push/PushNotificationsTags.png)
@@ -396,11 +389,12 @@ Delivery settings
 
 <span id="Send_Push_Notifications_from_Application" class="on_page_navigation"></span>
 ### Send Push Notifications from Application
-Как говорилось ранее it's possible to send 2 types of push notifications:
+As it was said before it's possible to send 2 types of push notifications:
 * Platform based Push Notifications
 * Universal push notifications
 
-Refer to the [Push Notification Formats](http://quickblox.com/developers/Messages#Push_Notification_Formats) document to better understand what happens under hood. 
+Refer to the [Push Notification Formats](http://quickblox.com/developers/Messages#Push_Notification_Formats) document for better 
+understanding what happens under the hood. 
 
 <span id="Platform_based_Push_Notifications" class="on_page_navigation"></span>
 #### Platform based Push Notifications
