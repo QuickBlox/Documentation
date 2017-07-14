@@ -16,7 +16,7 @@
   <div class="tab-content">
     <div role="tabpanel" class="tab-pane active" id="create_group_and_private">
     <h4>Example of creating group and private dialogs:</h4>
-     <code>
+     <pre><code class="language-java">
          ArrayList<Integer> occupantIdsList = new ArrayList<Integer>();<br>
          occupantIdsList.add(34);<br>
          occupantIdsList.add(17);<br>
@@ -43,9 +43,9 @@
                       <br>
              }<br>
          });
-      </code>      
+      </code></pre>      
       To notify occupants that you've created chat dialog you can use ```QBSystemMessagesManager```:
-      <code>
+      <pre><code class="language-java">
       public static final String PROPERTY_OCCUPANTS_IDS = "occupants_ids";<br>
       public static final String PROPERTY_DIALOG_TYPE = "dialog_type";<br>
       public static final String PROPERTY_DIALOG_NAME = "dialog_name";<br>
@@ -73,14 +73,14 @@
               }<br>
           }<br>
       }     
-      </code>      
+      </code></pre>     
       </div>
     <div role="tabpanel" class="tab-pane" id="create_public_group">
     <h4>Create a Public group chat dialog </h4>     
       It's also possible to create a public group chat, so that any user from you application can join it. There is no list with occupants, 
       this chat is just open for everybody.      
       To create a public group chat use the same logic as for group chat, but change the dialog's <b>type</b> 
-      to <code>QBDialogType.PUBLIC_GROUP</code> and do not pass the **occupantsIds** value.
+      to <pre><code class="language-java">QBDialogType.PUBLIC_GROUP</code></pre> and do not pass the **occupantsIds** value.
     </div>
   </div>
 
