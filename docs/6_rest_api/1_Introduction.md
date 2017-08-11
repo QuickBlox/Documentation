@@ -44,6 +44,59 @@ You can create **Application session** and then upgrade it to **User session** o
 
 ## API and Dashboard changelog
 
+### 3.17.08.1
+* **API**
+	* New
+		* Introducing new authentication method/provider - Firebase phone authentication (via SMS). New provider **firebase_phone** is added and can be used in **Create Session** and **User Login** requests. Twitter Digits provider is deprecated now, you have to switch to Firebase now.
+	* Fixed
+		* Authentication via Facebook fails if use latest Facebook Graph API version.
+
+### 3.17.07.1
+* **API**
+	* Fixed
+		* Login with external providers: to provide better error description.
+		* Do not throw an error when creating private chat dialog and pass current user id in **occupants_ids**.
+		* Updated errors descriptions when updating group chat dialog **occupants_ids**.
+		* Destroy Chat Message with 'force' from unprivileged user returns 200 OK.
+		* Users: 500 error appears if try to save Emoji to **custom_data** field.
+		* Twitter auth sometimes is not working properly.
+* **Dashboard**
+	* New
+		* 'Main application' feature is removed(legacy).
+		* API endpoints buttons are removed.
+	* Fixed
+		* Admin with 'Read Only' permissions isn't able to read chat messages.
+		* Admin with 'Read Only' permissions - unexpected behavior on 'Push Notifications/Queue' page.
+		* Custom IdP: added a hint about URL path parameters.
+		* Reviewed **Quickblox: your account inactivity** email.
+		* 500 error on 'Push Notification/Subscriptions' page.
+		* 'Push Notifications/Settings' page: 500 error if one of certificates is broken/invalid.
+		* Tables break boundaries on small resolutions (notebooks).
+		* Reviewed email **QuickBlox: rate limit for your current plan is exceeded**.
+		* Account Stats issue: records are doubled.
+
+### 3.17.05.1
+* **API**
+	* New
+		* Added **client_identification_sequence** & **bundle_identifier** fields in Push subscription response.
+	* Fixed
+		* Custom Objects API: error 500 is returned if set empty field type in **Create Class** request.
+		* Chat Message model's **read_ids** & **delivered_ids** is not empty in public group dialogs messages.
+		* Custom Objects API: filter by **_id** is not working.
+		* Create Chat Dialog API: it returns an object with **unread_messages_count=null** (should be 0)
+		* Can’t use the same external user (FB,TW,..) in 2 different apps.
+		* Create Chat Message API: Attachments: not all fields are processed correctly.
+		* Incorrect last massage in chat dialog when update chat message via API.
+		* Push Notifications API: incorrect behaviour when create an event with external user id and this user does not have any push subscriptions.
+* **Dashboard**
+	* New
+		* To show the **access** field of blob (public or not) in blobs table.
+		* Removed search autocomplete on Custom Objects module page (performance concerns).
+		* Content module: removed WYSIWYG Editor (legacy & useless).
+		* Optimised performance of Push Notifications/Subscriptions page.
+	* Fixed
+		* Copy credentials feature works only if you have Flash installed. You do not need Flash anymore.
+	
 ### 3.17.04.1
 * **API**
 	* New
