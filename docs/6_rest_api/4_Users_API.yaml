@@ -171,7 +171,8 @@ paths:
           * Login with **login/email** and **password**
           * Login via Facebook by providing **provider=facebook** and **keys[token]** parameters.
           * Login via Twitter by providing **provider=twitter**,  **keys[token]** and **keys[secret]** parameters.
-          * Login via Twitter Digits (SMS) by providing **provider=twitter_digits** and **twitter_digits[...]** parameters.
+          * Login via Twitter Digits (SMS) by providing **provider=twitter_digits**, **twitter_digits[X-Auth-Service-Provider]** and **twitter_digits
+          [X-Verify-Credentials-Authorization]** parameters.
           * Login via Firebase phone number (SMS) by providing **provider=firebase_phone**, **firebase_phone[project_id]** and **firebase_phone[access_token]** parameters.
       parameters:
         - name: login
