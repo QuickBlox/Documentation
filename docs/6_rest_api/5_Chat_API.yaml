@@ -728,38 +728,40 @@ definitions:
     properties:
       users:
         type: object
-        SuccessfullyDeleted:
-          type: array
-          items:
-            type: integer
-            example: 23
-        WrongPermissions:
-          type: array
-          items:
-            type: integer
-            example: 54
-        NotFound:
-          type: array
-          items:
-            type: integer
-            example: 78
+        properties:
+          SuccessfullyDeleted:
+            type: array
+            items:
+              type: integer
+              example: 23
+          WrongPermissions:
+            type: array
+            items:
+              type: integer
+              example: 54
+          NotFound:
+            type: array
+            items:
+              type: integer
+              example: 78
       dialogs:
         type: object
-        SuccessfullyDeleted:
-          type: array
-          items:
-            type: string
-            example: 536fbe15123127d63d43e7fe4
-        WrongPermissions:
-          type: array
-          items:
-            type: string
-            example: 53efbe15e4b077d33d43e7fd2
-        NotFound:
-          type: array
-          items:
-            type: string
-            example: 53afbe15e4b077ddd43e7fd5
+        properties:
+          SuccessfullyDeleted:
+            type: array
+            items:
+              type: string
+              example: 536fbe15123127d63d43e7fe4
+          WrongPermissions:
+            type: array
+            items:
+              type: string
+              example: 53efbe15e4b077d33d43e7fd2
+          NotFound:
+            type: array
+            items:
+              type: string
+              example: 53afbe15e4b077ddd43e7fd5
   MessagesResponse:
     type: object
     properties:
