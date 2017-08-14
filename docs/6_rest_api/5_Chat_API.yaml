@@ -331,7 +331,7 @@ paths:
             $ref: '#/definitions/DialogNotificationsResponse'
   /chat/Dialogs/add_occupants.json:
     post:
-      summary: Bulk add occupants.
+      summary: Bulk add occupants
       operationId: 108_Bulk_Add_Occupants
       description: |
         Add multiple occupants to a list of chat dialogs (bulk add)
@@ -361,7 +361,7 @@ paths:
             $ref: '#/definitions/DialogsBulkUpdateResponse'
   /chat/Dialogs/remove_occupants.json:
     post:
-      summary: Bulk remove occupants.
+      summary: Bulk remove occupants
       operationId: 109_Bulk_Remove_Occupants
       description: |
         Remove multiple occupants from a list of chat dialogs (bulk remove)
