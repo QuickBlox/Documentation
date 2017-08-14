@@ -329,10 +329,70 @@ paths:
           description: "Dialog notifications response"
           schema:
             $ref: '#/definitions/DialogNotificationsResponse'
+  /chat/Dialogs/add_occupants.json:
+    post:
+      summary: Bulk add occupants.
+      operationId: 108_Bulk_Add_Occupants
+      description: |
+        Add multiple occupants to a list of chat dialogs (bulk add)
+      parameters:
+        - name: users_ids
+          in: formData
+          description: |
+            An list of users' ids to add.
+          required: true
+          type: array
+          items:
+            type: integer
+          default: 56,78
+        - name: dialogs_ids
+          in: formData
+          description: |
+            A list of chat dialogs to update.
+          required: true
+          type: array
+          items:
+            type: string
+          default: 53aabe15e4b077ddd43e7fd6,53eabe15e4b076ddd43e7fd8
+      responses:
+        '200':
+          description: "Response"
+          schema:
+            $ref: '#/definitions/DialogsBulkUpdateResponse'
+  /chat/Dialogs/remove_occupants.json:
+    post:
+      summary: Bulk remove occupants.
+      operationId: 109_Bulk_Remove_Occupants
+      description: |
+        Remove multiple occupants from a list of chat dialogs (bulk remove)
+      parameters:
+        - name: users_ids
+          in: formData
+          description: |
+            An list of users' ids to remove.
+          required: true
+          type: array
+          items:
+            type: integer
+          default: 56,78
+        - name: dialogs_ids
+          in: formData
+          description: |
+            A list of chat dialogs to update.
+          required: true
+          type: array
+          items:
+            type: string
+          default: 53aabe15e4b077ddd43e7fd6,53eabe15e4b076ddd43e7fd8
+      responses:
+        '200':
+          description: "Response"
+          schema:
+            $ref: '#/definitions/DialogsBulkUpdateResponse'
   /chat/Message.json:
     get:
       summary: Retrieve messages
-      operationId: 108_Retrieve_Messages
+      operationId: 110_Retrieve_Messages
       description: |
         Retrieve all chat messages within particular chat dialog.
         It's only possible to retrieve chat messages in dialog if current user id is in **occupants_ids** field or if dialog's **type=1**(PUBLIC_GROUP).
@@ -405,7 +465,7 @@ paths:
             $ref: '#/definitions/MessagesResponse'
     post:
       summary: Create message
-      operationId: 109_Create_Message
+      operationId: 111_Create_Message
       description: |
         Create a chat message.
         You can initiate the message delivery via XMPP real-time transport or just inject it directly into history.
@@ -472,7 +532,7 @@ paths:
   /chat/Message/{message_id}.json:
     put:
       summary: Update message
-      operationId: 110_Update_Message
+      operationId: 112_Update_Message
       description: |
         Update chat message.
         At this stage it's possible to do 3 things: mark as read, mark as delivered and update the message's body.
@@ -515,7 +575,7 @@ paths:
   /chat/Message/{messages_ids}.json:
     delete:
       summary: Delete messages
-      operationId: 111_Delete_Messages
+      operationId: 113_Delete_Messages
       description: |
         Delete multiple chat messages.
         Any users from the dialog’s occupant_ids list are able to remove a message.
@@ -547,7 +607,7 @@ paths:
   /chat/Message/unread.json:
     get:
       summary: Retrieve unread messages count
-      operationId: 112_Retrieve_Unread_Messages_Count
+      operationId: 114_Retrieve_Unread_Messages_Count
       description: |
         Retrieve unread messages count split across dialogs plus total value.
       parameters:
@@ -663,6 +723,43 @@ definitions:
           enabled:
             type: integer
             example: 1
+  DialogsBulkUpdateResponse:
+    type: object
+    properties:
+      users:
+        type: object
+        SuccessfullyDeleted:
+          type: array
+          items:
+            type: integer
+            example: 23
+        WrongPermissions:
+          type: array
+          items:
+            type: integer
+            example: 54
+        NotFound:
+          type: array
+          items:
+            type: integer
+            example: 78
+      dialogs:
+        type: object
+        SuccessfullyDeleted:
+          type: array
+          items:
+            type: string
+            example: 536fbe15123127d63d43e7fe4
+        WrongPermissions:
+          type: array
+          items:
+            type: string
+            example: 53efbe15e4b077d33d43e7fd2
+        NotFound:
+          type: array
+          items:
+            type: string
+            example: 53afbe15e4b077ddd43e7fd5
   MessagesResponse:
     type: object
     properties:
