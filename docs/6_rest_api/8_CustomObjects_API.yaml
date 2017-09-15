@@ -58,7 +58,7 @@ paths:
             Custom field name and its value.
           required: false
           type: string
-          default: score_value=1024
+          default: rating=1024
       responses:
         '201':
           description: "An object"
@@ -82,6 +82,72 @@ paths:
           required: false
           type: string
           default: rating=2
+        - name: '{field_name}[{search_operator}]'
+          in: formData
+          description: Search record with field which contains value according to specified value and operator.
+          required: false
+          type: string
+          default: rating[gt]=4
+        - name: sort_asc
+          in: formData
+          description: Search results will be sorted by specified field in ascending order.
+          required: false
+          type: string
+          default: sort_asc=field_name
+        - name: sort_desc
+          in: formData
+          description: Search results will be sorted by specified field in descending order.
+          required: false
+          type: string
+          default: sort_desc=field_name
+        - name: skip
+          in: formData
+          description: |
+            Skip N records in search results.
+            Useful for pagination. Default (if not specified) - 0.
+          required: false
+          type: integer
+          default: 100
+        - name: limit
+          in: formData
+          description: |
+            Limit search results to N records.
+            Useful for pagination. Default and max values - 100.
+            If limit is equal to -1 only last record will be returned
+          required: false
+          type: integer
+          default: 100
+        - name: count
+          in: formData
+          description: Count search results. Response will contain only count of records found.
+          required: false
+          type: integer
+          default: count=1
+        - name: output[include]
+          in: formData
+          description: |
+            output[include] specifies the fields to include from the result set.
+            The _id field is, by default, included in the result set.
+            To exclude the _id field from the result set, you need to specify
+            in the output[exclude] value the exclusion of the _id field.
+          required: false
+          type: string
+          default: output[include]=field_name1,field_name2
+        - name: output[exclude]
+          in: formData
+          description: |
+            output[exclude] specifies the fields to exclude from the result set.
+          required: false
+          type: string
+          default: output[exclude]=field_name1,field_name2
+        - name: near
+          in: formData
+          description: |
+            Search records in a specific radius with current position
+            in meters. Format - field_name[near]=longitude,latitude;radius
+          required: false
+          type: string
+          default: user_location[near]=25.32,44.551;1000
       responses:
         '200':
           description: "An array of objects"
@@ -122,6 +188,6 @@ definitions:
       _parent_id:
         type: string
         example: 53aaa06f535c12cea9007496
-      score_value:
+      rating:
         type: integer
         example: 1024
