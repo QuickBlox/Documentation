@@ -148,6 +148,15 @@ paths:
           required: false
           type: string
           default: user_location[near]=25.32,44.551;1000
+        - name: 'group_by={field_name}'
+          in: formData
+          description: |
+              Aggregation operator.
+            	**group_by** works similar to **SQL GROUP BY** operator,
+              should be used with **calc** operator (below).
+          required: false
+          type: string
+          default: group_by=game_mode_name
         - name: '{field_name}[calc]={operator}'
           in: formData
           description: |
