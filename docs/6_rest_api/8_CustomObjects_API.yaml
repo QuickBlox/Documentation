@@ -82,12 +82,22 @@ paths:
           required: false
           type: string
           default: rating=2
-        - name: '{field_name}[{search_operator}]'
+        - name: '{field_name}[lt]'
           in: formData
-          description: Search record with field which contains value according to specified value and operator.
+          description: |
+            **Search operator.**
+            Search record with field which contains value **L**ess **T**han specified value.
           required: false
           type: string
-          default: rating[gt]=4
+          default: rating[lt]=4
+        - name: '{field_name}[gt]'
+          in: formData
+          description: |
+            **Search operator.**
+            Search record with field which contains value **G**reater **T**han specified value.
+          required: false
+          type: string
+          default: rating[gt]=7
         - name: sort_asc
           in: formData
           description: Search results will be sorted by specified field in ascending order.
@@ -151,10 +161,8 @@ paths:
         - name: group_by
           in: formData
           description: |
-            Aggregation operator.
-
-            
-            **group_by** works similar to [https://www.w3schools.com/sql/sql_groupby.asp](SQL GROUP BY) operator,
+            **Aggregation operator**.
+            It works similar to [https://www.w3schools.com/sql/sql_groupby.asp](SQL GROUP BY) operator,
             should be used with **calc** operator (below).
           required: false
           type: string
@@ -162,8 +170,8 @@ paths:
         - name: '{field_name}[calc]={operator}'
           in: formData
           description: |
-            Aggregation operator.
-            **avg, min, max, sum** can be used with **group_by** operator
+            **Aggregation operator**.
+            The **avg, min, max, sum** can be used with **group_by** operator.
           required: false
           type: string
           default: rating[calc]=min
