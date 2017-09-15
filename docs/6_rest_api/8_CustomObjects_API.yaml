@@ -152,6 +152,8 @@ paths:
           in: formData
           description: |
             Aggregation operator.
+            **group_by** works similar to [https://www.w3schools.com/sql/sql_groupby.asp](SQL GROUP BY) operator,
+            should be used with **calc** operator (below).
           required: false
           type: string
           default: group_by=game_mode_name
