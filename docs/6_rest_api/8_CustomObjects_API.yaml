@@ -15,6 +15,20 @@ info:
     • File<br>
     • Location (array with 2 elements: longitude, latitude)<br>
     • Date<br>
+    <br>
+    To start use Custom Objects module you should create your data schema.
+    Go to [QuickBlox Administration Panel](https://admin.quickblox.com),
+      Custom Objects module page and press 'Add new class' button.
+      'Add new class' popup will appear. Enter Class name, add any fields you want.
+      Press 'Create class' button - new class will be created.
+    <br>
+    <br>
+    There are some predefined fields:<br><br>
+    • _id - String (Record ID).<br>
+    • created_at - Integer (contains Unix timestamp - date & time when record was created, filled automatically).<br>
+    • updated_at - Integer (contains Unix timestamp - date & time when record was updated, filled automatically).<br>
+    • user_id - Integer (contains API User ID, which created current record).<br>
+    • _parent_id - String (parent object's ID) - for cascade deletion. <br>
   version: 1.0
 # the domain of the service
 host: quickblox.com
