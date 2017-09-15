@@ -114,6 +114,56 @@ paths:
           required: false
           type: string
           default: rating[gte]=7
+        - name: '{field_name}[ne]'
+          in: formData
+          description: |
+            **Search operator.**
+            Search record with field which contains value **N**ot **E**qual to specified value.
+          required: false
+          type: string
+          default: rating[ne]=100
+        - name: '{field_name}[in]'
+          in: formData
+          description: |
+            **Search operator.**
+            Search record with field which contains specified values **IN** array.
+          required: false
+          type: string
+          default: game_mode_name[in]=deathmatch,rage
+        - name: '{field_name}[nin]'
+          in: formData
+          description: |
+            **Search operator.**
+            Search record with field which **N**ot contains specified values **IN** array.
+          required: false
+          type: string
+          default: game_mode_name[nin]=survivor,crazy_nightmare
+        - name: '{field_name}[all]'
+          in: formData
+          description: |
+            **Search operator.**
+            Search record with field which contains **ALL** specified values **IN** array.
+          required: false
+          type: string
+          default: game_mode_name[all]=survivor,crazy
+        - name: '{field_name}[or]'
+          in: formData
+          description: |
+            **Search operator.**
+            Search record with field value using **OR** operator.
+            1. Will return records with name **sam** or **igor**.
+            2. Will return records with name **sam** or lastname **johnson**
+          required: false
+          type: string
+          default: 1. name[or]=sam,igor 2. name[or]=sam&lastname[or]=johnson
+        - name: '{field_name}[ctn]'
+          in: formData
+          description: |
+            **Search operator.**
+            Search record with field which **C**ontains specified substring values.
+          required: false
+          type: string
+          default: username[ctn]=son
         - name: sort_asc
           in: formData
           description: Search results will be sorted by specified field in ascending order.
