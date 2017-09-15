@@ -90,6 +90,14 @@ paths:
           required: false
           type: string
           default: rating[lt]=4
+        - name: '{field_name}[lte]'
+          in: formData
+          description: |
+            **Search operator.**
+            Search record with field which contains value **L**ess **T**han or **E**qual to specified value.
+          required: false
+          type: string
+          default: rating[lte]=4
         - name: '{field_name}[gt]'
           in: formData
           description: |
@@ -98,6 +106,14 @@ paths:
           required: false
           type: string
           default: rating[gt]=7
+        - name: '{field_name}[gte]'
+          in: formData
+          description: |
+            **Search operator.**
+            Search record with field which contains value **G**reater **T**han or **E**qual to specified value.
+          required: false
+          type: string
+          default: rating[gte]=7
         - name: sort_asc
           in: formData
           description: Search results will be sorted by specified field in ascending order.
