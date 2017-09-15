@@ -153,7 +153,7 @@ paths:
           description: asd
           required: false
           type: string
-          default: dsa
+          default: group_by=game_mode_name
         - name: '{field_name}[calc]={operator}'
           in: formData
           description: |
