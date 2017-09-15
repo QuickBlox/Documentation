@@ -48,7 +48,7 @@ paths:
       parameters:
         - name: class_name
           in: formData
-          description: A class name to which a new object belongs.
+          description: A class name to which a new object belongs (path parameter).
           required: true
           type: string
           default: MyScoreTable
@@ -61,9 +61,32 @@ paths:
           default: score_value=1024
       responses:
         '201':
-          description: "Custom object"
+          description: "An object"
           schema:
             $ref: '#/definitions/CustomObject'
+    get:
+      summary: Retrieve objects
+      operationId: 102_Retrieve_objects
+      description: |
+        Search for records of particular class.
+      parameters:
+        - name: class_name
+          in: formData
+          description: A class name of objects to retrieve (path parameter).
+          required: true
+          type: string
+          default: MyScoreTable
+        - name: '{field_name}'
+          in: formData
+          description: Search records with field which contains exactly specified value.
+          required: false
+          type: string
+          default: rating=2
+      responses:
+        '200':
+          description: "An array of objects"
+          schema:
+            $ref: '#/definitions/ArrayOfCustomObjectsResponse'
 definitions:
   ArrayOfCustomObjectsResponse:
     type: object
