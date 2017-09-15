@@ -150,7 +150,8 @@ paths:
           default: user_location[near]=25.32,44.551;1000
         - name: group_by
           in: formData
-          description: asd
+          description: |
+            Aggregation operator.
           required: false
           type: string
           default: group_by=game_mode_name
