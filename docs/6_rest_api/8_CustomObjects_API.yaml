@@ -151,7 +151,7 @@ paths:
         - name: group_by
           in: formData
           description: |
-            Aggregation operator.
+            Aggregation operator.<br><br>
             **group_by** works similar to [https://www.w3schools.com/sql/sql_groupby.asp](SQL GROUP BY) operator,
             should be used with **calc** operator (below).
           required: false
