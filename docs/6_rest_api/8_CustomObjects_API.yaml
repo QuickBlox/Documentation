@@ -155,7 +155,7 @@ paths:
             2. Will return records with name **sam** or lastname **johnson**
           required: false
           type: string
-          default: 1. name[or]=sam,igor 2. name[or]=sam&lastname[or]=johnson
+          default: 1. name[or]=sam,igor. 2. name[or]=sam&lastname[or]=johnson
         - name: '{field_name}[ctn]'
           in: formData
           description: |

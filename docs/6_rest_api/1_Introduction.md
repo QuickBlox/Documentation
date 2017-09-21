@@ -44,6 +44,15 @@ You can create **Application session** and then upgrade it to **User session** o
 
 ## API and Dashboard changelog
 
+### 3.17.09.1
+* **API**
+	* New 
+		* AddressBook REST API
+* **Dashboard**
+	* New
+		* AddressBook UI
+		* Moved Application settings ('Allow to retrieve a list of users via API' etc.) to Users module settings page
+
 ### 3.17.08.1
 * **API**
 	* New
