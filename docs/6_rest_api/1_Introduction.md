@@ -44,6 +44,30 @@ You can create **Application session** and then upgrade it to **User session** o
 
 ## API and Dashboard changelog
 
+### 3.17.09.2
+* **API**
+	* New
+		* Custom Objects. Retrieve objects API: default sort is by **_id** field now.
+		* Push Notifications. Create event API: new parameter for universal pushes - **ios_mutable_content=1**.
+	* Fixed
+		* Push Notifications. Create event API: error 500 appears if create an event with **event_type=fixed_date**
+		* Push Notifications. Create event API: an exception occurs when pass **user.ids** as string with single user ID.
+		* Custom Objects. Create object API: an exception occurs when pass location field value in wrong format. 
+		* Chat. Unread Messages Count API: improved logic and speed.
+		* Users API: improved DB indexes which lead to better API speed.
+		* Authentication. Create session with user API: it returns success response if provided input params in wrong format.
+		* Chat: Bulk update API: a duplicate of ID in the **SuccessfullyUpdated** and **NotFound** fields in response is returned.
+		* Chat. Update dialog API: group dialog is not automatically destroyed when no occupants left.
+		* AddressBook. Delete API: sometimes deleted contacts marked as 'updated' but not 'deleted'.
+* **Dashboard**
+	* New
+		* New Chat Alert teplate tag: **%plural[]%**. Now you can pluralise words. For example: **%plural[new message]%** will produce **new message** for 1 unread messages count and **new messages** for >1 unread messages count.
+	* Fixed
+		* Push Notifications: success message appears if send push notification by email channel without existent user subscription. 
+* **Other**
+	* Fixed: 
+		* Email **Quickblox: your APNS certificate was removed**: sometimes users receive it many times.   
+
 ### 3.17.09.1
 * **API**
 	* New 
@@ -62,6 +86,8 @@ You can create **Application session** and then upgrade it to **User session** o
 
 ### 3.17.07.1
 * **API**
+	* New
+		* Chat: bulk update API is introduced.  
 	* Fixed
 		* Login with external providers: to provide better error description.
 		* Do not throw an error when creating private chat dialog and pass current user id in **occupants_ids**.

@@ -105,6 +105,7 @@ There are some standard parameters, which will be translated to particular platf
 * **ios_badge** - will be translated to **aps.badge** for iOS. Ignored for Android.
 * **ios_sound** - will be translated to **aps.sound** for iOS. Ignored for Android.
 * **ios_content_available=1** - will be translated to **aps.content-available** for iOS. Ignored for Android.
+* **ios_mutable_content=1** - will be translated to **aps.mutable-content=** for iOS. Ignored for Android.
 * **ios_category** - will be translated to **aps.category** for iOS. Ignored for Android.
 * **ios_voip=1** - will initiate VoIP push notification for iOS if user has VoIP push subscription. Otherwise - iOS user will receive standart iOS push. For Android - it will be a standard push.
 
