@@ -70,10 +70,10 @@ definitions:
     properties:
       name:
         type: string
-        example: Frederic Cartwright
+        example: "Frederic Cartwright"
       phone:
         type: string
-        example: 6278336065
+        example: "6278336065"
   UploadAddressBookResponse:
     type: object
     properties:
