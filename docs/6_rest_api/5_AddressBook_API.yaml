@@ -51,7 +51,8 @@ paths:
           schema:
             $ref: '#/definitions/UploadAddressBookResponse'
     get:
-      summary: Retrieve address book
+      summary:
+        Retrieve address book
       operationId: Retrieve_Address_Book_Id
       description: Retrieve all uploaded address book contacts
       responses:
@@ -61,16 +62,18 @@ paths:
             $ref: '#/definitions/ArrayOfAddressBookContacts'
 definitions:
   ArrayOfAddressBookContacts:
-    type: array
-    items:
-      type: string
-      example: "Frederic Cartwright"
+    type: object
+    properties:
+      items:
+        type: array
+        items:
+          $ref: '#/definitions/AddressBookContact'
   AddressBookContact:
     type: object
     properties:
       name:
         type: string
-        example: "Frederic Cartwright"
+        example: Frederic Cartwright
       phone:
         type: string
         example: "6278336065"
