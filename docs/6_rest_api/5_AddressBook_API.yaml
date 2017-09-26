@@ -27,9 +27,9 @@ paths:
           in: formData
           description: |
             Contains array of contact hashes. Each contact can contain 3 keys:
-              * name - String (required only for create/update), min 1 max 255 symbols.
-              * phone - String (required), min 10 max 15 symbols
-              * destroy - Integer (not required, possible value 1)
+              * **name**: contact name. String (required only for create/update), min 1 max 255 symbols.
+              * **phone**: contact phone. String (required), min 10 max 15 symbols.
+              * **destroy**: used in a case of contact destroy. Integer (not required, possible value 1).
           required: true
           type: object
           default: {"name":"Frederic Cartwright", "phone": "8879108395"}
