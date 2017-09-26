@@ -61,7 +61,7 @@ You can create **Application session** and then upgrade it to **User session** o
 		* AddressBook. Delete API: sometimes deleted contacts marked as 'updated' but not 'deleted'.
 * **Dashboard**
 	* New
-		* New Chat Alert teplate tag: **%plural[]%**. Now you can pluralise words. For example: **%plural[new message]%** will produce **new message** for 1 unread messages count and **new messages** for >1 unread messages count.
+		* New Chat Alert template tag: **%plural[]%**. Now you can pluralize words. For example: **%plural[new message]%** will produce **new message** for 1 unread messages count and **new messages** for >1 unread messages count.
 	* Fixed
 		* Push Notifications: success message appears if send push notification by email channel without existent user subscription. 
 * **Other**
