@@ -198,7 +198,7 @@ paths:
           description: Count search results. Response will contain only count of records found.
           required: false
           type: integer
-          default: "count=1"
+          default: 1
         - name: output[include]
           in: formData
           description: |
