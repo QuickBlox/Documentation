@@ -86,23 +86,3 @@ definitions:
       deleted:
         type: integer
         example: 0
-      rejected:
-        $ref: '#/definitions/AddressBookRejectedObject'
-  AddressBookRejectedObject:
-    type: object
-    properties:
-      5:
-        type: array
-        items:
-          type: string
-          example: Invalid fields set
-      6:
-        type: array
-        items:
-          type: string
-          example: Length of 'phone' field should be min: 10 and max: 15.
-      8:
-        type: array
-        items:
-          type: string
-          example: Length of 'name' field should be min: 1 and max: 255.
