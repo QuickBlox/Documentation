@@ -62,10 +62,11 @@ paths:
             $ref: '#/definitions/ArrayOfAddressBookContacts'
 definitions:
   ArrayOfAddressBookContacts:
-    type: array
-    items:
-      type: string
-      example: "Frederic Cartwright"
+    type: object
+    properties:
+      name:
+        type: string
+        example: "Frederic Cartwright"
   AddressBookContact:
     type: object
     properties:
