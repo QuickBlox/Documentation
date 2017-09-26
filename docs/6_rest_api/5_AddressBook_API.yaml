@@ -54,8 +54,7 @@ paths:
       summary:
         Retrieve address book
       operationId: Retrieve_Address_Book_Id
-      description:
-        Retrieve all uploaded address book contacts
+      description: Retrieve all uploaded address book contacts
       responses:
         '200':
           description: "Array of contacts"
