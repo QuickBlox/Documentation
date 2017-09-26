@@ -64,7 +64,8 @@ definitions:
   ArrayOfAddressBookContacts:
     type: array
     items:
-      $ref: '#/definitions/AddressBookContact'
+      type: string
+      example: "Frederic Cartwright"
   AddressBookContact:
     type: object
     properties:
