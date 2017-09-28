@@ -246,7 +246,7 @@ paths:
           description: "An array of objects"
           schema:
             $ref: '#/definitions/ArrayOfCustomObjectsResponse'
-  /data/{class_name}/{id}.json:
+  /data/blabla.json:
     get:
       summary: Retrieve objects by IDs
       operationId: 103_Retrieve_objects_by_IDs
