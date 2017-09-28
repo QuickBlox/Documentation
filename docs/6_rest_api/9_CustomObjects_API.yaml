@@ -264,6 +264,8 @@ paths:
           description: An array of objects' ids to retrieve (path parameter).
           required: true
           type: array
+          items:
+            type: string
           default: "51c9a...32d6,51c9a...32dd"
       responses:
         '200':
