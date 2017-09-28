@@ -65,7 +65,7 @@ paths:
           schema:
             $ref: '#/definitions/CustomObject'
     get:
-      summary: Retrieve objectsaaa
+      summary: Retrieve objects
       operationId: 102_Retrieve_objects
       description: |
         Search for records of particular class.
@@ -246,7 +246,7 @@ paths:
           description: "An array of objects"
           schema:
             $ref: '#/definitions/ArrayOfCustomObjectsResponse'
-  /data/blabla.json:
+  /data/{class_name}/{id1},{id2}.json:
     get:
       summary: Retrieve objects by IDs
       operationId: 103_Retrieve_objects_by_IDs
@@ -259,6 +259,14 @@ paths:
           required: true
           type: string
           default: MyScoreTable
+        - name: "id1,id2"
+          in: formData
+          description: An array of objects' ids to retrieve (path parameter).
+          required: true
+          type: array
+          items:
+            type: string
+          default: "51c9a...32d6,51c9a...32dd"
       responses:
         '200':
           description: "An array of objects"
