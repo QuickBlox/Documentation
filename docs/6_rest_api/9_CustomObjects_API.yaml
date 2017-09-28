@@ -246,6 +246,30 @@ paths:
           description: "An array of objects"
           schema:
             $ref: '#/definitions/ArrayOfCustomObjectsResponse'
+  /data/{class_name}/{id1},{id2}.json:
+    get:
+      summary: Retrieve objects by IDs
+      operationId: 103_Retrieve_objects_by_IDs
+      description: |
+        Retrieve object by IDs of particular class.
+      parameters:
+        - name: class_name
+          in: formData
+          description: A class name of objects to retrieve (path parameter).
+          required: true
+          type: string
+          default: MyScoreTable
+        - name: "id1,id2"
+          in: formData
+          description: An array of objects' ids to retrieve (path parameter).
+          required: true
+          type: array
+          default: "51c9a...32d6,51c9a...32dd"
+      responses:
+        '200':
+          description: "An array of objects"
+          schema:
+            $ref: '#/definitions/ArrayOfCustomObjectsResponse'
 definitions:
   ArrayOfCustomObjectsResponse:
     type: object
