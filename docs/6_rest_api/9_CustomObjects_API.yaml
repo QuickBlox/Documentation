@@ -65,7 +65,7 @@ paths:
           schema:
             $ref: '#/definitions/CustomObject'
     get:
-      summary: Retrieve objects
+      summary: Retrieve objectsaaa
       operationId: 102_Retrieve_objects
       description: |
         Search for records of particular class.
