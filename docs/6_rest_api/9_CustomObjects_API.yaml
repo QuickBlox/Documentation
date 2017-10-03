@@ -291,6 +291,62 @@ paths:
           required: true
           type: string
           default: 53aaa06f535c12cea9007496
+        - name: 'inc[{field_name}]'
+          in: formData
+          description: |
+            **Special update operator.**
+            Increment field **field_name** to specified value. Value can positive or negative (i.e. decrement operation).
+          required: false
+          type: integer
+        - name: 'pull[{field_name}]'
+          in: formData
+          description: |
+            **Special update operator.**
+            Removes specified value from an array field.
+          required: false
+          type: string
+        - name: 'pull[{field_name}][{filter_operator}]'
+          in: formData
+          description: |
+            **Special update operator.**
+            Removes all elements, which filtered by filter operator, from array.
+          required: false
+          type: string
+        - name: 'pull_all[{field_name}][]'
+          in: formData
+          description: |
+            **Special update operator.**
+            Removes all specified values from array. Multiple 'pull_all' parameters can be used in a single request.
+          required: false
+          type: string
+        - name: 'pop[{field_name}]'
+          in: formData
+          description: |
+            **Special update operator.**
+            Removes last element from array. To remove first element value should be equal -1.
+          required: false
+          type: string
+        - name: 'push[{field_name}][]'
+          in: formData
+          description: |
+            **Special update operator.**
+            Appends specified values to array. Multiple 'push' parameters can be used in a single request.
+          required: false
+          type: string
+        - name: 'add_to_set[{field_name}]'
+          in: formData
+          description: |
+            **Special update operator.**
+            Adds a value to an array only if the value is not in the array already.
+          required: false
+          type: string
+        - name: '{field_name}[{index}]'
+          in: formData
+          description: |
+            **Special update operator.**
+            Update array element by index.
+          required: false
+          type: string
       responses:
         '200':
           description: "An object"
