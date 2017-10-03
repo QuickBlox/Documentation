@@ -462,14 +462,14 @@ paths:
         Then - pass parameters to update the fields of records found by search criteria.
         All available search operators you can find in [Retrieve_objects](#Retrieve_objects) API description.
       parameters:
-        - name: search_criteria[{field_name}][{search_operator}]
+        - name: 'search_criteria[{field_name}][{search_operator}]'
           in: formData
           description: |
             Finds objects by criteria that you want to update.
           required: true
           type: string
           default: search_criteria[age][gt]=4
-        - name: {field_name}
+        - name: '{field_name}'
           in: formData
           description: |
             A field to update.
@@ -487,7 +487,7 @@ paths:
       description: |
         Delete objects by criteria.
       parameters:
-        - name: {field_name}
+        - name: '{field_name}'
           in: formData
           description: |
             Search criteria. Search operators from [Retrieve_objects](#Retrieve_objects) API also can be used here.
