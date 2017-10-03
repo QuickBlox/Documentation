@@ -323,7 +323,7 @@ paths:
             Increment field **field_name** to specified value. Value can positive or negative (i.e. decrement operation).
           required: false
           type: integer
-          default: inc[field1]=1000
+          default: 1000
         - name: 'pull[{field_name}]'
           in: formData
           description: |
