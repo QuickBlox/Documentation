@@ -452,6 +452,53 @@ paths:
           description: "An array of updated objects"
           schema:
             $ref: '#/definitions/ArrayOfBulkUpdateCustomObjectsResponse'
+  /data/{class_name}/by_criteria.json:
+    put:
+      summary: Update objects (by criteria)
+      operationId: 109_Update_objects_by_criteria
+      description: |
+        Update objects by criteria.
+        For this you use a **search_criteria** parameter to find needed objects.
+        Then - pass parameters to update the fields of records found by search criteria.
+        All available search operators you can find in [Retrieve_objects](#Retrieve_objects) API description.
+      parameters:
+        - name: search_criteria[{field_name}][{search_operator}]
+          in: formData
+          description: |
+            Finds objects by criteria that you want to update.
+          required: true
+          type: string
+          default: search_criteria[age][gt]=4
+        - name: {field_name}
+          in: formData
+          description: |
+            A field to update.
+          required: true
+          type: string
+          default: score=100
+      responses:
+        '200':
+          description: "An array of updated objects"
+          schema:
+            $ref: '#/definitions/ArrayOfCustomObjectsResponse'
+    delete:
+      summary: Delete objects (by criteria)
+      operationId: 110_Delete_objects_by_criteria
+      description: |
+        Delete objects by criteria.
+      parameters:
+        - name: {field_name}
+          in: formData
+          description: |
+            Search criteria. Search operators from [Retrieve_objects](#Retrieve_objects) API also can be used here.
+          required: true
+          type: string
+          default: score=100
+      responses:
+        '200':
+          description: "Total deleted response"
+          schema:
+            $ref: '#/definitions/DeleteObjectsByCriteriaResponse'
 definitions:
   ArrayOfCustomObjectsResponse:
     type: object
@@ -573,3 +620,9 @@ definitions:
             items:
               type: string
               example: 53afbe15e4b077ddd43e7fd5
+  DeleteObjectsByCriteriaResponse:
+    type: object
+    properties:
+      total_deleted:
+        type: integer
+        example: 5
