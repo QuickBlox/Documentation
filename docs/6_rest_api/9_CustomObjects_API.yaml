@@ -291,7 +291,7 @@ paths:
           type: array
           items:
             type: string
-            default: "51c9a...32d6,51c9a...32dd"
+          default: "51c9a...32d6,51c9a...32dd"
       responses:
         '200':
           description: "Delete objects response"
@@ -406,6 +406,52 @@ paths:
       responses:
         '200':
           description: "Empty body"
+  /data/{class_name}/multi.json:
+    post:
+      summary: Create objects (bulk)
+      operationId: 107_Create_objects_bulk
+      description: |
+        Create objects in bulk.
+      parameters:
+        - name: record[{object_number}][{field_name}]
+          in: formData
+          description: |
+            An index (number) of new record in query and its field name/value.
+            Index begins with 1 to N.
+          required: true
+          type: string
+          default: record[1][name]=Alex
+      responses:
+        '200':
+          description: "An array of created objects"
+          schema:
+            $ref: '#/definitions/ArrayOfBulkCreateCustomObjectsResponse'
+    put:
+      summary: Update objects (bulk)
+      operationId: 108_Update_objects_bulk
+      description: |
+        Update objects in bulk.
+      parameters:
+        - name: record[{object_number}][{field_name}]
+          in: formData
+          description: |
+            An index (number) of record in query to update and its field name/value.
+            Index begins with 1 to N.
+          required: true
+          type: string
+          default: record[1][name]=Alex
+        - name: record[{object_number}][{id}]
+          in: formData
+          description: |
+            An index (number) of record in query to update and its id.
+          required: true
+          type: string
+          default: record[1][id]=522457b..8d3d01be
+      responses:
+        '200':
+          description: "An array of updated objects"
+          schema:
+            $ref: '#/definitions/ArrayOfBulkUpdateCustomObjectsResponse'
 definitions:
   ArrayOfCustomObjectsResponse:
     type: object
@@ -419,6 +465,34 @@ definitions:
       limit:
         type: integer
         example: 100
+      items:
+        type: array
+        items:
+          $ref: '#/definitions/CustomObject'
+  ArrayOfBulkCreateCustomObjectsResponse:
+    type: object
+    properties:
+      class_name:
+        type: string
+        example: MyScoreTable
+      items:
+        type: array
+        items:
+          $ref: '#/definitions/CustomObject'
+  ArrayOfBulkUpdateCustomObjectsResponse:
+    type: object
+    properties:
+      class_name:
+        type: string
+        example: MyScoreTable
+      not_found:
+        type: object
+        properties:
+          ids:
+            type: array
+            items:
+              type: string
+              example: 536fbe15123127d63d43e7fe4
       items:
         type: array
         items:
@@ -444,6 +518,29 @@ definitions:
       rating:
         type: integer
         example: 1024
+      permissions:
+        $ref: '#/definitions/CustomObjectPermissions'
+  CustomObjectPermissions:
+    type: object
+    properties:
+      read:
+        type: object
+        properties:
+          access:
+            type: string
+            example: open
+      update:
+        type: object
+        properties:
+          access:
+            type: string
+            example: open
+      delete:
+        type: object
+        properties:
+          access:
+            type: string
+            example: open
   DeleteObjectsResponse:
     type: object
     properties:
