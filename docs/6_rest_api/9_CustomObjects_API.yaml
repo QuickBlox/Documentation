@@ -478,9 +478,9 @@ paths:
           default: score=100
       responses:
         '200':
-          description: "An array of updated objects"
+          description: "Single updated object or an array of updated objects"
           schema:
-            $ref: '#/definitions/ArrayOfCustomObjectsResponse'
+            $ref: '#/definitions/ArrayOfCriteriaUpdateCustomObjectsResponse'
     delete:
       summary: Delete objects (by criteria)
       operationId: 110_Delete_objects_by_criteria
@@ -540,6 +540,25 @@ definitions:
             items:
               type: string
               example: 536fbe15123127d63d43e7fe4
+      items:
+        type: array
+        items:
+          $ref: '#/definitions/CustomObject'
+  ArrayOfCriteriaUpdateCustomObjectsResponse:
+    type: object
+    properties:
+      class_name:
+        type: string
+        example: MyScoreTable
+      skip:
+        type: integer
+        example: 10
+      limit:
+        type: integer
+        example: 100
+      total_found:
+        type: integer
+        example: 2
       items:
         type: array
         items:
