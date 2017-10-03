@@ -530,11 +530,8 @@ definitions:
             type: string
             example: open
       update:
-        type: object
-        properties:
-          access:
-            type: string
-            example: open
+        type: string
+        example: open
       delete:
         type: object
         properties:
