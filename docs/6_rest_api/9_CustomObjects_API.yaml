@@ -298,6 +298,7 @@ paths:
             Increment field **field_name** to specified value. Value can positive or negative (i.e. decrement operation).
           required: false
           type: integer
+          default: inc[field1]=1000
         - name: 'pull[{field_name}]'
           in: formData
           description: |
@@ -305,6 +306,7 @@ paths:
             Removes specified value from an array field.
           required: false
           type: string
+          default: pull[field1]=val1
         - name: 'pull[{field_name}][{filter_operator}]'
           in: formData
           description: |
@@ -312,6 +314,7 @@ paths:
             Removes all elements, which filtered by filter operator, from array.
           required: false
           type: string
+          default: pull[field1][gt]=4
         - name: 'pull_all[{field_name}][]'
           in: formData
           description: |
@@ -319,6 +322,7 @@ paths:
             Removes all specified values from array. Multiple 'pull_all' parameters can be used in a single request.
           required: false
           type: string
+          default: pull_all[field1][]=val1&pull_all[field1][]=val2
         - name: 'pop[{field_name}]'
           in: formData
           description: |
@@ -326,6 +330,7 @@ paths:
             Removes last element from array. To remove first element value should be equal -1.
           required: false
           type: string
+          default: pop[field1]=1
         - name: 'push[{field_name}][]'
           in: formData
           description: |
@@ -333,6 +338,7 @@ paths:
             Appends specified values to array. Multiple 'push' parameters can be used in a single request.
           required: false
           type: string
+          default: push[field1][]=val1&push[field1][]=val2
         - name: 'add_to_set[{field_name}]'
           in: formData
           description: |
@@ -340,6 +346,7 @@ paths:
             Adds a value to an array only if the value is not in the array already.
           required: false
           type: string
+          default: add_to_set[tags]=man,car
         - name: '{field_name}[{index}]'
           in: formData
           description: |
@@ -347,6 +354,7 @@ paths:
             Update array element by index.
           required: false
           type: string
+          default: tags[2]=6
       responses:
         '200':
           description: "An object"
