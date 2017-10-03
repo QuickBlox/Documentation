@@ -530,14 +530,22 @@ definitions:
             type: string
             example: open
       update:
-        type: string
-        example: open
+        type: object
+        properties:
+          users_groups:
+            type: array
+            items:
+              type: string
+              example: world
+          access:
+            type: string
+            example: open_for_groups
       delete:
         type: object
         properties:
           access:
             type: string
-            example: open
+            example: owner
   DeleteObjectsResponse:
     type: object
     properties:
