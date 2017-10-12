@@ -7,10 +7,9 @@ Our goal is let you quickly start building your JavaScript app on Quickblox.
 <span id="Overview" class="on_page_navigation"></span>
 ## Overview
 
-The latest version of JS SDK is [**2.5.0**](https://github.com/QuickBlox/quickblox-javascript-sdk/releases/latest),
-a full list of JS SDK versions can be found on [Github Releases](https://github.com/QuickBlox/quickblox-javascript-sdk/releases).
+A full list of JS SDK versions can be found on [**Github Releases**](https://github.com/QuickBlox/quickblox-javascript-sdk/releases).
 
-Check out our [API Reference](http://quickblox.github.io/quickblox-javascript-sdk/docs/) for more detailed information about our SDK.
+Check out our [**API Reference**](http://quickblox.github.io/quickblox-javascript-sdk/docs/) for more detailed information about our SDK.
 
 JS SDK supports Chrome 30+, Safari 7.1+, Firefox 30+, IE 10+, Opera 23+, Edge 12+ and Node v.4+.
 
@@ -46,10 +45,6 @@ The simplest way to load the JS SDK is to add a &lt;script&gt; tag:
 
 And SDK will be avaible via the `QB` namespace.
 
-```javascript
-QB.init(appId, authKey, authSecret);
-```
-
 #### NPM
 
 The JS SDK is also available on [NPM](https://www.npmjs.com/package/quickblox):
@@ -61,7 +56,7 @@ npm install quickblox --save
 JS SDK can then be accessed by requiring the module:
 
 ```javascript
-var QB = require('quickblox');
+const QB = require('quickblox');
 ```
 
 #### Bower

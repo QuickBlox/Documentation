@@ -12,13 +12,13 @@ Check out [init method in API Refference](http://quickblox.github.io/quickblox-j
 Initialize JS SDK with application credentials:
 
 ```html
-<script src="https://cdnjs.cloudflare.com/ajax/libs/quickblox/2.5.0/quickblox.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/quickblox/x.x.x/quickblox.min.js"></script>
 
 <script>
 var CREDS = {
-    appId: 28287,
-    authKey: 'XydaWcf8OO9xhGT',
-    authSecret: 'JZfqTspCvELAmnW'
+    appId: 12345,
+    authKey: 'XysdWcf8-O9xgGT',
+    authSecret: 'BRfq6shCvELAdfW'
 };
 
 var config = {
@@ -30,8 +30,17 @@ var config = {
         active: 2 // set 1 to use BOSH, set 2 to use WebSockets (default)
     },
     debug: { 
-        mode: 1 // the SDK will be printing logs to console.log()
+        mode: 1
     }
+    /*
+     * There are 3 debug mods:
+     * debug: {mode: 0} - logs are off
+     * debug: {mode: 1} - the SDK will be printing logs to console.log()
+     * debug: {
+     *  mode: 2,
+     *  file: "appname_debug.log"
+     * } - the SDK will be printing logs into file with name "appname_debug.log". Works only on Node.js.
+     */
 };
 
 QB.init(CREDS.appId, CREDS.authKey, CREDS.authSecret, config);
@@ -65,8 +74,8 @@ There are 2 types of session:
 To create an application session use the code:
 
 ```javascript
-QB.createSession(function(err, result) {
-  // callback function
+QB.createSession(function(error, session) {
+    // callback function
 });
 ```
 
@@ -79,12 +88,9 @@ var params = {login: 'garry', password: 'garry5santos'};
 
 // or through email
 // var params = {email: 'garry@gmail.com', password: 'garry5santos'};
-
-// or through social networks (Facebook / Twitter)
-// var params = {provider: 'facebook', keys: {token: 'AM46dxjhisdffgry26282352fdusdfusdfgsdf'}};
  
 QB.login(params, function(error, result) {
-
+    // callback function
 });
 ```
 
@@ -95,14 +101,229 @@ var params = {login: 'garry', password: 'garry5santos'};
 
 // or through email
 // var params = {email: 'garry@gmail.com', password: 'garry5santos'};
-
-// or through social networks (Facebook / Twitter)
-// var params = {provider: 'facebook', keys: {token: 'AM46dxjhisdffgry26282352fdusdfusdfgsdf'}};
  
 QB.createSession(params, function(error, result) {
-
+    // callback function
 });
 ```
+
+<span id="Authorization_custom_provider" class="on_page_navigation"></span>
+# Authorization via custom entity provider
+
+## Authorization via Facebook (to create User session token based on Facebook user)
+
+1. Open [Facebook Developer Console](https://developers.facebook.com/) and create a new application if you need.
+
+2. Connect the Facebook SDK ([read more](https://developers.facebook.com/docs/javascript/quickstart)):
+```` html
+<script src="https://connect.facebook.net/en_US/sdk.js"></script>
+````
+
+3. Initialize the Firebase SDK:
+````javascript
+var facebookAccount = {
+    appId: 'your-facebook-app-id', // from your facebook application
+    scope: 'email,user_friends'
+};
+
+FB.init({
+    appId: facebookAccount.appId,
+    version: 'v2.9'
+});
+````
+
+4. Call login method:
+````javascript
+FB.login(function(response) {
+    if (response.authResponse && response.status === 'connected') {
+        var params = {
+            provider: 'facebook',
+            keys: {
+                token: response.authResponse.accessToken
+            }
+        };
+        
+        // Create session and then login user to it
+        QB.createSession(function(error, result) {
+            if (result) {    
+                QB.login(params, function(err, res) {
+                    // callback function
+                });
+            }
+        });
+        
+        /* 
+        // Or create session with user login
+        QB.createSession(params, function(err, res) {
+            // callback function
+        });
+        */
+    }
+}, {scope: facebookAccount.scope});
+````
+
+**Find more in [Facebook JavaScript SDK](https://developers.facebook.com/docs/javascript) Docs.**
+
+## Authorization via Firebase (to create User session token based on Firebase phone user (SMS))
+
+1. Open [Firebase Console](https://console.firebase.google.com) and create a new application if you need.
+
+2. [Install the Firebase SDK](https://firebase.google.com/docs/web/setup) or just paste the code snippet into your application HTML:
+````html
+<script src="https://www.gstatic.com/firebasejs/4.5.0/firebase.js"></script>
+````
+
+3. Initialize the Firebase SDK:
+````javascript
+var firebaseConfig = {
+    apiKey: '<API_KEY>',
+    authDomain: '<PROJECT_ID>.firebaseapp.com',
+    databaseURL: 'https://<DATABASE_NAME>.firebaseio.com',
+    projectId: '<PROJECT_ID>',
+    storageBucket: '<BUCKET>.appspot.com',
+    messagingSenderId: '<SENDER_ID>'
+};
+
+firebase.initializeApp(firebaseConfig);
+````
+
+#### FirebaseUI Widget
+
+[FirebaseUI](https://github.com/firebase/firebaseui-web#firebaseui-for-web--auth) widget can be used for help:
+````html
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="UTF-8">
+        <title>Sample FirebaseUI App</title>
+        <script src="https://cdn.firebase.com/libs/firebaseui/2.4.0/firebaseui.js"></script>
+        <link type="text/css" rel="stylesheet" href="https://cdn.firebase.com/libs/firebaseui/2.4.0/firebaseui.css" />
+        <script type="text/javascript">
+            // FirebaseUI config.
+            var uiConfig = {
+                signInOptions: [{
+                    provider: firebase.auth.PhoneAuthProvider.PROVIDER_ID,
+                    recaptchaParameters: {
+                        type: 'image', // 'audio'
+                        size: 'normal', // 'invisible' or 'compact'
+                        badge: 'bottomleft' //' bottomright' or 'inline' applies to invisible.
+                    }
+                }],
+                // Terms of service url.
+                tosUrl: '<your-tos-url>'
+            };
+            
+            // Initialize the FirebaseUI Widget using Firebase.
+            var ui = new firebaseui.auth.AuthUI(firebase.auth());
+            // The start method will wait until the DOM is loaded.
+            ui.start('#firebaseui-auth-container', uiConfig);
+            
+            initApp = function() {
+                firebase.auth().onAuthStateChanged(function(user) {
+                    user.getIdToken().then(function(idToken) {
+                        var authParams = {
+                            'provider': 'firebase_phone',
+                            'firebase_phone': {
+                                'access_token': idToken,
+                                'project_id': firebaseConfig.projectId
+                            }
+                        };
+                    
+                        // Create session and then login user to it
+                        QB.createSession(function(error, result) {
+                            if (result) {    
+                                QB.login(authParams, function(err, res) {
+                                    // callback function
+                                });
+                            }
+                        });
+                    });
+                });
+            };
+            
+            window.addEventListener('load', function() {
+                initApp();
+            });
+        </script>
+    </head>
+    <body>
+        <div id="firebaseui-auth-container"></div>
+    </body>
+</html>
+````
+
+#### Build custom login form
+
+The simple HTML code snippet:
+````html
+...
+    <form class="firebase_form_SMS">
+        <input id="firebase_input_SMS" placeholder="Phone number" />
+        <div id="recaptcha_container"></div>
+        <button id="firebase_btn_sendSMS">Send</button>
+    </form>
+    
+    <form class="firebase_form_code">
+        <input id="firebase_input_code" placeholder="Code" />
+        <button id="firebase_btn_sendCode">Login</button>
+    </form>
+...
+````
+
+Set up the reCAPTCHA verifier ([source from Firebase Docs to read more](https://firebase.google.com/docs/auth/web/phone-auth#set-up-the-recaptcha-verifier)):
+````javascript
+window.recaptchaVerifier = new firebase.auth.RecaptchaVerifier('recaptcha-container');
+````
+
+Send a verification code to the user's phone ([source from Firebase Docs](https://firebase.google.com/docs/auth/web/phone-auth#send-a-verification-code-to-the-users-phone)):
+````javascript
+var phoneNumber = document.getElementById('firebase_input_SMS');
+var appVerifier = window.recaptchaVerifier;
+
+document.getElementById('firebase_form_SMS').addEventListener('submit', function() {
+    firebase.auth().signInWithPhoneNumber(phoneNumber, appVerifier)
+        .then(function (confirmationResult) {
+            window.confirmationResult = confirmationResult;
+        }).catch(function (error) {
+            // SMS not sent
+        });
+});
+````
+
+Sign in the user with the verification code ([source from Firebase Docs](https://firebase.google.com/docs/auth/web/phone-auth#sign-in-the-user-with-the-verification-code)):
+````javascript
+var code = document.getElementById('firebase_input_code');
+
+document.getElementById('firebase_form_code').addEventListener('submit', function() {
+    window.confirmationResult.confirm(code)
+        .then(function (result) {
+            // user signed in successfully.
+            result.user.getIdToken().then(function(idToken) {
+                var authParams = {
+                    'provider': 'firebase_phone',
+                    'firebase_phone': {
+                        'access_token': idToken,
+                        'project_id': firebaseConfig.projectId
+                    }
+                };
+            
+                // Create session and then login user to it
+                QB.createSession(function(error, result) {
+                    if (result) {    
+                        QB.login(authParams, function(err, res) {
+                            // callback function
+                        });
+                    }
+                });
+        }).catch(function (error) {
+            // user couldn't sign in (bad verification code?)
+        });
+    });
+});
+````
+
+**Read more about [Authenticate with Firebase with a Phone Number Using JavaScript](https://firebase.google.com/docs/auth/web/phone-auth).**
+
 
 <span id="Session_expiration" class="on_page_navigation"></span>
 # Session expiration
@@ -113,9 +334,9 @@ You may specify a session expiration listener, it looks like this:
 
 ```javascript
 config = {
-  on: {
-    sessionExpired: [Function]
-  }
+    on: {
+        sessionExpired: [Function]
+    }
 }
 //...
 
