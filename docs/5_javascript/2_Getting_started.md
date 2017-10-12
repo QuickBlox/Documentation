@@ -187,7 +187,7 @@ var firebaseConfig = {
 firebase.initializeApp(firebaseConfig);
 ````
 
-#### FirebaseUI Widget
+### FirebaseUI Widget
 
 [FirebaseUI](https://github.com/firebase/firebaseui-web#firebaseui-for-web--auth) widget can be used for help:
 ````html
@@ -252,9 +252,9 @@ firebase.initializeApp(firebaseConfig);
 </html>
 ````
 
-#### Build custom login form
+### Build custom login form without [FirebaseUI](https://github.com/firebase/firebaseui-web#firebaseui-for-web--auth)
 
-The simple HTML code snippet:
+1. Add the simple HTML code snippet:
 ````html
 ...
     <form class="firebase_form_SMS">
@@ -270,12 +270,12 @@ The simple HTML code snippet:
 ...
 ````
 
-Set up the reCAPTCHA verifier ([source from Firebase Docs to read more](https://firebase.google.com/docs/auth/web/phone-auth#set-up-the-recaptcha-verifier)):
+2. Set up the reCAPTCHA verifier ([source from Firebase Docs to read more](https://firebase.google.com/docs/auth/web/phone-auth#set-up-the-recaptcha-verifier)):
 ````javascript
 window.recaptchaVerifier = new firebase.auth.RecaptchaVerifier('recaptcha-container');
 ````
 
-Send a verification code to the user's phone ([source from Firebase Docs](https://firebase.google.com/docs/auth/web/phone-auth#send-a-verification-code-to-the-users-phone)):
+3. Send a verification code to the user's phone ([source from Firebase Docs](https://firebase.google.com/docs/auth/web/phone-auth#send-a-verification-code-to-the-users-phone)):
 ````javascript
 var phoneNumber = document.getElementById('firebase_input_SMS');
 var appVerifier = window.recaptchaVerifier;
@@ -290,7 +290,7 @@ document.getElementById('firebase_form_SMS').addEventListener('submit', function
 });
 ````
 
-Sign in the user with the verification code ([source from Firebase Docs](https://firebase.google.com/docs/auth/web/phone-auth#sign-in-the-user-with-the-verification-code)):
+4. Sign in the user with the verification code ([source from Firebase Docs](https://firebase.google.com/docs/auth/web/phone-auth#sign-in-the-user-with-the-verification-code)):
 ````javascript
 var code = document.getElementById('firebase_input_code');
 
