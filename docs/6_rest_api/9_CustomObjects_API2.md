@@ -38,6 +38,7 @@ Users which have a specified tag / tags (see more info about how to set tags for
 Only users that are specified in the permission level can make a required action with a record. One or several users can be specified (number of users isn’t limited) 
 
 <br>
+
 **Actions available for the entity**:
 
 * **Create**
