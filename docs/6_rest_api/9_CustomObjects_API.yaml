@@ -499,45 +499,7 @@ paths:
           description: "Total deleted response"
           schema:
             $ref: '#/definitions/DeleteObjectsByCriteriaResponse'
-  /data/{class_name}/file.json:
-    post:
-      summary: Upload file
-      operationId: 111_Upload_file
-      description: |
-        Upload file to the 'File' field. 
-        The 'File' field type is created for easily working with content from Custom Objects module. 
-        There is an ability to upload, download, update and delete content of file fields.
-        The max file size is 32 MB. 
-      parameters:
-        - name: class_name
-          in: formData
-          description: A class name of object to upload file to (path parameter).
-          required: true
-          type: string
-          default: MyScoreTable
-        - name: record_id
-          in: formData
-          description: An ID of object to upload file to (path parameter).
-          required: true
-          type: string
-          default: 53aaa06f535c12cea9007496
-        - name: field_name
-          in: formData
-          description: A field name of object to upload file to.
-          required: true
-          type: string
-          default: "user_avatar"
-        - name: file
-          in: formData
-          description: A file to upload.
-          required: true
-          type: string
-          default: "user_new_avatar.jpg"
-      responses:
-        '200':
-          description: "A file meta data response"
-          schema:
-            $ref: '#/definitions/FileMetadataResponse'
+  /data/{class_name}/{record_id}/file.json:
     get:
       summary: Download file
         operationId: 112_Download_file
