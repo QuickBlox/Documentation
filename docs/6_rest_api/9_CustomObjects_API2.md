@@ -92,6 +92,16 @@ To set a permission levels open the required Class and click on the record to op
 ![Custom Objects: edit Record permissions](./resources/images/custom_objects_edit_record_permissions.png)
 
 ## Choosing a permission schema
+In the same time only ONE permission level can be applicable to the record: Сlass permission schema or Record permission schema. To apply the Class permission levels to ALL records in the class - tick the checkbox ‘Use Class permissions’ near the required Action in the Admin panel, like so:
+
+![Custom Objects: edit general permissions](./resources/images/custom_objects_edit_general_permissions.png) 
+
+**Note**: Using the Class permission schema means that Record permission schema won’t be affected on reсord.
+
+In case when the Admin doesn’t tick the checkbox in the Admin panel user has a possibility to change the permission levels for every separate record in the table or create a new one with the ACL that the user requires.
+
+## Edit record's permissions via API
+You can edit record's permissions via API when create or update a particular record. Follow the **Create object** and **Update object** APIs.
 
 <span id="Tips_and_Tricks" class="on_page_navigation"></span>
 # Tips and Tricks 
