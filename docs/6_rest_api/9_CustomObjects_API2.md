@@ -10,7 +10,55 @@ If you need to retrieve all the children - you can retrieve records with the fil
 
 <span id="Permissions" class="on_page_navigation"></span>
 # Permissions 
-Permissions 
+**Access control list (ACL)** is a list of permissions attached to some object. An ACL specifies which users have an access to objects, as well as what operations are allowed on given objects. Each entry in a typical ACL specifies a subject and an operation. ACL models may be applied to collections of objects as well as to individual entities within the system's hierarchy
+
+In the QuickBlox user can **add the Access Control list only in the Custom objects module**.
+
+## Permission scheme 
+QuickBlox Permission scheme contains five permissions levels:
+
+* **Open (open)**
+
+Such permission schema means that any user within application can access to record/records in the class and is allowed to perform action with the current permission level
+
+* **Owner (owner)**
+
+Owner permission level means that only Owner (user who created a record) is allowed to perform action with the current permission level
+
+* **Not allowed (not_allowed)**
+
+No one (except the Account Administrator) can make the chosen action
+
+* **Open for groups (open_for_groups)**
+
+Users which have a specified tag / tags (see more info about how to set tags for user in Users module API) will be included in the group which is allowed to perform action with the current permission level. A current permission level can consist of one or several groups (number of groups is not limited). Tags can be added / deleted in the user’s profile.
+
+* **Open for users ids (open_for_users_ids)**
+
+Only users that are specified in the permission level can make a required action with a record. One or several users can be specified (number of users isn’t limited) 
+
+Actions available for the entity:
+
+* **Create**
+
+Creation a record
+
+* **Read**
+
+Retrieving and reading the info about the chosen record
+    
+* **Update**
+
+Updating any parameter for the chosen record (only those parameters that can be set by the user can be updated)
+
+* **Delete**
+
+Deleting a record 
+
+## Permission levels 
+There are two levels of access which QuickBlox is provided in such Permissions scheme: **Class** and **Record**. 
+
+## Choosing a permission schema
 
 <span id="Tips_and_Tricks" class="on_page_navigation"></span>
 # Tips and Tricks 
