@@ -536,8 +536,6 @@ paths:
       responses:
         '200':
           description: "A file meta data response"
-          schema:
-            $ref: '#/definitions/FileMetadataResponse'
 definitions:
   ArrayOfCustomObjectsResponse:
     type: object
