@@ -520,7 +520,7 @@ paths:
           description: An ID of object to upload file to (path parameter).
           required: true
           type: string
-          default: 52381...00004
+          default: 53aaa06f535c12cea9007496
         - name: field_name
           in: formData
           description: A field name of object to upload file to.
@@ -532,7 +532,7 @@ paths:
           description: A file to upload.
           required: true
           type: string
-          default: user_new_avatar.jpg
+          default: "user_new_avatar.jpg"
       responses:
         '200':
           description: "A file meta data response"
@@ -555,7 +555,7 @@ paths:
             description: An ID of object to download file of (path parameter).
             required: true
             type: string
-            default: 52381...00004
+            default: 53aaa06f535c12cea9007496
           - name: field_name
             in: formData
             description: A field name of object to download file of.
@@ -582,7 +582,7 @@ paths:
             description: An ID of object to delete file of (path parameter).
             required: true
             type: string
-            default: 52381...00004
+            default: 53aaa06f535c12cea9007496
           - name: field_name
             in: formData
             description: A field name of object to delete file of.
@@ -743,16 +743,16 @@ definitions:
       properties:
         _id:
           type: string
-          example: 5238...00008
+          example: 536fbe15123127d63d43e7fe4
         file_id:
           type: string
-          example: 5238...00008
+          example: 536fbe15123127d63d43e7fe4
         size:
           type: integer
           example: 3045266
         name:
           type: string
-          example: IMG_20130916_162318.jpg
+          example: "IMG_20130916_162318.jpg"
         content_type:
           type: string
           example: image/jpeg
