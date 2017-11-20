@@ -515,6 +515,18 @@ paths:
           required: true
           type: string
           default: MyScoreTable
+        - name: record_id
+          in: formData
+          description: An ID of object to upload file to (path parameter).
+          required: true
+          type: string
+          default: 53aaa06f535c12cea9007496
+        - name: field_name
+          in: formData
+          description: A field name of object to upload file to.
+          required: true
+          type: string
+          default: "user_avatar"
       responses:
         '200':
           description: "A file meta data response"
