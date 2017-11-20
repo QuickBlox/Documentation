@@ -536,6 +536,8 @@ paths:
       responses:
         '200':
           description: "A file meta data response"
+          schema:
+            $ref: '#/definitions/FileMetadataResponse'
     get:
       summary: Download file
       operationId: 112_Download_file
@@ -736,3 +738,21 @@ definitions:
       total_deleted:
         type: integer
         example: 5
+  FileMetadataResponse:
+    type: object
+    properties:
+      _id:
+        type: string
+        example: 536fbe15123127d63d43e7fe4
+      file_id:
+        type: string
+        example: 536fbe15123127d63d43e7fe4
+      size:
+        type: integer
+        example: 3045266
+      name:
+        type: string
+        example: "IMG_20130916_162318.jpg"
+      content_type:
+        type: string
+        example: image/jpeg
