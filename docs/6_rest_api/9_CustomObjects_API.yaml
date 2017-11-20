@@ -527,6 +527,12 @@ paths:
           required: true
           type: string
           default: "user_avatar"
+        - name: file
+          in: formData
+          description: A file to upload.
+          required: true
+          type: string
+          default: "user_new_avatar.jpg"
       responses:
         '200':
           description: "A file meta data response"
