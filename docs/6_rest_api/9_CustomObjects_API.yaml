@@ -538,55 +538,55 @@ paths:
           description: "A file meta data response"
     get:
       summary: Download file
-        operationId: 112_Download_file
-        description: |
-          Download file
-        parameters:
-          - name: class_name
-            in: formData
-            description: A class name of object to download file of (path parameter).
-            required: true
-            type: string
-            default: MyScoreTable
-          - name: record_id
-            in: formData
-            description: An ID of object to download file of (path parameter).
-            required: true
-            type: string
-            default: 53aaa06f535c12cea9007496
-          - name: field_name
-            in: formData
-            description: A field name of object to download file of.
-            required: true
-            type: string
-            default: "user_avatar"
+      operationId: 112_Download_file
+      description: |
+        Download file
+      parameters:
+        - name: class_name
+          in: formData
+          description: A class name of object to download file of (path parameter).
+          required: true
+          type: string
+          default: MyScoreTable
+        - name: record_id
+          in: formData
+          description: An ID of object to download file of (path parameter).
+          required: true
+          type: string
+          default: 53aaa06f535c12cea9007496
+        - name: field_name
+          in: formData
+          description: A field name of object to download file of.
+          required: true
+          type: string
+          default: "user_avatar"
       responses:
         '200':
           description: "A file body"
     delete:
       summary: Delete file
-        operationId: 113_Delete_file
-        description: |
-          Delete file
-        parameters:
-          - name: class_name
-            in: formData
-            description: A class name of object to delete file of (path parameter).
-            required: true
-            type: string
-            default: MyScoreTable
-          - name: record_id
-            in: formData
-            description: An ID of object to delete file of (path parameter).
-            required: true
-            type: string
-            default: 53aaa06f535c12cea9007496
-          - name: field_name
-            in: formData
-            description: A field name of object to delete file of.
-            required: true
-            type: string
-            default: "user_avatar"
+      operationId: 113_Delete_file
+      description: |
+        Delete file
+      parameters:
+        - name: class_name
+          in: formData
+          description: A class name of object to delete file of (path parameter).
+          required: true
+          type: string
+          default: MyScoreTable
+        - name: record_id
+          in: formData
+          description: An ID of object to delete file of (path parameter).
+          required: true
+          type: string
+          default: 53aaa06f535c12cea9007496
+        - name: field_name
+          in: formData
+          description: A field name of object to delete file of.
+          required: true
+          type: string
+          default: "user_avatar"
       responses:
         '200':
           description: "An empty body"
