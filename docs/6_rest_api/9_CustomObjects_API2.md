@@ -67,7 +67,7 @@ All actions (Create, Read, Update and Delete) are available for the ‘Class’ 
 
 To set a permission schema for the Class go to the Custom objects module and open a required class. Click on **'Edit permissions'** button to open a class to edit, like so:
 
-![Custom Objects: edit Class permissions](./resources/images/custom_objects_edit_class_permission.png)
+![Custom Objects: edit Class permissions](./resources/images/custom_objects_edit_class_permissions.png)
 
 Default Class permission schema is using while creating a class:
 
@@ -79,6 +79,17 @@ Default Class permission schema is using while creating a class:
 You should mark checkboxes to enable Class permissions  
 
 ### Record entity
+Record is an entity within the Class in the Custom Objects module that has it’s own permission levels. Creation of the record is available in the Web panel and in API (see Create a record request). All permission levels except **Not allowed** are available for the record and there are only three actions are available and applicable for the record: Read, Update and Delete.
+
+Default Record permission scheme is using while creating a class:
+
+* **Read**: Open
+* **Update**: Owner
+* **Delete**: Owner 
+
+To set a permission levels open the required Class and click on the record to open it for edit, like so: 
+
+![Custom Objects: edit Record permissions](./resources/images/custom_objects_edit_record_permissions.png)
 
 ## Choosing a permission schema
 
