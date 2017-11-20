@@ -60,6 +60,26 @@ Deleting a record
 ## Permission levels 
 There are two levels of access which QuickBlox is provided in such Permissions scheme: **Class** and **Record**. 
 
+### Class entity
+Class is an entity that contains records. Only the Account Administrator (web panel) can create a class in the Custom object module and make all possible actions with it. Operations with **Class** entity are not allowed in API
+
+All actions (Create, Read, Update and Delete) are available for the ‘Class’ entity and are applicable for all records in the class. Every action has the separate permission level available. The exception is a Create action that isn’t available for Owner permission level.
+
+To set a permission schema for the Class go to the Custom objects module and open a required class. Click on **'Edit permissions'** button to open a class to edit, like so:
+
+![Custom Objects: edit Class permissions](./resources/images/custom_objects_edit_class_permission.png)
+
+Default Class permission schema is using while creating a class:
+
+* **Create**: Open
+* **Read**: Open
+* **Update**: Owner
+* **Delete**: Owner 
+
+You should mark checkboxes to enable Class permissions  
+
+### Record entity
+
 ## Choosing a permission schema
 
 <span id="Tips_and_Tricks" class="on_page_navigation"></span>
