@@ -14,4 +14,13 @@ Permissions
 
 <span id="Tips_and_Tricks" class="on_page_navigation"></span>
 # Tips and Tricks 
-Tips and Tricks 
+
+## Sort by _id field
+According to the module description, the **_id** field contains info about object time creation (timestamp). It means that sorting on the **_id** ﬁeld is roughly equivalent to sorting by **created_at** field, but works much faster because the **_id** field has a predefined database index.
+
+Hence it is highly recommended to use sort by **_id** (e.g. sort_desc=_id) field instead of sort by **created_at** field: 
+
+## 'skip' parameter performance
+The **skip** parameter is often expensive because it requires the server to walk from the beginning of the class table to get the offset or skip position before beginning to return result. As offset increases, **skip** will become slower and more CPU intensive. With larger collections, **skip** may become IO bound.
+
+Instead of using big value of **skip** try to improve your query. Maybe you don't need it. 
