@@ -59,6 +59,27 @@ paths:
           required: false
           type: string
           default: rating=1024
+        - name: 'permissions[<action_name>][access]'
+          in: formData
+          description: |
+            Possible values of 'action_name': read, update, delete. 
+          required: false
+          type: string
+          default: 
+        - name: 'permissions[<action_name>][ids]'
+          in: formData
+          description: |
+            Possible values of 'action_name': read, update, delete. 
+          required: false
+          type: string
+          default: 
+        - name: 'permissions[<action_name>][groups]'
+          in: formData
+          description: |
+            Possible values of 'action_name': read, update, delete. 
+          required: false
+          type: string
+          default: 
       responses:
         '201':
           description: "An object"
