@@ -1,7 +1,5 @@
-**QuickBlox** - Communication & cloud backend (BaaS) platform which brings superpowers to your mobile apps.
 
-<span id="Prerequisites" class="on_page_navigation">
-</span>
+<span id="Prerequisites" class="on_page_navigation"></span>
 # Prerequisites
 
 Before you begin, you need a few things set up in your environment:
@@ -14,8 +12,7 @@ Before you begin, you need a few things set up in your environment:
 
 To use QuickBlox, head on over to the [**releases**](https://github.com/QuickBlox/quickblox-ios-sdk/releases) page, and download the latest build. Take a look at the public [**documentation**](https://quickblox.com) **(Need update link before release)** and start building.
 
-<span id="Cocoapods" class="on_page_navigation">
-</span>
+<span id="Cocoapods" class="on_page_navigation"></span>
 # Cocoapods
 
 We recommend installing QuickBlox using [CocoaPods](http://cocoapods.org/), which provides a simple dependency management system that automates the error-prone process of manually configuring libraries. First make sure you have CocoaPods installed.
@@ -45,8 +42,7 @@ Finally, run `pod install` to setup your CocoaPods environment and import `Quick
 > **NOTE**
 > Make sure to start working from the `.xcworkspace` file that CocoaPods automatically creates, not the `.xcodeproj` you may have had open.
 
-<span id="Manual_installation" class="on_page_navigation">
-</span>
+<span id="Manual_installation" class="on_page_navigation"></span>
 # Manual installation
 
 Our [releases repo](https://github.com/QuickBlox/quickblox-ios-sdk/releases) provides samples and two framework distributions you can add to your project: 
@@ -63,16 +59,14 @@ Download the appropriate build artefact from this repository and add it to your 
 5. Select your framework from the list of binaries that can be embedded (possible duplicate under `Linked Frameworks and Libraries`). 
 ![Figure 1: Click the Add button to embed a framework](https://d2mxuefqeaa7sj.cloudfront.net/s_DF0E961259CFB1CE17234E9C7818E55070E6CFE9DE8186A5054B0FD52EC8B947_1510310117670_EmbeddedBinaries.png)
 
-<span id="Configuring_Keychain_Sharing" class="on_page_navigation">
-</span>
+<span id="Configuring_Keychain_Sharing" class="on_page_navigation"></span>
 # Configuring Keychain Sharing
 
 In the Capabilities pane, if Keychain Sharing isn’t enabled, click the switch in the Keychain Sharing section as shown in Figure 2.
 
 ![Figure 2: Enable Keychain Sharing](https://d2mxuefqeaa7sj.cloudfront.net/s_DF0E961259CFB1CE17234E9C7818E55070E6CFE9DE8186A5054B0FD52EC8B947_1510243600964_Screenshot+2017-11-09+18.06.14.png)
 
-<span id="Add_Run_Script_Phase_to_Build_Phases" class="on_page_navigation">
-</span>
+<span id="Add_Run_Script_Phase_to_Build_Phases" class="on_page_navigation"></span>
 # Add Run Script Phase to Build Phases
 
 1. Go to `Build Phase` section of your target settings.
@@ -86,8 +80,7 @@ In the Capabilities pane, if Keychain Sharing isn’t enabled, click the switch 
 > NOTE
 > This script fixes a [known Apple bug](http://www.openradar.me/radar?id=6409498411401216),  which does not allow to publish applications which contain dynamic frameworks with simulator platforms to App Store.
 
-<span id="Verifying_installation" class="on_page_navigation">
-</span>
+<span id="Verifying_installation" class="on_page_navigation"></span>
 # Verifying installation
 
 Import the Quickblox module into your `UIApplicationDelegate` subclass:
