@@ -1,7 +1,6 @@
 The QuickBlox JavaScript SDK provides a JavaScript library making it even easier to access the QuickBlox cloud communication backend platform.
 
 Our goal is let you quickly start building your JavaScript app on Quickblox.
-
 <hr>
 
 <span id="Overview" class="on_page_navigation"></span>
@@ -12,7 +11,7 @@ a full list of JS SDK versions can be found on [Github Releases](https://github.
 
 Check out our [API Reference](http://quickblox.github.io/quickblox-javascript-sdk/docs/) for more detailed information about our SDK.
 
-JS SDK supports Chrome 30+, Safari 7.1+, Firefox 30+, IE 10+, Opera 23+, Edge 12+ and Node v.4+.
+JS SDK supports Chrome 50+, Safari 10.1+, Firefox 52+, Opera 36+, Edge 14+ and Node v.6+.
 
 You can check JavaScript SDK by running tests:
 * Visit our [a Spec Runner page on GitHub](https://quickblox.github.io/quickblox-javascript-sdk/spec/SpecRunner.html).
