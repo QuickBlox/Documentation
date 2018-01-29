@@ -1,0 +1,117 @@
+swagger: '2.0'
+info:
+  title: QuickBlox REST API, Address Book API.
+  description: A set of REST API requests to work with QuickBlox Address Book.
+  version: 1.0
+# the domain of the service
+host: quickblox.com
+# array of all schemes that QuickBlox API supports
+schemes:
+  - https
+basePath: /api
+produces:
+  - application/json
+paths:
+  /address_book.json:
+    post:
+      summary: Upload address book
+      operationId: 101_Upload_Address_Book_Id
+      description: |
+        Upload address book. Using this API you can actually do 4 things:
+          * Upload fresh address book (overwrite the previous one)
+          * Upload new contacts
+          * Update existing contacts
+          * Delete contacts
+      parameters:
+        - name: contacts
+          in: formData
+          description: |
+            Contains array of contact hashes. Each contact can contain 3 keys:
+              **name**: contact name. String (required only for create/update), min 1 max 255 symbols.
+              **phone**: contact phone. String (required), min 10 max 15 symbols.
+              **destroy**: used in a case of contact destroy. Integer (not required, possible value 1).
+          required: true
+          type: object
+          default: "{'name':'Frederic Cartwright', 'phone': '8879108395'}"
+        - name: force
+          in: formData
+          description: Defines force rewrite mode. If set 1 then all previous contacts for device context will be replaced by new ones.
+          required: false
+          type: integer
+          default: 1
+        - name: udid
+          in: formData
+          description: User's device identifier. If specified all operations will be in this context. Max length 64 symbols. If not - it means a user has one global address book across all his devices.
+          required: false
+          type: string
+          default: D337E8A4-80AD-8ABA-9F5D-579EFF6BACAB
+      responses:
+        '200':
+          description: "Upload response"
+          schema:
+            $ref: '#/definitions/UploadAddressBookResponse'
+    get:
+      summary: Retrieve address book
+      operationId: 102_Retrieve_Address_Book_Id
+      description: Retrieve all uploaded address book contacts
+      parameters:
+        - name: udid
+          in: formData
+          description: User's device identifier. If specified all operations will be in this context. Max length 64 symbols. If not - it means a user has one global address book across all his devices.
+          required: false
+          type: string
+          default: D337E8A4-80AD-8ABA-9F5D-579EFF6BACAB
+      responses:
+        '200':
+          description: "Array of contacts"
+          schema:
+            $ref: '#/definitions/ArrayOfAddressBookContacts'
+definitions:
+  ArrayOfAddressBookContacts:
+    type: object
+    properties:
+      items:
+        type: array
+        items:
+          $ref: '#/definitions/AddressBookContact'
+  AddressBookContact:
+    type: object
+    properties:
+      name:
+        type: string
+        example: Frederic Cartwright
+      phone:
+        type: string
+        example: "6278336065"
+  UploadAddressBookResponse:
+    type: object
+    properties:
+      created:
+        type: integer
+        example: 4
+      updated:
+        type: integer
+        example: 1
+      deleted:
+        type: integer
+        example: 0
+      rejected:
+        $ref: '#/definitions/AddressBookRejectedObject'
+  AddressBookRejectedObject:
+    type: object
+    properties:
+      5:
+        type: array
+        items:
+          type: string
+          example: Invalid fields set
+      6:
+        type: array
+        items:
+          type: string
+          example: "Length of 'phone' field should be min: 10 and max: 15."
+      8:
+        type: array
+        items:
+          type: string
+          example: "Length of 'name' field should be min: 1 and max: 255."

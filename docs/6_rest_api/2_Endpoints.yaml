@@ -23,7 +23,7 @@ paths:
       parameters:
         - name: "QB-Account-Key"
           in: header
-          description: QuickBlox Account Key. To get the **QB-Account-Key** open [https://admin.quickblox.com/account](https://admin.quickblox.com/account) url and copy the **Account key** value.
+          description: QuickBlox Account Key. To get the **QB-Account-Key** open [https://admin.quickblox.com/account/settings](https://admin.quickblox.com/account/settings) url and copy the **Account key** value.
           required: true
           type: string
           default: 2yvNe18TnjNiqDoewfqp

@@ -167,6 +167,13 @@ paths:
       description: |
         After you allow users to sign up, you need to let them log in to their account with a login/email and password in the future.
         You must provide the user's login or email address along with a password when authenticating users that are registered in QuickBlox.
+        The following login options are possible:
+          * Login with **login/email** and **password**
+          * Login via Facebook by providing **provider=facebook** and **keys[token]** parameters.
+          * Login via Twitter by providing **provider=twitter**,  **keys[token]** and **keys[secret]** parameters.
+          * Login via Twitter Digits (SMS) by providing **provider=twitter_digits**, **twitter_digits[X-Auth-Service-Provider]** and **twitter_digits
+          [X-Verify-Credentials-Authorization]** parameters.
+          * Login via Firebase phone number (SMS) by providing **provider=firebase_phone**, **firebase_phone[project_id]** and **firebase_phone[access_token]** parameters.
       parameters:
         - name: login
           in: formData
@@ -234,6 +241,20 @@ paths:
             oauth_token=...,
             oauth_version=...,
             oauth_signature_method=...
+        - name: firebase_phone[project_id]
+          in: formData
+          description: Firebase project ID - the unique identifier for your Firebase project.
+          required: false
+          type: string
+          default: |
+            my_app_project_id
+        - name: firebase_phone[access_token]
+          in: formData
+          description: Firebase user's ID token.
+          required: false
+          type: string
+          default: |
+            t35400d....fzxcxvsdfn
       responses:
         '200':
           description: "User object"

@@ -17,10 +17,14 @@ paths:
       summary: Create session
       operationId: Create_Session_Id
       description: |
-        Create session and retrieve session token. Usually there are 3 sets of parameters you can pass:
+        Create session and retrieve session token. There are 6 sets of parameters you can pass:
           * minimal set of parameters (to create App session token)
           * minimal set of parameters plus **user[login]**/**user[email]** and **user[password]** (to create User session token)
-          * minimal set of parameters plus **provider**, **keys[..]**/**twitter_digits[..]** (to create User session token based on social authorization)
+          * minimal set of parameters plus **provider=facebook**, **keys[token]** (to create User session token based on Facebook user)
+          * minimal set of parameters plus **provider=twitter**, **keys[token]** and **keys[secret]** (to create User session token based on Twitter user)
+          * minimal set of parameters plus **provider=twitter_digits**, **twitter_digits[X-Auth-Service-Provider]** and **twitter_digits
+          [X-Verify-Credentials-Authorization]** (to create User session token based on Twitter Digits user (SMS))
+          * minimal set of parameters plus **provider=firebase_phone**, **firebase_phone[project_id]** and **firebase_phone[access_token]** (to create User session token based on Firebase phone user (SMS))
       parameters:
         - name: application_id
           in: formData
@@ -74,7 +78,7 @@ paths:
           default: bad-as-passwd
         - name: provider
           in: formData
-          description: Name of the social network provider to create User session with, eg. **facebook**, **twitter**, **twitter_digits**.
+          description: Name of the social network provider to create User session with, eg. **facebook**, **twitter**, **twitter_digits**, **firebase_phone**.
           required: false
           type: string
           default: facebook
@@ -120,6 +124,20 @@ paths:
             oauth_token=...,
             oauth_version=...,
             oauth_signature_method=...
+        - name: firebase_phone[project_id]
+          in: formData
+          description: Firebase project ID - the unique identifier for your Firebase project.
+          required: false
+          type: string
+          default: |
+            my_app_project_id
+        - name: firebase_phone[access_token]
+          in: formData
+          description: Firebase user's ID token.
+          required: false
+          type: string
+          default: |
+            t35400d....fzxcxvsdfn
       responses:
         '201':
           description: "Session object"
