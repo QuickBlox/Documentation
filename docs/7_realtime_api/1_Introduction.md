@@ -167,4 +167,17 @@ Server:
 # Changelog
 
 ## Real-time(XMPP) API changelog
-TBA
+### 18.02.2
+* **API**
+	* Fixed
+		* Vulnerability: user is able to change "sender_id", "recipient_id" and "read" fields of message in history via XMPP.
+
+### 18.02.1
+* **API**
+	* Fixed
+		* Send location attachment to group chat via REST API: chat connection is broken then on the receiver's side.
+* **Other**
+	* Fixed
+		* Chat offline pushes: sometimes it shows a user as online while he is offline.
+		* Group Chat: do not send push notification to current user when he sends a message via REST API.
+		* WebSocket component: to make it more complient with rfc6455.
