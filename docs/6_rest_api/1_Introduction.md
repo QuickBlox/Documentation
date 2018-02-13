@@ -44,6 +44,61 @@ You can create **Application session** and then upgrade it to **User session** o
 
 ## API and Dashboard changelog
 
+### 3.18.02.2
+* **Dashboard**
+	* New 
+		* Export chat history feature.
+	* Fixed
+		* Content: User Id column link is broken. 
+		* Content: Now you can remove blobs that set as user's avatar (**user.blob_id** field will be nilified).
+
+### 3.18.02.1
+* **API**
+	* New
+		* Tie blobs to Application (instead of Account).
+		* Blob object: removed fields from API output: **ref_count, last_read_access_ts, lifetime**.
+		* Removed Twitter Digits.
+	* Fixed
+		* Performance issues when request chat dialog API with custom data filter.
+		* Updated API limits violation error message to better variant for end users.  
+* **Dashboard**
+	* New 
+		* Tie blobs to Application (instead of Account).
+		* Removed Twitter Digits.
+	* Fixed
+		* Dashboard Session Management Vulnerability.  
+		* Application image got changed by itself.
+		* Infinite 'processing' on Push Notifications page.
+		* Remove blobs after application remove.
+* **Other**
+	* Fixed
+		* Fixed failed push device tokens destruction by errors from APNS.
+		* Chat Alerts: 'badge' value do not come in Android push.
+
+### 3.17.10.2
+* **API**
+	* New
+		* AddressBook API: create  [API for retrieve already registered contacts/users](https://quickblox.com/developers/AddressBook) 
+		* Add **data** into allowed chat attachments attributes.
+	* Fixed
+		* Optimised 'retrieve chat dialogs' API with additional parameters search.  
+* **Dashboard**
+	* New 
+		* Protect Dashboard login from brute force attack.
+
+### 3.17.10.1
+* **API**
+	* Fixed
+		* Degraded performance of 'retrieve Custom Objects' API.  
+* **Dashboard**
+	* Fixed
+		* Application avatar is unavailable after application name change.  
+		* Quick Registration: User can be registered with already existing username.
+* **Other**
+	* Fixed
+		* **Reset Password** and **Limits violation** emails do not come when **receive emails** option unchecked in Dashboard panel for account.
+		* Degraded performance of storage when delete user (when remove him from all chat dialogs).
+
 ### 3.17.09.2
 * **API**
 	* New
