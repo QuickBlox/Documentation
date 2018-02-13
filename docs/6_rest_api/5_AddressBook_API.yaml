@@ -70,7 +70,7 @@ paths:
     get:
       summary: Retrieve already registered contacts/users
       operationId: 103_Retrieve_Already_Registered_Contact
-      description: Retrieve QuickBlox users who already registsred from your address book.
+      description: Retrieve QuickBlox users who already registered from your address book.
       parameters:
         - name: udid
           in: formData
