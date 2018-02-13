@@ -66,6 +66,29 @@ paths:
           description: "Array of contacts"
           schema:
             $ref: '#/definitions/ArrayOfAddressBookContacts'
+  /address_book/registered_users.json:
+    get:
+      summary: Retrieve already registered contacts/users
+      operationId: 103_Retrieve_Already_Registered_Contact
+      description: Retrieve QuickBlox users who already registsred from your address book.
+      parameters:
+        - name: udid
+          in: formData
+          description: User's device identifier. If specified all operations will be in this context. Max length 64 symbols. If not - it means a user has one global address book across all his devices.
+          required: false
+          type: string
+          default: D337E8A4-80AD-8ABA-9F5D-579EFF6BACAB
+        - name: compact
+          in: formData
+          description: Specifies whether to return only users' id+phone fields. If 0 - will return all user's fields.
+          required: false
+          type: integer
+          default: 1
+      responses:
+        '200':
+          description: "Array of users"
+          schema:
+            $ref: '#/definitions/ArrayOfUsersResponse'
 definitions:
   ArrayOfAddressBookContacts:
     type: object
@@ -115,3 +138,60 @@ definitions:
         items:
           type: string
           example: "Length of 'name' field should be min: 1 and max: 255."
+  ArrayOfUsersResponse:
+    type: object
+    properties:
+      items:
+        type: array
+        items:
+          $ref: '#/definitions/UserObject'
+  UserObject:
+    type: object
+    properties:
+      id:
+        type: integer
+        example: 1639
+      full_name:
+        type: string
+        example: John doe
+      login:
+        type: string
+        example: samuelrulez
+      phone:
+        type: string
+        example: 8765554351
+      website:
+        type: string
+        example: https://quickblox.com
+      created_at:
+        type: string
+        example: 2012-05-09T10:24:26Z
+      updated_at:
+        type: string
+        example: 2012-05-09T10:24:26Z
+      last_request_at:
+        type: string
+        example: 2012-05-09T10:24:26Z
+      facebook_id:
+        type: string
+        example: 100000883956766
+      twitter_id:
+        type: string
+        example: 23434883956766
+      twitter_digits_id:
+        type: string
+        example: 67434863956765
+      external_user_id:
+        type: string
+        example: 12334
+      blob_id:
+        type: integer
+        example: 234435
+      custom_data:
+        type: string
+        example: age=34&lang=en
+      user_tags:
+        type: array
+        items:
+          type: string
+          example: man
