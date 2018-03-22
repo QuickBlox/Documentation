@@ -171,8 +171,6 @@ paths:
           * Login with **login/email** and **password**
           * Login via Facebook by providing **provider=facebook** and **keys[token]** parameters.
           * Login via Twitter by providing **provider=twitter**,  **keys[token]** and **keys[secret]** parameters.
-          * Login via Twitter Digits (SMS) by providing **provider=twitter_digits**, **twitter_digits[X-Auth-Service-Provider]** and **twitter_digits
-          [X-Verify-Credentials-Authorization]** parameters.
           * Login via Firebase phone number (SMS) by providing **provider=firebase_phone**, **firebase_phone[project_id]** and **firebase_phone[access_token]** parameters.
       parameters:
         - name: login
@@ -215,32 +213,6 @@ paths:
           default: |
             t35400dfzxcxvsdfn
             76gancHDHoad7a7fs
-        - name: |
-            twitter_digits
-            [X-Auth-Service-Provider]
-          in: formData
-          description: Twitter Digits auth header to login User with.
-          required: false
-          type: string
-          default: |
-            https://api.digits.com/1.1
-            /sdk/account.json
-        - name: |
-            twitter_digits
-            [X-Verify-Credentials-Authorization]
-          in: formData
-          description: Twitter Digits auth header to login User with.
-          required: false
-          type: string
-          default: |
-            OAuth
-            oauth_signature=...,
-            oauth_nonce=...,
-            oauth_timestamp=...,
-            oauth_consumer_key=...,
-            oauth_token=...,
-            oauth_version=...,
-            oauth_signature_method=...
         - name: firebase_phone[project_id]
           in: formData
           description: Firebase project ID - the unique identifier for your Firebase project.
