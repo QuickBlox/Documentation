@@ -1,4 +1,4 @@
-Real-time(XMPP) API is a quick and reliable solution which combines benefits of scalable cloud hosted XMPP chat server, seamless authorization and incoming IM / chat alerts. It's robust, quick and auto-scalable AWS powered cloud servers infrastructure. It's the best and most comprehensive solution so far to have your users communicate cross-platform. 
+Real-time(XMPP) API is a quick and reliable solution which combines benefits of scalable cloud hosted XMPP chat server, seamless authorization and incoming IM / chat alerts. It's robust, quick and auto-scalable AWS powered cloud servers infrastructure. It's the best and most comprehensive solution so far to have your users communicate cross-platform.
 
 The following QuickBlox module are built on top of eal-time(XMPP) API:
 
@@ -10,7 +10,7 @@ QuickBlox iOS, Android and Javascript SDKs use Real-time(XMPP) APIs.
 
 <span id="XMPP_features_supported" class="on_page_navigation"></span>
 # XMPP features supported
-All standard XMPP libraries are supported (please check the list here [http://xmpp.org/xmpp-software/libraries](http://xmpp.org/xmpp-software/libraries)). All standard XEPs and the following additional ones (below) are supported: 
+All standard XMPP libraries are supported (please check the list here [http://xmpp.org/xmpp-software/libraries](http://xmpp.org/xmpp-software/libraries)). All standard XEPs and the following additional ones (below) are supported:
 
 * RFC-6120 - [http://xmpp.org/rfcs/rfc6120.html](http://xmpp.org/rfcs/rfc6120.html) - Core: SSL/TLS stream encryption, SASL authentication, Resource binding etc
 * RFC-6121 - [http://xmpp.org/rfcs/rfc6121.html](http://xmpp.org/rfcs/rfc6121.html) - Instant Messaging and Presence
@@ -32,11 +32,11 @@ All standard XMPP libraries are supported (please check the list here [http://xm
 * XEP-0033 - [http://xmpp.org/extensions/xep-0033.html](http://xmpp.org/extensions/xep-0033.html) - Extended Stanza Addressing (not supported yet)
 * XEP-0334 - [http://xmpp.org/extensions/xep-0334.html](http://xmpp.org/extensions/xep-0334.html) - Message Processing Hints (not supported yet)
 
-XEP-0095 & XEP-0096 are not supported, instead QuickBlox own TURN server takes care of NAT traversal for voice and video traffic streaming. 
+XEP-0095 & XEP-0096 are not supported, instead QuickBlox own TURN server takes care of NAT traversal for voice and video traffic streaming.
 
 <span id="API_introduction" class="on_page_navigation"></span>
 # API introduction
-All XMPP API access is over TLS, and accessed via the **chat.quickblox.com:5223** domain. 
+All XMPP API access is over TLS, and accessed via the **chat.quickblox.com:5223** domain.
 
 For Web applications it's also possible to use BOSH/WebSockets endpoints (**https://chat.quickblox.com:5281** and **wss://chat.quickblox.com:5291**).
 
@@ -45,9 +45,9 @@ For Web applications it's also possible to use BOSH/WebSockets endpoints (**http
 In order to connect to Real-Time API you have to create a user. You can do it on [QuickBlox dashboard](https://admin.quickblox.com) or via Users REST API. Then you will user the user's login+password to authenticate via Real-Time API.
 
 ## Login / ID
-Each user gets a JID (Jabber ID) in the following format:  
+Each user gets a JID (Jabber ID) in the following format: 
 ```
-<user_id>-<application_id>@chat.quickblox.com 
+<user_id>-<application_id>@chat.quickblox.com
 ```
 
 ## Password
@@ -167,6 +167,13 @@ Server:
 # Changelog
 
 ## Real-time(XMPP) API changelog
+### 18.04.1
+* **API**
+  * New
+    * ChatDialog: added "last_message_id" field
+  * Fixed
+    * Chat alerts. Offline user gets a few push-notifications about one message in chat if opponent lost internet connection during message sending
+
 ### 18.02.2
 * **API**
 	* Fixed

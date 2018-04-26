@@ -22,11 +22,11 @@ A session token is an opaque string that identifies a user and an app.
 
 Session tokens are obtained via [Create Session request](3_Session_API.md).
 
-Then, because of privacy checks, all REST API requests must be authenticated with a token - the **QB-Token** header of each request to REST API must contain valid session token. 
+Then, because of privacy checks, all REST API requests must be authenticated with a token - the **QB-Token** header of each request to REST API must contain valid session token.
 
-Expiration time for session token is 2 hours after last request to REST API. Be aware about it. If you will perform query with expired token - you will receive error **'Required session does not exist'**. In this case you have to recreate a session token. 
+Expiration time for session token is 2 hours after last request to REST API. Be aware about it. If you will perform query with expired token - you will receive error **'Required session does not exist'**. In this case you have to recreate a session token.
 
-Each REST API response contains header **'QB-Token-ExpirationDate'** which contains session token expiration date. 
+Each REST API response contains header **'QB-Token-ExpirationDate'** which contains session token expiration date.
 
 ## Access Tokens rights
 There are different types of session tokens to support different use cases:
@@ -38,18 +38,61 @@ There are different types of session tokens to support different use cases:
 
 
 You can create **Application session** and then upgrade it to **User session** or you can create **User session** at once. Use [Create Session request](3_Session_API.md).
- 
+
 <span id="Changelog" class="on_page_navigation"></span>
 # Changelog
 
 ## API and Dashboard changelog
 
+### 3.18.04.1
+* **API**
+  * New
+    * Removed Blackberry push notifications
+    * User: removed 'owner_id', 'twitter_digits_id' fields from API output
+    * ChatDialog: added 'last_message_id' field
+  * Fixed
+    * Added DB index to search users by 'twitter_id' field
+    * Speed up API request for retrieve users by ids
+    * Optimized user selection query in API for login via Custom Identity Provider.
+    * Optimized DB query in create new push subscription API
+* **Dashboard**
+  * New
+    * Removed Blackberry push notifications
+    * APNS push certificates: allow to upload only universal or non universal cert
+  * Fixed
+    * Chat: history export not working sometimes
+    * Dictionary upload for TnS sometimes not working
+* **Other**
+   * New
+     * ChatAlerts: include 'message_id' param into push payload if %body% tag is in push template
+   * Fixed
+     * Recurring error in 'period_date' push notifications.
+
+### 3.18.03.1
+* **API**
+  * New
+    * Location/Places modules deprecation
+  * Fixed
+    * Optimized API '/account_settings.json', remove not used fields: 'account_id' and 's3_bucket'
+    * Optimised DB query when create session with user, it was slow when lots of users in app
+* **Dashboard**
+  * New
+    * Location/Places modules deprecation
+    * ChatAlerts: ability to enable 'mutable-content' iOS push param in dashboard
+  * Fixed
+    * Overview: removed 'Reset Credentials' feature.
+    * Users: no label for push subscriptions section
+    * "We're sorry, but something went wrong." when open not existent page
+    * UI is stretched when do it smaller
+    * Users: address book section is empty
+    * Users: removed "Show only application users" checkbox
+
 ### 3.18.02.2
 * **Dashboard**
-	* New 
+	* New
 		* Export chat history feature.
 	* Fixed
-		* Content: User Id column link is broken. 
+		* Content: User Id column link is broken.
 		* Content: Now you can remove blobs that set as user's avatar (**user.blob_id** field will be nilified).
 
 ### 3.18.02.1
@@ -62,7 +105,7 @@ You can create **Application session** and then upgrade it to **User session** o
 		* Performance issues when request chat dialog API with custom data filter.
 		* Updated API limits violation error message to better variant for end users.  
 * **Dashboard**
-	* New 
+	* New
 		* Tie blobs to Application (instead of Account).
 		* Removed Twitter Digits.
 	* Fixed
@@ -78,12 +121,12 @@ You can create **Application session** and then upgrade it to **User session** o
 ### 3.17.10.2
 * **API**
 	* New
-		* AddressBook API: create  [API for retrieve already registered contacts/users](https://quickblox.com/developers/AddressBook) 
+		* AddressBook API: create  [API for retrieve already registered contacts/users](https://quickblox.com/developers/AddressBook)
 		* Add **data** into allowed chat attachments attributes.
 	* Fixed
 		* Optimised 'retrieve chat dialogs' API with additional parameters search.  
 * **Dashboard**
-	* New 
+	* New
 		* Protect Dashboard login from brute force attack.
 
 ### 3.17.10.1
@@ -107,7 +150,7 @@ You can create **Application session** and then upgrade it to **User session** o
 	* Fixed
 		* Push Notifications. Create event API: error 500 appears if create an event with **event_type=fixed_date**
 		* Push Notifications. Create event API: an exception occurs when pass **user.ids** as string with single user ID.
-		* Custom Objects. Create object API: an exception occurs when pass location field value in wrong format. 
+		* Custom Objects. Create object API: an exception occurs when pass location field value in wrong format.
 		* Chat. Unread Messages Count API: improved logic and speed.
 		* Users API: improved DB indexes which lead to better API speed.
 		* Authentication. Create session with user API: it returns success response if provided input params in wrong format.
@@ -118,14 +161,14 @@ You can create **Application session** and then upgrade it to **User session** o
 	* New
 		* New Chat Alert template tag: **%plural[]%**. Now you can pluralize words. For example: **%plural[new message]%** will produce **new message** for 1 unread messages count and **new messages** for >1 unread messages count.
 	* Fixed
-		* Push Notifications: success message appears if send push notification by email channel without existent user subscription. 
+		* Push Notifications: success message appears if send push notification by email channel without existent user subscription.
 * **Other**
-	* Fixed: 
+	* Fixed:
 		* Email **Quickblox: your APNS certificate was removed**: sometimes users receive it many times.   
 
 ### 3.17.09.1
 * **API**
-	* New 
+	* New
 		* AddressBook REST API
 * **Dashboard**
 	* New
@@ -186,7 +229,7 @@ You can create **Application session** and then upgrade it to **User session** o
 		* Optimised performance of Push Notifications/Subscriptions page.
 	* Fixed
 		* Copy credentials feature works only if you have Flash installed. You do not need Flash anymore.
-	
+
 ### 3.17.04.1
 * **API**
 	* New
@@ -198,7 +241,7 @@ You can create **Application session** and then upgrade it to **User session** o
 ### 3.17.03.1
 * **API**
 	* Fixed
-		* Push Notifications: subscription is overrided if install 2 iOS apps on a same device. 
+		* Push Notifications: subscription is overrided if install 2 iOS apps on a same device.
 
 ### 3.17.02.2
 * **API**
@@ -221,7 +264,7 @@ You can create **Application session** and then upgrade it to **User session** o
 		*  POST /chat/message API issue: chat dialog is broken when send not valid xml characters in chat message's body.
 * **Dashboard**
 	* Fixed
-		* Users page is so slow when have > 1M users in single application.	
+		* Users page is so slow when have > 1M users in single application.
 
 ### 3.17.01.1
 * **API**
@@ -234,7 +277,7 @@ You can create **Application session** and then upgrade it to **User session** o
 	* New
 		* Ability to upload multiple iOS push certificates
 	* Fixed
-		* Content page is so slow when have many records in single application. 
+		* Content page is so slow when have many records in single application.
 
 ### 3.16.12.1
 * **API**
@@ -261,22 +304,22 @@ You can create **Application session** and then upgrade it to **User session** o
 		* There was no way to create 2 push notifications subscriptions(dev+prod) for single user with same device udid.
 * **Dashboard**
 	* New
-		* Ability to pass URL path parameters for Custom Identity Provider. 
+		* Ability to pass URL path parameters for Custom Identity Provider.
 	* Fixed
 		* Incorrect behaviour when access Content module files with type 'application/octet-stream'.
-	
+
 ### 3.16.10.1
 * **Other**
 	* Fixed
 		* Stability improvements.
-	
+
 ### 3.16.09.2
 * **API**
-	* Fixed 
+	* Fixed
 		* Speed up search for GET /users/by_full_name API
 		* Two different date formats are displayed if perform requests "create custom class with date format field" and "create dialog with custom parameters"
 		* Filter chat messages via API by "updated_at" field doesn't work.
-		* Custom Objects: incorrect behaviour when upload file to not existent field. 
+		* Custom Objects: incorrect behaviour when upload file to not existent field.
 * **Dashboard**
 	* Fixed
 		* Information link for GCM API Key on the 'Push notifications' page is broken.  
@@ -308,6 +351,3 @@ You can create **Application session** and then upgrade it to **User session** o
 * **Other**
 	* New
 		* Custom Identity Provider feature
-	
-	
-	
