@@ -22,8 +22,6 @@ paths:
           * minimal set of parameters plus **user[login]**/**user[email]** and **user[password]** (to create User session token)
           * minimal set of parameters plus **provider=facebook**, **keys[token]** (to create User session token based on Facebook user)
           * minimal set of parameters plus **provider=twitter**, **keys[token]** and **keys[secret]** (to create User session token based on Twitter user)
-          * minimal set of parameters plus **provider=twitter_digits**, **twitter_digits[X-Auth-Service-Provider]** and **twitter_digits
-          [X-Verify-Credentials-Authorization]** (to create User session token based on Twitter Digits user (SMS))
           * minimal set of parameters plus **provider=firebase_phone**, **firebase_phone[project_id]** and **firebase_phone[access_token]** (to create User session token based on Firebase phone user (SMS))
       parameters:
         - name: application_id
@@ -98,32 +96,6 @@ paths:
           default: |
             t35400dfzxcxvsdfn
             76gancHDHoad7a7fs
-        - name: |
-            twitter_digits
-            [X-Auth-Service-Provider]
-          in: formData
-          description: Twitter Digits auth header to create User session with.
-          required: false
-          type: string
-          default: |
-            https://api.digits.com/1.1
-            /sdk/account.json
-        - name: |
-            twitter_digits
-            [X-Verify-Credentials-Authorization]
-          in: formData
-          description: Twitter Digits auth header to create User session with.
-          required: false
-          type: string
-          default: |
-            OAuth
-            oauth_signature=...,
-            oauth_nonce=...,
-            oauth_timestamp=...,
-            oauth_consumer_key=...,
-            oauth_token=...,
-            oauth_version=...,
-            oauth_signature_method=...
         - name: firebase_phone[project_id]
           in: formData
           description: Firebase project ID - the unique identifier for your Firebase project.

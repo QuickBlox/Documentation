@@ -36,9 +36,6 @@ definitions:
   EndpointsObject:
     type: object
     properties:
-      account_id:
-        type: integer
-        example: 55
       api_endpoint:
         type: string
         example: "https://api.quickblox.com"
